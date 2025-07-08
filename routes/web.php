@@ -15,3 +15,11 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', [PageController::class, 'home']);
+Route::get('/agenda', [PageController::class, 'agenda']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

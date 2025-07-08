@@ -1,23 +1,27 @@
-<header class="header">
+<header class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
     <div class="container">
-        <nav class="navbar">
-            <div class="nav-logo">
-                <a href="{{ url('/') }}">Poliwangi</a>
-            </div>
-            <ul class="nav-menu">
+        <a class="navbar-brand" href="{{ url('/') }}">Prodi TI</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link active">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link">Tentang</a>
+                    <a class="nav-link" href="/agenda">Agenda & Kegiatan</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#services" class="nav-link">Layanan</a>
+                    <a class="nav-link" href="#prestasi">Prestasi</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link">Kontak</a>
+                    <a class="nav-link" href="#dokumen">Dokumen</a>
                 </li>
             </ul>
-        </nav>
+            <div class="d-flex">
+                <a href="{{ route('login') }}" class="btn btn-outline-primary">Login</a>
+            </div>
+        </div>
     </div>
 </header>
