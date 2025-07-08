@@ -4,40 +4,73 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero-section text-white text-center py-5">
+    <section class="hero-section text-white text-center d-flex align-items-center justify-content-center">
         <div class="container">
-            <h1 class="display-4 fw-bold mb-3">Program Studi Teknik Informatika</h1>
-            <p class="lead mb-4">Mencetak talenta digital yang kreatif, inovatif, dan berdaya saing global.</p>
-            <a href="#contact" class="btn btn-light btn-lg rounded-pill">Hubungi Kami</a>
+            <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">Program Studi Teknik Informatika</h1>
+            <p class="lead mb-5 animate__animated animate__fadeInUp">Mencetak talenta digital yang kreatif, inovatif, dan berdaya saing global.</p>
+            <a href="#contact" class="btn btn-light btn-lg rounded-pill animate__animated animate__zoomIn">Hubungi Kami</a>
         </div>
     </section>
 
     <!-- Mitra Section -->
-    <section id="mitra" class="py-5">
+    <section id="mitra" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center section-title mb-5">Mitra Program Studi</h2>
-            <div class="row align-items-center justify-content-center g-4">
-                <div class="col-6 col-md-4 col-lg-2 text-center">
-                    <img src="https://via.placeholder.com/150x80.png/cccccc/ffffff?text=Mitra+1" alt="Mitra 1" class="img-fluid mx-auto">
+            <div id="mitraCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row justify-content-center align-items-center g-4">
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+A" alt="Mitra A" class="img-fluid mx-auto">
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+B" alt="Mitra B" class="img-fluid mx-auto">
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+C" alt="Mitra C" class="img-fluid mx-auto">
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+D" alt="Mitra D" class="img-fluid mx-auto">
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+E" alt="Mitra E" class="img-fluid mx-auto">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row justify-content-center align-items-center g-4">
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+F" alt="Mitra F" class="img-fluid mx-auto">
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+G" alt="Mitra G" class="img-fluid mx-auto">
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+H" alt="Mitra H" class="img-fluid mx-auto">
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+I" alt="Mitra I" class="img-fluid mx-auto">
+                            </div>
+                            <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+J" alt="Mitra J" class="img-fluid mx-auto">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center">
-                    <img src="https://via.placeholder.com/150x80.png/cccccc/ffffff?text=Mitra+2" alt="Mitra 2" class="img-fluid mx-auto">
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center">
-                    <img src="https://via.placeholder.com/150x80.png/cccccc/ffffff?text=Mitra+3" alt="Mitra 3" class="img-fluid mx-auto">
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center">
-                    <img src="https://via.placeholder.com/150x80.png/cccccc/ffffff?text=Mitra+4" alt="Mitra 4" class="img-fluid mx-auto">
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center">
-                    <img src="https://via.placeholder.com/150x80.png/cccccc/ffffff?text=Mitra+5" alt="Mitra 5" class="img-fluid mx-auto">
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#mitraCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#mitraCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Prestasi Section -->
-    <section id="prestasi" class="bg-light py-5">
+    <section id="prestasi" class="py-5">
         <div class="container">
             <h2 class="text-center section-title mb-5">Prestasi Mahasiswa</h2>
             <div class="row g-4">
@@ -70,7 +103,7 @@
     </section>
 
     <!-- Dokumen Section -->
-    <section id="dokumen" class="py-5">
+    <section id="dokumen" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center section-title mb-5">Dokumen Penting</h2>
             <div class="row justify-content-center">
@@ -99,7 +132,7 @@
     </section>
 
     <!-- Contact Form Section -->
-    <section id="contact" class="bg-light py-5">
+    <section id="contact" class="py-5">
         <div class="container">
             <h2 class="text-center section-title mb-5">Saran & Keluhan</h2>
             <div class="row justify-content-center">
