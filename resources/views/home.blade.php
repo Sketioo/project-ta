@@ -6,7 +6,7 @@
     <!-- Hero Section -->
     <section class="hero-section text-white text-center d-flex align-items-center justify-content-center">
         <div class="container">
-            <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">Program Studi Teknik Informatika</h1>
+            <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">Teknologi Rekayasa Perangkat Lunak</h1>
             <p class="lead mb-5 animate__animated animate__fadeInUp">Mencetak talenta digital yang kreatif, inovatif, dan berdaya saing global.</p>
             <a href="#contact" class="btn btn-light btn-lg rounded-pill animate__animated animate__zoomIn">Hubungi Kami</a>
         </div>
@@ -137,23 +137,23 @@
             <h2 class="text-center section-title mb-5">Saran & Keluhan</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="card">
+                    <div class="card contact-card">
                         <div class="card-body">
                             <form>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Nama</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <label for="name" class="form-label contact-label">Nama</label>
+                                    <input type="text" class="form-control contact-input" id="name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <label for="email" class="form-label contact-label">Email</label>
+                                    <input type="email" class="form-control contact-input" id="email">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="message" class="form-label">Pesan</label>
-                                    <textarea class="form-control" id="message" rows="5"></textarea>
+                                    <label for="message" class="form-label contact-label">Pesan</label>
+                                    <textarea class="form-control contact-textarea" id="message" rows="5"></textarea>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary-custom btn-lg rounded-pill">Kirim Pesan</button>
+                                    <button type="submit" class="btn btn-primary contact-button">Kirim Pesan</button>
                                 </div>
                             </form>
                         </div>

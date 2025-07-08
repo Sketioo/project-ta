@@ -36,14 +36,46 @@ body {
     color: #fff;
 }
 
-.navbar-brand {
-    color: var(--primary-color) !important;
-    font-weight: bold;
+/* Custom Navbar Styles */
+.custom-navbar {
+    background-color: var(--background-color) !important;
+    border-bottom: 3px solid var(--primary-color);
 }
 
-.nav-link.active,
-.nav-link:hover {
+.custom-navbar .navbar-brand {
     color: var(--primary-color) !important;
+    font-weight: bold;
+    font-size: 1.75rem;
+    transition: color 0.3s ease;
+}
+
+.custom-navbar .navbar-brand:hover {
+    color: var(--secondary-color) !important;
+}
+
+.custom-navbar .nav-link {
+    color: var(--text-color) !important;
+    font-weight: 500;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover,
+.custom-navbar .nav-link.active {
+    color: var(--primary-color) !important;
+    transform: translateY(-2px);
+}
+
+.custom-login-btn {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.custom-login-btn:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
 }
 
 /* Hero Section */
@@ -126,21 +158,17 @@ body {
     color: var(--primary-color);
 }
 
-/* Custom Login Page Styles */
-.min-vh-100 {
-    min-height: 100vh;
-}
-
-.login-card {
+/* Custom Login Page Styles (v2) */
+.login-card-v2 {
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     background-color: var(--background-color);
 }
 
-.login-header {
-    background-color: var(--primary-color);
-    color: var(--text-color);
+.login-header-v2 {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
     font-size: 1.8rem;
     font-weight: bold;
     text-align: center;
@@ -148,30 +176,64 @@ body {
     border-bottom: none;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    position: relative;
+    overflow: hidden;
 }
 
-.login-body {
+.login-header-v2::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(30deg);
+    animation: header-anim 5s infinite linear;
+}
+
+@keyframes header-anim {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.login-header-v2 h3 {
+    position: relative;
+    z-index: 1;
+}
+
+.login-body-v2 {
     padding: 2.5rem;
 }
 
-.login-label {
-    font-weight: bold;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
-}
-
-.login-input {
-    border-radius: 8px;
+.input-group-v2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
     border: 1px solid #ced4da;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.input-group-text-v2 {
+    background-color: var(--primary-color);
+    color: var(--text-color);
     padding: 0.75rem 1rem;
+    border-right: 1px solid #ced4da;
 }
 
-.login-input:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+.login-input-v2 {
+    border: none;
+    padding: 0.75rem 1rem;
+    flex-grow: 1;
 }
 
-.login-button {
+.login-input-v2:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.login-button-v2 {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
     border-radius: 8px;
@@ -182,18 +244,18 @@ body {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.login-button:hover {
+.login-button-v2:hover {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
     color: #fff;
 }
 
-.login-link {
+.login-link-v2 {
     color: var(--primary-color);
     font-weight: bold;
 }
 
-.login-link:hover {
+.login-link-v2:hover {
     color: var(--secondary-color);
 }
 
@@ -208,4 +270,68 @@ body {
 .carousel-control-prev,
 .carousel-control-next {
     width: 5%;
+}
+
+/* Contact Form Styles */
+.contact-card {
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    background-color: var(--background-color);
+}
+
+.contact-label {
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.contact-input,
+.contact-textarea {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.75rem 1rem;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+}
+
+.contact-button {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+}
+
+/* Footer Styles */
+.custom-footer {
+    background-color: var(--text-color);
+    color: #fff;
+    padding: 2rem 0;
+    border-top: 3px solid var(--primary-color);
+}
+
+.custom-footer .social-icons a {
+    color: #fff;
+    margin: 0 15px;
+    font-size: 1.8rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-footer .social-icons a:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
 }

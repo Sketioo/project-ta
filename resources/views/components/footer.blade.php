@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white py-4">
+<footer class="custom-footer">
     <div class="container text-center">
         <p class="mb-3">&copy; {{ date('Y') }} Program Studi Teknik Informatika. All Rights Reserved.</p>
         <div class="social-icons">
