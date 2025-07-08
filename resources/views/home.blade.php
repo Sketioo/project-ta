@@ -131,35 +131,4 @@
         </div>
     </section>
 
-    <!-- Contact Form Section -->
-    <section id="contact" class="py-5">
-        <div class="container">
-            <h2 class="text-center section-title mb-5">Saran & Keluhan</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card contact-card">
-                        <div class="card-body">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="name" class="form-label contact-label">Nama</label>
-                                    <input type="text" class="form-control contact-input" id="name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label contact-label">Email</label>
-                                    <input type="email" class="form-control contact-input" id="email">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="message" class="form-label contact-label">Pesan</label>
-                                    <textarea class="form-control contact-textarea" id="message" rows="5"></textarea>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary contact-button">Kirim Pesan</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-@endsection
+    @endsection
