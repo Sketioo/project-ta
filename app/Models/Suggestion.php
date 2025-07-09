@@ -14,5 +14,6 @@ class Suggestion extends Model
         'email',
         'message',
         'status',
+        'is_read',
     ];
 }

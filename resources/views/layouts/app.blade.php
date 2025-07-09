@@ -44,6 +44,8 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>feather.replace()</script>
 
+    @stack('scripts')
+
     <!-- Floating Suggestion Button -->
     <button class="btn btn-primary floating-btn" data-bs-toggle="modal" data-bs-target="#suggestionModal">
         <i class="fas fa-comment-dots"></i>
