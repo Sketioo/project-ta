@@ -31,6 +31,14 @@
                 </a>
             </li>
             @endif
+            @if(Auth::user()->role == 'admin')
+            <li class="nav-item my-1">
+                <a class="nav-link py-2 {{ Request::routeIs('agendas.index') ? 'active' : '' }}" href="{{ route('agendas.index') }}">
+                    <span data-feather="calendar" class="align-middle me-2"></span>
+                    Manajemen Agenda
+                </a>
+            </li>
+            @endif
         </ul>
     </div>
 </nav>

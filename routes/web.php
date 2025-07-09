@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\AgendaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,7 @@ use App\Http\Controllers\AchievementController;
 
 Route::get('/', [PageController::class, 'home']);
 Route::get('/agenda', [PageController::class, 'agenda'])->name('agenda'); // Added name for agenda route
+Route::get('/agenda/{agenda}', [PageController::class, 'showAgendaPublic'])->name('agenda.show.public');
 
 Auth::routes();
 
@@ -44,4 +47,9 @@ Route::middleware(['auth'])->group(function () {
     // Achievement Submission Routes
     Route::get('/achievements/create', [AchievementController::class, 'create'])->name('achievements.create');
     Route::post('/achievements', [AchievementController::class, 'store'])->name('achievements.store');
+
+    // Admin Routes
+    Route::middleware(['admin'])->group(function () {
+        Route::resource('agendas', AgendaController::class);
+    });
 });

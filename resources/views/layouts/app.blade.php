@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -20,13 +24,13 @@
 
     <main class="flex-grow-1">
         @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
         @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -45,6 +49,24 @@
     <script>feather.replace()</script>
 
     @stack('scripts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Auto-dismiss alerts
+            const customAlerts = document.querySelectorAll('.custom-alert');
+            customAlerts.forEach(alert => {
+                setTimeout(() => {
+                    const bootstrapAlert = bootstrap.Alert.getInstance(alert);
+                    if (bootstrapAlert) {
+                        bootstrapAlert.close();
+                    } else {
+                        // If not initialized by Bootstrap JS, manually remove
+                        alert.remove();
+                    }
+                }, 5000); // 5 seconds
+            });
+        });
+    </script>
 
     <!-- Floating Suggestion Button -->
     <button class="btn btn-primary floating-btn" data-bs-toggle="modal" data-bs-target="#suggestionModal">
@@ -72,7 +94,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="modalMessage" class="form-label contact-label">Pesan</label>
-                            <textarea class="form-control contact-textarea" id="modalMessage" name="message" rows="5" required></textarea>
+                            <textarea class="form-control contact-textarea" id="modalMessage" name="message" rows="5" required>{{ old('message') }}</textarea>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary contact-button">Kirim Pesan</button>

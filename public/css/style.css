@@ -13,10 +13,10 @@
 
 html, body {
     height: 100%;
+    font-family: 'Inter', sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-color);
     background-color: var(--background-color);
 }
@@ -708,4 +708,277 @@ body {
     border-color: var(--secondary-color);
     color: #fff;
     transform: translateY(-2px);
+}
+
+/* Agenda Page Customizations */
+.agenda-card-wrapper {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.agenda-card-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.agenda-card {
+    border-radius: 15px; /* More rounded corners */
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.agenda-image-container {
+    height: 250px; /* Fixed height for images */
+    overflow: hidden;
+    position: relative;
+}
+
+.agenda-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.agenda-card-wrapper:hover .agenda-image-container img {
+    transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+.agenda-card-body {
+    padding: 1.5rem;
+}
+
+.agenda-read-more-btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 50px; /* Pill shape */
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.agenda-read-more-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Agenda Article Page Customizations (public_show.blade.php) */
+.agenda-article {
+    background-color: var(--background-color);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.agenda-article-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+    line-height: 1.2;
+}
+
+.agenda-article-meta {
+    font-size: 1rem;
+    color: #6c757d; /* Bootstrap gray */
+}
+
+.agenda-article-main-image {
+    margin-bottom: 2.5rem;
+    text-align: center; /* Center the image */
+}
+
+.agenda-article-main-image img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.agenda-article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #495057; /* Darker text for readability */
+}
+
+.agenda-article-content p {
+    margin-bottom: 1.5rem;
+}
+
+.agenda-back-btn {
+    background-color: #6c757d; /* Bootstrap secondary color */
+    border-color: #6c757d;
+    color: #fff;
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.agenda-back-btn:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Carousel for Agenda Images */
+.agenda-carousel .carousel-item img {
+    height: 400px; /* Fixed height for carousel images */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.agenda-carousel .carousel-indicators [data-bs-target] {
+    background-color: var(--primary-color);
+}
+
+.agenda-carousel .carousel-control-prev-icon,
+.agenda-carousel .carousel-control-next-icon {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 15px;
+}
+
+/* Agenda Admin List Styles */
+.agenda-list-container {
+    background-color: var(--background-color);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+.agenda-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.agenda-list-item:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.agenda-list-item + .agenda-list-item {
+    margin-top: 1rem;
+}
+
+.agenda-list-content {
+    flex-grow: 1;
+}
+
+.agenda-list-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.agenda-list-meta {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.agenda-list-status .badge {
+    font-size: 0.85rem;
+    padding: 0.4em 0.7em;
+}
+
+.agenda-list-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.agenda-icon-btn {
+    width: 38px; /* Fixed width for icon buttons */
+    height: 38px; /* Fixed height for icon buttons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Make them circular */
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.agenda-icon-btn.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: #fff;
+}
+
+.agenda-icon-btn.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.agenda-icon-btn.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+.agenda-icon-btn.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #cc9500;
+}
+
+.agenda-icon-btn.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.agenda-icon-btn.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: #fff;
+}
+
+/* Custom Add Button */
+.custom-add-btn {
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.custom-add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Alert Styles */
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.custom-alert .btn-close {
+    margin-left: 1rem;
+    font-size: 0.8rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
 }
