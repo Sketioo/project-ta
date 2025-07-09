@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Achievement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AchievementStatusUpdated;
 
 class AchievementValidationController extends Controller
 {
@@ -34,8 +36,12 @@ class AchievementValidationController extends Controller
         ]);
 
         $updateData = [];
+        $statusChanged = false;
 
         if (isset($validatedData['status'])) {
+            if ($achievement->status !== $validatedData['status']) {
+                $statusChanged = true;
+            }
             $updateData['status'] = $validatedData['status'];
             $updateData['validated_by'] = Auth::id();
             $updateData['validated_at'] = now();
@@ -46,6 +52,11 @@ class AchievementValidationController extends Controller
         }
 
         $achievement->update($updateData);
+
+        // Send email if status was changed
+        if ($statusChanged) {
+            Mail::to($achievement->user->email)->send(new AchievementStatusUpdated($achievement));
+        }
 
         return redirect()->route('kaprodi.achievements.index')->with('success', 'Achievement updated successfully.');
     }
