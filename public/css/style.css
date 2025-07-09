@@ -140,6 +140,12 @@ body {
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition */
+}
+
+#prestasi .card:hover {
+    transform: translateY(-5px); /* Lift effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
 }
 
 .card-body {
@@ -840,6 +846,23 @@ body {
     padding: 15px;
 }
 
+/* Achievement Carousel Customizations */
+#achievementCarousel .carousel-control-prev-icon,
+#achievementCarousel .carousel-control-next-icon {
+    background-color: var(--primary-color); /* Use primary color for controls */
+    border-radius: 50%;
+    padding: 15px;
+}
+
+#achievementCarousel .carousel-control-prev,
+#achievementCarousel .carousel-control-next {
+    width: 5%; /* Adjust width of controls */
+}
+
+#achievementCarousel .carousel-indicators [data-bs-target] {
+    background-color: var(--primary-color); /* Use primary color for indicators */
+}
+
 /* Agenda Admin List Styles */
 .agenda-list-container {
     background-color: var(--background-color);
@@ -981,4 +1004,102 @@ body {
     background-color: #f8d7da;
     border-color: #f5c6cb;
     color: #721c24;
+}
+
+/* Achievement List Item Customizations */
+.achievement-item .card-body {
+    padding: 1.5rem;
+}
+
+.achievement-details {
+    margin-right: 1.5rem; /* Space between details and actions */
+}
+
+.achievement-details .card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.achievement-details .card-text {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-details .card-text strong {
+    color: #555;
+}
+
+.achievement-actions .btn {
+    width: 38px; /* Fixed width for icon buttons */
+    height: 38px; /* Fixed height for icon buttons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Make them circular */
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.achievement-actions .btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: #fff;
+}
+
+.achievement-actions .btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.achievement-actions .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+
+.achievement-actions .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.achievement-actions .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.achievement-actions .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.achievement-actions .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+.achievement-actions .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .achievement-item .card-body {
+        flex-direction: column; /* Stack details and actions on small screens */
+        align-items: flex-start; /* Align items to start */
+    }
+
+    .achievement-details {
+        margin-right: 0; /* Remove margin on small screens */
+        margin-bottom: 1rem; /* Add bottom margin */
+    }
+
+    .achievement-actions {
+        width: 100%; /* Full width for actions */
+        justify-content: flex-start; /* Align actions to start */
+    }
 }

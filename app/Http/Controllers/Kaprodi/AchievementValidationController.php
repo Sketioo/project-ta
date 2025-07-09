@@ -9,9 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AchievementValidationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $achievements = Achievement::where('status', 'pending')->get();
+        $query = Achievement::query();
+
+        if ($request->has('status') && $request->status != 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $achievements = $query->get();
         return view('kaprodi.achievements.index', compact('achievements'));
     }
 
@@ -20,25 +26,27 @@ class AchievementValidationController extends Controller
         return view('kaprodi.achievements.show', compact('achievement'));
     }
 
-    public function validateAchievement(Achievement $achievement)
+    public function update(Request $request, Achievement $achievement)
     {
-        $achievement->update([
-            'status' => 'validated',
-            'validated_by' => Auth::id(),
-            'validated_at' => now(),
+        $validatedData = $request->validate([
+            'status' => 'sometimes|required|in:pending,validated,rejected',
+            'show_on_main_page' => 'sometimes|boolean',
         ]);
 
-        return redirect()->route('kaprodi.achievements.index')->with('success', 'Achievement validated successfully.');
-    }
+        $updateData = [];
 
-    public function rejectAchievement(Achievement $achievement)
-    {
-        $achievement->update([
-            'status' => 'rejected',
-            'validated_by' => Auth::id(),
-            'validated_at' => now(),
-        ]);
+        if (isset($validatedData['status'])) {
+            $updateData['status'] = $validatedData['status'];
+            $updateData['validated_by'] = Auth::id();
+            $updateData['validated_at'] = now();
+        }
 
-        return redirect()->route('kaprodi.achievements.index')->with('success', 'Achievement rejected successfully.');
+        if (isset($validatedData['show_on_main_page'])) {
+            $updateData['show_on_main_page'] = $validatedData['show_on_main_page'];
+        }
+
+        $achievement->update($updateData);
+
+        return redirect()->route('kaprodi.achievements.index')->with('success', 'Achievement updated successfully.');
     }
 }

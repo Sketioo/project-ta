@@ -1,6 +1,6 @@
 <header class="navbar navbar-expand-lg navbar-light shadow-sm sticky-top custom-navbar">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}"><i class="fas fa-graduation-cap me-2"></i>Prodi TRPL</a>
+        <a class="navbar-brand" href="{{ url('/') }}"><i class="fas fa-graduation-cap me-2 text-black"></i>Prodi TRPL</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,8 +27,8 @@
                             class="btn btn-outline-success custom-dashboard-btn me-2"><i
                                 class="fas fa-award me-1"></i>Ajukan Prestasi</a>
                     @elseif (Auth::user()->role == 'kaprodi')
-                        <a href="{{ route('kaprodi.achievements.index') }}" class="btn btn-outline-secondary custom-dashboard-btn me-2"><i
-                                class="fas fa-check-circle me-1"></i>Validasi Prestasi</a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary custom-dashboard-btn me-2"><i
+                                class="fas fa-tachometer-alt me-1"></i>Dashboard</a>
                     @else
                         <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary custom-dashboard-btn me-2"><i
                                 class="fas fa-tachometer-alt me-1"></i>Dashboard</a>

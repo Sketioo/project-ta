@@ -73,31 +73,48 @@
     <section id="prestasi" class="py-5">
         <div class="container">
             <h2 class="text-center section-title mb-5">Prestasi Mahasiswa</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Juara 1 Lomba Web Design Nasional</h5>
-                            <p class="card-text text-muted">Tim kami berhasil meraih juara pertama dalam kompetisi desain web tingkat nasional yang diselenggarakan oleh Kemendikbud.</p>
+            <div id="achievementCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @php
+                        $chunkedAchievements = $achievements->chunk(3); // 3 cards per slide
+                    @endphp
+
+                    @forelse ($chunkedAchievements as $key => $chunk)
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                        <div class="row g-4 justify-content-center">
+                            @foreach ($chunk as $achievement)
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    @if($achievement->photo_path)
+                                        <img src="{{ asset('storage/' . $achievement->photo_path) }}" class="card-img-top" alt="{{ $achievement->title }}" style="height: 200px; object-fit: cover;">
+                                    @else
+                                        <img src="https://via.placeholder.com/400x200.png/cccccc/ffffff?text=No+Image" class="card-img-top" alt="No Image" style="height: 200px; object-fit: cover;">
+                                    @endif
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">{{ $achievement->title }}</h5>
+                                        <p class="card-text text-muted">{{ Str::limit($achievement->description, 100) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Finalis Kompetisi Aplikasi Mobile</h5>
-                            <p class="card-text text-muted">Aplikasi "EduLearn" karya mahasiswa kami berhasil menjadi finalis dalam ajang kompetisi aplikasi mobile tingkat Asia Tenggara.</p>
+                    @empty
+                    <div class="carousel-item active">
+                        <div class="col-12">
+                            <p class="text-center">Belum ada prestasi mahasiswa yang ditampilkan.</p>
                         </div>
                     </div>
+                    @endforelse
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Juara 2 Lomba Competitive Programming</h5>
-                            <p class="card-text text-muted">Mahasiswa kami menunjukkan kemampuannya dengan meraih juara kedua dalam kompetisi pemrograman kompetitif.</p>
-                        </div>
-                    </div>
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#achievementCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#achievementCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
     </section>

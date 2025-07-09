@@ -71,6 +71,14 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="photo" class="form-label custom-form-label">Foto Prestasi (JPG, PNG)</label>
+                            <input type="file" class="form-control custom-form-input" id="photo" name="photo" accept="image/jpeg,image/png">
+                            @error('photo')
+                                <div class="text-danger custom-form-error">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <button type="submit" class="btn btn-primary custom-submit-btn">Ajukan Prestasi</button>
                     </form>
                 </div>

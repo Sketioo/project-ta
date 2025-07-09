@@ -29,8 +29,8 @@
                     </div>
                 </div>
                 @empty
-                <div class="col-12">
-                    <p>Tidak ada saran yang belum dibaca.</p>
+                <div class="col-12 text-center py-4">
+                    <p class="text-muted">Tidak ada saran yang belum dibaca.</p>
                 </div>
                 @endforelse
             </div>

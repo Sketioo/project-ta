@@ -17,7 +17,11 @@ class Achievement extends Model
         'title',
         'description',
         'file_path',
-        'is_accepted',
+        'status',
+        'validated_by',
+        'validated_at',
+        'show_on_main_page',
+        'photo_path',
     ];
 
     public function user()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Agenda;
+use App\Models\Achievement;
 
 class PageController extends Controller
 {
@@ -15,7 +16,11 @@ class PageController extends Controller
      */
     public function home()
     {
-        return view('home');
+        $achievements = Achievement::where('status', 'validated')
+                                ->where('show_on_main_page', true)
+                                ->latest()
+                                ->get();
+        return view('home', compact('achievements'));
     }
 
     /**

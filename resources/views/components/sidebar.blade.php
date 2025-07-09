@@ -17,6 +17,14 @@
                 </a>
             </li>
             @endif
+            @if(Auth::user()->role == 'kaprodi')
+            <li class="nav-item my-1">
+                <a class="nav-link py-2 {{ Request::routeIs('kaprodi.achievements.index') ? 'active' : '' }}" href="{{ route('kaprodi.achievements.index') }}">
+                    <span data-feather="check-square" class="align-middle me-2"></span>
+                    Validasi Prestasi
+                </a>
+            </li>
+            @endif
             {{-- <li class="nav-item my-1">
                 <a class="nav-link py-2 {{ Request::routeIs('agenda') ? 'active' : '' }}" href="{{ route('agenda') }}">
                     <span data-feather="calendar" class="align-middle me-2"></span>

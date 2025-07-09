@@ -23,11 +23,17 @@ class AchievementController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'file' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $filePath = null;
         if ($request->hasFile('file')) {
-            $filePath = $request->file('file')->store('achievements', 'public');
+            $filePath = $request->file('file')->store('achievements/files', 'public');
+        }
+
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('achievements/photos', 'public');
         }
 
         Auth::user()->achievements()->create([
@@ -37,7 +43,8 @@ class AchievementController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'file_path' => $filePath,
-            'is_accepted' => false, // Default to false on submission
+            'photo_path' => $photoPath,
+            'status' => 'pending', // Default status on submission
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Pengajuan prestasi berhasil dikirim!');

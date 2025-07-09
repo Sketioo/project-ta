@@ -58,7 +58,6 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['kaprodi'])->name('kaprodi.')->prefix('kaprodi')->group(function () {
         Route::get('/achievements', [AchievementValidationController::class, 'index'])->name('achievements.index');
         Route::get('/achievements/{achievement}', [AchievementValidationController::class, 'show'])->name('achievements.show');
-        Route::post('/achievements/{achievement}/validate', [AchievementValidationController::class, 'validateAchievement'])->name('achievements.validate');
-        Route::post('/achievements/{achievement}/reject', [AchievementValidationController::class, 'rejectAchievement'])->name('achievements.reject');
+        Route::patch('/achievements/{achievement}', [AchievementValidationController::class, 'update'])->name('achievements.update');
     });
 });
