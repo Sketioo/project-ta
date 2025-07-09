@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Suggestion;
 
 class SuggestionController extends Controller
 {
     public function index()
     {
-        $suggestions = Suggestion::all();
+        // Fetch only unread suggestions by default
+        $suggestions = Suggestion::where('is_read', false)->latest()->get();
         return view('suggestions.index', compact('suggestions'));
     }
 
@@ -25,5 +25,18 @@ class SuggestionController extends Controller
         Suggestion::create($request->all());
 
         return redirect()->back()->with('success', 'Saran Anda berhasil dikirim!');
+    }
+
+    public function markAsRead(Request $request, Suggestion $suggestion)
+    {
+        $suggestion->update(['is_read' => true]);
+        return response()->json(['success' => true]);
+    }
+
+    public function readSuggestions()
+    {
+        // Fetch only read suggestions
+        $suggestions = Suggestion::where('is_read', true)->latest()->get();
+        return view('suggestions.read', compact('suggestions'));
     }
 }

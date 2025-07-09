@@ -16,7 +16,7 @@ use App\Http\Controllers\SuggestionController;
 */
 
 Route::get('/', [PageController::class, 'home']);
-Route::get('/agenda', [PageController::class, 'agenda']);
+Route::get('/agenda', [PageController::class, 'agenda'])->name('agenda'); // Added name for agenda route
 
 Auth::routes();
 
@@ -25,8 +25,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Public route for submitting suggestions
 Route::post('/suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
 
-Auth::routes();
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -34,4 +32,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Authenticated route for viewing suggestions (admin dashboard)
     Route::get('/suggestions', [SuggestionController::class, 'index'])->name('suggestions.index');
+
+    // Route to mark a suggestion as read
+    Route::post('/suggestions/{suggestion}/mark-as-read', [SuggestionController::class, 'markAsRead'])->name('suggestions.markAsRead');
+
+    // Route to view read suggestions
+    Route::get('/suggestions/read', [SuggestionController::class, 'readSuggestions'])->name('suggestions.read');
 });
