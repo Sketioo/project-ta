@@ -20,7 +20,16 @@
                 </li>
             </ul>
             <div class="d-flex">
-                <a href="{{ route('login') }}" class="btn btn-outline-primary custom-login-btn"><i class="fas fa-sign-in-alt me-1"></i>Login</a>
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-outline-primary custom-login-btn"><i class="fas fa-sign-in-alt me-1"></i>Login</a>
+                @endguest
+                @auth
+                    <a href="{{ route('dashboard') }}" class="btn btn-outline-success custom-dashboard-btn me-2"><i class="fas fa-tachometer-alt me-1"></i>Dashboard</a>
+                    <a href="{{ route('logout') }}" class="btn btn-outline-danger custom-logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                @endauth
             </div>
         </div>
     </div>

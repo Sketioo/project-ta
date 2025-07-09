@@ -13,9 +13,9 @@
                     @csrf
 
                     <div class="mb-3 input-group-v2">
-                        <span class="input-group-text-v2"><i class="fas fa-envelope"></i></span>
-                        <input id="email" type="email" class="form-control login-input-v2 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email Address">
-                        @error('email')
+                        <span class="input-group-text-v2"><i class="fas fa-user"></i></span> <!-- Changed icon to user -->
+                        <input id="username" type="text" class="form-control login-input-v2 @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username">
+                        @error('username')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

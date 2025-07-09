@@ -19,6 +19,18 @@
     @include('components.header')
 
     <main class="flex-grow-1">
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         @yield('content')
     </main>
 
@@ -43,18 +55,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body custom-modal-body">
-                    <form>
+                    <form method="POST" action="{{ route('suggestions.store') }}">
+                        @csrf
                         <div class="mb-3">
                             <label for="modalName" class="form-label contact-label">Nama</label>
-                            <input type="text" class="form-control contact-input" id="modalName">
+                            <input type="text" class="form-control contact-input" id="modalName" name="name" required>
                         </div>
                         <div class="mb-3">
                             <label for="modalEmail" class="form-label contact-label">Email</label>
-                            <input type="email" class="form-control contact-input" id="modalEmail">
+                            <input type="email" class="form-control contact-input" id="modalEmail" name="email">
                         </div>
                         <div class="mb-3">
                             <label for="modalMessage" class="form-label contact-label">Pesan</label>
-                            <textarea class="form-control contact-textarea" id="modalMessage" rows="5"></textarea>
+                            <textarea class="form-control contact-textarea" id="modalMessage" name="message" rows="5" required></textarea>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary contact-button">Kirim Pesan</button>
