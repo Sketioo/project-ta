@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\Kaprodi\AchievementValidationController;
 
 
 /*
@@ -51,5 +52,13 @@ Route::middleware(['auth'])->group(function () {
     // Admin Routes
     Route::middleware(['admin'])->group(function () {
         Route::resource('agendas', AgendaController::class);
+    });
+
+    // Kaprodi Routes
+    Route::middleware(['kaprodi'])->name('kaprodi.')->prefix('kaprodi')->group(function () {
+        Route::get('/achievements', [AchievementValidationController::class, 'index'])->name('achievements.index');
+        Route::get('/achievements/{achievement}', [AchievementValidationController::class, 'show'])->name('achievements.show');
+        Route::post('/achievements/{achievement}/validate', [AchievementValidationController::class, 'validateAchievement'])->name('achievements.validate');
+        Route::post('/achievements/{achievement}/reject', [AchievementValidationController::class, 'rejectAchievement'])->name('achievements.reject');
     });
 });

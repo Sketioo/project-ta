@@ -17,24 +17,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.0/dist/sweetalert2.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
     @include('components.header')
 
     <main class="flex-grow-1">
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
         @yield('content')
     </main>
 
@@ -48,23 +38,38 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>feather.replace()</script>
 
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.0/dist/sweetalert2.all.min.js"></script>
+
     @stack('scripts')
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Auto-dismiss alerts
-            const customAlerts = document.querySelectorAll('.custom-alert');
-            customAlerts.forEach(alert => {
-                setTimeout(() => {
-                    const bootstrapAlert = bootstrap.Alert.getInstance(alert);
-                    if (bootstrapAlert) {
-                        bootstrapAlert.close();
-                    } else {
-                        // If not initialized by Bootstrap JS, manually remove
-                        alert.remove();
-                    }
-                }, 5000); // 5 seconds
-            });
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: true,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    position: 'center',
+                    backdrop: true,
+                });
+            @endif
+
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Terjadi Kesalahan!',
+                    text: '{{ session('error') }}',
+                    showConfirmButton: true,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    position: 'center',
+                    backdrop: true,
+                });
+            @endif
         });
     </script>
 

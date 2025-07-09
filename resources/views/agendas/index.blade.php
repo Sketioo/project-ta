@@ -38,7 +38,7 @@
                         <form action="{{ route('agendas.destroy', $agenda->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm agenda-icon-btn" onclick="return confirm('Apakah Anda yakin ingin menghapus agenda ini?')" title="Hapus"><i class="fas fa-trash"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm agenda-icon-btn delete-agenda-btn" title="Hapus"><i class="fas fa-trash"></i></button>
                         </form>
                     </div>
                 </div>
@@ -52,3 +52,33 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.delete-agenda-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                const form = this.closest('form');
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda tidak akan dapat mengembalikan ini!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    backdrop: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+@endpush

@@ -26,6 +26,9 @@
                         <a href="{{ route('achievements.create') }}"
                             class="btn btn-outline-success custom-dashboard-btn me-2"><i
                                 class="fas fa-award me-1"></i>Ajukan Prestasi</a>
+                    @elseif (Auth::user()->role == 'kaprodi')
+                        <a href="{{ route('kaprodi.achievements.index') }}" class="btn btn-outline-secondary custom-dashboard-btn me-2"><i
+                                class="fas fa-check-circle me-1"></i>Validasi Prestasi</a>
                     @else
                         <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary custom-dashboard-btn me-2"><i
                                 class="fas fa-tachometer-alt me-1"></i>Dashboard</a>
