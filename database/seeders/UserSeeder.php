@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'username' => 'admin', // New field for username
             'email' => 'admin@example.com', // Keep email for now, will make nullable later
             'password' => Hash::make('password'),
+            'role' => 'admin', // Assuming you have a role field
         ]);
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\AchievementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,8 @@ Route::post('/suggestions', [SuggestionController::class, 'store'])->name('sugge
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $totalSuggestions = App\Models\Suggestion::count();
+        return view('dashboard', compact('totalSuggestions'));
     })->name('dashboard');
 
     // Authenticated route for viewing suggestions (admin dashboard)
@@ -38,4 +40,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Route to view read suggestions
     Route::get('/suggestions/read', [SuggestionController::class, 'readSuggestions'])->name('suggestions.read');
+
+    // Achievement Submission Routes
+    Route::get('/achievements/create', [AchievementController::class, 'create'])->name('achievements.create');
+    Route::post('/achievements', [AchievementController::class, 'store'])->name('achievements.store');
 });

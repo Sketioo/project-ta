@@ -4,6 +4,11 @@
     --secondary-color: #ff8f00; /* Kuning Oranye */
     --background-color: #ffffff; /* Putih */
     --text-color: #333333; /* Hitam */
+    --sidebar-bg-color-subtle: #f8f9fa; /* Light grey for subtle sidebar */
+    --sidebar-link-color: #495057; /* Darker grey for links */
+    --sidebar-link-hover-bg: #e9ecef; /* Lighter grey on hover */
+    --sidebar-link-active-bg: var(--primary-color); /* Primary color for active */
+    --sidebar-link-active-color: var(--text-color); /* Text color for active */
 }
 
 html, body {
@@ -458,6 +463,10 @@ body {
     border-left: 0.25rem solid #17a2b8 !important; /* Blue for info */
 }
 
+.card.border-left-warning {
+    border-left: 0.25rem solid #ffc107 !important; /* Orange for warning */
+}
+
 .text-xs {
     font-size: .75rem;
 }
@@ -478,8 +487,16 @@ body {
     color: #17a2b8 !important;
 }
 
+.text-warning {
+    color: #ffc107 !important;
+}
+
 .text-gray-800 {
     color: #343a40 !important;
+}
+
+.text-gray-300 {
+    color: #dee2e6!important;
 }
 
 .shadow {
@@ -533,10 +550,6 @@ body {
     max-width: 100%;
 }
 
-.text-gray-300 {
-    color: #dee2e6!important;
-}
-
 .fa-2x {
     font-size: 2em;
 }
@@ -568,4 +581,131 @@ body {
 
 .mr-3 {
     margin-right: 1rem!important;
+}
+
+/* Subtle Sidebar Customizations */
+.sidebar-custom {
+    background-color: var(--sidebar-bg-color-subtle); /* Use a subtle background */
+    border-right: 1px solid #e0e0e0; /* Light border */
+    padding-top: 1rem;
+}
+
+.sidebar-custom .nav-item {
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-custom .nav-link {
+    color: var(--sidebar-link-color) !important;
+    padding: 0.75rem 1rem; /* Slightly more padding */
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-custom .nav-link:hover {
+    background-color: var(--sidebar-link-hover-bg);
+    color: var(--primary-color) !important;
+}
+
+.sidebar-custom .nav-link.active {
+    background-color: var(--sidebar-link-active-bg);
+    color: var(--sidebar-link-active-color) !important;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for active state */
+    border-left: 4px solid var(--secondary-color); /* Add a prominent left border */
+}
+
+.sidebar-custom .nav-link span[data-feather] {
+    margin-right: 0.75rem;
+}
+
+/* Custom styles for Dashboard and Logout buttons */
+.custom-dashboard-btn,
+.custom-logout-btn {
+    border-radius: 50px; /* Pill shape */
+    padding: 0.5rem 1.2rem; /* Adjust padding */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-left: 0.5rem; /* Space between buttons */
+}
+
+.custom-dashboard-btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.custom-dashboard-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+}
+
+.custom-logout-btn {
+    background-color: #dc3545; /* Bootstrap danger red */
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.custom-logout-btn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: #fff;
+}
+
+/* Achievement Form Customizations */
+.custom-form-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.custom-form-header {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1.2rem 1.5rem;
+    border-bottom: none;
+}
+
+.achievement-form .custom-form-label {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.achievement-form .custom-form-input {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.achievement-form .custom-form-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+}
+
+.achievement-form .custom-form-error {
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}
+
+.custom-submit-btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-submit-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-2px);
 }
