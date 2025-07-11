@@ -1,0 +1,72 @@
+
+/* Custom Navbar Styling */
+.custom-navbar {
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.custom-navbar.scrolled {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-navbar .navbar-brand {
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-navbar .nav-link {
+    position: relative;
+    transition: color 0.3s ease-in-out;
+    color: #555;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #007bff;
+}
+
+.custom-navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #007bff;
+    transition: width 0.3s ease-in-out;
+}
+
+.custom-navbar .nav-link:hover::after,
+.custom-navbar .nav-link.active::after {
+    width: 100%;
+}
+
+.custom-navbar .nav-link.active {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Custom Button Styling */
+.custom-login-btn,
+.custom-dashboard-btn,
+.custom-logout-btn {
+    transition: all 0.3s ease-in-out;
+}
+
+.custom-login-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.custom-dashboard-btn:hover {
+    background-color: #6c757d;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.custom-logout-btn:hover {
+    background-color: #dc3545;
+    color: #fff;
+    transform: translateY(-2px);
+}

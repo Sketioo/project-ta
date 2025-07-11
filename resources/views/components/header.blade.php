@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('css/custom-header.css') }}">
+
 <header class="navbar navbar-expand-lg navbar-light shadow-sm sticky-top custom-navbar">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}"><i class="fas fa-graduation-cap me-2 text-black"></i>Prodi TRPL</a>
@@ -44,3 +46,5 @@
         </div>
     </div>
 </header>
+
+<script src="{{ asset('js/custom-header.js') }}"></script>
