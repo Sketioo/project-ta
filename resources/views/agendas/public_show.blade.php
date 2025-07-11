@@ -6,7 +6,7 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
-                <article class="agenda-article">
+                <article class="agenda-article" data-animation="animate__fadeInUp">
                     <h1 class="agenda-article-title text-center mb-3">{{ $agenda->title }}</h1>
                     <div class="agenda-article-meta text-center text-muted mb-5">
                         <i class="fas fa-calendar-alt me-1"></i> {{ $agenda->date->format('d F Y') }}
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="text-center mt-5">
-                        <a href="{{ route('agenda') }}" class="btn btn-outline-secondary agenda-back-btn"><i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Agenda</a>
+                        <a href="{{ route('agenda') }}" class="btn btn-outline-secondary agenda-back-btn" data-animation="animate__fadeInUp" data-animation-delay="0.2s"><i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Agenda</a>
                     </div>
                 </article>
             </div>

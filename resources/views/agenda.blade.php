@@ -7,7 +7,7 @@
         <h1 class="text-center section-title mb-5">Agenda & Kegiatan</h1>
         <div class="row g-4">
             @forelse($agendas as $agenda)
-            <div class="col-md-4 agenda-card-wrapper">
+            <div class="col-md-4 agenda-card-wrapper" data-animation="animate__fadeInUp">
                 <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden agenda-card">
                     <div class="agenda-image-container">
                         @if($agenda->images && count($agenda->images) > 0)

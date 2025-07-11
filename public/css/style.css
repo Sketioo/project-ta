@@ -1072,6 +1072,7 @@ body {
 .achievement-actions .btn-danger:hover {
     background-color: #c82333;
     border-color: #bd2130;
+    color: #fff;
 }
 
 .achievement-actions .btn-secondary {
@@ -1102,4 +1103,199 @@ body {
         width: 100%; /* Full width for actions */
         justify-content: flex-start; /* Align actions to start */
     }
+}
+
+/* Hero Section Background and Overlay */
+.hero-background {
+    background: url('../images/hero-bg.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+.hero-overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+    z-index: 0;
+}
+
+/* Mitra Section - Partner Logos */
+.partner-logo-wrapper {
+    height: 100px; /* Fixed height for consistent display */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-logo-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.partner-logo-wrapper img {
+    max-height: 80px; /* Ensure logos don't exceed this height */
+    width: auto; /* Maintain aspect ratio */
+    object-fit: contain;
+    filter: grayscale(100%); /* Grayscale effect */
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.partner-logo-wrapper:hover img {
+    filter: grayscale(0%); /* Color on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Achievement Card Specific Styles */
+.achievement-card {
+    border-radius: 15px; /* More rounded corners for the card */
+    overflow: hidden; /* Ensures image corners are also rounded */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger initial shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-8px); /* More pronounced lift effect */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); /* Even stronger shadow on hover */
+}
+
+.achievement-image-container {
+    height: 220px; /* Fixed height for achievement images */
+    overflow: hidden;
+    position: relative;
+}
+
+.achievement-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    transition: transform 0.3s ease;
+}
+
+.achievement-card:hover .achievement-image-container img {
+    transform: scale(1.08); /* Subtle zoom effect on image on hover */
+}
+
+.achievement-card .card-body {
+    padding: 1.5rem;
+}
+
+.achievement-card .card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+}
+
+.achievement-card .card-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Document List Item Styles */
+.document-list-item {
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px 20px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.document-list-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+}
+
+.document-list-item .document-title {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.document-list-item .document-download-btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 50px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.document-list-item .document-download-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Agenda Page Customizations */
+.agenda-card-wrapper {
+    /* Existing styles are good, just ensuring consistency and adding animation trigger */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.agenda-card-wrapper:hover {
+    transform: translateY(-8px); /* More pronounced lift effect */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.agenda-card {
+    border-radius: 15px; /* Consistent rounded corners */
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger initial shadow */
+    transition: all 0.3s ease;
+}
+
+.agenda-image-container {
+    height: 250px; /* Fixed height for consistent image display */
+    overflow: hidden;
+    position: relative;
+}
+
+.agenda-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the area */
+    transition: transform 0.3s ease;
+}
+
+.agenda-card-wrapper:hover .agenda-image-container img {
+    transform: scale(1.08); /* Subtle zoom on image hover */
+}
+
+.agenda-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.agenda-card-body .card-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color); /* Ensure title color is consistent */
+}
+
+.agenda-card-body .card-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    flex-grow: 1; /* Allow description to take available space */
+}
+
+.agenda-read-more-btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 50px; /* Pill shape */
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 1rem; /* Space above the button */
+}
+
+.agenda-read-more-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-2px);
 }
