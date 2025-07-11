@@ -15,7 +15,7 @@
                     <h6 class="m-0 font-weight-bold text-white">Form Agenda</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('agendas.store') }}" method="POST" enctype="multipart/form-data" class="agenda-form">
+                    <form action="{{ route('admin.agendas.store') }}" method="POST" enctype="multipart/form-data" class="agenda-form">
                         @csrf
 
                         <div class="row">

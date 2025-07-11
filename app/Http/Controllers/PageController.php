@@ -14,7 +14,7 @@ class PageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function home()
+    public function index()
     {
         $achievements = Achievement::where('status', 'validated')
                                 ->where('show_on_main_page', true)

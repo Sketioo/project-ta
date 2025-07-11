@@ -41,7 +41,12 @@
             @endif
             @if(Auth::user()->role == 'admin')
             <li class="nav-item my-1">
-                <a class="nav-link py-2 {{ Request::routeIs('agendas.index') ? 'active' : '' }}" href="{{ route('agendas.index') }}">
+                <a class="nav-link py-2 {{ Request::routeIs('admin.partners.index') ? 'active' : '' }}" href="{{ route('admin.partners.index') }}">
+                    <i class="fas fa-handshake me-2"></i>Manajemen Mitra
+                </a>
+            </li>
+            <li class="nav-item my-1">
+                <a class="nav-link py-2 {{ Request::routeIs('admin.agendas.index') ? 'active' : '' }}" href="{{ route('admin.agendas.index') }}">
                     <span data-feather="calendar" class="align-middle me-2"></span>
                     Manajemen Agenda
                 </a>

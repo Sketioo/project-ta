@@ -6,7 +6,7 @@ use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\Kaprodi\AchievementValidationController;
-
+use App\Http\Controllers\Admin\PartnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,22 +19,18 @@ use App\Http\Controllers\Kaprodi\AchievementValidationController;
 |
 */
 
-Route::get('/', [PageController::class, 'home']);
+Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/agenda', [PageController::class, 'agenda'])->name('agenda'); // Added name for agenda route
 Route::get('/agenda/{agenda}', [PageController::class, 'showAgendaPublic'])->name('agenda.show.public');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 // Public route for submitting suggestions
 Route::post('/suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        $totalSuggestions = App\Models\Suggestion::count();
-        return view('dashboard', compact('totalSuggestions'));
-    })->name('dashboard');
 
     // Authenticated route for viewing suggestions (admin dashboard)
     Route::get('/suggestions', [SuggestionController::class, 'index'])->name('suggestions.index');
@@ -50,8 +46,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/achievements', [AchievementController::class, 'store'])->name('achievements.store');
 
     // Admin Routes
-    Route::middleware(['admin'])->group(function () {
+    Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::resource('agendas', AgendaController::class);
+        Route::resource('partners', PartnerController::class)->except(['show', 'edit', 'update']);
     });
 
     // Kaprodi Routes
