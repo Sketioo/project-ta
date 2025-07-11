@@ -32,14 +32,16 @@ Route::post('/suggestions', [SuggestionController::class, 'store'])->name('sugge
 
 Route::middleware(['auth'])->group(function () {
 
-    // Authenticated route for viewing suggestions (admin dashboard)
-    Route::get('/suggestions', [SuggestionController::class, 'index'])->name('suggestions.index');
+    Route::middleware(['non.mahasiswa'])->group(function () {
+        // Authenticated route for viewing suggestions (admin dashboard)
+        Route::get('/suggestions', [SuggestionController::class, 'index'])->name('suggestions.index');
 
-    // Route to mark a suggestion as read
-    Route::post('/suggestions/{suggestion}/mark-as-read', [SuggestionController::class, 'markAsRead'])->name('suggestions.markAsRead');
+        // Route to mark a suggestion as read
+        Route::post('/suggestions/{suggestion}/mark-as-read', [SuggestionController::class, 'markAsRead'])->name('suggestions.markAsRead');
 
-    // Route to view read suggestions
-    Route::get('/suggestions/read', [SuggestionController::class, 'readSuggestions'])->name('suggestions.read');
+        // Route to view read suggestions
+        Route::get('/suggestions/read', [SuggestionController::class, 'readSuggestions'])->name('suggestions.read');
+    });
 
     // Achievement Submission Routes
     Route::get('/achievements/create', [AchievementController::class, 'create'])->name('achievements.create');

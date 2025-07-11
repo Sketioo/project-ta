@@ -1113,13 +1113,13 @@ body {
 }
 
 .hero-overlay {
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+    background-color: rgba(0, 0, 0, 0); /* Dark overlay for text readability */
     z-index: 0;
 }
 
 /* Mitra Section - Partner Logos */
 .partner-logo-wrapper {
-    height: 100px; /* Fixed height for consistent display */
+    height: 150px; /* Fixed height for consistent display */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1133,15 +1133,13 @@ body {
 }
 
 .partner-logo-wrapper img {
-    max-height: 80px; /* Ensure logos don't exceed this height */
+    max-height: 120px; /* Ensure logos don't exceed this height */
     width: auto; /* Maintain aspect ratio */
     object-fit: contain;
-    filter: grayscale(100%); /* Grayscale effect */
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .partner-logo-wrapper:hover img {
-    filter: grayscale(0%); /* Color on hover */
     transform: scale(1.05); /* Slight zoom on hover */
 }
 
@@ -1151,6 +1149,7 @@ body {
     overflow: hidden; /* Ensures image corners are also rounded */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger initial shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1.5rem; /* Add space below the card */
 }
 
 .achievement-card:hover {
@@ -1191,25 +1190,26 @@ body {
 
 /* Document List Item Styles */
 .document-list-item {
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Increased margin-bottom */
     border: 1px solid #e0e0e0;
+    border-left: 5px solid var(--primary-color); /* Added left border */
     border-radius: 8px;
-    padding: 15px 20px;
+    padding: 20px 25px; /* Increased padding */
     transition: all 0.3s ease;
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* More pronounced shadow */
 }
 
 .document-list-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px); /* More pronounced lift effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Even stronger shadow on hover */
     background-color: #f8f9fa;
 }
 
 .document-list-item .document-title {
-    font-weight: 600;
+    font-weight: 700; /* Bolder font */
     color: var(--text-color);
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Slightly larger font */
 }
 
 .document-list-item .document-download-btn {
@@ -1217,7 +1217,7 @@ body {
     border-color: var(--primary-color);
     color: var(--text-color);
     border-radius: 50px;
-    padding: 0.5rem 1.2rem;
+    padding: 0.6rem 1.5rem; /* Increased padding */
     font-weight: 600;
     transition: all 0.3s ease;
 }
@@ -1299,3 +1299,5 @@ body {
     color: #fff;
     transform: translateY(-2px);
 }
+
+

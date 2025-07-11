@@ -122,7 +122,7 @@
                                 <ul class="list-group list-group-flush">
                                     @foreach($documents as $document)
                                     <li class="list-group-item d-flex justify-content-between align-items-center document-list-item">
-                                        <span class="document-title">{{ $document->title }}</span>
+                                        <span class="document-title"><i class="fas fa-file-alt me-2"></i>{{ $document->title }}</span>
                                         <a href="{{ Storage::url($document->file_path) }}" class="btn btn-sm btn-outline-primary document-download-btn" download>
                                             <i class="fas fa-download me-1"></i> Download
                                         </a>
@@ -130,7 +130,7 @@
                                     @endforeach
                                 </ul>
                             @else
-                                <p class="text-center text-muted mb-0">Belum ada dokumen yang tersedia.</p>
+                                <p class="text-center empty-state-message mb-0">Belum ada dokumen yang tersedia.</p>
                             @endif
                         </div>
                     </div>
