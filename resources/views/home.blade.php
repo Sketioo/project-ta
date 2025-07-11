@@ -16,56 +16,42 @@
     <section id="mitra" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center section-title mb-5">Mitra Program Studi</h2>
-            <div id="mitraCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row justify-content-center align-items-center g-4">
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+A" alt="Mitra A" class="img-fluid mx-auto">
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+B" alt="Mitra B" class="img-fluid mx-auto">
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+C" alt="Mitra C" class="img-fluid mx-auto">
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+D" alt="Mitra D" class="img-fluid mx-auto">
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ffd700/333333?text=Mitra+E" alt="Mitra E" class="img-fluid mx-auto">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row justify-content-center align-items-center g-4">
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+F" alt="Mitra F" class="img-fluid mx-auto">
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+G" alt="Mitra G" class="img-fluid mx-auto">
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+H" alt="Mitra H" class="img-fluid mx-auto">
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+I" alt="Mitra I" class="img-fluid mx-auto">
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-2 text-center">
-                                <img src="https://via.placeholder.com/150x80/ff8f00/ffffff?text=Mitra+J" alt="Mitra J" class="img-fluid mx-auto">
+            @if($partners->isNotEmpty())
+                <div id="mitraCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @php
+                            $chunkedPartners = $partners->chunk(6); // 6 logos per slide
+                        @endphp
+
+                        @foreach ($chunkedPartners as $key => $chunk)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <div class="row justify-content-center align-items-center g-4">
+                                @foreach ($chunk as $partner)
+                                <div class="col-6 col-md-4 col-lg-2 text-center">
+                                    <a href="{{ $partner->website_url ?? '#' }}" target="_blank" rel="noopener noreferrer" title="{{ $partner->name }}">
+                                        <img src="{{ Storage::url($partner->logo_path) }}" alt="{{ $partner->name }}" class="img-fluid mx-auto" style="max-height: 80px; object-fit: contain;">
+                                    </a>
+                                </div>
+                                @endforeach
                             </div>
                         </div>
+                        @endforeach
                     </div>
+
+                    @if(count($chunkedPartners) > 1)
+                        <button class="carousel-control-prev" type="button" data-bs-target="#mitraCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#mitraCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    @endif
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#mitraCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#mitraCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+            @else
+                <p class="text-center text-muted">Belum ada mitra yang terdaftar.</p>
+            @endif
         </div>
     </section>
 
@@ -125,22 +111,22 @@
             <h2 class="text-center section-title mb-5">Dokumen Penting</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="card">
+                    <div class="card shadow-sm">
                         <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Panduan Akademik 2025
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">Download</a>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Kalender Akademik 2025/2026
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">Download</a>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Formulir KRS
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">Download</a>
-                                </li>
-                            </ul>
+                            @if($documents->isNotEmpty())
+                                <ul class="list-group list-group-flush">
+                                    @foreach($documents as $document)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{ $document->title }}
+                                        <a href="{{ Storage::url($document->file_path) }}" class="btn btn-sm btn-outline-primary" download>
+                                            <i class="fas fa-download me-1"></i> Download
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-center text-muted mb-0">Belum ada dokumen yang tersedia.</p>
+                            @endif
                         </div>
                     </div>
                 </div>

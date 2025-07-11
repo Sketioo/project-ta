@@ -125,6 +125,15 @@ class AgendaController extends Controller
         }
         $agenda->delete();
 
-        return redirect()->route('agendas.index')->with('success', 'Agenda berhasil dihapus!');
+        return redirect()->route('admin.agendas.index')->with('success', 'Agenda berhasil dihapus!');
+    }
+
+    public function togglePublication(Agenda $agenda)
+    {
+        $agenda->is_published = !$agenda->is_published;
+        $agenda->save();
+
+        $status = $agenda->is_published ? 'dipublikasikan' : 'disimpan sebagai draft';
+        return back()->with('success', "Status agenda '{$agenda->title}' berhasil diubah menjadi {$status}.");
     }
 }

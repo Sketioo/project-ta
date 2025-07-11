@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Agenda;
 use App\Models\Achievement;
+use App\Models\Partner;
+use App\Models\Document;
 
 class PageController extends Controller
 {
@@ -20,7 +22,9 @@ class PageController extends Controller
                                 ->where('show_on_main_page', true)
                                 ->latest()
                                 ->get();
-        return view('home', compact('achievements'));
+        $partners = Partner::where('is_visible', true)->get();
+        $documents = Document::where('is_visible', true)->latest()->get();
+        return view('home', compact('achievements', 'partners', 'documents'));
     }
 
     /**

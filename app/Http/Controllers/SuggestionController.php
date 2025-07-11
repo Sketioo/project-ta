@@ -10,9 +10,12 @@ class SuggestionController extends Controller
 {
     public function index()
     {
-        // Fetch only unread suggestions by default
-        $suggestions = Suggestion::where('is_read', false)->latest()->get();
-        return view('suggestions.index', compact('suggestions'));
+        $suggestions = Suggestion::latest()->get()->groupBy('is_read');
+        
+        $unreadSuggestions = $suggestions->get(0, collect());
+        $readSuggestions = $suggestions->get(1, collect());
+
+        return view('suggestions.index', compact('unreadSuggestions', 'readSuggestions'));
     }
 
     public function store(Request $request)
@@ -30,14 +33,19 @@ class SuggestionController extends Controller
 
     public function markAsRead(Request $request, Suggestion $suggestion)
     {
-        $suggestion->update(['is_read' => true]);
-        return response()->json(['success' => true]);
+        if (!$suggestion->is_read) {
+            $suggestion->update(['is_read' => true]);
+            return response()->json(['success' => true, 'message' => 'Saran ditandai sebagai sudah dibaca.']);
+        }
+        return response()->json(['success' => false, 'message' => 'Saran sudah dibaca sebelumnya.']);
     }
 
+    /**
+     * This method is no longer needed as its logic is merged into index().
+     * Kept for now to avoid breaking existing routes if any, will be removed later.
+     */
     public function readSuggestions()
     {
-        // Fetch only read suggestions
-        $suggestions = Suggestion::where('is_read', true)->latest()->get();
-        return view('suggestions.read', compact('suggestions'));
+        return redirect()->route('suggestions.index');
     }
 }

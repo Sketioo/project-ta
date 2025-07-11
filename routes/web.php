@@ -47,8 +47,12 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin Routes
     Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
+        Route::post('partners/{partner}/toggle-visibility', [PartnerController::class, 'toggleVisibility'])->name('partners.toggleVisibility');
+        Route::post('agendas/{agenda}/toggle-publication', [AgendaController::class, 'togglePublication'])->name('agendas.togglePublication');
         Route::resource('agendas', AgendaController::class);
         Route::resource('partners', PartnerController::class)->except(['show', 'edit', 'update']);
+        Route::post('documents/{document}/toggle-visibility', [\App\Http\Controllers\Admin\DocumentController::class, 'toggleVisibility'])->name('documents.toggleVisibility');
+        Route::resource('documents', \App\Http\Controllers\Admin\DocumentController::class);
     });
 
     // Kaprodi Routes

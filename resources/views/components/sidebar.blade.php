@@ -51,6 +51,12 @@
                     Manajemen Agenda
                 </a>
             </li>
+            <li class="nav-item my-1">
+                <a class="nav-link py-2 {{ Request::routeIs('admin.documents.index') ? 'active' : '' }}" href="{{ route('admin.documents.index') }}">
+                    <span data-feather="file" class="align-middle me-2"></span>
+                    Manajemen Dokumen
+                </a>
+            </li>
             @endif
         </ul>
     </div>

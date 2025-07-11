@@ -34,6 +34,7 @@ class PartnerController extends Controller
             'name' => $request->name,
             'logo_path' => $path,
             'website_url' => $request->website_url,
+            'is_visible' => $request->has('is_visible'),
         ]);
 
         return redirect()->route('admin.partners.index')->with('success', 'Partner added successfully.');
@@ -45,5 +46,14 @@ class PartnerController extends Controller
         $partner->delete();
 
         return redirect()->route('admin.partners.index')->with('success', 'Partner deleted successfully.');
+    }
+
+    public function toggleVisibility(Partner $partner)
+    {
+        $partner->is_visible = !$partner->is_visible;
+        $partner->save();
+
+        $status = $partner->is_visible ? 'ditampilkan' : 'disembunyikan';
+        return back()->with('success', "Status mitra {$partner->name} berhasil diubah menjadi {$status}.");
     }
 }
