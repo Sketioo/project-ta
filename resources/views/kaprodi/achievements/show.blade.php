@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Achievement Details</h1>
+    <h1 class="dashboard-title">Achievement Details</h1>
     <div class="card">
         <div class="card-header">
             {{ $achievement->title }}

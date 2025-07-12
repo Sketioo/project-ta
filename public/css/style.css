@@ -456,6 +456,27 @@ body {
     }
 }
 
+/* Dashboard Page Titles */
+.dashboard-title {
+    color: var(--primary-color);
+    font-size: 2.5rem; /* Adjust as needed */
+    font-weight: 700;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.dashboard-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 80px; /* Adjust width of the underline */
+    height: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+}
+
 /* Card styles for dashboard */
 .card.border-left-primary {
     border-left: 0.25rem solid var(--primary-color) !important;
@@ -1189,27 +1210,37 @@ body {
 }
 
 /* Document List Item Styles */
+/* Document List Item Styles */
 .document-list-item {
-    margin-bottom: 15px; /* Increased margin-bottom */
-    border: 1px solid #e0e0e0;
-    border-left: 5px solid var(--primary-color); /* Added left border */
-    border-radius: 8px;
-    padding: 20px 25px; /* Increased padding */
-    transition: all 0.3s ease;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* More pronounced shadow */
+    margin-bottom: 0; /* Remove margin-bottom from individual items */
+    border: none; /* Remove full border */
+    border-left: 5px solid var(--primary-color); /* Keep left border */
+    border-radius: 0; /* Remove border-radius */
+    padding: 15px 25px; /* Adjust padding */
+    transition: all 0.3s ease; /* Transition for hover effect */
+    background-color: #fff; /* Ensure background is white */
+}
+
+.document-list-item:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0; /* Add bottom border for separation */
 }
 
 .document-list-item:hover {
-    transform: translateY(-5px); /* More pronounced lift effect */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Even stronger shadow on hover */
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Light background on hover */
+    transform: translateY(-3px); /* Subtle lift effect */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow on hover */
 }
 
 .document-list-item .document-title {
     font-weight: 700; /* Bolder font */
     color: var(--text-color);
     font-size: 1.2rem; /* Slightly larger font */
+    display: flex;
+    align-items: center;
+}
+
+.document-list-item .document-title i {
+    margin-right: 10px; /* Space between icon and text */
 }
 
 .document-list-item .document-download-btn {
@@ -1217,9 +1248,9 @@ body {
     border-color: var(--primary-color);
     color: var(--text-color);
     border-radius: 50px;
-    padding: 0.6rem 1.5rem; /* Increased padding */
+    padding: 0.7rem 1.6rem; /* Slightly increased padding */
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Smooth transition */
 }
 
 .document-list-item .document-download-btn:hover {

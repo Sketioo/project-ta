@@ -7,7 +7,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Validasi Prestasi Mahasiswa</h1>
+                <h1 class="dashboard-title">Validasi Prestasi Mahasiswa</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <a href="{{ route('kaprodi.achievements.index', ['status' => 'all']) }}" class="btn btn-sm {{ request('status', 'all') == 'all' ? 'btn-primary' : 'btn-outline-primary' }}">Semua</a>
                     <a href="{{ route('kaprodi.achievements.index', ['status' => 'pending']) }}" class="btn btn-sm {{ request('status') == 'pending' ? 'btn-primary' : 'btn-outline-primary' }} ms-2">Menunggu Validasi</a>
