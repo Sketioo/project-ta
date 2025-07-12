@@ -1,14 +1,16 @@
 /* Custom CSS for Bootstrap Integration */
 :root {
-    --primary-color: #ffd700; /* Kuning Cerah */
-    --secondary-color: #ff8f00; /* Kuning Oranye */
-    --background-color: #ffffff; /* Putih */
-    --text-color: #333333; /* Hitam */
-    --sidebar-bg-color-subtle: #f8f9fa; /* Light grey for subtle sidebar */
-    --sidebar-link-color: #495057; /* Darker grey for links */
-    --sidebar-link-hover-bg: #e9ecef; /* Lighter grey on hover */
-    --sidebar-link-active-bg: var(--primary-color); /* Primary color for active */
-    --sidebar-link-active-color: var(--text-color); /* Text color for active */
+    --primary-color: #FFD700; /* Kuning Utama (Emas) */
+    --secondary-color: #E6C200; /* Kuning Sedikit Gelap untuk Hover */
+    --dark-color: #1a1a1a; /* Hitam Pekat */
+    --light-color: #ffffff; /* Putih */
+    --text-color: #333333; /* Abu-abu Gelap untuk Teks */
+    --background-color: #f4f4f4; /* Abu-abu Sangat Terang untuk Latar */
+    --sidebar-bg-color-subtle: #f8f9fa;
+    --sidebar-link-color: #495057;
+    --sidebar-link-hover-bg: #e9ecef;
+    --sidebar-link-active-bg: var(--primary-color);
+    --sidebar-link-active-color: var(--dark-color);
 }
 
 html, body {
@@ -21,6 +23,7 @@ body {
     background-color: var(--background-color);
 }
 
+/* General Re-theme */
 .bg-primary-custom {
     background-color: var(--primary-color);
 }
@@ -32,373 +35,170 @@ body {
 .btn-primary-custom {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    color: var(--text-color);
+    color: var(--dark-color);
+    font-weight: bold;
 }
 
 .btn-primary-custom:hover {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
-    color: #fff;
+    color: var(--dark-color);
+}
+
+/* Navbar Customization */
+.custom-navbar {
+    background-color: var(--light-color) !important;
+    border-bottom: 1px solid #eee;
 }
 
 .navbar-brand {
-    color: var(--primary-color) !important;
-    font-weight: bold;
-    font-size: 1.75rem;
-    transition: color 0.3s ease;
+    color: var(--dark-color) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
-.navbar-brand:hover {
-    color: var(--secondary-color) !important;
+.navbar-brand i {
+    color: var(--primary-color);
 }
 
 .nav-link {
-    color: var(--text-color) !important;
+    color: var(--dark-color) !important;
     font-weight: 500;
     margin: 0 10px;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 5px;
 }
 
-.nav-link:hover,
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
 .nav-link.active {
-    color: var(--primary-color) !important;
-    transform: translateY(-2px);
+    color: var(--dark-color) !important;
+    font-weight: 700;
 }
 
 .custom-login-btn {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid var(--primary-color);
+    color: var(--dark-color);
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .custom-login-btn:hover {
     background-color: var(--primary-color);
-    color: #fff;
-    border-color: var(--primary-color);
+    color: var(--dark-color);
 }
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    min-height: 70vh; /* Adjust as needed */
+    background: var(--dark-color);
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--light-color);
+    text-align: center;
 }
 
 .hero-section h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 4rem;
+    font-weight: 800;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .hero-section p {
-    font-size: 1.5rem;
-    margin-bottom: 2.5rem;
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-section .btn {
-    background-color: #fff;
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--dark-color);
     border: none;
-    padding: 0.8rem 2.5rem;
+    padding: 1rem 2.5rem;
     font-size: 1.2rem;
     font-weight: bold;
+    border-radius: 50px;
     transition: all 0.3s ease;
 }
 
 .hero-section .btn:hover {
-    background-color: var(--text-color);
-    color: #fff;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    transform: translateY(-3px);
 }
 
 /* Section Titles */
 .section-title {
-    color: var(--primary-color);
-    font-size: 2.5rem;
-    font-weight: bold;
+    color: var(--dark-color);
+    font-size: 2.8rem;
+    font-weight: 800;
     margin-bottom: 3rem;
     position: relative;
     display: inline-block;
+    padding-bottom: 10px;
 }
 
 .section-title::after {
     content: '';
     position: absolute;
     left: 50%;
-    bottom: -10px;
+    bottom: 0;
     transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background-color: var(--secondary-color);
+    width: 100px;
+    height: 5px;
+    background-color: var(--primary-color);
     border-radius: 2px;
 }
 
 /* Card Styles */
 .card {
     border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#prestasi .card:hover {
-    transform: translateY(-5px); /* Lift effect */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
 .card-body {
     padding: 2rem;
 }
 
-/* Social Icons */
-.social-icons a {
-    color: #fff;
-    margin: 0 10px;
-    font-size: 2rem;
-}
-
-.social-icons a:hover {
-    color: var(--primary-color);
-}
-
-/* Custom Login Page Styles (v2) */
-.login-card-v2 {
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    background-color: var(--background-color);
-}
-
-.login-header-v2 {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    color: #fff;
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-align: center;
-    padding: 1.5rem;
-    border-bottom: none;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    position: relative;
-    overflow: hidden;
-}
-
-.login-header-v2::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(255, 255, 255, 0.1);
-    transform: rotate(30deg);
-    animation: header-anim 5s infinite linear;
-}
-
-@keyframes header-anim {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.login-header-v2 h3 {
-    position: relative;
-    z-index: 1;
-}
-
-.login-body-v2 {
-    padding: 2.5rem;
-}
-
-.input-group-v2 {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.input-group-text-v2 {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 0.75rem 1rem;
-    border-right: 1px solid #ced4da;
-}
-
-.login-input-v2 {
-    border: none;
-    padding: 0.75rem 1rem;
-    flex-grow: 1;
-}
-
-.login-input-v2:focus {
-    box-shadow: none;
-    border-color: transparent;
-}
-
-.login-button-v2 {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--text-color);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.login-button-v2:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: #fff;
-}
-
-.login-link-v2 {
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
-.login-link-v2:hover {
-    color: var(--secondary-color);
-}
-
-/* Carousel Controls */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    padding: 15px;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    width: 5%;
-}
-
-/* Contact Form Styles (Modal) */
-.custom-modal-header {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    color: #fff;
-    border-bottom: none;
-    border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem;
-    padding: 1.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.custom-modal-header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(255, 255, 255, 0.1);
-    transform: rotate(30deg);
-    animation: header-anim 5s infinite linear;
-}
-
-.custom-modal-header .modal-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    position: relative;
-    z-index: 1;
-}
-
-.custom-modal-header .btn-close {
-    filter: invert(1);
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    z-index: 2;
-}
-
-.custom-modal-body {
-    background-color: var(--background-color);
-    padding: 2.5rem;
-}
-
-.contact-label {
-    font-weight: bold;
-    color: var(--text-color);
-    margin-bottom: 0.75rem;
-    font-size: 1.1rem;
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.contact-input,
-.contact-textarea {
-    border-radius: 8px;
-    border: 1px solid #ced4da;
-    padding: 1rem 1.25rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-input:focus,
-.contact-textarea:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
-}
-
-.contact-button {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--text-color);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.contact-button:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: #fff;
-}
-
-/* Floating Button */
-.floating-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.floating-btn:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-}
-
 /* Footer Styles */
 .custom-footer {
-    background-color: var(--text-color);
-    color: #fff;
-    padding: 2rem 0;
-    border-top: 3px solid var(--primary-color);
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 3rem 0;
+    border-top: 5px solid var(--primary-color);
+}
+
+.custom-footer p {
+    color: #ccc;
 }
 
 .custom-footer .social-icons a {
-    color: #fff;
+    color: var(--light-color);
     margin: 0 15px;
     font-size: 1.8rem;
     transition: color 0.3s ease, transform 0.3s ease;
@@ -409,742 +209,15 @@ body {
     transform: translateY(-3px);
 }
 
-/* Dashboard Specific Styles */
-#wrapper {
-    display: flex;
-}
-
-#sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -15rem;
-    transition: margin .25s ease-out;
-    width: 15rem;
-}
-
-#sidebar-wrapper .sidebar-heading {
-    padding: 0.875rem 1.25rem;
-    font-size: 1.2rem;
-    background-color: var(--primary-color); /* Using existing primary color */
-    color: var(--text-color); /* Using existing text color */
-    font-weight: bold;
-}
-
-#sidebar-wrapper .list-group {
-    width: 15rem;
-}
-
-#page-content-wrapper {
-    min-width: 100vw;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-    margin-left: 0;
-}
-
-@media (min-width: 768px) {
-    #sidebar-wrapper {
-        margin-left: 0;
-    }
-
-    #page-content-wrapper {
-        min-width: 0;
-        width: 100%;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        margin-left: -15rem;
-    }
-}
-
-/* Dashboard Page Titles */
-.dashboard-title {
-    color: var(--primary-color);
-    font-size: 2.5rem; /* Adjust as needed */
-    font-weight: 700;
-    margin-bottom: 2rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-}
-
-.dashboard-title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 80px; /* Adjust width of the underline */
-    height: 4px;
-    background-color: var(--secondary-color);
-    border-radius: 2px;
-}
-
-/* Card styles for dashboard */
-.card.border-left-primary {
-    border-left: 0.25rem solid var(--primary-color) !important;
-}
-
-.card.border-left-success {
-    border-left: 0.25rem solid #28a745 !important; /* Green for success */
-}
-
-.card.border-left-info {
-    border-left: 0.25rem solid #17a2b8 !important; /* Blue for info */
-}
-
-.card.border-left-warning {
-    border-left: 0.25rem solid #ffc107 !important; /* Orange for warning */
-}
-
-.text-xs {
-    font-size: .75rem;
-}
-
-.font-weight-bold {
-    font-weight: 700!important;
-}
-
-.text-primary {
-    color: var(--primary-color) !important;
-}
-
-.text-success {
-    color: #28a745 !important;
-}
-
-.text-info {
-    color: #17a2b8 !important;
-}
-
-.text-warning {
-    color: #ffc107 !important;
-}
-
-.text-gray-800 {
-    color: #343a40 !important;
-}
-
-.text-gray-300 {
-    color: #dee2e6!important;
-}
-
-.shadow {
-    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
-}
-
-.py-2 {
-    padding-top: .5rem!important;
-    padding-bottom: .5rem!important;
-}
-
-.card-body {
-    flex: 1 1 auto;
-    min-height: 1px;
-    padding: 1.25rem;
-}
-
-.no-gutters {
-    margin-right: 0;
-    margin-left: 0;
-}
-
-.no-gutters > .col, .no-gutters > [class*=col-] {
-    padding-right: 0;
-    padding-left: 0;
-}
-
-.align-items-center {
-    align-items: center!important;
-}
-
-.mb-1 {
-    margin-bottom: .25rem!important;
-}
-
-.h5, h5 {
-    font-size: 1.25rem;
-}
-
-.mb-0 {
-    margin-bottom: 0!important;
-}
-
-.mr-2 {
-    margin-right: .5rem!important;
-}
-
-.col-auto {
-    flex: 0 0 auto;
-    width: auto;
-    max-width: 100%;
-}
-
-.fa-2x {
-    font-size: 2em;
-}
-
-.progress {
-    display: flex;
-    height: 1rem;
-    overflow: hidden;
-    font-size: .75rem;
-    background-color: #e9ecef;
-    border-radius: .25rem;
-}
-
-.progress-bar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    background-color: #007bff;
-    transition: width .6s ease;
-}
-
-.progress-sm {
-    height: .5rem!important;
-}
-
-.mr-3 {
-    margin-right: 1rem!important;
-}
-
-/* Subtle Sidebar Customizations */
-.sidebar-custom {
-    background-color: var(--sidebar-bg-color-subtle); /* Use a subtle background */
-    border-right: 1px solid #e0e0e0; /* Light border */
-    padding-top: 1rem;
-}
-
-.sidebar-custom .nav-item {
-    margin-bottom: 0.25rem;
-}
-
-.sidebar-custom .nav-link {
-    color: var(--sidebar-link-color) !important;
-    padding: 0.75rem 1rem; /* Slightly more padding */
-    border-radius: 0.25rem;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.sidebar-custom .nav-link:hover {
-    background-color: var(--sidebar-link-hover-bg);
-    color: var(--primary-color) !important;
-}
-
-.sidebar-custom .nav-link.active {
-    background-color: var(--sidebar-link-active-bg);
-    color: var(--sidebar-link-active-color) !important;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for active state */
-    border-left: 4px solid var(--secondary-color); /* Add a prominent left border */
-}
-
-.sidebar-custom .nav-link span[data-feather] {
-    margin-right: 0.75rem;
-}
-
-/* Custom styles for Dashboard and Logout buttons */
-.custom-dashboard-btn,
-.custom-logout-btn {
-    border-radius: 50px; /* Pill shape */
-    padding: 0.5rem 1.2rem; /* Adjust padding */
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin-left: 0.5rem; /* Space between buttons */
-}
-
-.custom-dashboard-btn {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--text-color);
-}
-
-.custom-dashboard-btn:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: #fff;
-}
-
-.custom-logout-btn {
-    background-color: #dc3545; /* Bootstrap danger red */
-    border-color: #dc3545;
-    color: #fff;
-}
-
-.custom-logout-btn:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-    color: #fff;
-}
-
-/* Achievement Form Customizations */
-.custom-form-card {
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.custom-form-header {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 1.2rem 1.5rem;
-    border-bottom: none;
-}
-
-.achievement-form .custom-form-label {
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
-}
-
-.achievement-form .custom-form-input {
-    border-radius: 8px;
-    border: 1px solid #ced4da;
-    padding: 0.8rem 1rem;
-    font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.achievement-form .custom-form-input:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
-}
-
-.achievement-form .custom-form-error {
-    font-size: 0.875em;
-    margin-top: 0.25rem;
-}
-
-.custom-submit-btn {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--text-color);
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-}
-
-.custom-submit-btn:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-/* Agenda Page Customizations */
-.agenda-card-wrapper {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.agenda-card-wrapper:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-.agenda-card {
-    border-radius: 15px; /* More rounded corners */
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.agenda-image-container {
-    height: 250px; /* Fixed height for images */
-    overflow: hidden;
-    position: relative;
-}
-
-.agenda-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.agenda-card-wrapper:hover .agenda-image-container img {
-    transform: scale(1.05); /* Subtle zoom on hover */
-}
-
-.agenda-card-body {
-    padding: 1.5rem;
-}
-
-.agenda-read-more-btn {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--text-color);
-    border-radius: 50px; /* Pill shape */
-    padding: 0.6rem 1.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.agenda-read-more-btn:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-/* Agenda Article Page Customizations (public_show.blade.php) */
-.agenda-article {
-    background-color: var(--background-color);
-    padding: 3rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-.agenda-article-title {
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--text-color);
-    line-height: 1.2;
-}
-
-.agenda-article-meta {
-    font-size: 1rem;
-    color: #6c757d; /* Bootstrap gray */
-}
-
-.agenda-article-main-image {
-    margin-bottom: 2.5rem;
-    text-align: center; /* Center the image */
-}
-
-.agenda-article-main-image img {
-    border-radius: 10px;
-    width: 100%;
-    height: auto;
-}
-
-.agenda-article-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #495057; /* Darker text for readability */
-}
-
-.agenda-article-content p {
-    margin-bottom: 1.5rem;
-}
-
-.agenda-back-btn {
-    background-color: #6c757d; /* Bootstrap secondary color */
-    border-color: #6c757d;
-    color: #fff;
-    border-radius: 50px;
-    padding: 0.6rem 1.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.agenda-back-btn:hover {
-    background-color: #5a6268;
-    border-color: #545b62;
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-/* Carousel for Agenda Images */
-.agenda-carousel .carousel-item img {
-    height: 400px; /* Fixed height for carousel images */
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.agenda-carousel .carousel-indicators [data-bs-target] {
-    background-color: var(--primary-color);
-}
-
-.agenda-carousel .carousel-control-prev-icon,
-.agenda-carousel .carousel-control-next-icon {
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    padding: 15px;
-}
-
-/* Achievement Carousel Customizations */
-#achievementCarousel .carousel-control-prev-icon,
-#achievementCarousel .carousel-control-next-icon {
-    background-color: var(--primary-color); /* Use primary color for controls */
-    border-radius: 50%;
-    padding: 15px;
-}
-
-#achievementCarousel .carousel-control-prev,
-#achievementCarousel .carousel-control-next {
-    width: 5%; /* Adjust width of controls */
-}
-
-#achievementCarousel .carousel-indicators [data-bs-target] {
-    background-color: var(--primary-color); /* Use primary color for indicators */
-}
-
-/* Agenda Admin List Styles */
-.agenda-list-container {
-    background-color: var(--background-color);
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    padding: 1.5rem;
-}
-
-.agenda-list-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-.agenda-list-item:hover {
-    background-color: #f8f9fa;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.agenda-list-item + .agenda-list-item {
-    margin-top: 1rem;
-}
-
-.agenda-list-content {
-    flex-grow: 1;
-}
-
-.agenda-list-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 0.25rem;
-}
-
-.agenda-list-meta {
-    font-size: 0.9rem;
-    color: #6c757d;
-    margin-bottom: 0.5rem;
-}
-
-.agenda-list-status .badge {
-    font-size: 0.85rem;
-    padding: 0.4em 0.7em;
-}
-
-.agenda-list-actions {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.agenda-icon-btn {
-    width: 38px; /* Fixed width for icon buttons */
-    height: 38px; /* Fixed height for icon buttons */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%; /* Make them circular */
-    font-size: 1rem;
-    transition: all 0.2s ease;
-}
-
-.agenda-icon-btn.btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    color: #fff;
-}
-
-.agenda-icon-btn.btn-info:hover {
-    background-color: #138496;
-    border-color: #117a8b;
-}
-
-.agenda-icon-btn.btn-warning {
-    background-color: #ffc107;
-    border-color: #ffc107;
-    color: #212529;
-}
-
-.agenda-icon-btn.btn-warning:hover {
-    background-color: #e0a800;
-    border-color: #cc9500;
-}
-
-.agenda-icon-btn.btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: #fff;
-}
-
-.agenda-icon-btn.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-    color: #fff;
-}
-
-/* Custom Add Button */
-.custom-add-btn {
-    border-radius: 50px;
-    padding: 0.6rem 1.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.custom-add-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Custom Alert Styles */
-.custom-alert {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1050;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-}
-
-.custom-alert .btn-close {
-    margin-left: 1rem;
-    font-size: 0.8rem;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    color: #721c24;
-}
-
-/* Achievement List Item Customizations */
-.achievement-item .card-body {
-    padding: 1.5rem;
-}
-
-.achievement-details {
-    margin-right: 1.5rem; /* Space between details and actions */
-}
-
-.achievement-details .card-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.achievement-details .card-text {
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-}
-
-.achievement-details .card-text strong {
-    color: #555;
-}
-
-.achievement-actions .btn {
-    width: 38px; /* Fixed width for icon buttons */
-    height: 38px; /* Fixed height for icon buttons */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%; /* Make them circular */
-    font-size: 1rem;
-    transition: all 0.2s ease;
-}
-
-.achievement-actions .btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    color: #fff;
-}
-
-.achievement-actions .btn-info:hover {
-    background-color: #138496;
-    border-color: #117a8b;
-}
-
-.achievement-actions .btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-    color: #fff;
-}
-
-.achievement-actions .btn-success:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
-}
-
-.achievement-actions .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: #fff;
-}
-
-.achievement-actions .btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-    color: #fff;
-}
-
-.achievement-actions .btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
-    color: #fff;
-}
-
-.achievement-actions .btn-secondary:hover {
-    background-color: #5a6268;
-    border-color: #545b62;
-    color: #fff;
-}
-
-/* Responsive adjustments */
-@media (max-width: 767.98px) {
-    .achievement-item .card-body {
-        flex-direction: column; /* Stack details and actions on small screens */
-        align-items: flex-start; /* Align items to start */
-    }
-
-    .achievement-details {
-        margin-right: 0; /* Remove margin on small screens */
-        margin-bottom: 1rem; /* Add bottom margin */
-    }
-
-    .achievement-actions {
-        width: 100%; /* Full width for actions */
-        justify-content: flex-start; /* Align actions to start */
-    }
-}
-
-/* Hero Section Background and Overlay */
-.hero-background {
-    background: url('../images/hero-bg.jpg') no-repeat center center;
-    background-size: cover;
-    position: relative;
-}
-
-.hero-overlay {
-    background-color: rgba(0, 0, 0, 0); /* Dark overlay for text readability */
-    z-index: 0;
-}
-
 /* Mitra Section - Partner Logos */
 .partner-logo-wrapper {
-    height: 150px; /* Fixed height for consistent display */
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 15px;
+    background-color: var(--light-color);
+    border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1154,32 +227,26 @@ body {
 }
 
 .partner-logo-wrapper img {
-    max-height: 120px; /* Ensure logos don't exceed this height */
-    width: auto; /* Maintain aspect ratio */
+    max-height: 80px;
+    width: auto;
     object-fit: contain;
-    transition: filter 0.3s ease, transform 0.3s ease;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
 }
 
 .partner-logo-wrapper:hover img {
-    transform: scale(1.05); /* Slight zoom on hover */
+    filter: grayscale(0%);
 }
 
 /* Achievement Card Specific Styles */
 .achievement-card {
-    border-radius: 15px; /* More rounded corners for the card */
-    overflow: hidden; /* Ensures image corners are also rounded */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger initial shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 1.5rem; /* Add space below the card */
-}
-
-.achievement-card:hover {
-    transform: translateY(-8px); /* More pronounced lift effect */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); /* Even stronger shadow on hover */
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: var(--light-color);
 }
 
 .achievement-image-container {
-    height: 220px; /* Fixed height for achievement images */
+    height: 220px;
     overflow: hidden;
     position: relative;
 }
@@ -1187,12 +254,12 @@ body {
 .achievement-image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures image covers the area without distortion */
-    transition: transform 0.3s ease;
+    object-fit: cover;
+    transition: transform 0.4s ease;
 }
 
 .achievement-card:hover .achievement-image-container img {
-    transform: scale(1.08); /* Subtle zoom effect on image on hover */
+    transform: scale(1.1);
 }
 
 .achievement-card .card-body {
@@ -1201,134 +268,314 @@ body {
 
 .achievement-card .card-title {
     font-size: 1.3rem;
-    margin-bottom: 0.75rem;
+    font-weight: 700;
+    color: var(--dark-color);
 }
 
 .achievement-card .card-text {
     font-size: 0.95rem;
     line-height: 1.6;
+    color: #666;
 }
 
-/* Document List Item Styles */
-/* Document List Item Styles */
-.document-list-item {
-    margin-bottom: 0; /* Remove margin-bottom from individual items */
-    border: none; /* Remove full border */
-    border-left: 5px solid var(--primary-color); /* Keep left border */
-    border-radius: 0; /* Remove border-radius */
-    padding: 15px 25px; /* Adjust padding */
-    transition: all 0.3s ease; /* Transition for hover effect */
-    background-color: #fff; /* Ensure background is white */
+/* Dokumen Section */
+#dokumen {
+    background-color: var(--light-color);
 }
 
-.document-list-item:not(:last-child) {
-    border-bottom: 1px solid #e0e0e0; /* Add bottom border for separation */
+.document-search-container {
+    position: relative;
+    margin-bottom: 2rem;
 }
 
-.document-list-item:hover {
-    background-color: #f8f9fa; /* Light background on hover */
-    transform: translateY(-3px); /* Subtle lift effect */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow on hover */
+.document-search-input {
+    border-radius: 50px;
+    padding: 1rem 1.5rem 1rem 3.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.document-list-item .document-title {
-    font-weight: 700; /* Bolder font */
-    color: var(--text-color);
-    font-size: 1.2rem; /* Slightly larger font */
+.document-search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+}
+
+.document-search-container .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.document-list-container {
+    background-color: var(--light-color);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+}
+
+.document-item {
     display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+.document-item:last-child {
+    border-bottom: none;
+}
+
+.document-item:hover {
+    background-color: #fcfcfc;
+}
+
+.document-item-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-right: 1.5rem;
+}
+
+.document-item-content {
+    flex-grow: 1;
+}
+
+.document-item-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.25rem;
+}
+
+.document-item-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 0;
+}
+
+.document-item-action {
+    margin-left: 1rem;
+}
+
+.document-list-item {
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 1.25rem 1.5rem;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-.document-list-item .document-title i {
-    margin-right: 10px; /* Space between icon and text */
+/* FAQ Section */
+#faq {
+    background-color: #f8f9fa; /* Slightly different background for the section */
 }
 
-.document-list-item .document-download-btn {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--text-color);
-    border-radius: 50px;
-    padding: 0.7rem 1.6rem; /* Slightly increased padding */
+#faq .accordion-item {
+    background-color: var(--light-color);
+    border: 1px solid #e9ecef;
+    border-radius: 10px !important;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+#faq .accordion-item:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+#faq .accordion-button {
+    background-color: var(--light-color);
+    color: var(--dark-color);
     font-weight: 600;
-    transition: all 0.3s ease; /* Smooth transition */
-}
-
-.document-list-item .document-download-btn:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-/* Agenda Page Customizations */
-.agenda-card-wrapper {
-    /* Existing styles are good, just ensuring consistency and adding animation trigger */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.agenda-card-wrapper:hover {
-    transform: translateY(-8px); /* More pronounced lift effect */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-}
-
-.agenda-card {
-    border-radius: 15px; /* Consistent rounded corners */
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger initial shadow */
-    transition: all 0.3s ease;
-}
-
-.agenda-image-container {
-    height: 250px; /* Fixed height for consistent image display */
-    overflow: hidden;
+    font-size: 1.1rem;
+    padding: 1.5rem;
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-radius: 10px;
     position: relative;
 }
 
-.agenda-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure image covers the area */
+#faq .accordion-button:not(.collapsed) {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    box-shadow: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#faq .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+    z-index: 3;
+}
+
+/* Custom Plus/Minus Icons */
+#faq .accordion-button::after {
+    content: '\f067'; /* Font Awesome plus icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    width: auto;
+    height: auto;
+    background-image: none;
+    font-size: 1rem;
     transition: transform 0.3s ease;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
 }
 
-.agenda-card-wrapper:hover .agenda-image-container img {
-    transform: scale(1.08); /* Subtle zoom on image hover */
+#faq .accordion-button:not(.collapsed)::after {
+    content: '\f068'; /* Font Awesome minus icon */
+    transform: translateY(-50%) rotate(0deg);
 }
 
-.agenda-card-body {
-    padding: 1.5rem;
+#faq .accordion-body {
+    padding: 1.5rem 2rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    background-color: var(--light-color);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.document-list-item:hover {
+    background-color: #f9f9f9;
+}
+
+.document-title {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.document-download-btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+    border-radius: 50px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.document-download-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--dark-color);
+    transform: scale(1.05);
+}
+
+/* Carousel Controls */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 20px;
+    background-size: 50% 50%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    opacity: 0.7;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+/* Floating Button */
+.floating-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--dark-color);
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.agenda-card-body .card-title {
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-color); /* Ensure title color is consistent */
+.floating-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-5px) scale(1.05);
 }
 
-.agenda-card-body .card-text {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    flex-grow: 1; /* Allow description to take available space */
+/* Other existing styles will be inherited or can be adjusted below */
+/* ... (keep other specific styles like login, dashboard, etc., but they will now use the new color variables) ... */
+
+/* Login Page Styles */
+.login-card-v2 {
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    background-color: var(--light-color);
+}
+
+.login-header-v2 {
+    background: var(--dark-color);
+    color: var(--light-color);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 2rem;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+/* Dashboard Specific Styles */
+#sidebar-wrapper .sidebar-heading {
+    background-color: var(--dark-color);
+    color: var(--primary-color);
+}
+
+.sidebar-custom .nav-link.active {
+    background-color: var(--primary-color);
+    color: var(--dark-color) !important;
+    border-left: 4px solid var(--dark-color);
+}
+
+.custom-dashboard-btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.custom-dashboard-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+/* Agenda Page */
+.agenda-card {
+    background-color: var(--light-color);
 }
 
 .agenda-read-more-btn {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    color: var(--text-color);
-    border-radius: 50px; /* Pill shape */
-    padding: 0.6rem 1.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin-top: 1rem; /* Space above the button */
+    color: var(--dark-color);
 }
 
 .agenda-read-more-btn:hover {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
-    color: #fff;
-    transform: translateY(-2px);
+    color: var(--dark-color);
 }
 
 
