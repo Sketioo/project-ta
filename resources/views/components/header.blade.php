@@ -37,13 +37,6 @@
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     @endif
-                    <a href="{{ route('logout') }}" class="btn btn-outline-danger custom-logout-btn"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="fas fa-sign-out-alt me-1"></i>Logout
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
                 @endauth
             </div>
         </div>
