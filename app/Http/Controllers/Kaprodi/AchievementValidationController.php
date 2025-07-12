@@ -19,7 +19,7 @@ class AchievementValidationController extends Controller
             $query->where('status', $request->status);
         }
 
-        $achievements = $query->get();
+        $achievements = $query->paginate(10);
         return view('kaprodi.achievements.index', compact('achievements'));
     }
 
