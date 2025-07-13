@@ -115,20 +115,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const currentUrl = window.location.href;
             const sidebarLinks = document.querySelectorAll('.sidebar-layout .nav-link');
 
+            // Set active state on page load
             sidebarLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    // On different page, browser will handle it. For same-page (e.g. with JS frameworks), this is useful.
-                    if (link.href === window.location.href) {
-                        e.preventDefault();
+                if (link.href === currentUrl) {
+                    link.classList.add('active');
+                    // Add 'active' class to the parent nav-item (the <li>)
+                    if (link.closest('.nav-item')) {
+                        link.closest('.nav-item').classList.add('active');
                     }
+                }
 
-                    // Remove 'clicked' from others and add to current
+                // Click animation logic
+                link.addEventListener('click', function (e) {
                     sidebarLinks.forEach(l => l.classList.remove('clicked'));
                     this.classList.add('clicked');
-
-                    // Clean up the class after animation
                     setTimeout(() => {
                         this.classList.remove('clicked');
                     }, 500);

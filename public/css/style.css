@@ -501,10 +501,25 @@ body {
 }
 
 .sidebar-layout .nav-link.active {
-    background-color: var(--primary-color);
+    background-color: transparent; /* Active link is now transparent */
     color: var(--dark-color);
     font-weight: 700;
-    border-left-color: var(--primary-color);
+}
+
+/* The new active item wrapper style */
+.sidebar-layout .nav-item.active {
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    margin: 0.3rem 1rem;
+}
+
+/* Ensure the active link inside the wrapper has the correct text color */
+.sidebar-layout .nav-item.active .nav-link.active {
+    color: var(--dark-color) !important;
+}
+
+.sidebar-layout .nav-item.active .nav-link.active i {
+    color: var(--dark-color) !important;
 }
 
 .sidebar-layout .nav-link i {
