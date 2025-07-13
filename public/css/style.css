@@ -431,8 +431,8 @@ body {
 }
 
 /* --- DASHBOARD SIDEBAR STYLES --- */
-.sidebar-custom {
-    background-color: var(--dark-color);
+.sidebar-layout {
+    background-color: #1a1a1a; /* Slightly lighter dark color */
     color: var(--light-color);
     position: fixed;
     top: 0;
@@ -440,60 +440,108 @@ body {
     left: 0;
     z-index: 100;
     box-shadow: 0.5rem 0 1rem rgba(0,0,0,0.15) !important;
-    transition: all 0.3s ease;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #333;
+}
+
+.sidebar-menu-container {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar for webkit browsers */
+.sidebar-menu-container::-webkit-scrollbar {
+    width: 8px;
+}
+.sidebar-menu-container::-webkit-scrollbar-track {
+    background: #2c2c2c;
+}
+.sidebar-menu-container::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 10px;
+    border: 2px solid #2c2c2c;
 }
 
 .sidebar-header {
+    padding: 1.25rem 1rem;
     border-bottom: 1px solid #333;
 }
 
 .sidebar-header .navbar-brand {
     color: var(--light-color) !important;
+    font-size: 1.4rem;
 }
 
-.sidebar-custom .nav-item-header {
-    font-size: 0.75rem;
+.sidebar-layout .nav-item-header {
+    font-size: 0.7rem;
     font-weight: 700;
     color: #888;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    padding: 1.5rem 1.5rem 0.5rem;
 }
 
-.sidebar-custom .nav-link {
+.sidebar-layout .nav-link {
     color: #ccc;
     font-weight: 500;
-    padding: 0.8rem 1.5rem;
-    margin: 0.25rem 0;
+    padding: 0.9rem 1.5rem;
+    margin: 0.3rem 1rem;
+    border-radius: 8px;
     border-left: 4px solid transparent;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.sidebar-custom .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+.sidebar-layout .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.08);
     color: var(--light-color);
-    border-left-color: var(--primary-color);
+    transform: translateX(5px);
 }
 
-.sidebar-custom .nav-link.active {
+.sidebar-layout .nav-link.active {
     background-color: var(--primary-color);
     color: var(--dark-color);
     font-weight: 700;
-    border-left-color: var(--secondary-color);
+    border-left-color: var(--primary-color);
 }
 
-.sidebar-custom .nav-link i {
-    width: 20px; /* Fixed width for icons */
+.sidebar-layout .nav-link i {
+    width: 22px;
     text-align: center;
+    margin-right: 0.5rem;
     color: #888;
     transition: color 0.3s ease;
 }
 
-.sidebar-custom .nav-link:hover i,
-.sidebar-custom .nav-link.active i {
-    color: inherit; /* Icon color will match link color */
+.sidebar-layout .nav-link:hover i,
+.sidebar-layout .nav-link.active i {
+    color: inherit;
 }
 
 .sidebar-footer {
+    padding: 1rem;
     border-top: 1px solid #333;
+    flex-shrink: 0;
+}
+
+/* Click Animation */
+.nav-link.clicked {
+    animation: click-flash 0.5s ease-out;
+}
+
+@keyframes click-flash {
+    0% {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.sidebar-layout .nav-link.active.clicked {
+    animation: none; /* Disable flash on already active link */
 }
 
 main[role="main"] {

@@ -112,6 +112,30 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebarLinks = document.querySelectorAll('.sidebar-layout .nav-link');
+
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    // On different page, browser will handle it. For same-page (e.g. with JS frameworks), this is useful.
+                    if (link.href === window.location.href) {
+                        e.preventDefault();
+                    }
+
+                    // Remove 'clicked' from others and add to current
+                    sidebarLinks.forEach(l => l.classList.remove('clicked'));
+                    this.classList.add('clicked');
+
+                    // Clean up the class after animation
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 500);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 <script>
