@@ -9,13 +9,13 @@
     background-image:
         radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
     background-size: 20px 20px;
-    padding: 20px;
+    
 }
 
 .login-container {
-    max-width: 900px;
+    max-width: 750px; /* Reduced max-width */
     width: 100%;
-    border-radius: 20px;
+    border-radius: 0; /* Changed to sharp corners */
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     overflow: hidden;
     background-color: #fff;
@@ -30,82 +30,96 @@
 
 /* Panel Kiri - Selamat Datang */
 .login-welcome-panel {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
+    background-color: var(--primary-color); /* Set to yellow */
+    background-image: radial-gradient(circle at 100% 150%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 0% -50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    background-repeat: no-repeat;
+    color: var(--dark-color); /* Change text color for contrast */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 40px; /* Reduced padding */
     text-align: center;
     position: relative;
     overflow: hidden;
 }
 
-.login-welcome-panel::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
+.welcome-icon {
+    font-size: 5rem; /* Increased icon size */
+    color: var(--dark-color);
+    margin-bottom: 2rem; /* Increased margin */
+    text-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Added subtle shadow */
+    animation: float 3s ease-in-out infinite;
 }
 
-.welcome-content {
-    position: relative;
-    z-index: 2;
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 
 .welcome-title {
-    font-weight: 700;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-weight: 800; /* Bolder font weight */
+    font-size: 2.8rem; /* Increased font size */
+    margin-bottom: 1.2rem;
     line-height: 1.2;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    color: var(--dark-color);
+    letter-spacing: -0.03em; /* Added letter spacing */
+    text-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Added subtle text shadow */
 }
 
 .welcome-text {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    max-width: 350px;
-    margin-bottom: 2.5rem;
-    opacity: 0.9;
+    font-size: 1.2rem; /* Increased font size */
+    line-height: 1.8;
+    max-width: 400px; /* Increased max-width */
+    margin-bottom: 3rem; /* Increased margin */
+    opacity: 0.9; /* Slightly reduced opacity */
+    color: var(--dark-color);
+    letter-spacing: 0.01em; /* Added letter spacing */
 }
 
 .feature-list {
     text-align: left;
     list-style: none;
     padding: 0;
-    max-width: 300px;
+    max-width: 350px; /* Increased max-width */
     margin: 0 auto;
 }
 
 .feature-item {
-    margin-bottom: 1rem;
-    font-size: 1.05rem;
+    margin-bottom: 1.2rem; /* Increased margin */
+    font-size: 1.1rem; /* Increased font size */
+    font-weight: 600; /* Added font weight */
     display: flex;
     align-items: center;
-    opacity: 0.95;
+    opacity: 1;
+    color: var(--dark-color);
+    transition: all 0.3s ease;
+    padding: 10px 20px; /* Adjusted padding */
+    border-radius: 10px; /* Adjusted border-radius */
+    cursor: pointer;
+    letter-spacing: 0.02em; /* Added letter spacing */
+}
+
+.feature-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateX(5px);
 }
 
 .feature-item i {
-    color: var(--primary-color);
-    margin-right: 12px;
-    width: 22px;
+    color: var(--dark-color);
+    margin-right: 15px; /* Increased margin */
+    width: 25px; /* Increased width */
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.4rem; /* Increased icon size */
 }
 
 
 
 /* Panel Kanan - Form */
 .login-form-panel {
-    padding: 40px;
+    padding: 35px; /* Reduced padding */
     display: flex;
     flex-direction: column;
     justify-content: center;
