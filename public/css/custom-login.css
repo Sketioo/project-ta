@@ -1,8 +1,4 @@
-:root {
-    --primary-color: #FFD700; /* Kuning Utama (Emas) */
-    --secondary-color: #E6C200; /* Kuning Sedikit Gelap untuk Hover */
-    --dark-color: #1a1a1a; /* Hitam Pekat */
-}
+
 
 .login-page-container {
     display: flex;
