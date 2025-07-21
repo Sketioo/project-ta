@@ -26,6 +26,7 @@
             <div class="col-lg-6 login-form-panel">
                 <div class="card-body login-body-v2">
                     <div class="login-header-v2 text-center mb-4">
+                        <i class="fas fa-user-circle login-icon-form mb-3" style="font-size: 3rem; color: var(--primary-color);"></i>
                         <h3 class="mb-0">{{ __('Login Akun') }}</h3>
                     </div>
                     <form method="POST" action="{{ route('login') }}">
