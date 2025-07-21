@@ -11,9 +11,9 @@
             <!-- Kolom Kiri (Welcome Panel) -->
             <div class="col-lg-6 login-welcome-panel">
                 <div class="welcome-content text-center">
-                    <i class="fas fa-graduation-cap welcome-icon"></i>
-                    <h2 class="welcome-title">Selamat Datang Kembali!</h2>
-                    <p class="welcome-text">Sistem Informasi Program Studi TRPL. Silakan masuk untuk melanjutkan.</p>
+                    <i class="fas fa-graduation-cap welcome-icon animate__animated animate__fadeInDown" data-animation="animate__fadeInDown"></i>
+                    <h2 class="welcome-title animate__animated animate__fadeInUp" data-animation="animate__fadeInUp">Selamat Datang Kembali!</h2>
+                    <p class="welcome-text animate__animated animate__fadeInUp" data-animation="animate__fadeInUp" data-animation-delay="0.2s">Sistem Informasi Program Studi TRPL. Silakan masuk untuk melanjutkan.</p>
                     
                 </div>
             </div>

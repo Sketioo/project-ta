@@ -46,10 +46,6 @@ a:hover {
     color: var(--primary-color) !important; /* Change color to primary on hover */
 }
 
-.navbar-brand .highlight {
-    color: var(--primary-color);
-}
-
 .nav-link {
     font-weight: 500;
     color: rgba(255, 255, 255, 0.8) !important; /* Mengubah warna teks link menjadi putih transparan */
@@ -620,3 +616,5 @@ a:hover {
 .custom-footer .fa-map-marker-alt, .custom-footer .fa-phone-alt {
     color: var(--primary-color);
 }
+
+
