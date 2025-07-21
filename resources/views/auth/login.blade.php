@@ -14,6 +14,11 @@
                     <i class="fas fa-graduation-cap welcome-icon"></i>
                     <h2 class="welcome-title">Selamat Datang Kembali!</h2>
                     <p class="welcome-text">Sistem Informasi Program Studi TRPL. Silakan masuk untuk melanjutkan.</p>
+                    <div class="feature-list">
+                        <div class="feature-item"><i class="fas fa-check-circle"></i> Lacak Prestasi Mahasiswa</div>
+                        <div class="feature-item"><i class="fas fa-calendar-alt"></i> Lihat Agenda Terbaru</div>
+                        <div class="feature-item"><i class="fas fa-lightbulb"></i> Berikan Saran & Masukan</div>
+                    </div>
                 </div>
             </div>
 
@@ -68,7 +73,13 @@
                                 {{ __('Login') }}
                             </button>
                         </div>
+
+                        
                     </form>
+
+                    <div class="text-center mt-4">
+                        <p class="register-link-text">Belum punya akun? <a href="#">Hubungi Administrator</a></p>
+                    </div>
                 </div>
             </div>
         </div>
