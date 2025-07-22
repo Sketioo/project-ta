@@ -195,15 +195,17 @@ a:hover {
     position: relative;
     display: inline-block;
     padding-bottom: 10px;
+    text-align: left; /* Align title to the left */
+    width: 100%; /* Ensure it takes full width for left alignment */
+    padding-left: 15px; /* Add some left padding for visual spacing */
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    left: 50%;
+    left: 15px; /* Align underline to the left, matching padding */
     bottom: 0;
-    transform: translateX(-50%);
-    width: 80px;
+    width: 120px; /* Increased length */
     height: 4px;
     background-color: var(--primary-color);
     border-radius: 2px;
@@ -292,31 +294,45 @@ a:hover {
 }
 
 /* Dokumen Section */
-.document-search-container {
-    position: relative;
-    margin-bottom: 30px;
+.document-search-form .input-group {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Subtle shadow for the input group */
+    border-radius: 50px;
+    overflow: hidden;
 }
 
 .document-search-input {
-    border-radius: 50px;
-    padding: 12px 20px 12px 50px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background-color: #fff; /* White background */
+    border: 1px solid #dee2e6; /* Standard Bootstrap border color */
+    border-right: none;
+    padding: 12px 20px;
+    height: auto;
+    font-size: 1rem;
+    border-radius: 50px 0 0 50px;
     transition: all 0.3s ease;
 }
 
 .document-search-input:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25); /* Bootstrap-like focus shadow */
+    background-color: #fff;
 }
 
-.search-icon {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #aaa;
-    font-size: 1.1rem;
+.document-search-btn {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: var(--dark-color);
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 0 50px 50px 0;
+    transition: all 0.3s ease;
+}
+
+.document-search-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--dark-color);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+    transform: translateY(-1px);
 }
 
 .document-list-container {
@@ -384,46 +400,45 @@ a:hover {
 }
 
 /* Agenda Search Bar */
-.agenda-search-card {
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
 .agenda-search-form .input-group {
-    border-radius: 10px; /* Slightly rounded corners for the input group within the card */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Subtle shadow for the input group */
+    border-radius: 50px;
     overflow: hidden;
 }
 
 .agenda-search-input {
-    background-color: var(--light-gray);
-    border: 1px solid #e0e0e0;
+    background-color: #fff; /* White background */
+    border: 1px solid #dee2e6; /* Standard Bootstrap border color */
     border-right: none;
     padding: 12px 20px;
     height: auto;
-    border-radius: 8px 0 0 8px; /* Adjusted border-radius for input */
+    font-size: 1rem;
+    border-radius: 50px 0 0 50px;
     transition: all 0.3s ease;
 }
 
 .agenda-search-input:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25); /* Bootstrap-like focus shadow */
+    background-color: #fff;
 }
 
 .agenda-search-btn {
-    background-color: var(--dark-color);
-    border: 1px solid var(--dark-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: var(--dark-color);
     padding: 12px 25px;
-    border-radius: 0 8px 8px 0; /* Adjusted border-radius for button */
+    font-size: 1rem;
+    border-radius: 0 50px 50px 0;
     transition: all 0.3s ease;
 }
 
 .agenda-search-btn:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
     color: var(--dark-color);
     box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+    transform: translateY(-1px);
 }
 
 /* Agenda Card Styling */
@@ -519,6 +534,68 @@ a:hover {
     border-color: #dee2e6;
 }
 
+/* Agenda Detail Page */
+.agenda-detail-container {
+    background-color: var(--light-gray); /* Light gray background */
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.agenda-article {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 40px;
+    margin-bottom: 30px;
+}
+
+.agenda-article-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dark-color);
+    margin-bottom: 15px;
+}
+
+.agenda-article-meta {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 30px;
+}
+
+.agenda-article-main-image img {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.agenda-carousel .carousel-item img {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.agenda-article-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+.agenda-back-btn {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 10px 25px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.agenda-back-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+}
+
 /* FAQ Section */
 .accordion-item {
     border: none;
@@ -585,27 +662,41 @@ a:hover {
 }
 
 /* Custom Modal Styles */
+.modal-content {
+    border-radius: 15px; /* Rounded corners for the modal content */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
 .custom-modal-header {
-    background-color: var(--dark-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color); /* Yellow header */
+    color: var(--dark-color); /* Dark text for header */
     border-bottom: none;
-    padding: 20px;
+    padding: 20px 25px;
 }
 
 .custom-modal-header .modal-title {
     font-weight: 700;
+    color: var(--dark-color); /* Ensure title is dark */
 }
 
 .custom-modal-header .btn-close {
-    background-color: #fff;
+    background-color: var(--dark-color); /* Dark close button */
     border-radius: 50%;
     padding: 8px;
     opacity: 1;
+    filter: invert(1); /* Invert color for visibility on dark background */
+    transition: all 0.3s ease;
+}
+
+.custom-modal-header .btn-close:hover {
+    background-color: var(--secondary-color); /* Slightly darker yellow on hover */
+    transform: rotate(90deg); /* Subtle rotation on hover */
 }
 
 .custom-modal-body {
-    padding: 30px;
-    background-color: #f8f9fa;
+    padding: 30px 25px;
+    background-color: #fff; /* White background for body */
 }
 
 .contact-label {
@@ -615,15 +706,17 @@ a:hover {
 }
 
 .contact-input, .contact-textarea {
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #e0e0e0;
     padding: 12px 15px;
     transition: all 0.3s ease;
+    background-color: var(--light-gray); /* Light gray background for inputs */
 }
 
 .contact-input:focus, .contact-textarea:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25); /* Bootstrap-like focus shadow */
+    background-color: #fff; /* White on focus */
 }
 
 .contact-button {
@@ -631,7 +724,7 @@ a:hover {
     border-color: var(--dark-color);
     color: var(--primary-color);
     font-weight: bold;
-    padding: 10px 25px;
+    padding: 12px 30px; /* Slightly larger padding */
     border-radius: 50px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -643,7 +736,7 @@ a:hover {
     border-color: var(--primary-color);
     color: var(--dark-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4); /* More prominent shadow on hover */
 }
 
 /* General Animations */

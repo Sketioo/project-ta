@@ -19,7 +19,7 @@
     <!-- Mitra Section -->
     <section id="mitra" class="py-5" data-animation="animate__fadeInUp">
         <div class="container">
-            <h2 class="text-center section-title mb-5">Mitra Industri</h2>
+            <h2 class="section-title mb-5">Mitra Industri</h2>
             @if($partners->isNotEmpty())
                 <div id="mitraCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -64,7 +64,7 @@
     <!-- Prestasi Section -->
     <section id="prestasi" class="py-5 bg-light" data-animation="animate__fadeInUp">
         <div class="container">
-            <h2 class="text-center section-title mb-5">Prestasi Mahasiswa</h2>
+            <h2 class="section-title mb-5">Prestasi Mahasiswa</h2>
             @if($achievements->isNotEmpty())
             <div id="achievementCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -116,13 +116,17 @@
     <!-- Dokumen Section -->
     <section id="dokumen" class="py-5" data-animation="animate__fadeInUp">
         <div class="container">
-            <h2 class="text-center section-title mb-5">Pusat Dokumen</h2>
+            <h2 class="section-title mb-5">Pusat Dokumen</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <!-- Search Bar -->
-                    <div class="mb-4 document-search-container">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" id="documentSearch" class="form-control document-search-input" placeholder="Cari dokumen...">
+                    <div class="mb-4">
+                        <form action="#" method="GET" class="d-flex document-search-form">
+                            <div class="input-group">
+                                <input type="text" id="documentSearch" class="form-control document-search-input" placeholder="Cari dokumen...">
+                                <button class="btn document-search-btn" type="button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
                     </div>
 
                     <div class="document-list-container">
@@ -162,7 +166,7 @@
     <!-- FAQ Section -->
     <section id="faq" class="py-5 bg-light" data-animation="animate__fadeInUp">
         <div class="container">
-            <h2 class="text-center section-title mb-5">Frequently Asked Questions (FAQ)</h2>
+            <h2 class="section-title mb-5">Frequently Asked Questions (FAQ)</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-9">
                     <div class="accordion" id="faqAccordion">

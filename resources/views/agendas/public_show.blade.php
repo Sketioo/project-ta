@@ -3,7 +3,7 @@
 @section('title', $agenda->title)
 
 @section('content')
-    <div class="container py-5">
+    <div class="container py-5 agenda-detail-container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
                 <article class="agenda-article" data-animation="animate__fadeInUp">
