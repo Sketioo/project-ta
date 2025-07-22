@@ -177,47 +177,30 @@
             <h2 class="section-title mb-5">Frequently Asked Questions (FAQ)</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-9">
+                    @if($faqs->isNotEmpty())
                     <div class="accordion" id="faqAccordion">
-                        <!-- FAQ Item 1 -->
+                        @foreach($faqs as $index => $faq)
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    Bagaimana cara mendaftar di prodi TRPL?
+                            <h2 class="accordion-header" id="heading{{ $index }}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="false" aria-controls="collapse{{ $index }}">
+                                    {{ $faq->question }}
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                            <div id="collapse{{ $index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $index }}" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    Pendaftaran untuk program studi Teknologi Rekayasa Perangkat Lunak (TRPL) mengikuti jadwal dan prosedur penerimaan mahasiswa baru di tingkat institusi. Anda dapat menemukan semua informasi terkait, termasuk tanggal penting, persyaratan, dan alur pendaftaran, di situs web resmi penerimaan mahasiswa baru kami.
+                                    {{ $faq->answer }}
                                 </div>
                             </div>
                         </div>
-                        <!-- FAQ Item 2 -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Apa saja prospek karir setelah lulus dari TRPL?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Lulusan TRPL memiliki prospek karir yang sangat luas di industri teknologi. Beberapa peran yang umum diisi oleh lulusan kami antara lain: Software Developer, Mobile App Developer, Web Developer (Front-end & Back-end), UI/UX Designer, Quality Assurance Engineer, dan DevOps Engineer. Kami juga membekali mahasiswa dengan keterampilan kewirausahaan untuk memulai startup teknologi mereka sendiri.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ Item 3 -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Apakah ada program magang atau kerja praktik?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Ya, program magang atau kerja praktik industri merupakan bagian wajib dari kurikulum kami. Kami telah menjalin kemitraan dengan berbagai perusahaan teknologi terkemuka untuk memberikan mahasiswa pengalaman kerja nyata di lingkungan profesional. Program ini dirancang untuk menjembatani teori yang dipelajari di kelas dengan praktik di industri.
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
+                    @else
+                    <div class="empty-state">
+                        <i class="fas fa-question-circle empty-state-icon"></i>
+                        <p class="empty-state-text">Belum ada FAQ yang tersedia.</p>
+                        <p class="empty-state-subtext">Silakan cek kembali nanti atau tambahkan FAQ baru.</p>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

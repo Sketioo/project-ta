@@ -8,6 +8,7 @@ use App\Models\Agenda;
 use App\Models\Achievement;
 use App\Models\Partner;
 use App\Models\Document;
+use App\Models\Faq; // Import the Faq model
 
 class PageController extends Controller
 {
@@ -24,7 +25,8 @@ class PageController extends Controller
                                 ->get();
         $partners = Partner::where('is_visible', true)->get();
         $documents = Document::where('is_visible', true)->latest()->get();
-        return view('home', compact('achievements', 'partners', 'documents'));
+        $faqs = Faq::where('is_visible', true)->latest()->get(); // Fetch only visible FAQs
+        return view('home', compact('achievements', 'partners', 'documents', 'faqs'));
     }
 
     /**

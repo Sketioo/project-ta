@@ -67,6 +67,12 @@
                     Manajemen Dokumen
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::routeIs('admin.faqs.index') ? 'active' : '' }}" href="{{ route('admin.faqs.index') }}">
+                    <i class="fas fa-question-circle fa-fw me-2"></i>
+                    Manajemen FAQ
+                </a>
+            </li>
             @endif
         </ul>
     </div>
