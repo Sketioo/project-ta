@@ -19,7 +19,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $achievements = Achievement::where('status', 'validated')
+        $achievements = Achievement::where('status', 'disetujui')
                                 ->where('show_on_main_page', true)
                                 ->latest()
                                 ->get();

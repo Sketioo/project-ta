@@ -81,12 +81,12 @@
 
                         <hr>
 
-                        {{-- <div class="d-flex justify-content-end">
-                            <a href="{{ route('achievements.index') }}" class="btn btn-secondary me-2">
+                        <div class="d-flex justify-content-end">
+                            <a href="{{ route('achievements.create') }}" class="btn btn-secondary me-2">
                                 <i class="fas fa-times"></i> Batal
                             </a>
                             <button type="submit" class="btn btn-primary">Ajukan Prestasi</button>
-                        </div> --}}
+                        </div>
                     </form>
                 </div>
             </div>

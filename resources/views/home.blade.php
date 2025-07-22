@@ -139,13 +139,54 @@
                         @if($documents->isNotEmpty())
                             <div id="documentList">
                                 @foreach($documents as $document)
+                                    @php
+                                        $extension = pathinfo($document->file_path, PATHINFO_EXTENSION);
+                                        $iconClass = 'fa-file-alt'; // Default icon
+                                        $fileType = strtoupper($extension);
+
+                                        switch (strtolower($extension)) {
+                                            case 'pdf':
+                                                $iconClass = 'fa-file-pdf';
+                                                break;
+                                            case 'doc':
+                                            case 'docx':
+                                                $iconClass = 'fa-file-word';
+                                                $fileType = 'Word';
+                                                break;
+                                            case 'xls':
+                                            case 'xlsx':
+                                                $iconClass = 'fa-file-excel';
+                                                $fileType = 'Excel';
+                                                break;
+                                            case 'csv':
+                                                $iconClass = 'fa-file-csv';
+                                                $fileType = 'CSV';
+                                                break;
+                                            case 'ppt':
+                                            case 'pptx':
+                                                $iconClass = 'fa-file-powerpoint';
+                                                $fileType = 'PowerPoint';
+                                                break;
+                                            case 'zip':
+                                            case 'rar':
+                                                $iconClass = 'fa-file-archive';
+                                                break;
+                                            case 'jpg':
+                                            case 'jpeg':
+                                            case 'png':
+                                            case 'gif':
+                                                $iconClass = 'fa-file-image';
+                                                $fileType = 'Gambar';
+                                                break;
+                                        }
+                                    @endphp
                                 <div class="document-item" data-title="{{ strtolower($document->title) }}">
                                     <div class="document-item-icon">
-                                        <i class="fas fa-file-pdf"></i>
+                                        <i class="fas {{ $iconClass }}"></i>
                                     </div>
                                     <div class="document-item-content">
                                         <h5 class="document-item-title">{{ $document->title }}</h5>
-                                        <p class="document-item-meta">Tipe: PDF</p>
+                                        <p class="document-item-meta">Tipe: {{ $fileType }}</p>
                                     </div>
                                     <div class="document-item-action">
                                         <a href="{{ Storage::url($document->file_path) }}" class="btn document-download-btn" download>
@@ -218,6 +259,49 @@ document.addEventListener('DOMContentLoaded', function () {
     const documentListContainer = document.getElementById('documentList');
     const noResultsMessage = document.getElementById('noResultsMessage');
 
+    function getFileIconInfo(filePath) {
+        const extension = filePath.split('.').pop().toLowerCase();
+        let iconClass = 'fa-file-alt'; // Default icon
+        let fileType = extension.toUpperCase();
+
+        switch (extension) {
+            case 'pdf':
+                iconClass = 'fa-file-pdf';
+                break;
+            case 'doc':
+            case 'docx':
+                iconClass = 'fa-file-word';
+                fileType = 'Word';
+                break;
+            case 'xls':
+            case 'xlsx':
+                iconClass = 'fa-file-excel';
+                fileType = 'Excel';
+                break;
+            case 'csv':
+                iconClass = 'fa-file-csv';
+                fileType = 'CSV';
+                break;
+            case 'ppt':
+            case 'pptx':
+                iconClass = 'fa-file-powerpoint';
+                fileType = 'PowerPoint';
+                break;
+            case 'zip':
+            case 'rar':
+                iconClass = 'fa-file-archive';
+                break;
+            case 'jpg':
+            case 'jpeg':
+            case 'png':
+            case 'gif':
+                iconClass = 'fa-file-image';
+                fileType = 'Gambar';
+                break;
+        }
+        return { iconClass, fileType };
+    }
+
     if (documentSearchInput && documentListContainer) {
         documentSearchInput.addEventListener('keyup', function () {
             const searchTerm = this.value;
@@ -231,14 +315,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.length > 0) {
                         noResultsMessage.style.display = 'none';
                         data.forEach(function (document) {
+                            const { iconClass, fileType } = getFileIconInfo(document.file_path);
                             const documentItem = `
                                 <div class="document-item" data-title="${document.title.toLowerCase()}">
                                     <div class="document-item-icon">
-                                        <i class="fas fa-file-pdf"></i>
+                                        <i class="fas ${iconClass}"></i>
                                     </div>
                                     <div class="document-item-content">
                                         <h5 class="document-item-title">${document.title}</h5>
-                                        <p class="document-item-meta">Tipe: PDF</p>
+                                        <p class="document-item-meta">Tipe: ${fileType}</p>
                                     </div>
                                     <div class="document-item-action">
                                         <a href="/storage/${document.file_path}" class="btn document-download-btn" download>
@@ -251,6 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
                     } else {
                         noResultsMessage.style.display = 'block';
+                        documentListContainer.innerHTML = ''; // Ensure it's empty
                     }
                 },
                 error: function (xhr, status, error) {

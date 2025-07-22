@@ -54,7 +54,7 @@ class AgendaController extends Controller
             'images' => $imagePaths,
         ]);
 
-        return redirect()->route('agendas.index')->with('success', 'Agenda berhasil ditambahkan!');
+        return redirect()->route('admin.agendas.index')->with('success', 'Agenda berhasil ditambahkan!');
     }
 
     /**
@@ -62,7 +62,7 @@ class AgendaController extends Controller
      */
     public function show(Agenda $agenda)
     {
-        return view('agendas.show', compact('agenda'));
+        return view('admin.agendas.show', compact('agenda'));
     }
 
     /**
@@ -109,7 +109,7 @@ class AgendaController extends Controller
             'images' => $imagePaths,
         ]);
 
-        return redirect()->route('agendas.index')->with('success', 'Agenda berhasil diperbarui!');
+        return redirect()->route('admin.agendas.index')->with('success', 'Agenda berhasil diperbarui!');
     }
 
     /**

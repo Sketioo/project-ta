@@ -31,7 +31,7 @@ class AchievementValidationController extends Controller
     public function update(Request $request, Achievement $achievement)
     {
         $validatedData = $request->validate([
-            'status' => 'sometimes|required|in:pending,validated,rejected',
+            'status' => 'sometimes|required|in:pending,disetujui,ditolak',
             'show_on_main_page' => 'sometimes|boolean',
         ]);
 

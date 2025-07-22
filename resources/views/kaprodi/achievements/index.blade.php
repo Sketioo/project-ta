@@ -8,48 +8,50 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 1rem;
+        padding-bottom: 1rem;
     }
-    .filter-nav .btn {
+    .filter-pills .nav-link {
         border-radius: 50px;
-        padding: 0.5rem 1.2rem;
+        padding: 0.6rem 1.3rem;
         font-weight: 600;
         transition: all 0.3s ease;
+        color: #6c757d;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        margin: 0 5px;
     }
-    .filter-nav .btn.active {
-        background-color: var(--primary-color);
-        color: var(--dark-color);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .filter-pills .nav-link.active {
+        color: #fff;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
     }
     .achievement-card-kaprodi {
         background-color: #fff;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         transition: all 0.3s ease;
-        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
     .achievement-card-kaprodi:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
     .card-header-kaprodi {
         padding: 1rem 1.5rem;
         border-bottom: 1px solid #f0f0f0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        background-color: #f8f9fa;
     }
-    .status-badge {
-        font-size: 0.9rem;
-        font-weight: 700;
-        padding: 0.4em 0.8em;
-        border-radius: 50px;
+    .card-header-kaprodi h6 {
+        margin: 0;
+        font-weight: 600;
+        color: #343a40;
     }
-    .status-pending { background-color: #ffc107; color: #333; }
-    .status-validated { background-color: #28a745; color: #fff; }
-    .status-rejected { background-color: #dc3545; color: #fff; }
-
     .card-body-kaprodi {
         padding: 1.5rem;
+        flex-grow: 1;
     }
     .student-info {
         display: flex;
@@ -57,34 +59,38 @@
         margin-bottom: 1rem;
     }
     .student-info img {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
         margin-right: 1rem;
         object-fit: cover;
     }
-    .action-buttons .btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: inline-flex;
+    .student-info h6 {
+        font-weight: 600;
+    }
+    .card-footer-kaprodi {
+        padding: 1rem 1.5rem;
+        background-color: #fff;
+        border-top: 1px solid #f0f0f0;
+        text-align: right;
+    }
+    .empty-state {
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 0 0.25rem;
+        padding: 4rem 0;
+        text-align: center;
+        background-color: #f8f9fa;
+        border-radius: 12px;
     }
-    .pagination-wrapper .pagination {
-        justify-content: center;
+    .empty-state i {
+        font-size: 4rem;
+        color: #ced4da;
     }
-    .pagination-wrapper .page-link {
-        color: var(--dark-color);
-        border-radius: 50px !important;
-        margin: 0 5px;
-        border: none;
-    }
-    .pagination-wrapper .page-item.active .page-link {
-        background-color: var(--primary-color);
-        color: var(--dark-color);
-        font-weight: bold;
+    .empty-state h4 {
+        margin-top: 1.5rem;
+        color: #6c757d;
     }
 </style>
 @endpush
@@ -94,71 +100,69 @@
     <div class="row">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <div class="pt-3 pb-2 mb-3 border-bottom validation-header">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
+            <div class="validation-header border-bottom">
                 <h1 class="h2">Validasi Prestasi</h1>
-                <div class="filter-nav btn-group" role="group">
-                    <a href="{{ route('kaprodi.achievements.index') }}" class="btn {{ !request('status') || request('status') == 'all' ? 'active' : 'btn-light' }}">Semua</a>
-                    <a href="{{ route('kaprodi.achievements.index', ['status' => 'pending']) }}" class="btn {{ request('status') == 'pending' ? 'active' : 'btn-light' }}">Pending</a>
-                    <a href="{{ route('kaprodi.achievements.index', ['status' => 'validated']) }}" class="btn {{ request('status') == 'validated' ? 'active' : 'btn-light' }}">Validated</a>
-                    <a href="{{ route('kaprodi.achievements.index', ['status' => 'rejected']) }}" class="btn {{ request('status') == 'rejected' ? 'active' : 'btn-light' }}">Rejected</a>
-                </div>
+                <ul class="nav nav-pills filter-pills">
+                    <li class="nav-item">
+                        <a href="{{ route('kaprodi.achievements.index', ['status' => 'all']) }}" class="nav-link {{ !request('status') || request('status') == 'all' ? 'active' : '' }}">Semua</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('kaprodi.achievements.index', ['status' => 'pending']) }}" class="nav-link {{ request('status') == 'pending' ? 'active' : '' }}">Pending</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('kaprodi.achievements.index', ['status' => 'disetujui']) }}" class="nav-link {{ request('status') == 'disetujui' ? 'active' : '' }}">Disetujui</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('kaprodi.achievements.index', ['status' => 'ditolak']) }}" class="nav-link {{ request('status') == 'ditolak' ? 'active' : '' }}">Ditolak</a>
+                    </li>
+                </ul>
             </div>
 
-            <div class="row">
+            <div class="row mt-4">
                 @forelse ($achievements as $achievement)
-                <div class="col-lg-6 col-md-12 mb-4">
+                <div class="col-lg-6 mb-4">
                     <div class="achievement-card-kaprodi">
                         <div class="card-header-kaprodi">
-                            <h5 class="mb-0">{{ Str::limit($achievement->title, 35) }}</h5>
-                            <span class="status-badge status-{{$achievement->status}}">{{ ucfirst($achievement->status) }}</span>
+                            <h6>{{ Str::limit($achievement->title, 45) }}</h6>
                         </div>
                         <div class="card-body-kaprodi">
                             <div class="student-info">
-                                <img src="https://ui-avatars.com/api/?name={{ urlencode($achievement->user->name) }}&background=ffd700&color=1a1a1a" alt="Avatar">
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode($achievement->user->name) }}&background=0D6EFD&color=fff" alt="Avatar">
                                 <div>
                                     <h6 class="mb-0">{{ $achievement->user->name }}</h6>
                                     <small class="text-muted">{{ $achievement->nim }} - Kelas {{ $achievement->class }}</small>
                                 </div>
                             </div>
-                            <p>{{ $achievement->description }}</p>
+                            <p class="text-muted">{{ Str::limit($achievement->description, 120) }}</p>
                         </div>
-                        <div class="card-footer bg-white text-end action-buttons">
-                            <a href="{{ route('kaprodi.achievements.show', $achievement->id) }}" class="btn btn-outline-info" title="Lihat Detail">
-                                <i class="fas fa-eye"></i>
+                        <div class="card-footer-kaprodi d-flex justify-content-between align-items-center">
+                             <span>
+                                @if($achievement->status == 'disetujui')
+                                    <span class="badge rounded-pill bg-success">Disetujui</span>
+                                @elseif($achievement->status == 'ditolak')
+                                    <span class="badge rounded-pill bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge rounded-pill bg-warning text-dark">Pending</span>
+                                @endif
+                            </span>
+                            <a href="{{ route('kaprodi.achievements.show', $achievement->id) }}" class="btn btn-primary btn-sm">
+                                Detail & Validasi <i class="fas fa-arrow-right ms-1"></i>
                             </a>
-                            @if ($achievement->status == 'pending' || $achievement->status == 'rejected')
-                            <form action="{{ route('kaprodi.achievements.update', $achievement->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('PATCH')
-                                <input type="hidden" name="status" value="validated">
-                                <button type="submit" class="btn btn-outline-success" title="Validasi">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                            </form>
-                            @endif
-                            @if ($achievement->status == 'pending' || $achievement->status == 'validated')
-                            <form action="{{ route('kaprodi.achievements.update', $achievement->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('PATCH')
-                                <input type="hidden" name="status" value="rejected">
-                                <button type="submit" class="btn btn-outline-danger" title="Tolak">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </form>
-                            @endif
                         </div>
                     </div>
                 </div>
                 @empty
-                <div class="col-12 text-center py-5">
-                    <i class="fas fa-folder-open fa-4x text-muted mb-3"></i>
-                    <h4 class="text-muted">Tidak ada data prestasi untuk status ini.</h4>
+                <div class="col-12">
+                    <div class="empty-state">
+                        <i class="fas fa-folder-open"></i>
+                        <h4>Tidak ada data prestasi untuk kategori ini.</h4>
+                    </div>
                 </div>
                 @endforelse
             </div>
 
-            <div class="pagination-wrapper mt-4">
+            <div class="d-flex justify-content-center mt-4">
                 {{ $achievements->appends(request()->query())->links() }}
             </div>
         </main>
@@ -168,7 +172,6 @@
 
 @push('scripts')
 <script>
-    // Check for success message and display SweetAlert
     @if (session('success'))
         Swal.fire({
             icon: 'success',
