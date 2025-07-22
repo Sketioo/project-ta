@@ -3,15 +3,6 @@
 @push('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        .card-header { background-color: #4a5568; color: white; }
-        .btn-primary { background-color: #4299e1; border-color: #4299e1; }
-        .btn-danger { background-color: #e53e3e; border-color: #e53e3e; }
-        .btn-info { background-color: #3182ce; border-color: #3182ce; }
-        .btn-warning { background-color: #f59e0b; border-color: #f59e0b; }
-        .btn-success { background-color: #38a169; border-color: #38a169; }
-        .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
-    </style>
 @endpush
 
 @section('content')
@@ -19,7 +10,7 @@
     <div class="row">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Manajemen Agenda</h1>
             </div>

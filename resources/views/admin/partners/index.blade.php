@@ -3,31 +3,6 @@
 @push('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        .card-header {
-            background-color: #4a5568;
-            color: white;
-        }
-        .btn-primary {
-            background-color: #4299e1;
-            border-color: #4299e1;
-        }
-        .btn-danger {
-            background-color: #e53e3e;
-            border-color: #e53e3e;
-        }
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current, 
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-            background: #4a5568 !important;
-            color: white !important;
-            border-color: #4a5568;
-        }
-        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-            background: #edf2f7 !important;
-            color: #1a202c !important;
-            border-color: #e2e8f0;
-        }
-    </style>
 @endpush
 
 @section('content')
@@ -35,7 +10,7 @@
     <div class="row">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="dashboard-title">Manajemen Mitra</h1>
             </div>

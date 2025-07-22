@@ -505,35 +505,6 @@ a:hover {
     box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
 }
 
-/* Pagination Styling */
-.pagination .page-item .page-link {
-    color: var(--dark-color);
-    border: 1px solid #dee2e6;
-    border-radius: 50px;
-    margin: 0 5px;
-    transition: all 0.3s ease;
-}
-
-.pagination .page-item.active .page-link {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--dark-color);
-    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
-}
-
-.pagination .page-item .page-link:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: var(--dark-color);
-}
-
-.pagination .page-item.disabled .page-link {
-    color: #6c757d;
-    pointer-events: none;
-    background-color: #e9ecef;
-    border-color: #dee2e6;
-}
-
 /* Agenda Detail Page */
 .agenda-detail-container {
     background-color: var(--light-gray); /* Light gray background */
@@ -925,6 +896,82 @@ a:hover {
 .sidebar-footer .btn-danger:hover {
     background-color: #c53030;
     border-color: #c53030;
+}
+
+/* Admin/Management Page Styles */
+.management-page .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.management-page .card-header {
+    background-color: var(--dark-color);
+    color: #fff;
+    border-bottom: 2px solid var(--primary-color);
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.management-page .card-header h5 {
+    color: #fff;
+}
+
+.management-page .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+.management-page .btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.management-page .table-hover tbody tr:hover {
+    background-color: var(--light-gray);
+}
+
+.management-page .table th {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.management-page .btn-info {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+.management-page .btn-info:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.management-page .btn-danger {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+.management-page .btn-danger:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
+.management-page .btn-success {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}
+.management-page .btn-success:hover {
+    background-color: #27ae60;
+    border-color: #27ae60;
+}
+
+.management-page .btn-warning {
+    background-color: #f1c40f;
+    border-color: #f1c40f;
+    color: var(--dark-color);
+}
+.management-page .btn-warning:hover {
+    background-color: #f39c12;
+    border-color: #f39c12;
 }
 
 
