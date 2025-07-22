@@ -7,14 +7,16 @@
         <h1 class="text-center section-title mb-5">Agenda & Kegiatan</h1>
 
         <!-- Search Bar -->
-        <div class="row justify-content-center mb-4">
+        <div class="row justify-content-center mb-5">
             <div class="col-lg-8 col-md-10">
-                <form action="{{ route('agenda') }}" method="GET" class="d-flex agenda-search-form">
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control agenda-search-input" placeholder="Cari agenda..." value="{{ request('search') }}">
-                        <button class="btn agenda-search-btn" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
+                <div class="card p-4 shadow-sm agenda-search-card">
+                    <form action="{{ route('agenda') }}" method="GET" class="d-flex agenda-search-form">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control agenda-search-input" placeholder="Cari agenda..." value="{{ request('search') }}">
+                            <button class="btn agenda-search-btn" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 

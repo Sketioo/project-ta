@@ -384,24 +384,30 @@ a:hover {
 }
 
 /* Agenda Search Bar */
+.agenda-search-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
 .agenda-search-form .input-group {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    border-radius: 50px;
+    border-radius: 10px; /* Slightly rounded corners for the input group within the card */
     overflow: hidden;
 }
 
 .agenda-search-input {
+    background-color: var(--light-gray);
     border: 1px solid #e0e0e0;
     border-right: none;
     padding: 12px 20px;
     height: auto;
-    border-radius: 50px 0 0 50px;
+    border-radius: 8px 0 0 8px; /* Adjusted border-radius for input */
     transition: all 0.3s ease;
 }
 
 .agenda-search-input:focus {
     border-color: var(--primary-color);
-    box-shadow: none;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
 }
 
 .agenda-search-btn {
@@ -409,7 +415,7 @@ a:hover {
     border: 1px solid var(--dark-color);
     color: var(--primary-color);
     padding: 12px 25px;
-    border-radius: 0 50px 50px 0;
+    border-radius: 0 8px 8px 0; /* Adjusted border-radius for button */
     transition: all 0.3s ease;
 }
 
@@ -417,6 +423,100 @@ a:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
     color: var(--dark-color);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+}
+
+/* Agenda Card Styling */
+.agenda-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.agenda-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.agenda-image-container {
+    width: 100%;
+    height: 200px; /* Fixed height for images */
+    overflow: hidden;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.agenda-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.agenda-card-body {
+    padding: 25px;
+}
+
+.agenda-card .card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.agenda-card .card-text {
+    font-size: 0.95rem;
+    color: #6c757d;
+}
+
+.agenda-read-more-btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.agenda-read-more-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--dark-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+}
+
+/* Pagination Styling */
+.pagination .page-item .page-link {
+    color: var(--dark-color);
+    border: 1px solid #dee2e6;
+    border-radius: 50px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
 }
 
 /* FAQ Section */
