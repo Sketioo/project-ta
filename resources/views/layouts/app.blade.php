@@ -62,6 +62,15 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Initialize all carousels on the page for auto-sliding
+            const carousels = document.querySelectorAll('.carousel');
+            carousels.forEach(function (carousel) {
+                new bootstrap.Carousel(carousel, {
+                    interval: 4000, // Set slide interval to 4 seconds
+                    ride: 'carousel'
+                });
+            });
+
             @if(session('success'))
                 Swal.fire({
                     icon: 'success',
