@@ -5,71 +5,78 @@
     <div class="row">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Tambah Agenda Baru</h1>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
+            <div class="page-header pt-3">
+                <h1 class="page-title">Tambah Agenda Baru</h1>
             </div>
 
-            <div class="card shadow mb-4 custom-form-card">
-                <div class="card-header py-3 custom-form-header">
-                    <h6 class="m-0 font-weight-bold text-white">Form Agenda</h6>
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Form Agenda</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.agendas.store') }}" method="POST" enctype="multipart/form-data" class="agenda-form">
+                    <form action="{{ route('admin.agendas.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="title" class="form-label custom-form-label">Judul Agenda</label>
-                                    <input type="text" class="form-control custom-form-input" id="title" name="title" value="{{ old('title') }}" required>
+                                    <label for="title" class="form-label">Judul Agenda</label>
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
                                     @error('title')
-                                        <div class="text-danger custom-form-error">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="date" class="form-label custom-form-label">Tanggal</label>
-                                    <input type="date" class="form-control custom-form-input" id="date" name="date" value="{{ old('date') }}" required>
+                                    <label for="date" class="form-label">Tanggal</label>
+                                    <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date') }}" required>
                                     @error('date')
-                                        <div class="text-danger custom-form-error">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="location" class="form-label custom-form-label">Lokasi</label>
-                            <input type="text" class="form-control custom-form-input" id="location" name="location" value="{{ old('location') }}" required>
+                            <label for="location" class="form-label">Lokasi</label>
+                            <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" value="{{ old('location') }}" required>
                             @error('location')
-                                <div class="text-danger custom-form-error">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="description" class="form-label custom-form-label">Deskripsi</label>
-                            <textarea class="form-control custom-form-input" id="description" name="description" rows="5" required>{{ old('description') }}</textarea>
+                            <label for="description" class="form-label">Deskripsi</label>
+                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="5" required>{{ old('description') }}</textarea>
                             @error('description')
-                                <div class="text-danger custom-form-error">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is_published" name="is_published" {{ old('is_published') ? 'checked' : '' }}>
-                            <label class="form-check-label custom-form-label" for="is_published">Publikasikan Agenda</label>
+                            <label class="form-check-label" for="is_published">Publikasikan Agenda</label>
                         </div>
 
                         <div class="mb-3">
-                            <label for="images" class="form-label custom-form-label">Gambar Agenda (Bisa lebih dari 1)</label>
-                            <input type="file" class="form-control custom-form-input" id="images" name="images[]" multiple accept="image/*">
-                            @error('images.*')
-                                <div class="text-danger custom-form-error">{{ $message }}</div>
+                            <label for="images" class="form-label">Gambar Agenda (Bisa lebih dari 1)</label>
+                            <input type="file" class="form-control @error('images.*') is-invalid @enderror" id="images" name="images[]" multiple accept="image/*">
+                            @error('images.* ')
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                             <div id="image-preview-container" class="mt-3 row"></div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary custom-submit-btn">Simpan Agenda</button>
+                        <hr>
+
+                        <div class="d-flex justify-content-end">
+                            <a href="{{ route('admin.agendas.index') }}" class="btn btn-secondary me-2">
+                                <i class="fas fa-times"></i> Batal
+                            </a>
+                            <button type="submit" class="btn btn-primary">Simpan Agenda</button>
+                        </div>
                     </form>
                 </div>
             </div>

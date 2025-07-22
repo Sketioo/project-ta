@@ -11,21 +11,21 @@
         @include('components.sidebar')
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Manajemen Agenda</h1>
+            <div class="page-header pt-3">
+                <h1 class="page-title">Manajemen Agenda</h1>
             </div>
 
-            <div class="card shadow-sm">
+            <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Daftar Agenda</h5>
-                    <a href="{{ route('admin.agendas.create') }}" class="btn btn-primary btn-sm">
-                        <i class="fas fa-plus"></i> Tambah Agenda Baru
+                    <a href="{{ route('admin.agendas.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Tambah Agenda Baru
                     </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="agendasTable" class="table table-hover table-bordered" style="width:100%">
-                            <thead class="table-light">
+                        <table id="agendasTable" class="table table-hover" style="width:100%">
+                            <thead>
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th>Judul Agenda</th>
@@ -43,20 +43,19 @@
                                         <td>{{ $agenda->date->format('d M Y') }}</td>
                                         <td>{{ $agenda->location }}</td>
                                         <td class="text-center">
-                                            <form action="{{ route('admin.agendas.togglePublication', $agenda) }}" method="POST" class="d-inline">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm {{ $agenda->is_published ? 'btn-success' : 'btn-warning text-dark' }}">
-                                                    {{ $agenda->is_published ? 'Published' : 'Draft' }}
-                                                </button>
-                                            </form>
+                                            <span class="status-badge {{ $agenda->is_published ? 'status-published' : 'status-draft' }}">
+                                                {{ $agenda->is_published ? 'Published' : 'Draft' }}
+                                            </span>
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('admin.agendas.edit', $agenda) }}" class="btn btn-info btn-sm" title="Edit">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <button class="btn btn-danger btn-sm delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $agenda->id }}" data-title="{{ $agenda->title }}" title="Hapus">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
+                                            <div class="action-btn-group">
+                                                <a href="{{ route('admin.agendas.edit', $agenda) }}" class="btn btn-info" data-bs-toggle="tooltip" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <button class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $agenda->id }}" data-title="{{ $agenda->title }}" data-bs-toggle="tooltip" title="Hapus">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -102,6 +101,12 @@
                 "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json" },
                 "pageLength": 10
             });
+
+            // Initialize Bootstrap tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
 
             $('.delete-btn').on('click', function () {
                 var agendaId = $(this).data('id');

@@ -11,21 +11,21 @@
         @include('components.sidebar')
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="dashboard-title">Manajemen Mitra</h1>
+            <div class="page-header pt-3">
+                <h1 class="page-title">Manajemen Mitra</h1>
             </div>
 
-            <div class="card shadow-sm">
+            <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Daftar Mitra</h5>
-                    <a href="{{ route('admin.partners.create') }}" class="btn btn-primary btn-sm">
-                        <i class="fas fa-plus"></i> Tambah Mitra Baru
+                    <a href="{{ route('admin.partners.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Tambah Mitra Baru
                     </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="partnersTable" class="table table-hover table-bordered" style="width:100%">
-                            <thead class="table-light">
+                        <table id="partnersTable" class="table table-hover" style="width:100%">
+                            <thead>
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Logo</th>
@@ -40,22 +40,28 @@
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td class="text-center">
-                                            <img src="{{ Storage::url($partner->logo_path) }}" alt="{{ $partner->name }}" class="img-thumbnail" width="80">
+                                            @if($partner->logo_path)
+                                                <img src="{{ Storage::url($partner->logo_path) }}" alt="{{ $partner->name }}" class="img-thumbnail" width="100" style="border-radius: 8px;">
+                                            @else
+                                                <span class="text-muted">No Logo</span>
+                                            @endif
                                         </td>
                                         <td>{{ $partner->name }}</td>
-                                        <td><a href="{{ $partner->website_url }}" target="_blank" rel="noopener noreferrer">{{ $partner->website_url }}</a></td>
+                                        <td><a href="{{ $partner->website_url }}" target="_blank" rel="noopener noreferrer" style="color: #007bff;">{{ $partner->website_url }}</a></td>
                                         <td class="text-center">
                                             <form action="{{ route('admin.partners.toggleVisibility', $partner) }}" method="POST" class="d-inline">
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm {{ $partner->is_visible ? 'btn-success' : 'btn-secondary' }}">
+                                                <button type="submit" class="badge {{ $partner->is_visible ? 'bg-success' : 'bg-danger' }}" style="border: none; cursor: pointer; padding: 0.5em 0.75em; border-radius: 0.35rem; font-weight: bold;">
                                                     {{ $partner->is_visible ? 'Ditampilkan' : 'Disembunyikan' }}
                                                 </button>
                                             </form>
                                         </td>
                                         <td class="text-center">
-                                            <button class="btn btn-danger btn-sm delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $partner->id }}" data-name="{{ $partner->name }}">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
+                                            <div class="action-btn-group">
+                                                <button class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $partner->id }}" data-name="{{ $partner->name }}" data-bs-toggle="tooltip" title="Hapus">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -98,12 +104,16 @@
     <script>
         $(document).ready(function() {
             $('#partnersTable').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
-                },
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json" },
                 "pageLength": 10,
                 "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
             });
+
+            // Initialize Bootstrap tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
 
             $('.delete-btn').on('click', function () {
                 var partnerId = $(this).data('id');

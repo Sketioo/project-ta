@@ -2,11 +2,6 @@
 
 @push('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<style>
-    .card-header { background-color: #4a5568; color: white; }
-    .btn-primary { background-color: #4299e1; border-color: #4299e1; }
-    .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
-</style>
 @endpush
 
 @section('content')
@@ -14,14 +9,14 @@
     <div class="row">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="dashboard-title">Manajemen Dokumen</h1>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
+            <div class="page-header pt-3">
+                <h1 class="page-title">Tambah Dokumen Baru</h1>
             </div>
 
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <h5 class="mb-0">Tambah Dokumen Baru</h5>
+                    <h5 class="mb-0">Form Dokumen</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('admin.documents.store') }}" method="POST" enctype="multipart/form-data">

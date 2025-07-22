@@ -974,6 +974,210 @@ a:hover {
     border-color: #f39c12;
 }
 
+/* =============================================== */
+/* ===      ADMIN MANAGEMENT PAGE STYLES       === */
+/* =============================================== */
+
+.management-page .card {
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    overflow: hidden; /* Ensures child elements conform to border radius */
+}
+
+.management-page .card-header {
+    background-color: #fff;
+    color: var(--dark-color);
+    border-bottom: 1px solid #e9ecef;
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 !important; /* Override Bootstrap's radius */
+}
+
+.management-page .card-header h5 {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.management-page .card-header .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.management-page .card-header .btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+}
+
+.management-page .table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.management-page .table thead th {
+    background-color: #f8f9fa;
+    border-bottom-width: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    color: #6c757d;
+}
+
+.management-page .table tbody td {
+    padding: 1rem 1.25rem;
+    vertical-align: middle;
+}
+
+.management-page .table tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.management-page .table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Status Badge Styles */
+.status-badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: .75em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 50rem; /* Pill shape */
+}
+
+.status-badge.status-published,
+.status-badge.status-visible {
+    color: #1d643b;
+    background-color: #d1e7dd;
+}
+
+.status-badge.status-draft,
+.status-badge.status-hidden {
+    color: #58616b;
+    background-color: #e2e3e5;
+}
+
+/* Action Buttons Group */
+.action-btn-group .btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50% !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 4px;
+    transition: all 0.3s ease;
+}
+
+.action-btn-group .btn-info { background-color: #eaf5fc; color: #3498db; border: none; }
+.action-btn-group .btn-info:hover { background-color: #3498db; color: #fff; }
+
+.action-btn-group .btn-success { background-color: #eafaf1; color: #2ecc71; border: none; }
+.action-btn-group .btn-success:hover { background-color: #2ecc71; color: #fff; }
+
+.action-btn-group .btn-danger { background-color: #fdedec; color: #e74c3c; border: none; }
+.action-btn-group .btn-danger:hover {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+/* Page Title Styling */
+.management-page .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.management-page .page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.management-page .page-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 70%;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+}
+
+/* Status Toggle Button */
+.status-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 50rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px; /* Ensure consistent width */
+}
+
+.status-toggle-btn .fa-fw {
+    margin-right: 0.5rem;
+}
+
+.status-toggle-btn.status-visible {
+    color: #1d643b;
+    background-color: #d1e7dd;
+}
+.status-toggle-btn.status-visible:hover {
+    background-color: #bde0c9;
+    box-shadow: 0 2px 5px rgba(29, 100, 59, 0.2);
+}
+
+.status-toggle-btn.status-hidden {
+    color: #58616b;
+    background-color: #e2e3e5;
+}
+.status-toggle-btn.status-hidden:hover {
+    background-color: #d4d6d8;
+    box-shadow: 0 2px 5px rgba(88, 97, 107, 0.2);
+}
+
+/* Form Control Styling for Management Pages */
+.management-page .form-control {
+    background-color: var(--light-gray); /* Light gray background for inputs */
+    border: 1px solid #e0e0e0;
+    padding: 0.75rem 1rem; /* Consistent padding */
+    border-radius: 8px; /* Slightly rounded corners */
+    transition: all 0.3s ease;
+}
+
+.management-page .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25); /* Bootstrap-like focus shadow */
+    background-color: #fff; /* White on focus */
+}
+
+.management-page .form-label {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
 /* Custom Dashboard Styles */
 .dashboard-header {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
