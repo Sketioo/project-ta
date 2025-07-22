@@ -52,19 +52,19 @@
         display: none;
     }
     .status-radio-group input[type="radio"]:checked + .btn-outline-secondary {
-        background-color: #6c757d;
+        background-color: var(--bs-secondary);
         color: #fff;
-        border-color: #6c757d;
+        border-color: var(--bs-secondary);
     }
     .status-radio-group input[type="radio"]:checked + .btn-outline-success {
-        background-color: #198754;
+        background-color: var(--bs-success);
         color: #fff;
-        border-color: #198754;
+        border-color: var(--bs-success);
     }
     .status-radio-group input[type="radio"]:checked + .btn-outline-danger {
-        background-color: #dc3545;
+        background-color: var(--bs-danger);
         color: #fff;
-        border-color: #dc3545;
+        border-color: var(--bs-danger);
     }
     .form-check-custom {
         display: flex;
@@ -118,7 +118,7 @@
                         <strong>Status Saat Ini</strong>
                         <span>
                             @if($achievement->status == 'disetujui')
-                                <span class="badge rounded-pill bg-success status-badge">Disetujui</span>
+                                <span class="badge rounded-pill bg-success status-badge text-white">Disetujui</span>
                             @elseif($achievement->status == 'ditolak')
                                 <span class="badge rounded-pill bg-danger status-badge">Ditolak</span>
                             @else

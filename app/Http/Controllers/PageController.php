@@ -38,7 +38,7 @@ class PageController extends Controller
     {
         $query = Agenda::where('is_published', true);
 
-        if ($request->has('search')) {
+        if ($request->has('search') && !empty($request->input('search'))) {
             $searchTerm = $request->input('search');
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('title', 'like', '%' . $searchTerm . '%')
@@ -46,17 +46,12 @@ class PageController extends Controller
             });
         }
 
-        $agendas = $query->latest('date')->paginate(9); // 9 items per page
-
         if ($request->ajax()) {
-            return response()->json([
-                'data' => $agendas->items(),
-                'next_page_url' => $agendas->nextPageUrl(),
-                'prev_page_url' => $agendas->previousPageUrl(),
-                'last_page' => $agendas->lastPage(),
-                'current_page' => $agendas->currentPage(),
-            ]);
+            $agendas = $query->latest('date')->get();
+            return response()->json($agendas);
         }
+
+        $agendas = $query->latest('date')->paginate(9);
 
         return view('agenda', compact('agendas'));
     }

@@ -21,10 +21,9 @@
         margin: 0 5px;
     }
     .filter-pills .nav-link.active {
-        color: #fff;
-        background-color: #0d6efd;
-        border-color: #0d6efd;
-        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+        background-color: var(--bs-primary);
+        border-color: var(--bs-primary);
+        box-shadow: 0 4px 12px rgba(var(--bs-primary-rgb), 0.3);
     }
     .achievement-card-kaprodi {
         background-color: #fff;

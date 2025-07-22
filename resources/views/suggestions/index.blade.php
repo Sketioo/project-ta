@@ -18,9 +18,17 @@
     }
     .filter-pills .nav-link.active {
         color: #fff;
-        background-color: #0d6efd;
-        border-color: #0d6efd;
-        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+        background-color: var(--bs-primary);
+        border-color: var(--bs-primary);
+        box-shadow: 0 4px 12px rgba(var(--bs-primary-rgb), 0.3);
+    }
+    .suggestion-item-card .card-footer .btn {
+        background-color: var(--bs-success);
+        border-color: var(--bs-success);
+        color: #fff;
+    }
+    .suggestion-item-card .card-footer .btn:hover {
+        opacity: 0.9;
     }
     .suggestion-item-card {
         border: 1px solid #e9ecef;
