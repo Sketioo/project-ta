@@ -17,10 +17,13 @@ class AchievementTest extends TestCase
         $user = User::factory()->create();
         $achievement = Achievement::create([
             'user_id' => $user->id,
+            'nim' => '1234567890',
+            'semester' => 'Ganjil',
+            'class' => 'A',
             'title' => 'Juara Lomba Coding',
             'description' => 'Memenangkan lomba coding tingkat nasional.',
-            'date' => '2023-01-15',
-            'validator_id' => null,
+            'file_path' => null,
+            'is_accepted' => false,
             'status' => 'pending',
             'show_on_main_page' => false,
             'photo_path' => null,
@@ -29,6 +32,11 @@ class AchievementTest extends TestCase
         $this->assertDatabaseHas('achievements', [
             'title' => 'Juara Lomba Coding',
             'user_id' => $user->id,
+            'nim' => '1234567890',
+            'semester' => 'Ganjil',
+            'class' => 'A',
+            'is_accepted' => false,
+            'status' => 'pending',
         ]);
         $this->assertInstanceOf(Achievement::class, $achievement);
     }
@@ -51,20 +59,65 @@ class AchievementTest extends TestCase
         $achievement = Achievement::factory()->create([
             'user_id' => $user->id,
             'status' => 'pending',
-            'validator_id' => null,
+            'validated_by' => null,
+            'validated_at' => null,
         ]);
 
         $achievement->update([
             'status' => 'validated',
-            'validator_id' => $validator->id,
+            'validated_by' => $validator->id,
+            'validated_at' => now(),
         ]);
 
         $this->assertEquals('validated', $achievement->status);
-        $this->assertEquals($validator->id, $achievement->validator_id);
+        $this->assertEquals($validator->id, $achievement->validated_by);
+        $this->assertNotNull($achievement->validated_at);
         $this->assertDatabaseHas('achievements', [
             'id' => $achievement->id,
             'status' => 'validated',
-            'validator_id' => $validator->id,
+            'validated_by' => $validator->id,
+        ]);
+    }
+
+    /** @test */
+    public function an_achievement_can_be_rejected()
+    {
+        $user = User::factory()->create();
+        $validator = User::factory()->create();
+        $achievement = Achievement::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'pending',
+            'validated_by' => null,
+            'validated_at' => null,
+        ]);
+
+        $achievement->update([
+            'status' => 'rejected',
+            'validated_by' => $validator->id,
+            'validated_at' => now(),
+        ]);
+
+        $this->assertEquals('rejected', $achievement->status);
+        $this->assertEquals($validator->id, $achievement->validated_by);
+        $this->assertNotNull($achievement->validated_at);
+        $this->assertDatabaseHas('achievements', [
+            'id' => $achievement->id,
+            'status' => 'rejected',
+            'validated_by' => $validator->id,
+        ]);
+    }
+
+    /** @test */
+    public function an_achievement_can_be_shown_on_main_page()
+    {
+        $achievement = Achievement::factory()->create(['show_on_main_page' => false]);
+
+        $achievement->update(['show_on_main_page' => true]);
+
+        $this->assertTrue($achievement->show_on_main_page);
+        $this->assertDatabaseHas('achievements', [
+            'id' => $achievement->id,
+            'show_on_main_page' => true,
         ]);
     }
 }

@@ -17,7 +17,6 @@ class AgendaTest extends TestCase
             'title' => 'Rapat Tahunan',
             'description' => 'Rapat evaluasi kinerja tahunan.',
             'date' => '2023-07-25',
-            'time' => '10:00:00',
             'location' => 'Ruang Rapat Utama',
         ]);
 
