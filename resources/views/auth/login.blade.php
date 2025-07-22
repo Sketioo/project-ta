@@ -26,34 +26,17 @@
                         <h3 class="mb-0">{{ __('Login Akun') }}</h3>
                     </div>
 
-                    @if ($errors->has('username') || $errors->has('password'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            Kredensial yang Anda masukkan tidak cocok dengan catatan kami.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="mb-3 input-group-v2">
                             <span class="input-group-text-v2"><i class="fas fa-user"></i></span>
                             <input id="username" type="text" class="form-control login-input-v2 @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username">
-                            @error('username')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         <div class="mb-3 input-group-v2">
                             <span class="input-group-text-v2"><i class="fas fa-lock"></i></span>
                             <input id="password" type="password" class="form-control login-input-v2 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -93,13 +76,37 @@
 @endsection
 
 @push('scripts')
-<script>
-    // Menghapus footer dari halaman login jika ada
-    document.addEventListener('DOMContentLoaded', function() {
-        const footer = document.querySelector('.custom-footer');
-        if (footer) {
-            footer.style.display = 'none';
-        }
-    });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const footer = document.querySelector('.custom-footer');
+            if (footer) {
+                footer.style.display = 'none';
+            }
+
+            @if ($errors->any())
+                let title = 'Terjadi Kesalahan Validasi!';
+                let htmlMessage = '<ul>';
+
+                @if ($errors->has('username') || $errors->has('password'))
+                    htmlMessage += '<li>Kredensial yang Anda masukkan tidak cocok dengan catatan kami.</li>';
+                @else
+                    @foreach ($errors->all() as $error)
+                        htmlMessage += '<li>{{ $error }}</li>';
+                    @endforeach
+                @endif
+                htmlMessage += '</ul>';
+
+                Swal.fire({
+                    icon: 'error',
+                    title: title,
+                    html: htmlMessage,
+                    showConfirmButton: true,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    position: 'center',
+                    backdrop: true,
+                });
+            @endif
+        });
+    </script>
 @endpush
