@@ -83,9 +83,9 @@
 }
 
 .mark-as-read-btn {
-    background-color: var(--dark-color);
-    color: var(--primary-color);
-    border: 1px solid var(--dark-color);
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    border: 1px solid var(--primary-color);
     font-weight: 600;
     padding: 0.6rem 1.2rem;
     border-radius: 50px;
@@ -93,11 +93,11 @@
 }
 
 .mark-as-read-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--dark-color);
-    border-color: var(--primary-color);
+    background-color: var(--dark-color);
+    color: var(--primary-color);
+    border-color: var(--dark-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .mark-as-read-btn i {
@@ -108,12 +108,16 @@
 .suggestion-tabs .nav-link {
     border: none;
     background-color: transparent;
-    color: var(--suggestion-meta-color);
+    color: var(--dark-color) !important; /* Ensure dark color for text */
     font-weight: 600;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     transition: all 0.3s ease;
     margin: 0 0.5rem;
+}
+
+.suggestion-tabs .nav-link i {
+    color: var(--dark-color) !important; /* Ensure dark color for icon */
 }
 
 .suggestion-tabs .nav-link.active {
@@ -165,4 +169,25 @@
     opacity: 1;
     transform: scale(1);
     transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Custom badge styles for suggestion tabs */
+.suggestion-tabs .nav-link .badge.bg-danger {
+    background-color: #dc3545 !important; /* Bootstrap red */
+    color: #ffffff !important; /* White text for better contrast */
+}
+
+.suggestion-tabs .nav-link.active .badge.bg-danger {
+    background-color: #c82333 !important; /* Slightly darker red when active */
+    color: #ffffff !important;
+}
+
+.suggestion-tabs .nav-link .badge.bg-secondary {
+    background-color: #6c757d !important; /* Bootstrap secondary grey */
+    color: #ffffff !important; /* White text for better contrast */
+}
+
+.suggestion-tabs .nav-link.active .badge.bg-secondary {
+    background-color: #5a6268 !important; /* Slightly darker grey when active */
+    color: #ffffff !important;
 }

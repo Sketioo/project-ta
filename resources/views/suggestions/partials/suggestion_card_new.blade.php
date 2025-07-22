@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="suggestion-card-body">
-        {{ $suggestion->content }}
+        {{ $suggestion->message }}
     </div>
     @if(!$is_read)
     <div class="suggestion-card-footer">
