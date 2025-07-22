@@ -606,6 +606,38 @@ a:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
+/* Empty State Styling */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--light-gray);
+    border-radius: 15px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.empty-state .empty-state-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.empty-state .empty-state-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--dark-color);
+    margin-bottom: 0;
+}
+
+.empty-state .empty-state-subtext {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
 .accordion-button {
     background-color: #fff;
     color: var(--dark-color);

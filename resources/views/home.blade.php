@@ -56,7 +56,11 @@
                     @endif
                 </div>
             @else
-                <p class="text-center text-muted mb-3 mt-3">Belum ada mitra yang terdaftar.</p>
+                <div class="empty-state">
+                    <i class="fas fa-box-open empty-state-icon"></i>
+                    <p class="empty-state-text">Belum ada mitra yang terdaftar.</p>
+                    <p class="empty-state-subtext">Silakan cek kembali nanti atau hubungi administrator.</p>
+                </div>
             @endif
         </div>
     </section>
@@ -106,8 +110,10 @@
                 </button>
             </div>
             @else
-            <div class="text-center">
-                <p>Belum ada prestasi mahasiswa yang ditampilkan.</p>
+            <div class="empty-state">
+                <i class="fas fa-frown empty-state-icon"></i>
+                <p class="empty-state-text">Belum ada prestasi mahasiswa yang ditampilkan.</p>
+                <p class="empty-state-subtext">Tetap semangat dan terus berkarya!</p>
             </div>
             @endif
         </div>
@@ -153,8 +159,10 @@
                                 <p class="mb-0">Dokumen tidak ditemukan.</p>
                             </div>
                         @else
-                            <div class="text-center p-4">
-                                <p class="mb-0">Belum ada dokumen yang tersedia.</p>
+                            <div class="empty-state">
+                                <i class="fas fa-folder-open empty-state-icon"></i>
+                                <p class="empty-state-text">Belum ada dokumen yang tersedia.</p>
+                                <p class="empty-state-subtext">Silakan cek kembali nanti.</p>
                             </div>
                         @endif
                     </div>

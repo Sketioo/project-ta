@@ -41,9 +41,11 @@
                 </div>
             </div>
             @empty
-            <div class="col-12 text-center py-5">
-                <div class="alert alert-info" role="alert">
-                    <i class="fas fa-info-circle me-2"></i>Tidak ada agenda yang tersedia saat ini. Silakan cek kembali nanti!
+            <div class="col-12">
+                <div class="empty-state">
+                    <i class="fas fa-calendar-times empty-state-icon"></i>
+                    <p class="empty-state-text">Tidak ada agenda yang tersedia saat ini.</p>
+                    <p class="empty-state-subtext">Silakan cek kembali nanti!</p>
                 </div>
             </div>
             @endforelse
