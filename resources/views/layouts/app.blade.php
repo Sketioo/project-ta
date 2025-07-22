@@ -20,6 +20,20 @@
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.0/dist/sweetalert2.min.css">
     @stack('styles')
+    <style>
+        /* Sidebar Full Height Fix */
+        .container-fluid.full-height-layout {
+            display: flex;
+            flex-wrap: nowrap;
+            min-height: calc(100vh - 56px); /* Adjust 56px based on actual header height */
+        }
+        .full-height-layout .row {
+            flex-grow: 1;
+        }
+        #sidebarMenu {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 

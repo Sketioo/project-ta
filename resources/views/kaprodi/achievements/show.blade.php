@@ -86,7 +86,7 @@
 @endpush
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid full-height-layout">
     <div class="row">
         @include('components.sidebar')
 
