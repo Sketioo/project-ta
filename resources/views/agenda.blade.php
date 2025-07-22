@@ -5,6 +5,19 @@
 @section('content')
     <div class="container py-5">
         <h1 class="text-center section-title mb-5">Agenda & Kegiatan</h1>
+
+        <!-- Search Bar -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-8 col-md-10">
+                <form action="{{ route('agenda') }}" method="GET" class="d-flex agenda-search-form">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control agenda-search-input" placeholder="Cari agenda..." value="{{ request('search') }}">
+                        <button class="btn agenda-search-btn" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="row g-4">
             @forelse($agendas as $agenda)
             <div class="col-md-4 agenda-card-wrapper" data-animation="animate__fadeInUp">
@@ -32,6 +45,11 @@
                 </div>
             </div>
             @endforelse
+        </div>
+
+        <!-- Pagination Links -->
+        <div class="d-flex justify-content-center mt-5">
+            {{ $agendas->links() }}
         </div>
     </div>
 @endsection

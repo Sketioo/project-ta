@@ -32,9 +32,20 @@ class PageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function agenda()
+    public function agenda(Request $request)
     {
-        $agendas = Agenda::where('is_published', true)->latest('date')->get();
+        $query = Agenda::where('is_published', true);
+
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('title', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        $agendas = $query->latest('date')->paginate(9); // 9 items per page
+
         return view('agenda', compact('agendas'));
     }
 
