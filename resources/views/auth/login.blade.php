@@ -25,6 +25,14 @@
                         <i class="fas fa-user-circle login-icon-form mb-3" style="font-size: 3rem; color: var(--primary-color);"></i>
                         <h3 class="mb-0">{{ __('Login Akun') }}</h3>
                     </div>
+
+                    @if ($errors->has('username') || $errors->has('password'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Kredensial yang Anda masukkan tidak cocok dengan catatan kami.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

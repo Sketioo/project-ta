@@ -31,7 +31,7 @@
                         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                             <div class="row justify-content-center align-items-center g-4">
                                 @foreach ($chunk as $partner)
-                                <div class="col-6 col-md-4 col-lg-2 text-center">
+                                <div class="col-6 col-md-4 col-lg-2 text-center  p-3">
                                     <div class="partner-logo-wrapper">
                                         <a href="{{ $partner->website_url ?? '#' }}" target="_blank" rel="noopener noreferrer" title="{{ $partner->name }}">
                                             <img src="{{ Storage::url($partner->logo_path) }}" alt="{{ $partner->name }}" class="img-fluid mx-auto">

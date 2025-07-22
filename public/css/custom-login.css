@@ -233,6 +233,12 @@
     text-decoration: none;
 }
 
+.login-input-v2 + .invalid-feedback {
+    display: block; /* Ensure it takes up space when visible */
+    margin-top: 0.25rem; /* Standard Bootstrap spacing */
+    position: static; /* Ensure it flows normally */
+}
+
 /* Responsif */
 @media (max-width: 991.98px) {
     .login-welcome-panel, .login-form-panel { padding: 30px; }
