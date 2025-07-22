@@ -2,76 +2,54 @@
 
 @push('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<style>
-    .stat-card {
-        border-left: 4px solid;
-        transition: transform 0.2s ease-in-out;
-    }
-    .stat-card:hover {
-        transform: translateY(-5px);
-    }
-    .border-primary { border-color: #4299e1 !important; }
-    .border-success { border-color: #38a169 !important; }
-    .border-info { border-color: #3182ce !important; }
-    .border-warning { border-color: #f59e0b !important; }
-    .border-danger { border-color: #e53e3e !important; }
-    .border-secondary { border-color: #6c757d !important; }
-
-    /* Ensure the main content area can scroll */
-    .main-content-scrollable {
-        overflow-y: auto;
-        height: 100%; 
-    }
-</style>
 @endpush
 
 @section('content')
-<div class="container-fluid h-100">
-    <div class="row h-100">
+<div class="container-fluid">
+    <div class="row">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content-scrollable">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>
             </div>
 
-            <div class="alert alert-light shadow-sm" role="alert">
-                <h4 class="alert-heading">Selamat Datang, {{ Auth::user()->name }}!</h4>
-                <p>Anda login sebagai <strong>{{ ucfirst(Auth::user()->role) }}</strong>. Gunakan menu di samping untuk mengelola konten website.</p>
+            <!-- Welcome Header -->
+            <div class="dashboard-header">
+                <div class="welcome-text">
+                    <h4>Selamat Datang Kembali, {{ Auth::user()->name }}!</h4>
+                    <p>Anda login sebagai <strong>{{ ucfirst(Auth::user()->role) }}</strong>. Kelola konten website dengan mudah melalui menu di samping.</p>
+                </div>
+                <div class="welcome-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
             </div>
 
-            <div class="row mt-4">
+            <!-- Stats Cards -->
+            <div class="row g-4">
                 @if(in_array(Auth::user()->role, ['admin', 'kaprodi']))
                 <!-- Total Suggestions Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card stat-card border-primary shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="text-xs fw-bold text-primary text-uppercase mb-1">Total Saran Masuk</div>
-                                    <div class="h5 mb-0 fw-bold text-gray-800">{{ $stats['totalSuggestions'] ?? 0 }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-comments fa-2x text-muted"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="stat-card-v2">
+                        <div class="stat-icon icon-primary">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Total Saran Masuk</div>
+                            <div class="stat-number">{{ $stats['totalSuggestions'] ?? 0 }}</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Unread Suggestions Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card stat-card border-warning shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="text-xs fw-bold text-warning text-uppercase mb-1">Saran Belum Dibaca</div>
-                                    <div class="h5 mb-0 fw-bold text-gray-800">{{ $stats['unreadSuggestions'] ?? 0 }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-envelope fa-2x text-muted"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="stat-card-v2">
+                        <div class="stat-icon icon-warning">
+                            <i class="fas fa-envelope-open"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Saran Belum Dibaca</div>
+                            <div class="stat-number">{{ $stats['unreadSuggestions'] ?? 0 }}</div>
                         </div>
                     </div>
                 </div>
@@ -79,52 +57,40 @@
 
                 @if(Auth::user()->role == 'admin')
                 <!-- Total Partners Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card stat-card border-success shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="text-xs fw-bold text-success text-uppercase mb-1">Total Mitra</div>
-                                    <div class="h5 mb-0 fw-bold text-gray-800">{{ $stats['totalPartners'] ?? 0 }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-handshake fa-2x text-muted"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="stat-card-v2">
+                        <div class="stat-icon icon-success">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Total Mitra</div>
+                            <div class="stat-number">{{ $stats['totalPartners'] ?? 0 }}</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Total Documents Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card stat-card border-info shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="text-xs fw-bold text-info text-uppercase mb-1">Total Dokumen</div>
-                                    <div class="h5 mb-0 fw-bold text-gray-800">{{ $stats['totalDocuments'] ?? 0 }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-file-alt fa-2x text-muted"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="stat-card-v2">
+                        <div class="stat-icon icon-info">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Total Dokumen</div>
+                            <div class="stat-number">{{ $stats['totalDocuments'] ?? 0 }}</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Total Agendas Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card stat-card border-secondary shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="text-xs fw-bold text-secondary text-uppercase mb-1">Total Agenda</div>
-                                    <div class="h5 mb-0 fw-bold text-gray-800">{{ $stats['totalAgendas'] ?? 0 }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-calendar-alt fa-2x text-muted"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="stat-card-v2">
+                        <div class="stat-icon icon-secondary">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Total Agenda</div>
+                            <div class="stat-number">{{ $stats['totalAgendas'] ?? 0 }}</div>
                         </div>
                     </div>
                 </div>
@@ -132,18 +98,14 @@
 
                 @if(Auth::user()->role == 'kaprodi')
                 <!-- Pending Achievements Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card stat-card border-danger shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="text-xs fw-bold text-danger text-uppercase mb-1">Prestasi Menunggu Validasi</div>
-                                    <div class="h5 mb-0 fw-bold text-gray-800">{{ $stats['pendingAchievements'] ?? 0 }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-check-square fa-2x text-muted"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="stat-card-v2">
+                        <div class="stat-icon icon-danger">
+                            <i class="fas fa-check-square"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Prestasi Menunggu Validasi</div>
+                            <div class="stat-number">{{ $stats['pendingAchievements'] ?? 0 }}</div>
                         </div>
                     </div>
                 </div>
