@@ -69,15 +69,5 @@
             </li>
             @endif
         </ul>
-
-        <div class="sidebar-footer">
-            <a href="{{ route('logout') }}" class="btn btn-danger w-100"
-               onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();">
-                <i class="fas fa-sign-out-alt me-2"></i>Logout
-            </a>
-            <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </div>
     </div>
 </nav>
