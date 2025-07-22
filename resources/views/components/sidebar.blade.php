@@ -1,14 +1,14 @@
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar-layout">
-    <div class="position-sticky pt-3">
-        <div class="sidebar-header text-center py-3">
+    <div class="position-sticky">
+        <div class="sidebar-header text-center">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <i class="fas fa-graduation-cap me-2"></i>
                 <strong>Prodi</strong> TRPL
             </a>
         </div>
 
-        <ul class="nav flex-column">
-            <li class="nav-item-header px-3 mt-3 mb-1 text-uppercase">
+        <ul class="nav flex-column px-3 flex-grow-1">
+            <li class="nav-item-header mt-3 mb-1 text-uppercase">
                 <span>Menu Utama</span>
             </li>
 
@@ -46,7 +46,7 @@
             @endif
 
             @if(Auth::user()->role == 'admin')
-            <li class="nav-item-header px-3 mt-4 mb-1 text-uppercase">
+            <li class="nav-item-header mt-4 mb-1 text-uppercase">
                 <span>Manajemen Konten</span>
             </li>
             <li class="nav-item">
@@ -70,7 +70,7 @@
             @endif
         </ul>
 
-        <div class="sidebar-footer mt-auto p-3">
+        <div class="sidebar-footer">
             <a href="{{ route('logout') }}" class="btn btn-danger w-100"
                onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();">
                 <i class="fas fa-sign-out-alt me-2"></i>Logout

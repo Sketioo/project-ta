@@ -1,7 +1,7 @@
 :root {
     --primary-color: #FFD700; /* Kuning Utama (Emas) */
     --secondary-color: #E6C200; /* Kuning Sedikit Gelap untuk Hover */
-    --dark-color: #1a1a1a; /* Hitam Pekat */
+    --dark-color: #212529; /* Abu-abu Sangat Gelap (Off-Black) */
     --light-gray: #f8f9fa;
     --text-color: #343a40;
     --heading-color: #212529;
@@ -844,6 +844,87 @@ a:hover {
 
 .custom-footer .fa-map-marker-alt, .custom-footer .fa-phone-alt {
     color: var(--primary-color);
+}
+
+/* Sidebar Layout */
+.sidebar-layout {
+    background-color: #34495e; /* Abu-abu Batu Tulis (Slate Gray) */
+    color: #fff;
+    height: 100vh; /* Full height */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-layout .position-sticky {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-header {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header .navbar-brand {
+    font-size: 1.5rem;
+    color: #fff !important;
+}
+
+.sidebar-header .navbar-brand strong {
+    color: var(--primary-color);
+}
+
+.sidebar-layout .nav-item-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+}
+
+.sidebar-layout .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-weight: 500;
+    padding: 12px 20px;
+    margin: 4px 0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-layout .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff !important;
+}
+
+.sidebar-layout .nav-link.active {
+    background-color: var(--primary-color);
+    color: var(--dark-color) !important;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+}
+
+.sidebar-layout .nav-link .fa-fw {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-footer .btn-danger {
+    background-color: #e53e3e;
+    border-color: #e53e3e;
+    transition: all 0.3s ease;
+}
+
+.sidebar-footer .btn-danger:hover {
+    background-color: #c53030;
+    border-color: #c53030;
 }
 
 

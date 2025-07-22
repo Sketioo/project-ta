@@ -16,15 +16,21 @@
     .border-warning { border-color: #f59e0b !important; }
     .border-danger { border-color: #e53e3e !important; }
     .border-secondary { border-color: #6c757d !important; }
+
+    /* Ensure the main content area can scroll */
+    .main-content-scrollable {
+        overflow-y: auto;
+        height: 100%; 
+    }
 </style>
 @endpush
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid h-100">
+    <div class="row h-100">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content-scrollable">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>
             </div>
