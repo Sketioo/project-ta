@@ -18,6 +18,8 @@
             </div>
         </div>
 
+        <div class="section-separator mb-5"></div>
+
         <div class="row g-4">
             @forelse($agendas as $agenda)
             <div class="col-md-4 agenda-card-wrapper" data-animation="animate__fadeInUp">

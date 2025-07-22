@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-lg-4 text-center text-lg-end">
-                <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i> Alamat Prodi, Kota, Negara</p>
+                <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i> Jl. Raya Jember - Banyuwangi KM.13, Labanasem, Kabat, Banyuwangi, Jawa Timur 68461</p>
                 <p class="mb-0"><i class="fas fa-phone-alt me-2"></i> (123) 456-7890</p>
             </div>
         </div>
