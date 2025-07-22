@@ -86,102 +86,107 @@
 @endpush
 
 @section('content')
-<div class="container py-5">
-    <div class="row mb-4">
-        <div class="col">
-            <h1 class="dashboard-title">Validasi Prestasi</h1>
-        </div>
-    </div>
+<div class="container-fluid">
+    <div class="row">
+        @include('components.sidebar')
 
-    <div class="row g-4">
-        <!-- Details Column -->
-        <div class="col-lg-7">
-            <div class="card details-card">
-                <div class="card-header">
-                    <i class="fas fa-info-circle me-2"></i>Detail Pengajuan
-                </div>
-                <div class="card-body p-4">
-                    <h4 class="card-title mb-3">{{ $achievement->title }}</h4>
-                    <div class="detail-item">
-                        <strong>Mahasiswa</strong>
-                        <span>{{ $achievement->user->name }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <strong>NIM</strong>
-                        <span>{{ $achievement->nim }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <strong>Kelas / Semester</strong>
-                        <span>{{ $achievement->class }} / {{ $achievement->semester }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <strong>Status Saat Ini</strong>
-                        <span>
-                            @if($achievement->status == 'disetujui')
-                                <span class="badge rounded-pill bg-success status-badge text-white">Disetujui</span>
-                            @elseif($achievement->status == 'ditolak')
-                                <span class="badge rounded-pill bg-danger status-badge">Ditolak</span>
-                            @else
-                                <span class="badge rounded-pill bg-warning text-dark status-badge">Pending</span>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
+            <div class="page-header pt-3">
+                <h1 class="page-title">Detail & Validasi Prestasi</h1>
+            </div>
+
+            <div class="row g-4">
+                <!-- Details Column -->
+                <div class="col-lg-7">
+                    <div class="card details-card">
+                        <div class="card-header">
+                            <i class="fas fa-info-circle me-2"></i>Detail Pengajuan
+                        </div>
+                        <div class="card-body p-4">
+                            <h4 class="card-title mb-3">{{ $achievement->title }}</h4>
+                            <div class="detail-item">
+                                <strong>Mahasiswa</strong>
+                                <span>{{ $achievement->user->name }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>NIM</strong>
+                                <span>{{ $achievement->nim }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Kelas / Semester</strong>
+                                <span>{{ $achievement->class }} / {{ $achievement->semester }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Status Saat Ini</strong>
+                                <span>
+                                    @if($achievement->status == 'disetujui')
+                                        <span class="badge rounded-pill bg-success status-badge">Disetujui</span>
+                                    @elseif($achievement->status == 'ditolak')
+                                        <span class="badge rounded-pill bg-danger status-badge">Ditolak</span>
+                                    @else
+                                        <span class="badge rounded-pill bg-warning text-dark status-badge">Pending</span>
+                                    @endif
+                                </span>
+                            </div>
+                            <div class="pt-3">
+                                <strong>Deskripsi</strong>
+                                <p class="text-muted mt-2">{{ $achievement->description }}</p>
+                            </div>
+
+                            @if ($achievement->file_path)
+                                <a href="{{ asset('storage/' . $achievement->file_path) }}" target="_blank" class="btn btn-outline-primary mt-3">
+                                    <i class="fas fa-paperclip me-2"></i>Lihat Lampiran
+                                </a>
                             @endif
-                        </span>
+                        </div>
                     </div>
-                    <div class="pt-3">
-                        <strong>Deskripsi</strong>
-                        <p class="text-muted mt-2">{{ $achievement->description }}</p>
-                    </div>
+                </div>
 
-                    @if ($achievement->file_path)
-                        <a href="{{ asset('storage/' . $achievement->file_path) }}" target="_blank" class="btn btn-outline-primary mt-3">
-                            <i class="fas fa-paperclip me-2"></i>Lihat Lampiran
-                        </a>
-                    @endif
+                <!-- Form Column -->
+                <div class="col-lg-5">
+                    <div class="card form-card">
+                        <div class="card-header">
+                            <i class="fas fa-edit me-2"></i>Form Validasi
+                        </div>
+                        <div class="card-body p-4">
+                            <form action="{{ route('kaprodi.achievements.update', $achievement) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+
+                                <div class="mb-4">
+                                    <label class="form-label-custom">Ubah Status Pengajuan</label>
+                                    <div class="status-radio-group text-center">
+                                        <input type="radio" class="btn-check" name="status" id="status_pending" value="pending" {{ $achievement->status == 'pending' ? 'checked' : '' }} autocomplete="off">
+                                        <label class="btn btn-outline-secondary" for="status_pending">Pending</label>
+
+                                        <input type="radio" class="btn-check" name="status" id="status_disetujui" value="disetujui" {{ $achievement->status == 'disetujui' ? 'checked' : '' }} autocomplete="off">
+                                        <label class="btn btn-outline-success" for="status_disetujui">Setujui</label>
+
+                                        <input type="radio" class="btn-check" name="status" id="status_ditolak" value="ditolak" {{ $achievement->status == 'ditolak' ? 'checked' : '' }} autocomplete="off">
+                                        <label class="btn btn-outline-danger" for="status_ditolak">Tolak</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                     <label class="form-label-custom">Pengaturan Tampilan</label>
+                                    <div class="form-check form-switch form-check-custom">
+                                        <label class="form-check-label" for="show_on_main_page"><strong>Tampilkan di Beranda</strong></label>
+                                        <input type="hidden" name="show_on_main_page" value="0">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="show_on_main_page" name="show_on_main_page" value="1" {{ $achievement->show_on_main_page ? 'checked' : '' }}>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save me-2"></i>Simpan Perubahan</button>
+                                    <a href="{{ route('kaprodi.achievements.index') }}" class="btn btn-light btn-lg">Kembali</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Form Column -->
-        <div class="col-lg-5">
-            <div class="card form-card">
-                <div class="card-header">
-                    <i class="fas fa-edit me-2"></i>Form Validasi
-                </div>
-                <div class="card-body p-4">
-                    <form action="{{ route('kaprodi.achievements.update', $achievement) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-
-                        <div class="mb-4">
-                            <label class="form-label-custom">Ubah Status Pengajuan</label>
-                            <div class="status-radio-group text-center">
-                                <input type="radio" class="btn-check" name="status" id="status_pending" value="pending" {{ $achievement->status == 'pending' ? 'checked' : '' }} autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="status_pending">Pending</label>
-
-                                <input type="radio" class="btn-check" name="status" id="status_disetujui" value="disetujui" {{ $achievement->status == 'disetujui' ? 'checked' : '' }} autocomplete="off">
-                                <label class="btn btn-outline-success" for="status_disetujui">Setujui</label>
-
-                                <input type="radio" class="btn-check" name="status" id="status_ditolak" value="ditolak" {{ $achievement->status == 'ditolak' ? 'checked' : '' }} autocomplete="off">
-                                <label class="btn btn-outline-danger" for="status_ditolak">Tolak</label>
-                            </div>
-                        </div>
-
-                        <div class="mb-4">
-                             <label class="form-label-custom">Pengaturan Tampilan</label>
-                            <div class="form-check form-switch form-check-custom">
-                                <label class="form-check-label" for="show_on_main_page"><strong>Tampilkan di Beranda</strong></label>
-                                <input type="hidden" name="show_on_main_page" value="0">
-                                <input class="form-check-input" type="checkbox" role="switch" id="show_on_main_page" name="show_on_main_page" value="1" {{ $achievement->show_on_main_page ? 'checked' : '' }}>
-                            </div>
-                        </div>
-
-                        <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save me-2"></i>Simpan Perubahan</button>
-                            <a href="{{ route('kaprodi.achievements.index') }}" class="btn btn-light btn-lg">Kembali</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 </div>
 @endsection
+

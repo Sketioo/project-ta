@@ -13,13 +13,13 @@ class AchievementValidationController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Achievement::query();
+        $query = Achievement::with('user')->latest();
 
         if ($request->has('status') && $request->status != 'all') {
             $query->where('status', $request->status);
         }
 
-        $achievements = $query->paginate(10);
+        $achievements = $query->get();
         return view('kaprodi.achievements.index', compact('achievements'));
     }
 
