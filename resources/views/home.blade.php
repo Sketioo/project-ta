@@ -56,7 +56,7 @@
                     @endif
                 </div>
             @else
-                <p class="text-center text-muted">Belum ada mitra yang terdaftar.</p>
+                <p class="text-center text-muted mb-3 mt-3">Belum ada mitra yang terdaftar.</p>
             @endif
         </div>
     </section>
