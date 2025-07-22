@@ -155,8 +155,10 @@
                                 </div>
                                 @endforeach
                             </div>
-                            <div id="noResultsMessage" class="text-center p-4" style="display: none;">
-                                <p class="mb-0">Dokumen tidak ditemukan.</p>
+                            <div id="noResultsMessage" class="empty-state" style="display: none;">
+                                <i class="fas fa-search-minus empty-state-icon"></i>
+                                <p class="empty-state-text">Dokumen tidak ditemukan.</p>
+                                <p class="empty-state-subtext">Coba kata kunci lain atau periksa kembali ejaan Anda.</p>
                             </div>
                         @else
                             <div class="empty-state">
@@ -211,33 +213,53 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Script for Document Search
-    const searchInput = document.getElementById('documentSearch');
-    const documentList = document.getElementById('documentList');
-    
-    if (searchInput && documentList) {
-        const documentItems = documentList.querySelectorAll('.document-item');
-        const noResultsMessage = document.getElementById('noResultsMessage');
+    // Script for Document Search (AJAX)
+    const documentSearchInput = document.getElementById('documentSearch');
+    const documentListContainer = document.getElementById('documentList');
+    const noResultsMessage = document.getElementById('noResultsMessage');
 
-        searchInput.addEventListener('keyup', function () {
-            const searchTerm = searchInput.value.toLowerCase();
-            let visibleCount = 0;
+    if (documentSearchInput && documentListContainer) {
+        documentSearchInput.addEventListener('keyup', function () {
+            const searchTerm = this.value;
 
-            documentItems.forEach(function (item) {
-                const title = item.getAttribute('data-title');
-                if (title.includes(searchTerm)) {
-                    item.style.display = '';
-                    visibleCount++;
-                } else {
-                    item.style.display = 'none';
+            $.ajax({
+                url: '{{ route('documents.search') }}',
+                method: 'GET',
+                data: { search: searchTerm },
+                success: function (data) {
+                    documentListContainer.innerHTML = ''; // Clear previous results
+                    if (data.length > 0) {
+                        noResultsMessage.style.display = 'none';
+                        data.forEach(function (document) {
+                            const documentItem = `
+                                <div class="document-item" data-title="${document.title.toLowerCase()}">
+                                    <div class="document-item-icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div class="document-item-content">
+                                        <h5 class="document-item-title">${document.title}</h5>
+                                        <p class="document-item-meta">Tipe: PDF</p>
+                                    </div>
+                                    <div class="document-item-action">
+                                        <a href="/storage/${document.file_path}" class="btn document-download-btn" download>
+                                            <i class="fas fa-download me-2"></i>Download
+                                        </a>
+                                    </div>
+                                </div>
+                            `;
+                            documentListContainer.insertAdjacentHTML('beforeend', documentItem);
+                        });
+                    } else {
+                        noResultsMessage.style.display = 'block';
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error: ", status, error);
+                    documentListContainer.innerHTML = '';
+                    noResultsMessage.style.display = 'block';
+                    noResultsMessage.querySelector('p').innerText = 'Terjadi kesalahan saat mencari dokumen.';
                 }
             });
-
-            if (visibleCount === 0) {
-                noResultsMessage.style.display = 'block';
-            } else {
-                noResultsMessage.style.display = 'none';
-            }
         });
     }
 

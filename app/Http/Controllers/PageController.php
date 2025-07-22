@@ -48,6 +48,16 @@ class PageController extends Controller
 
         $agendas = $query->latest('date')->paginate(9); // 9 items per page
 
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => $agendas->items(),
+                'next_page_url' => $agendas->nextPageUrl(),
+                'prev_page_url' => $agendas->previousPageUrl(),
+                'last_page' => $agendas->lastPage(),
+                'current_page' => $agendas->currentPage(),
+            ]);
+        }
+
         return view('agenda', compact('agendas'));
     }
 
@@ -57,5 +67,16 @@ class PageController extends Controller
             abort(404); // Or redirect to a 404 page if not published
         }
         return view('agendas.public_show', compact('agenda'));
+    }
+
+    public function searchDocuments(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $documents = Document::where('is_visible', true)
+                            ->where('title', 'like', '%' . $searchTerm . '%')
+                            ->latest()
+                            ->get();
+
+        return response()->json($documents);
     }
 }
