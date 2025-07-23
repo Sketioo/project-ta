@@ -773,15 +773,7 @@ a:hover {
 }
 
 /* General Animations */
-.animate__animated {
-    visibility: hidden; /* Hide elements until animation starts */
-}
 
-.animate__animated.animate__fadeInDown,
-.animate__animated.animate__fadeInUp,
-.animate__animated.animate__pulse {
-    visibility: visible; /* Make visible when animation class is added */
-}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
