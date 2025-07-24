@@ -12,16 +12,23 @@ class Achievement extends Model
     protected $fillable = [
         'user_id',
         'nim',
-        'semester',
-        'class',
-        'title',
-        'description',
-        'file_path',
+        'nama',
+        'nama_kompetisi',
+        'tingkat_kompetisi',
+        'penyelenggara',
+        'prestasi',
+        'tanggal_pelaksanaan',
+        'dosen_pembimbing',
+        'file_sertifikat',
+        'keterangan_lomba',
         'status',
         'validated_by',
         'validated_at',
         'show_on_main_page',
-        'photo_path',
+    ];
+
+    protected $casts = [
+        'tanggal_pelaksanaan' => 'date',
     ];
 
     public function user()

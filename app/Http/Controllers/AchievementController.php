@@ -18,33 +18,34 @@ class AchievementController extends Controller
     {
         $request->validate([
             'nim' => 'required|string|max:255',
-            'semester' => 'required|string|max:255',
-            'class' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'nama' => 'required|string|max:255',
+            'nama_kompetisi' => 'required|string|max:255',
+            'tingkat_kompetisi' => 'required|string|max:255',
+            'penyelenggara' => 'required|string|max:255',
+            'prestasi' => 'required|string|max:255',
+            'tanggal_pelaksanaan' => 'required|date',
+            'dosen_pembimbing' => 'nullable|string|max:255',
+            'file_sertifikat' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
+            'keterangan_lomba' => 'nullable|string',
         ]);
 
-        $filePath = null;
-        if ($request->hasFile('file')) {
-            $filePath = $request->file('file')->store('achievements/files', 'public');
-        }
-
-        $photoPath = null;
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('achievements/photos', 'public');
+        $fileSertifikatPath = null;
+        if ($request->hasFile('file_sertifikat')) {
+            $fileSertifikatPath = $request->file('file_sertifikat')->store('achievements/sertifikat', 'public');
         }
 
         Auth::user()->achievements()->create([
             'nim' => $request->nim,
-            'semester' => $request->semester,
-            'class' => $request->class,
-            'title' => $request->title,
-            'description' => $request->description,
-            'file_path' => $filePath,
-            'photo_path' => $photoPath,
-            'status' => 'pending', // Default status on submission
+            'nama' => $request->nama,
+            'nama_kompetisi' => $request->nama_kompetisi,
+            'tingkat_kompetisi' => $request->tingkat_kompetisi,
+            'penyelenggara' => $request->penyelenggara,
+            'prestasi' => $request->prestasi,
+            'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
+            'dosen_pembimbing' => $request->dosen_pembimbing,
+            'file_sertifikat' => $fileSertifikatPath,
+            'keterangan_lomba' => $request->keterangan_lomba,
+            'status' => 'pending',
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Pengajuan prestasi berhasil dikirim!');

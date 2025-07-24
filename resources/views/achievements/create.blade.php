@@ -19,62 +19,85 @@
                         @csrf
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="nim" class="form-label">NIM</label>
-                                    <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim" value="{{ old('nim', Auth::user()->nim ?? '') }}" required>
-                                    @error('nim')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="nim" class="form-label">NIM</label>
+                                <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim" value="{{ old('nim', Auth::user()->nim ?? '') }}" required>
+                                @error('nim')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="semester" class="form-label">Semester</label>
-                                    <input type="text" class="form-control @error('semester') is-invalid @enderror" id="semester" name="semester" value="{{ old('semester') }}" required>
-                                    @error('semester')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="nama" class="form-label">Nama</label>
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama', Auth::user()->name ?? '') }}" required>
+                                @error('nama')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nama_kompetisi" class="form-label">Nama Kompetisi</label>
+                                <input type="text" class="form-control @error('nama_kompetisi') is-invalid @enderror" id="nama_kompetisi" name="nama_kompetisi" value="{{ old('nama_kompetisi') }}" required>
+                                @error('nama_kompetisi')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="tingkat_kompetisi" class="form-label">Tingkat Kompetisi</label>
+                                <input type="text" class="form-control @error('tingkat_kompetisi') is-invalid @enderror" id="tingkat_kompetisi" name="tingkat_kompetisi" value="{{ old('tingkat_kompetisi') }}" required>
+                                @error('tingkat_kompetisi')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="penyelenggara" class="form-label">Penyelenggara</label>
+                                <input type="text" class="form-control @error('penyelenggara') is-invalid @enderror" id="penyelenggara" name="penyelenggara" value="{{ old('penyelenggara') }}" required>
+                                @error('penyelenggara')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="prestasi" class="form-label">Prestasi</label>
+                                <input type="text" class="form-control @error('prestasi') is-invalid @enderror" id="prestasi" name="prestasi" value="{{ old('prestasi') }}" required>
+                                @error('prestasi')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="tanggal_pelaksanaan" class="form-label">Tanggal Pelaksanaan</label>
+                                <input type="date" class="form-control @error('tanggal_pelaksanaan') is-invalid @enderror" id="tanggal_pelaksanaan" name="tanggal_pelaksanaan" value="{{ old('tanggal_pelaksanaan') }}" required>
+                                @error('tanggal_pelaksanaan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="dosen_pembimbing" class="form-label">Dosen Pembimbing (Opsional)</label>
+                                <input type="text" class="form-control @error('dosen_pembimbing') is-invalid @enderror" id="dosen_pembimbing" name="dosen_pembimbing" value="{{ old('dosen_pembimbing') }}">
+                                @error('dosen_pembimbing')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="mb-3">
-                            <label for="class" class="form-label">Kelas</label>
-                            <input type="text" class="form-control @error('class') is-invalid @enderror" id="class" name="class" value="{{ old('class') }}" required>
-                            @error('class')
+                            <label for="file_sertifikat" class="form-label">File Sertifikat (PDF, DOCX, JPG, PNG)</label>
+                            <input type="file" class="form-control @error('file_sertifikat') is-invalid @enderror" id="file_sertifikat" name="file_sertifikat">
+                            @error('file_sertifikat')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="title" class="form-label">Judul Prestasi</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
-                            @error('title')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Penjelasan Prestasi</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="5" required>{{ old('description') }}</textarea>
-                            @error('description')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="file" class="form-label">File Pendukung (PDF, DOCX, JPG, PNG)</label>
-                            <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file">
-                            @error('file')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="photo" class="form-label">Foto Prestasi (JPG, PNG)</label>
-                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" accept="image/jpeg,image/png">
-                            @error('photo')
+                            <label for="keterangan_lomba" class="form-label">Keterangan Lomba (Opsional)</label>
+                            <textarea class="form-control @error('keterangan_lomba') is-invalid @enderror" id="keterangan_lomba" name="keterangan_lomba" rows="5">{{ old('keterangan_lomba') }}</textarea>
+                            @error('keterangan_lomba')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
