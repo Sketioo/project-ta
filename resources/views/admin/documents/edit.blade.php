@@ -6,6 +6,28 @@
     .card-header { background-color: #4a5568; color: white; }
     .btn-primary { background-color: #4299e1; border-color: #4299e1; }
     .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
+    .category-suggestion-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+    }
+    .category-suggestion-tag {
+        background-color: #e9ecef;
+        border: 1px solid #ced4da;
+        color: #495057;
+        padding: 4px 10px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        font-size: 0.85rem;
+    }
+    .category-suggestion-tag:hover {
+        background-color: var(--primary-color);
+        color: var(--dark-color);
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
 </style>
 @endpush
 
@@ -51,7 +73,8 @@
 
                         <div class="mb-3">
                             <label for="category" class="form-label">Kategori</label>
-                            <input type="text" name="category" id="category" class="form-control @error('category') is-invalid @enderror" value="{{ old('category', $document->category->name ?? '') }}" required>
+                            <input type="text" name="category" id="category" class="form-control @error('category') is-invalid @enderror" value="{{ old('category', $document->category->name ?? '') }}" required autocomplete="off">
+                            <div id="category-suggestions" class="category-suggestion-container"></div>
                             @error('category')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -91,3 +114,49 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryInput = document.getElementById('category');
+    const suggestionsContainer = document.getElementById('category-suggestions');
+    
+    const categories = @json($categories->pluck('name'));
+
+    function renderSuggestions(filter = '') {
+        suggestionsContainer.innerHTML = '';
+        const filteredCategories = categories.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
+        
+        filteredCategories.forEach(categoryName => {
+            const tag = document.createElement('div');
+            tag.classList.add('category-suggestion-tag');
+            tag.textContent = categoryName;
+            tag.addEventListener('click', () => {
+                categoryInput.value = categoryName;
+                suggestionsContainer.innerHTML = '';
+            });
+            suggestionsContainer.appendChild(tag);
+        });
+    }
+
+    categoryInput.addEventListener('focus', () => {
+        renderSuggestions(categoryInput.value);
+    });
+
+    categoryInput.addEventListener('keyup', () => {
+        renderSuggestions(categoryInput.value);
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!suggestionsContainer.contains(event.target) && event.target !== categoryInput) {
+            suggestionsContainer.innerHTML = '';
+        }
+    });
+
+    // Initial render in case of old input
+    if (categoryInput.value) {
+        renderSuggestions(categoryInput.value);
+    }
+});
+</script>
+@endpush

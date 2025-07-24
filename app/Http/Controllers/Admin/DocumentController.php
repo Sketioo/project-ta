@@ -25,7 +25,8 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('admin.documents.create');
+        $categories = DocumentCategory::orderBy('name')->get();
+        return view('admin.documents.create', compact('categories'));
     }
 
     /**
@@ -70,7 +71,8 @@ class DocumentController extends Controller
      */
     public function edit(Document $document)
     {
-        return view('admin.documents.edit', compact('document'));
+        $categories = DocumentCategory::orderBy('name')->get();
+        return view('admin.documents.edit', compact('document', 'categories'));
     }
 
     /**
