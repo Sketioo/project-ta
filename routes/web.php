@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\PartnerController;
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/agenda', [PageController::class, 'agenda'])->name('agenda'); // Added name for agenda route
 Route::get('/agenda/{agenda}', [PageController::class, 'showAgendaPublic'])->name('agenda.show.public');
+Route::get('/announcements', [PageController::class, 'announcements'])->name('announcements.public.index');
+Route::get('/announcements/{announcement}', [PageController::class, 'showAnnouncementPublic'])->name('announcements.public.show');
 Route::get('/documents/search', [PageController::class, 'searchDocuments'])->name('documents.search');
 Route::get('/documents/filter', [PageController::class, 'filterDocuments'])->name('documents.filter');
 

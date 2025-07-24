@@ -10,6 +10,7 @@ use App\Models\Partner;
 use App\Models\Document;
 use App\Models\DocumentCategory;
 use App\Models\Faq; // Import the Faq model
+use App\Models\Announcement; // Import the Announcement model
 
 class PageController extends Controller
 {
@@ -64,6 +65,41 @@ class PageController extends Controller
             abort(404); // Or redirect to a 404 page if not published
         }
         return view('agendas.public_show', compact('agenda'));
+    }
+
+    /**
+     * Display the announcements page.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function announcements(Request $request)
+    {
+        $query = Announcement::where('is_published', true);
+
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('title', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('content', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        if ($request->ajax()) {
+            $announcements = $query->latest('created_at')->get();
+            return response()->json($announcements);
+        }
+
+        $announcements = $query->latest('created_at')->paginate(9);
+
+        return view('announcements', compact('announcements'));
+    }
+
+    public function showAnnouncementPublic(Announcement $announcement)
+    {
+        if (!$announcement->is_published) {
+            abort(404); // Or redirect to a 404 page if not published
+        }
+        return view('announcements.public_show', compact('announcement'));
     }
 
     public function searchDocuments(Request $request)

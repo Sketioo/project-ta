@@ -12,7 +12,12 @@ class Announcement extends Model
     protected $fillable = [
         'title',
         'content',
+        'photos_path',
         'category',
         'is_published',
+    ];
+
+    protected $casts = [
+        'photos_path' => 'array',
     ];
 }

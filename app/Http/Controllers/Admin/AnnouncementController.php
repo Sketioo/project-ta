@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AnnouncementController extends Controller
 {
@@ -30,17 +31,27 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all() );
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category' => 'required|in:akademik,non-akademik',
+            'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_published' => 'boolean',
         ]);
+
+        $photosPath = [];
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $photosPath[] = $photo->store('announcements', 'public');
+            }
+        }
 
         Announcement::create([
             'title' => $request->title,
             'content' => $request->content,
             'category' => $request->category,
+            'photos_path' => $photosPath,
             'is_published' => $request->has('is_published'),
         ]);
 
@@ -64,15 +75,30 @@ class AnnouncementController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category' => 'required|in:akademik,non-akademik',
+            'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_published' => 'boolean',
         ]);
 
-        $announcement->update([
-            'title' => $request->title,
-            'content' => $request->content,
-            'category' => $request->category,
-            'is_published' => $request->has('is_published'),
-        ]);
+        $data = $request->only(['title', 'content', 'category', 'is_published']);
+        $data['is_published'] = $request->has('is_published');
+
+        $photosPath = $announcement->photos_path ?? [];
+
+        if ($request->hasFile('photos')) {
+            // Delete old photos if new ones are uploaded
+            foreach ($photosPath as $oldPhotoPath) {
+                Storage::delete($oldPhotoPath);
+            }
+            $photosPath = []; // Reset array for new photos
+
+            foreach ($request->file('photos') as $photo) {
+                $photosPath[] = $photo->store('announcements', 'public');
+            }
+        }
+
+        $data['photos_path'] = $photosPath;
+
+        $announcement->update($data);
 
         return redirect()->route('admin.announcements.index')->with('success', 'Pengumuman berhasil diperbarui!');
     }
@@ -82,6 +108,11 @@ class AnnouncementController extends Controller
      */
     public function destroy(Announcement $announcement)
     {
+        if ($announcement->photos_path) {
+            foreach ($announcement->photos_path as $photoPath) {
+                Storage::delete($photoPath);
+            }
+        }
         $announcement->delete();
 
         return redirect()->route('admin.announcements.index')->with('success', 'Pengumuman berhasil dihapus!');

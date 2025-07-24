@@ -15,7 +15,7 @@
                     <h5 class="mb-0">Form Pengumuman</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.announcements.store') }}" method="POST">
+                    <form action="{{ route('admin.announcements.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3">
@@ -46,6 +46,16 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Foto Pengumuman (Opsional)</label>
+                            <input type="file" name="photos[]" id="photos" class="form-control @error('photos.*') is-invalid @enderror" accept="image/*" multiple>
+                            <small class="form-text text-muted">Format: JPG, PNG, GIF, SVG. Maks 2MB per foto. Dimensi disarankan 16:9.</small>
+                            @error('photos.*')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div id="photos-preview-container" class="mt-3 row"></div>
+                        </div>
+
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is_published" name="is_published" value="1" {{ old('is_published') ? 'checked' : '' }}>
                             <label class="form-check-label" for="is_published">Publikasikan Pengumuman</label>
@@ -66,3 +76,38 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const photosInput = document.getElementById('photos');
+        const photosPreviewContainer = document.getElementById('photos-preview-container');
+
+        photosInput.addEventListener('change', function () {
+            photosPreviewContainer.innerHTML = ''; // Clear previous previews
+
+            if (this.files) {
+                Array.from(this.files).forEach(file => {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        const colDiv = document.createElement('div');
+                        colDiv.classList.add('col-md-3', 'mb-3');
+
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.classList.add('img-thumbnail', 'img-fluid', 'rounded');
+                        img.style.height = '100px';
+                        img.style.objectFit = 'cover';
+
+                        colDiv.appendChild(img);
+                        photosPreviewContainer.appendChild(colDiv);
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+            }
+        });
+    });
+</script>
+@endpush
