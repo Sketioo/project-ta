@@ -9,10 +9,10 @@
         <!-- Search Bar -->
         <div class="row justify-content-center mb-4">
             <div class="col-lg-8 col-md-10">
-                <form action="{{ route('announcements.public.index') }}" method="GET" class="d-flex announcement-search-form">
+                <form action="{{ route('announcements.public.index') }}" method="GET" class="d-flex agenda-search-form">
                     <div class="input-group">
-                        <input type="text" name="search" id="announcementSearchInput" class="form-control announcement-search-input" placeholder="Cari pengumuman..." value="{{ request('search') }}">
-                        <button class="btn announcement-search-btn" type="button"><i class="fas fa-search"></i></button>
+                        <input type="text" name="search" id="announcementSearchInput" class="form-control agenda-search-input" placeholder="Cari pengumuman..." value="{{ request('search') }}">
+                        <button class="btn agenda-search-btn" type="button"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>
@@ -29,20 +29,20 @@
         @else
             <div class="row g-4" id="announcementListContainer">
                 @foreach($announcements as $announcement)
-                <div class="col-md-4 announcement-card-wrapper" data-animation="animate__fadeInUp">
-                    <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden announcement-card">
-                        <div class="announcement-image-container">
+                <div class="col-md-4 agenda-card-wrapper" data-animation="animate__fadeInUp">
+                    <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden agenda-card">
+                        <div class="agenda-image-container">
                             @if($announcement->photos_path && count($announcement->photos_path) > 0)
                                 <img src="{{ asset('storage/' . $announcement->photos_path[0]) }}" class="card-img-top" alt="{{ $announcement->title }}">
                             @else
                                 <img src="https://via.placeholder.com/400x250.png/cccccc/ffffff?text=No+Image" class="card-img-top" alt="No Image">
                             @endif
                         </div>
-                        <div class="card-body d-flex flex-column announcement-card-body">
+                        <div class="card-body d-flex flex-column agenda-card-body">
                             <h5 class="card-title fw-bold text-primary">{{ $announcement->title }}</h5>
                             <p class="card-text text-muted flex-grow-1">{{ Str::limit($announcement->content, 100) }}</p>
                             <p class="card-text mb-1"><small class="text-muted"><i class="fas fa-tag me-1"></i>Kategori: {{ ucfirst($announcement->category) }}</small></p>
-                            <a href="{{ route('announcements.public.show', $announcement->id) }}" class="btn btn-outline-primary mt-auto announcement-read-more-btn">Baca Selengkapnya</a>
+                            <a href="{{ route('announcements.public.show', $announcement->id) }}" class="btn btn-outline-primary mt-auto agenda-read-more-btn">Baca Selengkapnya</a>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
             </div>
 
             <!-- Pagination Links -->
-            <div class="d-flex justify-content-center mt-5" id="announcementPaginationLinks">
+            <div class="d-flex justify-content-center mt-5" id="agendaPaginationLinks">
                 {{ $announcements->links() }}
             </div>
         @endif
@@ -67,10 +67,10 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.getElementById('announcementSearchInput');
-    const listContainer = document.getElementById('announcementListContainer');
+    const searchInput = document.getElementById('agendaSearchInput');
+    const listContainer = document.getElementById('agendaListContainer');
     const noResultsMessage = document.getElementById('noResultsMessage');
-    const paginationLinks = document.getElementById('announcementPaginationLinks');
+    const paginationLinks = document.getElementById('agendaPaginationLinks');
 
     let searchTimeout;
 
@@ -102,16 +102,16 @@ document.addEventListener('DOMContentLoaded', function () {
                                 : `https://via.placeholder.com/400x250.png/cccccc/ffffff?text=No+Image`;
 
                             const announcementCard = `
-                                <div class="col-md-4 announcement-card-wrapper" data-animation="animate__fadeInUp">
-                                    <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden announcement-card">
-                                        <div class="announcement-image-container">
+                                <div class="col-md-4 agenda-card-wrapper" data-animation="animate__fadeInUp">
+                                    <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden agenda-card">
+                                        <div class="agenda-image-container">
                                             <img src="${imageUrl}" class="card-img-top" alt="${announcement.title}">
                                         </div>
-                                        <div class="card-body d-flex flex-column announcement-card-body">
+                                        <div class="card-body d-flex flex-column agenda-card-body">
                                             <h5 class="card-title fw-bold text-primary">${announcement.title}</h5>
                                             <p class="card-text text-muted flex-grow-1">${content}</p>
                                             <p class="card-text mb-1"><small class="text-muted"><i class="fas fa-tag me-1"></i>Kategori: ${announcement.category.charAt(0).toUpperCase() + announcement.category.slice(1)}</small></p>
-                                            <a href="/announcements/${announcement.id}" class="btn btn-outline-primary mt-auto announcement-read-more-btn">Baca Selengkapnya</a>
+                                            <a href="/announcements/${announcement.id}" class="btn btn-outline-primary mt-auto agenda-read-more-btn">Baca Selengkapnya</a>
                                         </div>
                                     </div>
                                 </div>
