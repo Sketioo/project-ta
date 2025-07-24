@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Achievement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AchievementController extends Controller
 {
@@ -16,6 +17,35 @@ class AchievementController extends Controller
 
     public function store(Request $request)
     {
+        Validator::extend('aspect_ratio', function ($attribute, $value, $parameters, $validator) {
+            $ratio = explode('/', $parameters[0]);
+            $expectedWidth = (int) $ratio[0];
+            $expectedHeight = (int) $ratio[1];
+
+            if (!$value->isValid()) {
+                return false;
+            }
+
+            $imageSize = getimagesize($value->getRealPath());
+            if (!$imageSize) {
+                return false;
+            }
+
+            $width = $imageSize[0];
+            $height = $imageSize[1];
+
+            // Calculate GCD to simplify the ratio
+            $gcd = function($a, $b) use (&$gcd) {
+                return ($a % $b) ? $gcd($b, $a % $b) : $b;
+            };
+
+            $commonDivisor = $gcd($width, $height);
+            $actualWidthRatio = $width / $commonDivisor;
+            $actualHeightRatio = $height / $commonDivisor;
+
+            return $actualWidthRatio == $expectedWidth && $actualHeightRatio == $expectedHeight;
+        });
+
         $request->validate([
             'nim' => 'required|string|max:255',
             'nama' => 'required|string|max:255',
@@ -27,7 +57,7 @@ class AchievementController extends Controller
             'dosen_pembimbing' => 'nullable|string|max:255',
             'file_sertifikat' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
             'keterangan_lomba' => 'nullable|string',
-            'photos_dokumentasi.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photos_dokumentasi.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048|aspect_ratio:16/9',
         ]);
 
         $fileSertifikatPath = null;

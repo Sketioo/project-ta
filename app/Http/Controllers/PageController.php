@@ -102,6 +102,14 @@ class PageController extends Controller
         return view('announcements.public_show', compact('announcement'));
     }
 
+    public function showAchievementPublic(Achievement $achievement)
+    {
+        if ($achievement->status !== 'disetujui' || !$achievement->show_on_main_page) {
+            abort(404); // Only show approved achievements that are set to be shown on main page
+        }
+        return view('achievements.public_show', compact('achievement'));
+    }
+
     public function searchDocuments(Request $request)
     {
         $searchTerm = $request->input('search');

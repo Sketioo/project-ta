@@ -56,7 +56,7 @@
                         <div class="row g-4 justify-content-center">
                             @foreach ($chunk as $achievement)
                             <div class="col-md-6 col-lg-4 d-flex align-items-stretch">
-                                <div class="card achievement-card w-100">
+                                <div class="card achievement-card w-100" onclick="window.location='{{ route('achievements.public.show', $achievement->id) }}'" style="cursor: pointer;">
                                     <div class="achievement-image-container">
                                         @if($achievement->photos_dokumentasi && count($achievement->photos_dokumentasi) > 0)
                                             <img src="{{ asset('storage/' . $achievement->photos_dokumentasi[0]) }}" class="card-img-top" alt="{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}">

@@ -24,6 +24,7 @@ Route::get('/agenda', [PageController::class, 'agenda'])->name('agenda'); // Add
 Route::get('/agenda/{agenda}', [PageController::class, 'showAgendaPublic'])->name('agenda.show.public');
 Route::get('/announcements', [PageController::class, 'announcements'])->name('announcements.public.index');
 Route::get('/announcements/{announcement}', [PageController::class, 'showAnnouncementPublic'])->name('announcements.public.show');
+Route::get('/achievements/{achievement}', [PageController::class, 'showAchievementPublic'])->name('achievements.public.show');
 Route::get('/documents/search', [PageController::class, 'searchDocuments'])->name('documents.search');
 Route::get('/documents/filter', [PageController::class, 'filterDocuments'])->name('documents.filter');
 
@@ -70,5 +71,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/achievements', [AchievementValidationController::class, 'index'])->name('achievements.index');
         Route::get('/achievements/{achievement}', [AchievementValidationController::class, 'show'])->name('achievements.show');
         Route::patch('/achievements/{achievement}', [AchievementValidationController::class, 'update'])->name('achievements.update');
+        Route::delete('/achievements/{achievement}', [AchievementValidationController::class, 'destroy'])->name('achievements.destroy');
     });
 });
