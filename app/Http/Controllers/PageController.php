@@ -25,7 +25,7 @@ class PageController extends Controller
                                 ->latest()
                                 ->get();
         $partners = Partner::where('is_visible', true)->get();
-        $documents = Document::where('is_visible', true)->latest()->get();
+        $documents = Document::where('is_visible', true)->where('status', 'berlaku')->latest()->get();
         $documentCategories = DocumentCategory::all();
         $faqs = Faq::where('is_visible', true)->latest()->get(); // Fetch only visible FAQs
         return view('home', compact('achievements', 'partners', 'documents', 'documentCategories', 'faqs'));
@@ -70,6 +70,7 @@ class PageController extends Controller
     {
         $searchTerm = $request->input('search');
         $documents = Document::where('is_visible', true)
+                            ->where('status', 'berlaku')
                             ->where('title', 'like', '%' . $searchTerm . '%')
                             ->latest()
                             ->get();
@@ -81,7 +82,7 @@ class PageController extends Controller
     {
         $categoryIds = $request->input('category_ids', []);
 
-        $query = Document::where('is_visible', true);
+        $query = Document::where('is_visible', true)->where('status', 'berlaku');
 
         // If category_ids is not empty and is an array, filter by it
         if (!empty($categoryIds) && is_array($categoryIds)) {

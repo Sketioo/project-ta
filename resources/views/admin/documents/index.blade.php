@@ -32,7 +32,8 @@
                                     <th>Kode</th>
                                     <th>Kategori</th>
                                     <th class="text-center">Tanggal Unggah</th>
-                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Status Dokumen</th>
+                                    <th class="text-center">Status Tampilan</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -46,6 +47,11 @@
                                             <span class="badge bg-secondary">{{ $document->category->name ?? 'Tidak ada kategori' }}</span>
                                         </td>
                                         <td class="text-center">{{ $document->created_at->format('d M Y') }}</td>
+                                        <td class="text-center">
+                                            <span class="status-badge {{ $document->status === 'berlaku' ? 'status-published' : 'status-draft' }}">
+                                                {{ ucfirst($document->status) }}
+                                            </span>
+                                        </td>
                                         <td class="text-center">
                                             <span class="status-badge {{ $document->is_visible ? 'status-visible' : 'status-hidden' }}">
                                                 {{ $document->is_visible ? 'Ditampilkan' : 'Disembunyikan' }}

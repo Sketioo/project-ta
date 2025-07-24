@@ -15,6 +15,7 @@ class Document extends Model
         'document_category_id',
         'file_path',
         'is_visible',
+        'status',
     ];
 
     public function category()

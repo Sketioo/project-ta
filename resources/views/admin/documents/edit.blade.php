@@ -90,10 +90,26 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible" value="1" {{ $document->is_visible ? 'checked' : '' }}>
-                                <label class="form-check-label" for="is_visible">Tampilkan di Halaman Utama</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Status Dokumen</label>
+                                    <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
+                                        <option value="berlaku" {{ old('status', $document->status) == 'berlaku' ? 'selected' : '' }}>Berlaku</option>
+                                        <option value="tidak berlaku" {{ old('status', $document->status) == 'tidak berlaku' ? 'selected' : '' }}>Tidak Berlaku</option>
+                                    </select>
+                                    @error('status')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3 pt-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible" value="1" {{ old('is_visible', $document->is_visible) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="is_visible">Tampilkan di Halaman Utama</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
