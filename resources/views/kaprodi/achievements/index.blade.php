@@ -55,7 +55,8 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th>Nama Mahasiswa</th>
-                                    <th>Judul Prestasi</th>
+                                    <th>Nama Kompetisi</th>
+                                    <th>Prestasi</th>
                                     <th class="text-center">Tanggal Pengajuan</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Aksi</th>
@@ -66,7 +67,8 @@
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $achievement->user->name }}</td>
-                                        <td>{{ Str::limit($achievement->title, 40) }}</td>
+                                        <td>{{ Str::limit($achievement->nama_kompetisi, 40) }}</td>
+                                        <td>{{ Str::limit($achievement->prestasi, 40) }}</td>
                                         <td class="text-center">{{ $achievement->created_at->format('d M Y') }}</td>
                                         <td class="text-center">
                                             <span class="status-badge status-{{ str_replace(' ', '-', strtolower($achievement->status)) }}">

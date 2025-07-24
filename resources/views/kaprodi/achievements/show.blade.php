@@ -35,9 +35,14 @@
         color: #6c757d;
     }
     .status-badge {
-        font-size: 0.9rem;
-        padding: 0.5em 0.9em;
+        padding: 0.4em 0.8em;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.8rem;
     }
+    .status-disetujui { background-color: #d1e7dd; color: #0f5132; }
+    .status-ditolak { background-color: #f8d7da; color: #58151c; }
+    .status-pending { background-color: #fff3cd; color: #664d03; }
     .form-label-custom {
         font-weight: 600;
         margin-bottom: 0.75rem;
@@ -103,7 +108,7 @@
                             <i class="fas fa-info-circle me-2"></i>Detail Pengajuan
                         </div>
                         <div class="card-body p-4">
-                            <h4 class="card-title mb-3">{{ $achievement->title }}</h4>
+                            <h4 class="card-title mb-3">{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}</h4>
                             <div class="detail-item">
                                 <strong>Mahasiswa</strong>
                                 <span>{{ $achievement->user->name }}</span>
@@ -112,29 +117,26 @@
                                 <strong>NIM</strong>
                                 <span>{{ $achievement->nim }}</span>
                             </div>
-                            <div class="detail-item">
-                                <strong>Kelas / Semester</strong>
-                                <span>{{ $achievement->class }} / {{ $achievement->semester }}</span>
-                            </div>
+                            
                             <div class="detail-item">
                                 <strong>Status Saat Ini</strong>
                                 <span>
                                     @if($achievement->status == 'disetujui')
-                                        <span class="badge rounded-pill bg-success status-badge">Disetujui</span>
+                                        <span class="status-badge status-disetujui">Disetujui</span>
                                     @elseif($achievement->status == 'ditolak')
-                                        <span class="badge rounded-pill bg-danger status-badge">Ditolak</span>
+                                        <span class="status-badge status-ditolak">Ditolak</span>
                                     @else
-                                        <span class="badge rounded-pill bg-warning text-dark status-badge">Pending</span>
+                                        <span class="status-badge status-pending">Pending</span>
                                     @endif
                                 </span>
                             </div>
                             <div class="pt-3">
-                                <strong>Deskripsi</strong>
-                                <p class="text-muted mt-2">{{ $achievement->description }}</p>
+                                <strong>Keterangan Lomba</strong>
+                                <p class="text-muted mt-2">{{ $achievement->keterangan_lomba }}</p>
                             </div>
 
-                            @if ($achievement->file_path)
-                                <a href="{{ asset('storage/' . $achievement->file_path) }}" target="_blank" class="btn btn-outline-primary mt-3">
+                            @if ($achievement->file_sertifikat)
+                                <a href="{{ asset('storage/' . $achievement->file_sertifikat) }}" target="_blank" class="btn btn-outline-primary mt-3">
                                     <i class="fas fa-paperclip me-2"></i>Lihat Lampiran
                                 </a>
                             @endif
