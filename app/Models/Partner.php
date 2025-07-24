@@ -13,6 +13,9 @@ class Partner extends Model
         'name',
         'logo_path',
         'website_url',
+        'contact_person',
+        'alamat',
+        'deskripsi',
         'is_visible',
     ];
 }

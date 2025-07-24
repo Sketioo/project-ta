@@ -30,6 +30,7 @@
                                     <th class="text-center">No</th>
                                     <th class="text-center">Logo</th>
                                     <th>Nama Mitra</th>
+                                    <th>Contact Person</th>
                                     <th>Website</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Aksi</th>
@@ -46,7 +47,8 @@
                                                 <span class="text-muted">No Logo</span>
                                             @endif
                                         </td>
-                                        <td>{{ $partner->name }}</td>
+                                        <td data-bs-toggle="tooltip" title="{{ $partner->deskripsi }}">{{ $partner->name }}</td>
+                                        <td>{{ $partner->contact_person ?? '-' }}</td>
                                         <td><a href="{{ $partner->website_url }}" target="_blank" rel="noopener noreferrer" style="color: #007bff;">{{ $partner->website_url }}</a></td>
                                         <td class="text-center">
                                             <form action="{{ route('admin.partners.toggleVisibility', $partner) }}" method="POST" class="d-inline">
@@ -58,6 +60,9 @@
                                         </td>
                                         <td class="text-center">
                                             <div class="action-btn-group">
+                                                <a href="{{ route('admin.partners.edit', $partner) }}" class="btn btn-info" data-bs-toggle="tooltip" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
                                                 <button class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $partner->id }}" data-name="{{ $partner->name }}" data-bs-toggle="tooltip" title="Hapus">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>

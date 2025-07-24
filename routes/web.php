@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('partners/{partner}/toggle-visibility', [PartnerController::class, 'toggleVisibility'])->name('partners.toggleVisibility');
         Route::post('agendas/{agenda}/toggle-publication', [AgendaController::class, 'togglePublication'])->name('agendas.togglePublication');
         Route::resource('agendas', AgendaController::class);
-        Route::resource('partners', PartnerController::class)->except(['show', 'edit', 'update']);
+        Route::resource('partners', PartnerController::class);
         Route::post('documents/{document}/toggle-visibility', [\App\Http\Controllers\Admin\DocumentController::class, 'toggleVisibility'])->name('documents.toggleVisibility');
         Route::resource('documents', \App\Http\Controllers\Admin\DocumentController::class);
         Route::post('faqs/{faq}/toggle-visibility', [\App\Http\Controllers\Admin\FaqController::class, 'toggleVisibility'])->name('faqs.toggleVisibility');
