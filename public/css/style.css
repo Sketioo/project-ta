@@ -256,6 +256,103 @@ a:hover {
     transition: filter 0.3s ease;
 }
 
+/* Visi Misi Section */
+.visi-misi-section {
+    padding: 60px 0;
+    background-color: var(--light-gray);
+}
+
+.vm-container-box {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    display: flex;
+    transition: all 0.3s ease;
+}
+
+.vm-container-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.vm-col {
+    padding: 50px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.vm-icon-bg {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 10rem;
+    color: rgba(0,0,0,0.05);
+    transition: all 0.5s ease;
+    transform: rotate(-20deg);
+}
+
+.vm-col:hover .vm-icon-bg {
+    transform: rotate(0deg) scale(1.1);
+    color: rgba(0,0,0,0.1);
+}
+
+.vm-col-visi {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+}
+
+.vm-col-visi .vm-title {
+    color: var(--dark-color);
+}
+
+.vm-col-visi p {
+    color: #2c3e50; /* Slightly softer dark color */
+}
+
+.vm-col-misi {
+    background-color: #fff;
+}
+
+.vm-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.vm-col p, .vm-col ul {
+    margin-bottom: 0;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 2;
+}
+
+.vm-col ul {
+    padding-left: 25px;
+}
+
+.vm-col ul li {
+    margin-bottom: 15px;
+}
+
+.vm-col-misi ul li::marker {
+    color: var(--primary-color);
+}
+
+@media (max-width: 991.98px) {
+    .vm-container-box {
+        flex-direction: column;
+    }
+    .vm-col {
+        padding: 40px 30px;
+    }
+}
+
 /* Prestasi Section */
 .achievement-card {
     border: none;

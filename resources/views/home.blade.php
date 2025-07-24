@@ -16,57 +16,32 @@
         </div>
     </section>
 
-    <!-- Mitra Section -->
-    <section id="mitra" class="py-5" data-animation="animate__fadeInUp">
+    <!-- Visi Misi Section -->
+    <section id="visi-misi" class="visi-misi-section" data-animation="animate__fadeInUp">
         <div class="container">
-            <h2 class="section-title mb-5">Mitra Industri</h2>
-            @if($partners->isNotEmpty())
-                <div id="mitraCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        @php
-                            $chunkedPartners = $partners->chunk(6); // 6 logos per slide
-                        @endphp
-
-                        @foreach ($chunkedPartners as $key => $chunk)
-                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                            <div class="row justify-content-center align-items-center g-4">
-                                @foreach ($chunk as $partner)
-                                <div class="col-6 col-md-4 col-lg-2 text-center  p-3">
-                                    <div class="partner-logo-wrapper">
-                                        <a href="{{ $partner->website_url ?? '#' }}" target="_blank" rel="noopener noreferrer" title="{{ $partner->name }}">
-                                            <img src="{{ Storage::url($partner->logo_path) }}" alt="{{ $partner->name }}" class="img-fluid mx-auto">
-                                        </a>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-
-                    @if(count($chunkedPartners) > 1)
-                        <button class="carousel-control-prev" type="button" data-bs-target="#mitraCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#mitraCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    @endif
+            <div class="row g-0 vm-container-box">
+                <!-- Visi Column -->
+                <div class="col-lg-6 vm-col vm-col-visi">
+                    <div class="vm-icon-bg"><i class="fas fa-eye"></i></div>
+                    <h3 class="vm-title">Visi</h3>
+                    <p>Menjadi program studi Teknologi Rekayasa Perangkat Lunak yang unggul dan inovatif dalam pengembangan solusi digital cerdas, serta berdaya saing di tingkat nasional maupun internasional pada tahun 2030.</p>
                 </div>
-            @else
-                <div class="empty-state">
-                    <i class="fas fa-box-open empty-state-icon"></i>
-                    <p class="empty-state-text">Belum ada mitra yang terdaftar.</p>
-                    <p class="empty-state-subtext">Silakan cek kembali nanti atau hubungi administrator.</p>
+                <!-- Misi Column -->
+                <div class="col-lg-6 vm-col vm-col-misi">
+                    <div class="vm-icon-bg"><i class="fas fa-bullseye"></i></div>
+                    <h3 class="vm-title">Misi</h3>
+                    <ul>
+                        <li>Menyelenggarakan pendidikan vokasi yang berkualitas di bidang rekayasa perangkat lunak dengan kurikulum yang adaptif terhadap perkembangan industri.</li>
+                        <li>Melaksanakan penelitian terapan yang inovatif untuk menghasilkan produk dan solusi digital yang bermanfaat bagi masyarakat dan industri.</li>
+                        <li>Menjalin kemitraan strategis dengan industri dan berbagai pihak untuk meningkatkan kompetensi lulusan dan relevansi program studi.</li>
+                    </ul>
                 </div>
-            @endif
+            </div>
         </div>
     </section>
 
     <!-- Prestasi Section -->
-    <section id="prestasi" class="py-5 bg-light" data-animation="animate__fadeInUp">
+    <section id="prestasi" class="py-5" data-animation="animate__fadeInUp">
         <div class="container">
             <h2 class="section-title mb-5">Prestasi Mahasiswa</h2>
             @if($achievements->isNotEmpty())
@@ -120,7 +95,7 @@
     </section>
 
     <!-- Dokumen Section -->
-    <section id="dokumen" class="py-5" data-animation="animate__fadeInUp">
+    <section id="dokumen" class="py-5 bg-light" data-animation="animate__fadeInUp">
         <div class="container">
             <h2 class="section-title mb-5">Pusat Dokumen</h2>
             <div class="row justify-content-center">
@@ -211,6 +186,55 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Mitra Section -->
+    <section id="mitra" class="py-5" data-animation="animate__fadeInUp">
+        <div class="container">
+            <h2 class="section-title mb-5">Mitra Industri</h2>
+            @if($partners->isNotEmpty())
+                <div id="mitraCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @php
+                            $chunkedPartners = $partners->chunk(6); // 6 logos per slide
+                        @endphp
+
+                        @foreach ($chunkedPartners as $key => $chunk)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <div class="row justify-content-center align-items-center g-4">
+                                @foreach ($chunk as $partner)
+                                <div class="col-6 col-md-4 col-lg-2 text-center  p-3">
+                                    <div class="partner-logo-wrapper">
+                                        <a href="{{ $partner->website_url ?? '#' }}" target="_blank" rel="noopener noreferrer" title="{{ $partner->name }}">
+                                            <img src="{{ Storage::url($partner->logo_path) }}" alt="{{ $partner->name }}" class="img-fluid mx-auto">
+                                        </a>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    @if(count($chunkedPartners) > 1)
+                        <button class="carousel-control-prev" type="button" data-bs-target="#mitraCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#mitraCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    @endif
+                </div>
+            @else
+                <div class="empty-state">
+                    <i class="fas fa-box-open empty-state-icon"></i>
+                    <p class="empty-state-text">Belum ada mitra yang terdaftar.</p>
+                    <p class="empty-state-subtext">Silakan cek kembali nanti atau hubungi administrator.</p>
+                </div>
+            @endif
         </div>
     </section>
 

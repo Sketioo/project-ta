@@ -18,7 +18,13 @@
             <div class="dashboard-header">
                 <div class="welcome-text">
                     <h4>Selamat Datang Kembali, {{ Auth::user()->name }}!</h4>
-                    <p>Anda login sebagai <strong>{{ ucfirst(Auth::user()->role) }}</strong>. Kelola konten website dengan mudah melalui menu di samping.</p>
+                    @if(Auth::user()->role == 'admin')
+                        <p>Anda login sebagai <strong>Admin</strong>. Anda memiliki akses penuh untuk mengelola semua konten website.</p>
+                    @elseif(Auth::user()->role == 'kaprodi')
+                        <p>Anda login sebagai <strong>Kaprodi</strong>. Anda dapat memvalidasi prestasi mahasiswa dan mengelola saran.</p>
+                    @else
+                        <p>Anda login sebagai <strong>Mahasiswa</strong>. Gunakan menu di samping untuk mengajukan prestasi atau melihat informasi lainnya.</p>
+                    @endif
                 </div>
                 <div class="welcome-icon">
                     <i class="fas fa-rocket"></i>
