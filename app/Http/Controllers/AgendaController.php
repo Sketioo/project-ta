@@ -35,6 +35,7 @@ class AgendaController extends Controller
             'description' => 'required|string',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
+            'link_terkait' => 'nullable|url|max:255',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -50,6 +51,7 @@ class AgendaController extends Controller
             'description' => $request->description,
             'date' => $request->date,
             'location' => $request->location,
+            'link_terkait' => $request->link_terkait,
             'is_published' => $request->has('is_published'),
             'images' => $imagePaths,
         ]);
@@ -83,6 +85,7 @@ class AgendaController extends Controller
             'description' => 'required|string',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
+            'link_terkait' => 'nullable|url|max:255',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -105,6 +108,7 @@ class AgendaController extends Controller
             'description' => $request->description,
             'date' => $request->date,
             'location' => $request->location,
+            'link_terkait' => $request->link_terkait,
             'is_published' => $request->has('is_published'),
             'images' => $imagePaths,
         ]);

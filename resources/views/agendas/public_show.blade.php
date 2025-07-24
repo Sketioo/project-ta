@@ -53,6 +53,14 @@
                         <p>{{ $agenda->description }}</p>
                     </div>
 
+                    @if($agenda->link_terkait)
+                    <div class="text-center mb-4">
+                        <a href="{{ $agenda->link_terkait }}" class="btn agenda-read-more-btn" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-link me-2"></i>Kunjungi Link Terkait
+                        </a>
+                    </div>
+                    @endif
+
                     <div class="text-center mt-5">
                         <a href="{{ route('agenda') }}" class="btn btn-outline-secondary agenda-back-btn" data-animation="animate__fadeInUp" data-animation-delay="0.2s"><i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Agenda</a>
                     </div>

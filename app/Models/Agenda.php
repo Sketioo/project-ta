@@ -12,6 +12,7 @@ class Agenda extends Model
     protected $fillable = [
         'title',
         'description',
+        'link_terkait',
         'date',
         'location',
         'is_published',

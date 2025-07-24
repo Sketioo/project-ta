@@ -49,6 +49,14 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="link_terkait" class="form-label">Link Terkait (Opsional)</label>
+                            <input type="url" class="form-control @error('link_terkait') is-invalid @enderror" id="link_terkait" name="link_terkait" value="{{ old('link_terkait', $agenda->link_terkait) }}" placeholder="https://contoh.com/pendaftaran">
+                            @error('link_terkait')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
                             <label for="description" class="form-label custom-form-label">Deskripsi</label>
                             <textarea class="form-control custom-form-input" id="description" name="description" rows="5" required>{{ old('description', $agenda->description) }}</textarea>
                             @error('description')

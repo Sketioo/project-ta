@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="date" class="form-label">Tanggal</label>
+                                    <label for="date" class="form-label">Tanggal Agenda</label>
                                     <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date') }}" required>
                                     @error('date')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -43,6 +43,14 @@
                             <label for="location" class="form-label">Lokasi</label>
                             <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" value="{{ old('location') }}" required>
                             @error('location')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="link_terkait" class="form-label">Link Terkait (Opsional)</label>
+                            <input type="url" class="form-control @error('link_terkait') is-invalid @enderror" id="link_terkait" name="link_terkait" value="{{ old('link_terkait') }}" placeholder="https://contoh.com/pendaftaran">
+                            @error('link_terkait')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
