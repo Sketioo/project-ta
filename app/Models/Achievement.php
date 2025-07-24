@@ -37,4 +37,9 @@ class Achievement extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function validator()
+    {
+        return $this->belongsTo(User::class, 'validated_by');
+    }
 }

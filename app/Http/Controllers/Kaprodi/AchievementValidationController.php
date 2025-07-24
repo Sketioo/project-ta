@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AchievementStatusUpdated;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AchievementsExport;
 
 class AchievementValidationController extends Controller
 {
@@ -21,6 +23,11 @@ class AchievementValidationController extends Controller
 
         $achievements = $query->get();
         return view('kaprodi.achievements.index', compact('achievements'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new AchievementsExport, 'achievements.xlsx');
     }
 
     public function show(Achievement $achievement)

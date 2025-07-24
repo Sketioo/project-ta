@@ -37,15 +37,20 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Daftar Pengajuan Prestasi</h5>
-                    <div class="filter-container">
-                        <form id="filterForm" action="{{ route('kaprodi.achievements.index') }}" method="GET">
-                            <select name="status" class="form-select" onchange="document.getElementById('filterForm').submit()">
-                                <option value="all" {{ request('status', 'all') == 'all' ? 'selected' : '' }}>Semua Status</option>
-                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
-                                <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
-                            </select>
-                        </form>
+                    <div class="d-flex align-items-center">
+                        <a href="{{ route('kaprodi.achievements.export') }}" class="btn btn-success btn-sm me-2">
+                            <i class="fas fa-file-excel me-1"></i> Export Data
+                        </a>
+                        <div class="filter-container">
+                            <form id="filterForm" action="{{ route('kaprodi.achievements.index') }}" method="GET">
+                                <select name="status" class="form-select" onchange="document.getElementById('filterForm').submit()">
+                                    <option value="all" {{ request('status', 'all') == 'all' ? 'selected' : '' }}>Semua Status</option>
+                                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
+                                    <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                </select>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">

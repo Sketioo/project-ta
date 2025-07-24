@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('partners/{partner}/toggle-visibility', [PartnerController::class, 'toggleVisibility'])->name('partners.toggleVisibility');
         Route::post('agendas/{agenda}/toggle-publication', [AgendaController::class, 'togglePublication'])->name('agendas.togglePublication');
         Route::resource('agendas', AgendaController::class);
+        Route::get('partners/export', [PartnerController::class, 'export'])->name('partners.export');
         Route::resource('partners', PartnerController::class);
         Route::post('documents/{document}/toggle-visibility', [\App\Http\Controllers\Admin\DocumentController::class, 'toggleVisibility'])->name('documents.toggleVisibility');
         Route::resource('documents', \App\Http\Controllers\Admin\DocumentController::class);
@@ -68,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Kaprodi Routes
     Route::middleware(['kaprodi'])->name('kaprodi.')->prefix('kaprodi')->group(function () {
+        Route::get('/achievements/export', [AchievementValidationController::class, 'export'])->name('achievements.export');
         Route::get('/achievements', [AchievementValidationController::class, 'index'])->name('achievements.index');
         Route::get('/achievements/{achievement}', [AchievementValidationController::class, 'show'])->name('achievements.show');
         Route::patch('/achievements/{achievement}', [AchievementValidationController::class, 'update'])->name('achievements.update');

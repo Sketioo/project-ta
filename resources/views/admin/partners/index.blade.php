@@ -49,9 +49,14 @@
 <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Daftar Mitra</h5>
-                    <a href="{{ route('admin.partners.create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus me-2"></i>Tambah Mitra Baru
-                    </a>
+                    <div>
+                        <a href="{{ route('admin.partners.export') }}" class="btn btn-success me-2">
+                            <i class="fas fa-file-excel me-2"></i>Export Data Mitra
+                        </a>
+                        <a href="{{ route('admin.partners.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus me-2"></i>Tambah Mitra Baru
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

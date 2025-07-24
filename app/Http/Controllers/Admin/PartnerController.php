@@ -8,6 +8,8 @@ use App\Models\Province;
 use App\Models\Regency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PartnersExport;
 
 class PartnerController extends Controller
 {
@@ -27,6 +29,11 @@ class PartnerController extends Controller
         $provinces = Province::all();
 
         return view('admin.partners.index', compact('partners', 'provinces'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new PartnersExport, 'partners.xlsx');
     }
 
     public function create()
