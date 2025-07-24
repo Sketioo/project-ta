@@ -16,12 +16,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('agenda') ? 'active' : '' }}" href="/agenda">
+                    <a class="nav-link {{ Request::is('agenda*') ? 'active' : '' }}" href="/agenda">
                         <i class="fas fa-calendar-alt me-1"></i>Agenda
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('announcements') ? 'active' : '' }}" href="/announcements">
+                    <a class="nav-link {{ Request::is('announcements*') ? 'active' : '' }}" href="/announcements">
                         <i class="fas fa-bullhorn me-1"></i>Pengumuman
                     </a>
                 </li>
