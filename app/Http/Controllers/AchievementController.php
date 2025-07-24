@@ -27,11 +27,19 @@ class AchievementController extends Controller
             'dosen_pembimbing' => 'nullable|string|max:255',
             'file_sertifikat' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
             'keterangan_lomba' => 'nullable|string',
+            'photos_dokumentasi.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $fileSertifikatPath = null;
         if ($request->hasFile('file_sertifikat')) {
             $fileSertifikatPath = $request->file('file_sertifikat')->store('achievements/sertifikat', 'public');
+        }
+
+        $photosDokumentasiPaths = [];
+        if ($request->hasFile('photos_dokumentasi')) {
+            foreach ($request->file('photos_dokumentasi') as $photo) {
+                $photosDokumentasiPaths[] = $photo->store('achievements/dokumentasi', 'public');
+            }
         }
 
         Auth::user()->achievements()->create([
@@ -45,6 +53,7 @@ class AchievementController extends Controller
             'dosen_pembimbing' => $request->dosen_pembimbing,
             'file_sertifikat' => $fileSertifikatPath,
             'keterangan_lomba' => $request->keterangan_lomba,
+            'photos_dokumentasi' => $photosDokumentasiPaths,
             'status' => 'pending',
         ]);
 

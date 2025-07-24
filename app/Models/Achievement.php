@@ -25,10 +25,12 @@ class Achievement extends Model
         'validated_by',
         'validated_at',
         'show_on_main_page',
+        'photos_dokumentasi',
     ];
 
     protected $casts = [
         'tanggal_pelaksanaan' => 'date',
+        'photos_dokumentasi' => 'array',
     ];
 
     public function user()

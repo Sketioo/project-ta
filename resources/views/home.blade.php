@@ -58,15 +58,15 @@
                             <div class="col-md-6 col-lg-4 d-flex align-items-stretch">
                                 <div class="card achievement-card w-100">
                                     <div class="achievement-image-container">
-                                        @if($achievement->photo_path)
-                                            <img src="{{ asset('storage/' . $achievement->photo_path) }}" class="card-img-top" alt="{{ $achievement->title }}">
+                                        @if($achievement->photos_dokumentasi && count($achievement->photos_dokumentasi) > 0)
+                                            <img src="{{ asset('storage/' . $achievement->photos_dokumentasi[0]) }}" class="card-img-top" alt="{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}">
                                         @else
                                             <img src="https://via.placeholder.com/400x220.png/1a1a1a/FFD700?text=TRPL" class="card-img-top" alt="No Image">
                                         @endif
                                     </div>
                                     <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title">{{ $achievement->title }}</h5>
-                                        <p class="card-text text-muted flex-grow-1">{{ Str::limit($achievement->description, 100) }}</p>
+                                        <h5 class="card-title">{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}</h5>
+                                        <p class="card-text text-muted flex-grow-1">{{ Str::limit($achievement->keterangan_lomba, 100) }}</p>
                                     </div>
                                 </div>
                             </div>

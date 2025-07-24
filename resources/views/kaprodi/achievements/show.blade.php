@@ -140,6 +140,21 @@
                                     <i class="fas fa-paperclip me-2"></i>Lihat Lampiran
                                 </a>
                             @endif
+
+                            @if ($achievement->photos_dokumentasi && count($achievement->photos_dokumentasi) > 0)
+                                <div class="mt-4">
+                                    <strong>Foto Dokumentasi</strong>
+                                    <div class="row mt-2">
+                                        @foreach ($achievement->photos_dokumentasi as $photoPath)
+                                            <div class="col-md-4 mb-3">
+                                                <a href="{{ asset('storage/' . $photoPath) }}" target="_blank">
+                                                    <img src="{{ asset('storage/' . $photoPath) }}" class="img-fluid rounded shadow-sm" alt="Dokumentasi Prestasi">
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
