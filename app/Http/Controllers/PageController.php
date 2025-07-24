@@ -8,6 +8,7 @@ use App\Models\Agenda;
 use App\Models\Achievement;
 use App\Models\Partner;
 use App\Models\Document;
+use App\Models\DocumentCategory;
 use App\Models\Faq; // Import the Faq model
 
 class PageController extends Controller
@@ -25,8 +26,9 @@ class PageController extends Controller
                                 ->get();
         $partners = Partner::where('is_visible', true)->get();
         $documents = Document::where('is_visible', true)->latest()->get();
+        $documentCategories = DocumentCategory::all();
         $faqs = Faq::where('is_visible', true)->latest()->get(); // Fetch only visible FAQs
-        return view('home', compact('achievements', 'partners', 'documents', 'faqs'));
+        return view('home', compact('achievements', 'partners', 'documents', 'documentCategories', 'faqs'));
     }
 
     /**
@@ -71,6 +73,22 @@ class PageController extends Controller
                             ->where('title', 'like', '%' . $searchTerm . '%')
                             ->latest()
                             ->get();
+
+        return response()->json($documents);
+    }
+
+    public function filterDocuments(Request $request)
+    {
+        $categoryIds = $request->input('category_ids', []);
+
+        $query = Document::where('is_visible', true);
+
+        // If category_ids is not empty and is an array, filter by it
+        if (!empty($categoryIds) && is_array($categoryIds)) {
+            $query->whereIn('document_category_id', $categoryIds);
+        }
+
+        $documents = $query->latest()->get();
 
         return response()->json($documents);
     }

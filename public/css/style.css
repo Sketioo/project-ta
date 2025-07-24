@@ -452,6 +452,65 @@ a:hover {
     transform: translateY(-1px);
 }
 
+/* New styles for document controls */
+.document-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.document-controls .document-search-form {
+    flex-grow: 1;
+}
+
+.btn-filter-dropdown {
+    background-color: var(--dark-color);
+    color: var(--primary-color);
+    border-radius: 50px;
+    width: 48px; /* Match height of search input */
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--dark-color);
+    transition: all 0.3s ease;
+}
+
+.btn-filter-dropdown:hover, .btn-filter-dropdown.show {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+}
+
+.document-controls .dropdown-menu {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border: 1px solid #eee;
+    width: 280px;
+}
+
+.document-controls .dropdown-header {
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.custom-form-check .form-check-input {
+    border-color: #ccc;
+}
+
+.custom-form-check .form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.custom-form-check .form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+}
+
+.custom-form-check .form-check-label {
+    padding-left: 5px;
+}
+
 .document-list-container {
     background-color: #fff;
     border-radius: 15px;

@@ -100,14 +100,40 @@
             <h2 class="section-title mb-5">Pusat Dokumen</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <!-- Search Bar -->
-                    <div class="mb-4">
-                        <form action="#" method="GET" class="d-flex document-search-form">
-                            <div class="input-group">
-                                <input type="text" id="documentSearch" class="form-control document-search-input" placeholder="Cari dokumen...">
-                                <button class="btn document-search-btn" type="button"><i class="fas fa-search"></i></button>
+                    <!-- Search and Filter Controls -->
+                    <div class="document-controls mb-4">
+                        <div class="input-group document-search-form">
+                            <input type="text" id="documentSearch" class="form-control document-search-input" placeholder="Cari dokumen...">
+                            <button class="btn document-search-btn" type="button"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-filter-dropdown" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="filterDropdown">
+                                <h6 class="dropdown-header">Filter Berdasarkan Kategori</h6>
+                                <div id="categoryFilterCheckboxes">
+                                    @if($documentCategories->isNotEmpty())
+                                        @foreach($documentCategories as $category)
+                                            <div class="form-check custom-form-check">
+                                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="category-{{ $category->id }}">
+                                                <label class="form-check-label" for="category-{{ $category->id }}">
+                                                    {{ $category->name }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <p class="text-muted px-2">Tidak ada kategori.</p>
+                                    @endif
+                                </div>
+                                @if($documentCategories->isNotEmpty())
+                                <div class="dropdown-divider"></div>
+                                <div class="px-2">
+                                    <button class="btn btn-primary-custom w-100" id="applyFilterBtn">Terapkan</button>
+                                </div>
+                                @endif
                             </div>
-                        </form>
+                        </div>
                     </div>
 
                     <div class="document-list-container">
@@ -120,39 +146,13 @@
                                         $fileType = strtoupper($extension);
 
                                         switch (strtolower($extension)) {
-                                            case 'pdf':
-                                                $iconClass = 'fa-file-pdf';
-                                                break;
-                                            case 'doc':
-                                            case 'docx':
-                                                $iconClass = 'fa-file-word';
-                                                $fileType = 'Word';
-                                                break;
-                                            case 'xls':
-                                            case 'xlsx':
-                                                $iconClass = 'fa-file-excel';
-                                                $fileType = 'Excel';
-                                                break;
-                                            case 'csv':
-                                                $iconClass = 'fa-file-csv';
-                                                $fileType = 'CSV';
-                                                break;
-                                            case 'ppt':
-                                            case 'pptx':
-                                                $iconClass = 'fa-file-powerpoint';
-                                                $fileType = 'PowerPoint';
-                                                break;
-                                            case 'zip':
-                                            case 'rar':
-                                                $iconClass = 'fa-file-archive';
-                                                break;
-                                            case 'jpg':
-                                            case 'jpeg':
-                                            case 'png':
-                                            case 'gif':
-                                                $iconClass = 'fa-file-image';
-                                                $fileType = 'Gambar';
-                                                break;
+                                            case 'pdf': $iconClass = 'fa-file-pdf'; break;
+                                            case 'doc': case 'docx': $iconClass = 'fa-file-word'; $fileType = 'Word'; break;
+                                            case 'xls': case 'xlsx': $iconClass = 'fa-file-excel'; $fileType = 'Excel'; break;
+                                            case 'csv': $iconClass = 'fa-file-csv'; $fileType = 'CSV'; break;
+                                            case 'ppt': case 'pptx': $iconClass = 'fa-file-powerpoint'; $fileType = 'PowerPoint'; break;
+                                            case 'zip': case 'rar': $iconClass = 'fa-file-archive'; break;
+                                            case 'jpg': case 'jpeg': case 'png': case 'gif': $iconClass = 'fa-file-image'; $fileType = 'Gambar'; break;
                                         }
                                     @endphp
                                 <div class="document-item" data-title="{{ strtolower($document->title) }}">
@@ -278,112 +278,95 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Script for Document Search (AJAX)
-    const documentSearchInput = document.getElementById('documentSearch');
     const documentListContainer = document.getElementById('documentList');
     const noResultsMessage = document.getElementById('noResultsMessage');
+    const documentSearchInput = document.getElementById('documentSearch');
+    const applyFilterBtn = document.getElementById('applyFilterBtn');
+    const categoryCheckboxes = document.querySelectorAll('#categoryFilterCheckboxes .form-check-input');
+
+    // Prevent dropdown from closing when clicking inside
+    document.querySelector('.dropdown-menu').addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
 
     function getFileIconInfo(filePath) {
-        const extension = filePath.split('.').pop().toLowerCase();
-        let iconClass = 'fa-file-alt'; // Default icon
+        const extension = filePath ? filePath.split('.').pop().toLowerCase() : '';
+        let iconClass = 'fa-file-alt';
         let fileType = extension.toUpperCase();
-
         switch (extension) {
-            case 'pdf':
-                iconClass = 'fa-file-pdf';
-                break;
-            case 'doc':
-            case 'docx':
-                iconClass = 'fa-file-word';
-                fileType = 'Word';
-                break;
-            case 'xls':
-            case 'xlsx':
-                iconClass = 'fa-file-excel';
-                fileType = 'Excel';
-                break;
-            case 'csv':
-                iconClass = 'fa-file-csv';
-                fileType = 'CSV';
-                break;
-            case 'ppt':
-            case 'pptx':
-                iconClass = 'fa-file-powerpoint';
-                fileType = 'PowerPoint';
-                break;
-            case 'zip':
-            case 'rar':
-                iconClass = 'fa-file-archive';
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'png':
-            case 'gif':
-                iconClass = 'fa-file-image';
-                fileType = 'Gambar';
-                break;
+            case 'pdf': iconClass = 'fa-file-pdf'; break;
+            case 'doc': case 'docx': iconClass = 'fa-file-word'; fileType = 'Word'; break;
+            case 'xls': case 'xlsx': iconClass = 'fa-file-excel'; fileType = 'Excel'; break;
+            case 'csv': iconClass = 'fa-file-csv'; fileType = 'CSV'; break;
+            case 'ppt': case 'pptx': iconClass = 'fa-file-powerpoint'; fileType = 'PowerPoint'; break;
+            case 'zip': case 'rar': iconClass = 'fa-file-archive'; break;
+            case 'jpg': case 'jpeg': case 'png': case 'gif': iconClass = 'fa-file-image'; fileType = 'Gambar'; break;
         }
         return { iconClass, fileType };
     }
 
-    if (documentSearchInput && documentListContainer) {
-        documentSearchInput.addEventListener('keyup', function () {
-            const searchTerm = this.value;
-
-            $.ajax({
-                url: '{{ route('documents.search') }}',
-                method: 'GET',
-                data: { search: searchTerm },
-                success: function (data) {
-                    documentListContainer.innerHTML = ''; // Clear previous results
-                    if (data.length > 0) {
-                        noResultsMessage.style.display = 'none';
-                        data.forEach(function (document) {
-                            const { iconClass, fileType } = getFileIconInfo(document.file_path);
-                            const documentItem = `
-                                <div class="document-item" data-title="${document.title.toLowerCase()}">
-                                    <div class="document-item-icon">
-                                        <i class="fas ${iconClass}"></i>
-                                    </div>
-                                    <div class="document-item-content">
-                                        <h5 class="document-item-title">${document.title}</h5>
-                                        <p class="document-item-meta">Tipe: ${fileType}</p>
-                                    </div>
-                                    <div class="document-item-action">
-                                        <a href="/storage/${document.file_path}" class="btn document-download-btn" download>
-                                            <i class="fas fa-download me-2"></i>Download
-                                        </a>
-                                    </div>
-                                </div>
-                            `;
-                            documentListContainer.insertAdjacentHTML('beforeend', documentItem);
-                        });
-                    } else {
-                        noResultsMessage.style.display = 'block';
-                        documentListContainer.innerHTML = ''; // Ensure it's empty
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Error: ", status, error);
-                    documentListContainer.innerHTML = '';
-                    noResultsMessage.style.display = 'block';
-                    noResultsMessage.querySelector('p').innerText = 'Terjadi kesalahan saat mencari dokumen.';
-                }
+    function renderDocuments(data) {
+        documentListContainer.innerHTML = '';
+        if (data.length > 0) {
+            noResultsMessage.style.display = 'none';
+            data.forEach(function (document) {
+                const { iconClass, fileType } = getFileIconInfo(document.file_path);
+                const documentItem = `
+                    <div class="document-item" data-title="${document.title.toLowerCase()}">
+                        <div class="document-item-icon"><i class="fas ${iconClass}"></i></div>
+                        <div class="document-item-content">
+                            <h5 class="document-item-title">${document.title}</h5>
+                            <p class="document-item-meta">Tipe: ${fileType}</p>
+                        </div>
+                        <div class="document-item-action">
+                            <a href="/storage/${document.file_path}" class="btn document-download-btn" download>
+                                <i class="fas fa-download me-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                `;
+                documentListContainer.insertAdjacentHTML('beforeend', documentItem);
             });
+        } else {
+            noResultsMessage.style.display = 'block';
+        }
+    }
+
+    function fetchDocuments(url, data) {
+        $.ajax({
+            url: url,
+            method: 'GET',
+            data: data,
+            success: function (response) {
+                renderDocuments(response);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error: ", status, error);
+                documentListContainer.innerHTML = '';
+                noResultsMessage.style.display = 'block';
+                noResultsMessage.querySelector('p').innerText = 'Terjadi kesalahan saat memuat dokumen.';
+            }
         });
     }
 
-    // Script for FAQ Accordion Icon Toggle
-    const faqAccordion = document.getElementById('faqAccordion');
-    if (faqAccordion) {
-        const accordionItems = faqAccordion.querySelectorAll('.accordion-item');
-        accordionItems.forEach(item => {
-            const button = item.querySelector('.accordion-button');
-            button.addEventListener('click', () => {
-                // The 'collapsed' class is managed by Bootstrap automatically.
-                // The CSS handles the icon change based on the presence of '.collapsed' class.
-                // No extra JS is needed to toggle icons if using the CSS ::after pseudo-element approach.
+    // Handler for Apply Filter button
+    if (applyFilterBtn) {
+        applyFilterBtn.addEventListener('click', function () {
+            const selectedCategories = [];
+            categoryCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedCategories.push(checkbox.value);
+                }
             });
+            fetchDocuments('{{ route('documents.filter') }}', { category_ids: selectedCategories });
+        });
+    }
+
+    // Handler for search input
+    if (documentSearchInput) {
+        documentSearchInput.addEventListener('keyup', function () {
+            const searchTerm = this.value;
+            fetchDocuments('{{ route('documents.search') }}', { search: searchTerm });
         });
     }
 });
