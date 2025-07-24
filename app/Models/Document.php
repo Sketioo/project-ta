@@ -11,7 +11,14 @@ class Document extends Model
 
     protected $fillable = [
         'title',
+        'kode_dokumen',
+        'document_category_id',
         'file_path',
         'is_visible',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(DocumentCategory::class, 'document_category_id');
+    }
 }

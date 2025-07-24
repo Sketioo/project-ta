@@ -22,10 +22,31 @@
                     <form action="{{ route('admin.documents.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Judul Dokumen</label>
+                                    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" required>
+                                    @error('title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="kode_dokumen" class="form-label">Kode Dokumen (Opsional)</label>
+                                    <input type="text" name="kode_dokumen" id="kode_dokumen" class="form-control @error('kode_dokumen') is-invalid @enderror" value="{{ old('kode_dokumen') }}">
+                                    @error('kode_dokumen')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
-                            <label for="title" class="form-label">Judul Dokumen</label>
-                            <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" required>
-                            @error('title')
+                            <label for="category" class="form-label">Kategori</label>
+                            <input type="text" name="category" id="category" class="form-control @error('category') is-invalid @enderror" value="{{ old('category') }}" required>
+                            @error('category')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

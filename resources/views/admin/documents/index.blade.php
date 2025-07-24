@@ -29,6 +29,8 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th>Judul Dokumen</th>
+                                    <th>Kode</th>
+                                    <th>Kategori</th>
                                     <th class="text-center">Tanggal Unggah</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Aksi</th>
@@ -39,6 +41,10 @@
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $document->title }}</td>
+                                        <td>{{ $document->kode_dokumen ?? '-' }}</td>
+                                        <td>
+                                            <span class="badge bg-secondary">{{ $document->category->name ?? 'Tidak ada kategori' }}</span>
+                                        </td>
                                         <td class="text-center">{{ $document->created_at->format('d M Y') }}</td>
                                         <td class="text-center">
                                             <span class="status-badge {{ $document->is_visible ? 'status-visible' : 'status-hidden' }}">

@@ -7,6 +7,8 @@ use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use App\Models\DocumentCategory;
+
 class DocumentController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $documents = Document::latest()->get();
+        $documents = Document::with('category')->latest()->get();
         return view('admin.documents.index', compact('documents'));
     }
 
@@ -33,13 +35,21 @@ class DocumentController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'kode_dokumen' => 'nullable|string|max:100',
+            'category' => 'required|string|max:100',
             'document_file' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:10240', // 10MB Max
         ]);
 
-        $path = $request->file('document_file')->store('public/documents');
+        // Find or create the category
+        $categoryName = strtolower($request->input('category'));
+        $category = DocumentCategory::firstOrCreate(['name' => $categoryName]);
+
+        $path = $request->file('document_file')->store('documents', 'public');
 
         Document::create([
             'title' => $request->title,
+            'kode_dokumen' => $request->kode_dokumen,
+            'document_category_id' => $category->id,
             'file_path' => $path,
             'is_visible' => $request->has('is_visible'),
         ]);
@@ -70,17 +80,25 @@ class DocumentController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'kode_dokumen' => 'nullable|string|max:100',
+            'category' => 'required|string|max:100',
             'document_file' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:10240', // 10MB Max
         ]);
 
+        // Find or create the category
+        $categoryName = strtolower($request->input('category'));
+        $category = DocumentCategory::firstOrCreate(['name' => $categoryName]);
+
         $document->title = $request->title;
+        $document->kode_dokumen = $request->kode_dokumen;
+        $document->document_category_id = $category->id;
         $document->is_visible = $request->has('is_visible');
 
         if ($request->hasFile('document_file')) {
             // Delete old file
-            Storage::delete($document->file_path);
+            Storage::disk('public')->delete($document->file_path);
             // Store new file
-            $path = $request->file('document_file')->store('public/documents');
+            $path = $request->file('document_file')->store('documents', 'public');
             $document->file_path = $path;
         }
 
