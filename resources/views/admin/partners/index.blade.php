@@ -15,7 +15,38 @@
                 <h1 class="page-title">Manajemen Mitra</h1>
             </div>
 
-            <div class="card">
+            <div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Filter Mitra</h5>
+    </div>
+    <div class="card-body">
+        <form action="{{ route('admin.partners.index') }}" method="GET">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label for="province_id" class="form-label">Provinsi</label>
+                    <select class="form-select" id="province_id" name="province_id">
+                        <option value="">Pilih Provinsi</option>
+                        @foreach ($provinces as $province)
+                            <option value="{{ $province->id }}" {{ request('province_id') == $province->id ? 'selected' : '' }}>{{ $province->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="regency_id" class="form-label">Kabupaten/Kota</label>
+                    <select class="form-select" id="regency_id" name="regency_id" disabled>
+                        <option value="">Pilih Kabupaten/Kota</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <a href="{{ route('admin.partners.index') }}" class="btn btn-secondary">Reset</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Daftar Mitra</h5>
                     <a href="{{ route('admin.partners.create') }}" class="btn btn-primary">
@@ -129,6 +160,34 @@
                 $('#partnerName').text(partnerName);
                 $('#deleteForm').attr('action', url);
             });
+
+            // Dynamic dropdown for regencies
+            $('#province_id').on('change', function() {
+                var provinceId = $(this).val();
+                var regencySelect = $('#regency_id');
+                regencySelect.empty();
+                regencySelect.append('<option value="">Pilih Kabupaten/Kota</option>');
+                regencySelect.prop('disabled', true);
+
+                if (provinceId) {
+                    $.ajax({
+                        url: '/api/kabupaten/' + provinceId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(key, value) {
+                                regencySelect.append('<option value="' + value.id + '"' + (value.id == "{{ request('regency_id') }}" ? 'selected' : '') + '>' + value.name + '</option>');
+                            });
+                            regencySelect.prop('disabled', false);
+                        }
+                    });
+                }
+            });
+
+            // Trigger change on page load if a province is already selected
+            if ($('#province_id').val()) {
+                $('#province_id').trigger('change');
+            }
         });
     </script>
 @endpush

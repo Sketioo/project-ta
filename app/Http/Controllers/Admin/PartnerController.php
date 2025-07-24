@@ -4,20 +4,35 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Partner;
+use App\Models\Province;
+use App\Models\Regency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PartnerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $partners = Partner::all();
-        return view('admin.partners.index', compact('partners'));
+        $query = Partner::query();
+
+        if ($request->filled('province_id')) {
+            $query->where('province_id', $request->province_id);
+        }
+
+        if ($request->filled('regency_id')) {
+            $query->where('regency_id', $request->regency_id);
+        }
+
+        $partners = $query->get();
+        $provinces = Province::all();
+
+        return view('admin.partners.index', compact('partners', 'provinces'));
     }
 
     public function create()
     {
-        return view('admin.partners.create');
+        $provinces = Province::all();
+        return view('admin.partners.create', compact('provinces'));
     }
 
     public function store(Request $request)
@@ -27,7 +42,9 @@ class PartnerController extends Controller
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'website_url' => 'nullable|url',
             'contact_person' => 'nullable|string|max:255',
-            'alamat' => 'nullable|string',
+            'province_id' => 'nullable|exists:provinces,id',
+            'regency_id' => 'nullable|exists:regencies,id',
+            'detail_alamat' => 'nullable|string',
             'deskripsi' => 'nullable|string',
         ]);
 
@@ -38,7 +55,9 @@ class PartnerController extends Controller
             'logo_path' => $path,
             'website_url' => $request->website_url,
             'contact_person' => $request->contact_person,
-            'alamat' => $request->alamat,
+            'province_id' => $request->province_id,
+            'regency_id' => $request->regency_id,
+            'detail_alamat' => $request->detail_alamat,
             'deskripsi' => $request->deskripsi,
             'is_visible' => $request->has('is_visible'),
         ]);
@@ -48,7 +67,8 @@ class PartnerController extends Controller
 
     public function edit(Partner $partner)
     {
-        return view('admin.partners.edit', compact('partner'));
+        $provinces = Province::all();
+        return view('admin.partners.edit', compact('partner', 'provinces'));
     }
 
     public function update(Request $request, Partner $partner)
@@ -58,11 +78,13 @@ class PartnerController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'website_url' => 'nullable|url',
             'contact_person' => 'nullable|string|max:255',
-            'alamat' => 'nullable|string',
+            'province_id' => 'nullable|exists:provinces,id',
+            'regency_id' => 'nullable|exists:regencies,id',
+            'detail_alamat' => 'nullable|string',
             'deskripsi' => 'nullable|string',
         ]);
 
-        $data = $request->only(['name', 'website_url', 'contact_person', 'alamat', 'deskripsi']);
+        $data = $request->only(['name', 'website_url', 'contact_person', 'province_id', 'regency_id', 'detail_alamat', 'deskripsi']);
         $data['is_visible'] = $request->has('is_visible');
 
         if ($request->hasFile('logo')) {

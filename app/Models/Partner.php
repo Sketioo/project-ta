@@ -14,7 +14,9 @@ class Partner extends Model
         'logo_path',
         'website_url',
         'contact_person',
-        'alamat',
+        'province_id',
+        'regency_id',
+        'detail_alamat',
         'deskripsi',
         'is_visible',
     ];

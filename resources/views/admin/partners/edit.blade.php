@@ -47,10 +47,34 @@
                             @enderror
                         </div>
 
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="province_id" class="form-label">Provinsi (Opsional)</label>
+                                <select class="form-select @error('province_id') is-invalid @enderror" id="province_id" name="province_id">
+                                    <option value="">Pilih Provinsi</option>
+                                    @foreach ($provinces as $province)
+                                        <option value="{{ $province->id }}" {{ old('province_id', $partner->province_id) == $province->id ? 'selected' : '' }}>{{ $province->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('province_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label for="regency_id" class="form-label">Kabupaten/Kota (Opsional)</label>
+                                <select class="form-select @error('regency_id') is-invalid @enderror" id="regency_id" name="regency_id" disabled>
+                                    <option value="">Pilih Kabupaten/Kota</option>
+                                </select>
+                                @error('regency_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="mb-3">
-                            <label for="alamat" class="form-label">Alamat (Opsional)</label>
-                            <textarea name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" rows="3">{{ old('alamat', $partner->alamat) }}</textarea>
-                            @error('alamat')
+                            <label for="detail_alamat" class="form-label">Detail Alamat (Opsional)</label>
+                            <textarea name="detail_alamat" id="detail_alamat" class="form-control @error('detail_alamat') is-invalid @enderror" rows="3">{{ old('detail_alamat', $partner->detail_alamat) }}</textarea>
+                            @error('detail_alamat')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -117,6 +141,34 @@
                 });
             }
         });
+
+        // Dynamic dropdown for regencies
+        $('#province_id').on('change', function() {
+            var provinceId = $(this).val();
+            var regencySelect = $('#regency_id');
+            regencySelect.empty();
+            regencySelect.append('<option value="">Pilih Kabupaten/Kota</option>');
+            regencySelect.prop('disabled', true);
+
+            if (provinceId) {
+                $.ajax({
+                    url: '/api/kabupaten/' + provinceId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $.each(data, function(key, value) {
+                            regencySelect.append('<option value="' + value.id + '"' + (value.id == "{{ old('regency_id', $partner->regency_id) }}" ? 'selected' : '') + '>' + value.name + '</option>');
+                        });
+                        regencySelect.prop('disabled', false);
+                    }
+                });
+            }
+        });
+
+        // Trigger change on page load if a province is already selected
+        if ($('#province_id').val()) {
+            $('#province_id').trigger('change');
+        }
     });
 </script>
 @endpush
