@@ -73,6 +73,12 @@
                     Manajemen FAQ
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::routeIs('admin.announcements.index') ? 'active' : '' }}" href="{{ route('admin.announcements.index') }}">
+                    <i class="fas fa-bullhorn fa-fw me-2"></i>
+                    Manajemen Pengumuman
+                </a>
+            </li>
             @endif
         </ul>
     </div>

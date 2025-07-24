@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('documents', \App\Http\Controllers\Admin\DocumentController::class);
         Route::post('faqs/{faq}/toggle-visibility', [\App\Http\Controllers\Admin\FaqController::class, 'toggleVisibility'])->name('faqs.toggleVisibility');
         Route::resource('faqs', \App\Http\Controllers\Admin\FaqController::class); // Add FAQ resource routes
+        Route::post('announcements/{announcement}/toggle-publication', [\App\Http\Controllers\Admin\AnnouncementController::class, 'togglePublication'])->name('announcements.togglePublication');
+        Route::resource('announcements', \App\Http\Controllers\Admin\AnnouncementController::class);
     });
 
     // Kaprodi Routes
