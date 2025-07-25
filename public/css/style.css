@@ -50,11 +50,12 @@ a:hover {
     font-weight: 500;
     color: rgba(255, 255, 255, 0.8) !important; /* Mengubah warna teks link menjadi putih transparan */
     margin: 0 10px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, font-size 0.3s ease; /* Add font-size to transition */
 }
 
 .nav-link:hover {
     color: var(--primary-color) !important;
+    font-size: 1.05em; /* Slightly increase font size on hover */
 }
 
 .nav-link.active {
@@ -992,6 +993,79 @@ a:hover {
 }
 
 /* Added a comment to force cache bust - 2025-07-22 */
+
+/* Custom Dropdown Menu Styles for Navbar */
+.navbar-nav .nav-item.dropdown .dropdown-menu {
+    background-color: var(--dark-color); /* Dark background for dropdown */
+    border: 1px solid rgba(255, 215, 0, 0.2); /* Subtle border with primary color */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* More pronounced shadow */
+    border-radius: 10px; /* Slightly more rounded corners */
+    padding: 12px 0; /* Increased padding */
+    min-width: 220px; /* Slightly wider */
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-item {
+    color: rgba(255, 255, 255, 0.85) !important; /* Slightly brighter text for items */
+    padding: 12px 20px; /* Increased padding */
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: flex; /* Enable flex for icon alignment */
+    align-items: center;
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-item {
+    color: rgba(255, 255, 255, 0.85) !important; /* Slightly brighter text for items */
+    padding: 12px 20px; /* Increased padding */
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: flex; /* Enable flex for icon alignment */
+    align-items: center;
+    border-radius: 6px; /* Apply border-radius by default for consistent look */
+    margin: 0 8px; /* Add horizontal margin to create space for hover effect */
+    width: calc(100% - 16px); /* Adjust width to account for margin */
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-item:hover,
+.navbar-nav .nav-item.dropdown .dropdown-item:focus {
+    background-color: rgba(255, 215, 0, 0.2); /* Slightly more opaque primary color on hover */
+    color: var(--primary-color) !important; /* Primary color on hover */
+    padding-left: 25px; /* Increase padding-left to create slide effect */
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-item.active {
+    background-color: var(--primary-color);
+    color: var(--dark-color) !important;
+    font-weight: 700;
+    border-left: 4px solid var(--primary-color); /* Highlight active item */
+    padding-left: 21px; /* Adjust padding due to border and new hover padding */
+    border-radius: 6px; /* Subtle rounding for active item */
+}
+
+.navbar-nav .nav-item.dropdown .nav-link-dropdown-custom {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-item.dropdown .nav-link-dropdown-custom i {
+    margin-right: 8px;
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-item i {
+    margin-right: 10px; /* Space between icon and text in dropdown items */
+    color: rgba(255, 255, 255, 0.6); /* Default icon color */
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-item:hover i,
+.navbar-nav .nav-item.dropdown .dropdown-item:focus i {
+    color: var(--primary-color); /* Icon color changes on hover */
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-item.active i {
+    color: var(--dark-color); /* Icon color for active item */
+}
+
+
 
 /* Footer Styles */
 .custom-footer {

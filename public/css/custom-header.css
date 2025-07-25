@@ -1,70 +1,49 @@
-
-/* Custom Navbar Styling */
 .custom-navbar {
-    background-color: #FFFACD; /* Light yellow color */
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.custom-navbar.scrolled {
-    background-color: #FFFACD; /* Keep light yellow when scrolled */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Example: White background for navbar */
 }
 
 .custom-navbar .navbar-brand {
-    font-weight: bold;
-    color: #333;
+    color: #343a40; /* Example: Dark text for brand */
 }
 
 .custom-navbar .nav-link {
-    position: relative;
-    transition: color 0.3s ease-in-out;
-    color: #555;
-}
-
-.custom-navbar .nav-link:hover {
-    color: #007bff;
-}
-
-.custom-navbar .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #007bff;
-    transition: width 0.3s ease-in-out;
-}
-
-.custom-navbar .nav-link:hover::after,
-.custom-navbar .nav-link.active::after {
-    width: 100%;
+    color: #343a40; /* Example: Dark text for nav links */
 }
 
 .custom-navbar .nav-link.active {
-    color: #007bff;
+    color: #007bff; /* Example: Blue for active link */
     font-weight: bold;
 }
 
-/* Custom Button Styling */
-.custom-login-btn,
-.custom-dashboard-btn,
-.custom-logout-btn {
-    transition: all 0.3s ease-in-out;
+.custom-login-btn {
+    border-color: #343a40;
+    color: #343a40;
 }
 
 .custom-login-btn:hover {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.btn-primary-custom {
     background-color: #007bff;
-    color: #fff;
+    border-color: #007bff;
+    color: #ffffff;
+}
+
+.btn-primary-custom:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.custom-dashboard-btn {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #ffffff;
 }
 
 .custom-dashboard-btn:hover {
-    background-color: #6c757d;
-    color: #fff;
+    background-color: #5a6268;
+    border-color: #5a6268;
 }
 
-.custom-logout-btn:hover {
-    background-color: #dc3545;
-    color: #fff;
-}

@@ -1,12 +1,17 @@
-
-document.addEventListener('DOMContentLoaded', function () {
-    const navbar = document.querySelector('.custom-navbar');
-
-    window.addEventListener('scroll', function () {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    var dropdownElement = document.querySelector('.nav-item.dropdown');
+    if (dropdownElement) {
+        dropdownElement.addEventListener('mouseenter', function() {
+            var dropdownMenu = this.querySelector('.dropdown-menu');
+            if (dropdownMenu) {
+                dropdownMenu.classList.add('show');
+            }
+        });
+        dropdownElement.addEventListener('mouseleave', function() {
+            var dropdownMenu = this.querySelector('.dropdown-menu');
+            if (dropdownMenu) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    }
 });

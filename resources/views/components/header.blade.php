@@ -25,6 +25,15 @@
                         <i class="fas fa-bullhorn me-1"></i>Pengumuman
                     </a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle nav-link-dropdown-custom" href="#" id="navbarDropdownTentangProdi" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-info-circle me-1"></i>Tentang Prodi
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownTentangProdi">
+                        <li><a class="dropdown-item" href="/fasilitas"><i class="fas fa-building me-2"></i>Fasilitas</a></li>
+                        <li><a class="dropdown-item" href="/kurikulum"><i class="fas fa-book me-2"></i>Kurikulum</a></li>
+                    </ul>
+                </li>
             </ul>
             <div class="d-flex align-items-center">
                 @guest
