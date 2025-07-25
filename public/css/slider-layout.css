@@ -1,0 +1,129 @@
+/* public/css/slider-layout.css */
+
+.facility-section {
+    /* Remove padding to allow the slider to be full-width */
+    padding: 0;
+    background-color: #1a1a1a; /* Dark background for the slider container */
+}
+
+#facilitiesCarousel {
+    margin-bottom: 0;
+}
+
+.focus-slide-item {
+    height: 85vh; /* 85% of the viewport height, making it quite large */
+    min-height: 600px;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.focus-slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Gradient overlay looks more modern than a solid color */
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
+}
+
+/* Override Bootstrap's default caption positioning */
+.carousel-caption {
+    position: static; /* Remove absolute positioning */
+    transform: none;
+    color: #fff;
+    padding: 2rem;
+    z-index: 10;
+    max-width: 800px;
+}
+
+.carousel-caption h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    animation: fadeInDown 1s;
+}
+
+.carousel-caption p {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    animation: fadeInUp 1s;
+}
+
+.carousel-caption .btn {
+    margin-top: 1.5rem;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px; /* Pill-shaped button */
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.2s;
+}
+
+.carousel-caption .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+}
+
+/* Customizing controls */
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;
+}
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    padding: 20px;
+    background-size: 50%;
+}
+
+/* Empty state for slider */
+.empty-state-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 15px;
+    margin: 40px;
+}
+.empty-state-container .icon {
+    font-size: 4rem;
+    color: #3498db;
+    margin-bottom: 20px;
+}
+.empty-state-container h3, .empty-state-container p {
+    color: #333;
+}
+
+/* Animations for caption text */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ensure animations reset on slide change */
+.carousel-item .carousel-caption h2,
+.carousel-item .carousel-caption p,
+.carousel-item .carousel-caption .btn {
+    animation: none;
+}
+.carousel-item.active .carousel-caption h2,
+.carousel-item.active .carousel-caption p,
+.carousel-item.active .carousel-caption .btn {
+    animation-fill-mode: both;
+}
+.carousel-item.active .carousel-caption h2 { animation-name: fadeInDown; animation-delay: 0.5s; }
+.carousel-item.active .carousel-caption p { animation-name: fadeInUp; animation-delay: 0.7s; }
+.carousel-item.active .carousel-caption .btn { animation-name: fadeInUp; animation-delay: 0.9s; }
