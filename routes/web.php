@@ -7,6 +7,8 @@ use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\Kaprodi\AchievementValidationController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\Admin\FacilityController as AdminFacilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +29,13 @@ Route::get('/announcements/{announcement}', [PageController::class, 'showAnnounc
 Route::get('/achievements/{achievement}', [PageController::class, 'showAchievementPublic'])->name('achievements.public.show');
 Route::get('/documents/search', [PageController::class, 'searchDocuments'])->name('documents.search');
 Route::get('/documents/filter', [PageController::class, 'filterDocuments'])->name('documents.filter');
+Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
+Route::get('/facilities/{facility}', [FacilityController::class, 'show'])->name('facilities.show');
 
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
 
 // Public route for submitting suggestions
 Route::post('/suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
@@ -65,6 +70,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('faqs', \App\Http\Controllers\Admin\FaqController::class); // Add FAQ resource routes
         Route::post('announcements/{announcement}/toggle-publication', [\App\Http\Controllers\Admin\AnnouncementController::class, 'togglePublication'])->name('announcements.togglePublication');
         Route::resource('announcements', \App\Http\Controllers\Admin\AnnouncementController::class);
+        Route::resource('facilities', AdminFacilityController::class);
+        Route::delete('facilities/photo/{photo}', [AdminFacilityController::class, 'deletePhoto'])->name('facilities.photo.destroy');
     });
 
     // Kaprodi Routes

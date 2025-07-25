@@ -79,6 +79,12 @@
                     Manajemen Pengumuman
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::routeIs('admin.facilities.index') ? 'active' : '' }}" href="{{ route('admin.facilities.index') }}">
+                    <i class="fas fa-building fa-fw me-2"></i>
+                    Manajemen Fasilitas
+                </a>
+            </li>
             @endif
         </ul>
     </div>

@@ -30,7 +30,7 @@
                         <i class="fas fa-info-circle me-1"></i>Tentang Prodi
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownTentangProdi">
-                        <li><a class="dropdown-item" href="/fasilitas"><i class="fas fa-building me-2"></i>Fasilitas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('facilities.index') }}"><i class="fas fa-building me-2"></i>Fasilitas</a></li>
                         <li><a class="dropdown-item" href="/kurikulum"><i class="fas fa-book me-2"></i>Kurikulum</a></li>
                     </ul>
                 </li>
