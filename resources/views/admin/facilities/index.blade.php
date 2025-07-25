@@ -42,15 +42,15 @@
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td class="text-center">
-                                        @if($facility->photos->isNotEmpty())
-                                            <img src="{{ asset('storage/' . $facility->photos->first()->photo_path) }}" alt="{{ $facility->name }}" class="img-thumbnail" width="100" style="border-radius: 8px;">
+                                        @if(!empty($facility->photos))
+                                            <img src="{{ asset('storage/' . $facility->photos[0]) }}" alt="{{ $facility->name }}" class="img-thumbnail" width="100" style="border-radius: 8px;">
                                         @else
                                             <span class="text-muted">No Logo</span>
                                         @endif
                                     </td>
                                     <td>{{ $facility->name }}</td>
                                     <td>{{ $facility->person_in_charge ?? '-' }}</td>
-                                    <td class="text-center"><span class="badge bg-secondary">{{ $facility->photos->count() }}</span></td>
+                                    <td class="text-center"><span class="badge bg-secondary">{{ count($facility->photos ?? []) }}</span></td>
                                     <td class="text-center">
                                         <div class="action-btn-group">
                                             <a href="{{ route('admin.facilities.edit', $facility->id) }}" class="btn btn-info" data-bs-toggle="tooltip" title="Edit">

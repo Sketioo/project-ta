@@ -71,7 +71,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('announcements/{announcement}/toggle-publication', [\App\Http\Controllers\Admin\AnnouncementController::class, 'togglePublication'])->name('announcements.togglePublication');
         Route::resource('announcements', \App\Http\Controllers\Admin\AnnouncementController::class);
         Route::resource('facilities', AdminFacilityController::class);
-        Route::delete('facilities/photo/{photo}', [AdminFacilityController::class, 'deletePhoto'])->name('facilities.photo.destroy');
     });
 
     // Kaprodi Routes

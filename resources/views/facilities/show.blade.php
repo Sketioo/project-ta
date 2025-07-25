@@ -43,16 +43,16 @@
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <!-- Facility Photos Carousel -->
-            @if($facility->photos->isNotEmpty())
+            @if(!empty($facility->photos))
                 <div id="facilityCarousel" class="carousel slide facility-carousel mb-4" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        @foreach($facility->photos as $key => $photo)
+                        @foreach($facility->photos as $key => $photoPath)
                             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                <img src="{{ asset('storage/' . $photo->photo_path) }}" alt="{{ $facility->name }} - Foto {{ $key + 1 }}">
+                                <img src="{{ asset('storage/' . $photoPath) }}" alt="{{ $facility->name }} - Foto {{ $key + 1 }}">
                             </div>
                         @endforeach
                     </div>
-                    @if($facility->photos->count() > 1)
+                    @if(count($facility->photos) > 1)
                         <button class="carousel-control-prev" type="button" data-bs-target="#facilityCarousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>

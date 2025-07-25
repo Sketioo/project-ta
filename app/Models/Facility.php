@@ -13,10 +13,10 @@ class Facility extends Model
         'name',
         'description',
         'person_in_charge',
+        'photos',
     ];
 
-    public function photos()
-    {
-        return $this->hasMany(FacilityPhoto::class);
-    }
+    protected $casts = [
+        'photos' => 'array',
+    ];
 }

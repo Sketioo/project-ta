@@ -71,8 +71,8 @@
                 <div class="col-md-6 col-lg-4 d-flex align-items-stretch">
                     <div class="card facility-card w-100" onclick="window.location='{{ route('facilities.show', $facility->id) }}'" style="cursor: pointer;">
                         <div class="facility-image-container">
-                            @if($facility->photos->isNotEmpty())
-                                <img src="{{ asset('storage/' . $facility->photos->first()->photo_path) }}" class="card-img-top" alt="{{ $facility->name }}">
+                            @if(!empty($facility->photos))
+                                <img src="{{ asset('storage/' . $facility->photos[0]) }}" class="card-img-top" alt="{{ $facility->name }}">
                             @else
                                 <img src="https://via.placeholder.com/400x220.png/1a1a1a/ffffff?text=TRPL" class="card-img-top" alt="No Image">
                             @endif

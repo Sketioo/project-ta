@@ -12,7 +12,7 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        $facilities = Facility::with('photos')->latest()->paginate(9);
+        $facilities = Facility::latest()->paginate(9);
         return view('facilities.index', compact('facilities'));
     }
 
@@ -21,7 +21,6 @@ class FacilityController extends Controller
      */
     public function show(Facility $facility)
     {
-        $facility->load('photos');
         return view('facilities.show', compact('facility'));
     }
 }
