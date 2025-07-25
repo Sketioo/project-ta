@@ -7,12 +7,15 @@
     <div class="row">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Edit Fasilitas: {{ $facility->name }}</h1>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
+            <div class="page-header pt-3 mb-4">
+                <h1 class="page-title">Edit Fasilitas</h1>
             </div>
 
-            <div class="card">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Formulir Edit: {{ $facility->name }}</h5>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('admin.facilities.update', $facility->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -44,7 +47,7 @@
                         <div class="mb-3">
                             <label for="photos" class="form-label">Tambah Foto Baru</label>
                             <input type="file" class="form-control @error('photos') is-invalid @enderror" id="photos" name="photos[]" multiple>
-                            <div class="form-text">Anda dapat memilih lebih dari satu foto untuk ditambahkan.</div>
+                            <div class="form-text">Anda dapat memilih lebih dari satu foto untuk ditambahkan. Biarkan kosong jika tidak ingin menambah foto.</div>
                             @error('photos')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -53,22 +56,24 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                        <a href="{{ route('admin.facilities.index') }}" class="btn btn-secondary">Batal</a>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Simpan Perubahan</button>
+                            <a href="{{ route('admin.facilities.index') }}" class="btn btn-secondary">Batal</a>
+                        </div>
                     </form>
                 </div>
             </div>
 
-            <div class="card mt-4">
+            <div class="card">
                 <div class="card-header">
-                    Foto Saat Ini
+                    <h5 class="mb-0">Foto Saat Ini</h5>
                 </div>
                 <div class="card-body">
                     @if($facility->photos->isNotEmpty())
                         <div class="row g-3">
                             @foreach($facility->photos as $photo)
-                                <div class="col-md-3">
-                                    <div class="position-relative">
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="position-relative current-photo-container">
                                         <img src="{{ asset('storage/' . $photo->photo_path) }}" class="img-fluid rounded" alt="Foto fasilitas">
                                         <form action="{{ route('admin.facilities.photo.destroy', $photo->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus foto ini?');">
                                             @csrf
@@ -82,7 +87,7 @@
                             @endforeach
                         </div>
                     @else
-                        <p class="text-center text-muted">Tidak ada foto untuk fasilitas ini.</p>
+                        <p class="text-center text-muted mb-0">Tidak ada foto untuk fasilitas ini.</p>
                     @endif
                 </div>
             </div>
@@ -90,3 +95,21 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+.current-photo-container {
+    transition: transform 0.2s ease-in-out;
+}
+.current-photo-container:hover {
+    transform: scale(1.05);
+}
+.current-photo-container .btn-danger {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.current-photo-container:hover .btn-danger {
+    opacity: 1;
+}
+</style>
+@endpush

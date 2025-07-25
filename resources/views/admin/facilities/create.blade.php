@@ -7,12 +7,15 @@
     <div class="row">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Tambah Fasilitas Baru</h1>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
+            <div class="page-header pt-3 mb-4">
+                <h1 class="page-title">Tambah Fasilitas Baru</h1>
             </div>
 
             <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Formulir Fasilitas</h5>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('admin.facilities.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -43,7 +46,7 @@
                         <div class="mb-3">
                             <label for="photos" class="form-label">Foto Fasilitas</label>
                             <input type="file" class="form-control @error('photos') is-invalid @enderror" id="photos" name="photos[]" multiple required>
-                            <div class="form-text">Anda dapat memilih lebih dari satu foto.</div>
+                            <div class="form-text">Anda dapat memilih lebih dari satu foto. Pastikan foto memiliki rasio 4:3 atau 16:9 untuk tampilan terbaik.</div>
                             @error('photos')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -52,8 +55,10 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <a href="{{ route('admin.facilities.index') }}" class="btn btn-secondary">Batal</a>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Simpan</button>
+                            <a href="{{ route('admin.facilities.index') }}" class="btn btn-secondary">Batal</a>
+                        </div>
                     </form>
                 </div>
             </div>
