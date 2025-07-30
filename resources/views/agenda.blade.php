@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
                     } else {
                         listContainer.style.display = 'none'; // Hide container
-                        noResultsMessage.style.display = 'flex'; // Show no results message
+                        noResultsMessage.style.display = 'block'; // Show no results message
                     }
                 },
                 error: function (xhr, status, error) {
