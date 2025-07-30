@@ -12,86 +12,165 @@
                 <span>Menu Utama</span>
             </li>
 
-            @if(Auth::user()->role != 'mahasiswa')
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                    <i class="fas fa-tachometer-alt fa-fw me-2"></i>
-                    Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('suggestions.index') ? 'active' : '' }}" href="{{ route('suggestions.index') }}">
-                    <i class="fas fa-inbox fa-fw me-2"></i>
-                    Saran & Masukan
-                </a>
-            </li>
+            {{-- Common for Admin & Kaprodi --}}
+            @if(in_array(Auth::user()->role, ['admin', 'kaprodi']))
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                        <i class="fas fa-tachometer-alt fa-fw me-2"></i>
+                        Dashboard
+                    </a>
+                </li>
             @endif
 
-            @if(Auth::user()->role == 'kaprodi')
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('kaprodi.achievements.index') ? 'active' : '' }}" href="{{ route('kaprodi.achievements.index') }}">
-                    <i class="fas fa-check-circle fa-fw me-2"></i>
-                    Validasi Prestasi
-                </a>
-            </li>
-            @endif
-
+            {{-- Mahasiswa Menu --}}
             @if(Auth::user()->role == 'mahasiswa')
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('achievements.create') ? 'active' : '' }}" href="{{ route('achievements.create') }}">
-                    <i class="fas fa-trophy fa-fw me-2"></i>
-                    Ajukan Prestasi
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::routeIs('achievements.create') ? 'active' : '' }}" href="{{ route('achievements.create') }}">
+                        <i class="fas fa-trophy fa-fw me-2"></i>
+                        Ajukan Prestasi
+                    </a>
+                </li>
             @endif
 
+            {{-- Kaprodi Menu --}}
+            @if(Auth::user()->role == 'kaprodi')
+                <li class="nav-item-header mt-4 mb-1 text-uppercase">
+                    <span>Validasi & Masukan</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::routeIs('kaprodi.achievements.index') ? 'active' : '' }}" href="{{ route('kaprodi.achievements.index') }}">
+                        <i class="fas fa-check-circle fa-fw me-2"></i>
+                        Validasi Prestasi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::routeIs('suggestions.index') ? 'active' : '' }}" href="{{ route('suggestions.index') }}">
+                        <i class="fas fa-inbox fa-fw me-2"></i>
+                        Saran & Masukan
+                    </a>
+                </li>
+            @endif
+
+            {{-- Admin Menu --}}
             @if(Auth::user()->role == 'admin')
-            <li class="nav-item-header mt-4 mb-1 text-uppercase">
-                <span>Manajemen Konten</span>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('admin.agendas.index') ? 'active' : '' }}" href="{{ route('admin.agendas.index') }}">
-                    <i class="fas fa-calendar-days fa-fw me-2"></i>
-                    Manajemen Agenda
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('admin.partners.index') ? 'active' : '' }}" href="{{ route('admin.partners.index') }}">
-                    <i class="fas fa-handshake fa-fw me-2"></i>
-                    Manajemen Mitra
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('admin.documents.index') ? 'active' : '' }}" href="{{ route('admin.documents.index') }}">
-                    <i class="fas fa-folder-open fa-fw me-2"></i>
-                    Manajemen Dokumen
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('admin.faqs.index') ? 'active' : '' }}" href="{{ route('admin.faqs.index') }}">
-                    <i class="fas fa-question-circle fa-fw me-2"></i>
-                    Manajemen FAQ
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('admin.announcements.index') ? 'active' : '' }}" href="{{ route('admin.announcements.index') }}">
-                    <i class="fas fa-bullhorn fa-fw me-2"></i>
-                    Manajemen Pengumuman
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('admin.facilities.index') ? 'active' : '' }}" href="{{ route('admin.facilities.index') }}">
-                    <i class="fas fa-building fa-fw me-2"></i>
-                    Manajemen Fasilitas
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::routeIs('admin.curriculums.index') ? 'active' : '' }}" href="{{ route('admin.curriculums.index') }}">
-                    <i class="fas fa-book-open fa-fw me-2"></i>
-                    Manajemen Kurikulum
-                </a>
-            </li>
+                <li class="nav-item-header mt-4 mb-1 text-uppercase">
+                    <span>Manajemen</span>
+                </li>
+                {{-- Group 1: Manajemen Konten --}}
+                <li class="nav-item">
+                    <a class="nav-link collapsed d-flex justify-content-between align-items-center" href="#contentSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="contentSubmenu">
+                        <span>
+                            <i class="fas fa-file-alt fa-fw me-2"></i>
+                            Manajemen Konten
+                        </span>
+                        <i class="fas fa-chevron-up"></i>
+                    </a>
+                    <div class="collapse" id="contentSubmenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item"><a class="nav-link {{ Request::routeIs('admin.agendas.index') ? 'active' : '' }}" href="{{ route('admin.agendas.index') }}">Agenda</a></li>
+                            <li class="nav-item"><a class="nav-link {{ Request::routeIs('admin.announcements.index') ? 'active' : '' }}" href="{{ route('admin.announcements.index') }}">Pengumuman</a></li>
+                            <li class="nav-item"><a class="nav-link {{ Request::routeIs('admin.documents.index') ? 'active' : '' }}" href="{{ route('admin.documents.index') }}">Dokumen</a></li>
+                            <li class="nav-item"><a class="nav-link {{ Request::routeIs('admin.curriculums.index') ? 'active' : '' }}" href="{{ route('admin.curriculums.index') }}">Kurikulum</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                {{-- Group 2: Manajemen Halaman --}}
+                <li class="nav-item">
+                    <a class="nav-link collapsed d-flex justify-content-between align-items-center" href="#pageSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="pageSubmenu">
+                        <span>
+                            <i class="fas fa-sitemap fa-fw me-2"></i>
+                            Manajemen Halaman
+                        </span>
+                        <i class="fas fa-chevron-up"></i>
+                    </a>
+                    <div class="collapse" id="pageSubmenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item"><a class="nav-link {{ Request::routeIs('admin.partners.index') ? 'active' : '' }}" href="{{ route('admin.partners.index') }}">Mitra</a></li>
+                            <li class="nav-item"><a class="nav-link {{ Request::routeIs('admin.faqs.index') ? 'active' : '' }}" href="{{ route('admin.faqs.index') }}">FAQ</a></li>
+                            <li class="nav-item"><a class="nav-link {{ Request::routeIs('admin.facilities.index') ? 'active' : '' }}" href="{{ route('admin.facilities.index') }}">Fasilitas</a></li>
+                        </ul>
+                    </div>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link {{ Request::routeIs('suggestions.index') ? 'active' : '' }}" href="{{ route('suggestions.index') }}">
+                        <i class="fas fa-inbox fa-fw me-2"></i>
+                        Saran & Masukan
+                    </a>
+                </li>
             @endif
         </ul>
     </div>
 </nav>
+
+@push('scripts')
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+    // --- Initial State Setup ---
+    // Find all collapse triggers
+    const collapseTriggers = document.querySelectorAll('.sidebar-layout .nav-link[data-bs-toggle="collapse"]');
+
+    // Function to set the icon for a trigger based on its expanded state
+    const setInitialIcon = (trigger) => {
+        const icon = trigger.querySelector('.fas[class*="fa-chevron-"]');
+        if (!icon) return;
+        
+        const target = document.querySelector(trigger.getAttribute('data-bs-target'));
+        if (target && target.classList.contains('show')) {
+            // It's open, show 'down' arrow
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+        } else {
+            // It's closed, show 'up' arrow
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+        }
+    };
+
+    // Logic to automatically open the active submenu and set its icon
+    const activeSubLink = document.querySelector('.nav-item .collapse .nav-link.active');
+    if (activeSubLink) {
+        const collapseElement = activeSubLink.closest('.collapse');
+        if (collapseElement) {
+            collapseElement.classList.add('show'); // Ensure it's open
+            const trigger = document.querySelector(`[data-bs-target="#${collapseElement.id}"]`);
+            if (trigger) {
+                trigger.classList.remove('collapsed');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        }
+    }
+    
+    // Set the correct initial icons for ALL triggers after potentially opening one
+    collapseTriggers.forEach(setInitialIcon);
+
+    // --- Click Event Handling ---
+    collapseTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function() {
+            const icon = this.querySelector('.fas[class*="fa-chevron-"]');
+            if (icon) {
+                // Directly toggle the classes
+                icon.classList.toggle('fa-chevron-up');
+                icon.classList.toggle('fa-chevron-down');
+            }
+        });
+    });
+});
+</script>
+@endpush
+
+@push('styles')
+<style>
+    .sidebar-layout .collapse .nav-link {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem 0.5rem 2.5rem; /* Added more left padding for sub-items */
+    }
+    .sidebar-layout .collapse .nav-link.active {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    .sidebar-layout .nav-link[data-bs-toggle="collapse"] {
+        padding-right: 1rem; /* Ensure padding for the arrow */
+    }
+</style>
+@endpush
