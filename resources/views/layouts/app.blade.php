@@ -20,6 +20,7 @@
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.0/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="{{ asset('css/featurette-layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom-facilities.css') }}">
     @stack('styles')
     <style>
         /* Sidebar Full Height Fix */

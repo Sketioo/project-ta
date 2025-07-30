@@ -12,30 +12,26 @@
         </div>
 
         @if($facilities->isNotEmpty())
-            @foreach ($facilities as $index => $facility)
-                <div class="row featurette-item">
-                    <div class="col-md-7 {{ $index % 2 !== 0 ? 'order-md-2' : '' }}">
-                        <h2 class="featurette-heading">{{ $facility->name }}</h2>
-                        <p class="lead featurette-text">{{ $facility->description }}</p>
-                        <p><a class="btn btn-primary" href="{{ route('facilities.show', $facility->id) }}">Lihat Detail &raquo;</a></p>
-                    </div>
-                    <div class="col-md-5 {{ $index % 2 !== 0 ? 'order-md-1' : '' }}">
-                        <div class="featurette-image-container">
+            <div class="facility-grid">
+                @foreach ($facilities as $facility)
+                    <div class="facility-card">
+                        <div class="card-img-container">
                             @if($facility->photos && !empty($facility->photos[0]))
-                                <img src="{{ asset('storage/' . $facility->photos[0]) }}" class="featurette-image" alt="{{ $facility->name }}">
+                                <img src="{{ asset('storage/' . $facility->photos[0]) }}" class="card-img" alt="{{ $facility->name }}">
                             @else
-                                <div class="featurette-placeholder">
+                                <div class="facility-placeholder">
                                     <span>Gambar tidak tersedia</span>
                                 </div>
                             @endif
                         </div>
+                        <div class="card-body">
+                            <h3 class="card-title">{{ $facility->name }}</h3>
+                            <p class="card-text">{{ Str::limit($facility->description, 120) }}</p>
+                            <a href="{{ route('facilities.show', $facility->id) }}" class="btn btn-primary">Lihat Detail</a>
+                        </div>
                     </div>
-                </div>
-
-                @if (!$loop->last)
-                    <hr class="featurette-divider">
-                @endif
-            @endforeach
+                @endforeach
+            </div>
 
             @if ($facilities->hasPages())
                 <div class="mt-5 d-flex justify-content-center">
