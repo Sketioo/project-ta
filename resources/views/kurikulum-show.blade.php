@@ -15,7 +15,7 @@
     .kurikulum-title {
         font-size: 2.5rem;
         font-weight: 800;
-        color: #1a253c; /* Warna gelap yang lebih pekat */
+        color: #1a253c;
         position: relative;
         display: inline-block;
         padding-bottom: 10px;
@@ -33,7 +33,7 @@
     }
     .kurikulum-description {
         font-size: 1.1rem;
-        color: #5a6782; /* Warna abu-biru yang lebih lembut */
+        color: #5a6782;
         margin-top: 1rem;
         max-width: 800px;
         margin-left: auto;
@@ -71,20 +71,49 @@
         padding: 3rem;
     }
 
-    /* Style untuk Sidebar dan Info Box */
+    /* Style untuk Info Box dengan efek kertas terlipat dan pin */
     .info-box {
-        background-color: #ffffff;
-        border-radius: 12px;
-        padding: 1.5rem;
+        background: #ffffff;
+        padding: 3.5rem 1.5rem 1.5rem 1.5rem; /* Menambah padding atas untuk pin */
         margin-bottom: 1.5rem;
         border: 1px solid #e8eef7;
         box-shadow: 0 5px 25px rgba(41, 82, 122, 0.06);
-        transition: all 0.3s ease;
+        position: relative;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+        /* Menambahkan ikon pin sebagai background */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="%23ff6b6b" d="M12 2C9.243 2 7 4.243 7 7c0 1.453.614 2.774 1.591 3.736L6 18h2v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3h2l-2.591-7.264A4.982 4.982 0 0 0 17 7c0-2.757-2.243-5-5-5z"/><circle cx="12" cy="7" r="3" fill="%23ff4757"/></svg>');
+        background-repeat: no-repeat;
+        background-position: top 15px center; /* Sedikit menurunkan posisi pin */
+        background-size: 28px;
     }
+
+    .info-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: 30px;
+        background-color: #f4f7fc;
+        border-bottom: 1px solid #e8eef7;
+        border-left: 1px solid #e8eef7;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 8px;
+        box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s ease-in-out;
+    }
+
     .info-box:hover {
-        border-left: 4px solid var(--primary-color);
-        transform: translateX(5px);
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 10px 30px rgba(41, 82, 122, 0.1);
     }
+
+    .info-box:hover::before {
+        width: 35px;
+        height: 35px;
+    }
+
     .info-box-title {
         font-size: 1.2rem;
         font-weight: 700;
@@ -104,7 +133,7 @@
     }
     .info-box-content p, .info-box-content ul {
         font-size: 0.95rem;
-        color: #3e4a61; /* Warna teks konten yang lebih gelap dan kontras */
+        color: #3e4a61;
         line-height: 1.6;
     }
     .info-box-content ul {
