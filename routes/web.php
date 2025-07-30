@@ -31,6 +31,7 @@ Route::get('/documents/search', [PageController::class, 'searchDocuments'])->nam
 Route::get('/documents/filter', [PageController::class, 'filterDocuments'])->name('documents.filter');
 Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
 Route::get('/facilities/{facility}', [FacilityController::class, 'show'])->name('facilities.show');
+Route::get('/kurikulum/{curriculum}', [PageController::class, 'showCurriculum'])->name('kurikulum.show');
 
 Auth::routes();
 
@@ -71,6 +72,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('announcements/{announcement}/toggle-publication', [\App\Http\Controllers\Admin\AnnouncementController::class, 'togglePublication'])->name('announcements.togglePublication');
         Route::resource('announcements', \App\Http\Controllers\Admin\AnnouncementController::class);
         Route::resource('facilities', AdminFacilityController::class);
+        Route::resource('curriculums', \App\Http\Controllers\Admin\CurriculumController::class);
+        Route::delete('curriculum-images/{curriculumImage}', [\App\Http\Controllers\Admin\CurriculumImageController::class, 'destroy'])->name('curriculum-images.destroy');
     });
 
     // Kaprodi Routes

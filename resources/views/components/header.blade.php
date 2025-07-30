@@ -34,8 +34,11 @@
                         <li class="dropdown-submenu">
                             <a class="dropdown-item dropdown-toggle" href="#"><i class="fas fa-book me-2"></i>Kurikulum</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-check me-2"></i>Kurikulum 2023</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-check me-2"></i>Kurikulum Merdeka</a></li>
+                                @forelse($navCurriculums as $curriculum)
+                                    <li><a class="dropdown-item" href="{{ route('kurikulum.show', $curriculum) }}"><i class="fas fa-calendar-check me-2"></i>{{ $curriculum->name }}</a></li>
+                                @empty
+                                    <li><a class="dropdown-item" href="#">Tidak ada kurikulum</a></li>
+                                @endforelse
                             </ul>
                         </li>
                     </ul>

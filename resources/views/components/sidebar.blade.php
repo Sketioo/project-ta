@@ -85,6 +85,12 @@
                     Manajemen Fasilitas
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::routeIs('admin.curriculums.index') ? 'active' : '' }}" href="{{ route('admin.curriculums.index') }}">
+                    <i class="fas fa-book-open fa-fw me-2"></i>
+                    Manajemen Kurikulum
+                </a>
+            </li>
             @endif
         </ul>
     </div>

@@ -11,6 +11,7 @@ use App\Models\Document;
 use App\Models\DocumentCategory;
 use App\Models\Faq; // Import the Faq model
 use App\Models\Announcement; // Import the Announcement model
+use App\Models\Curriculum;
 
 class PageController extends Controller
 {
@@ -136,5 +137,14 @@ class PageController extends Controller
         $documents = $query->latest()->get();
 
         return response()->json($documents);
+    }
+
+    public function showCurriculum(Curriculum $curriculum)
+    {
+        if (!$curriculum->is_visible) {
+            abort(404);
+        }
+        $curriculum->load('images'); // Eager load images
+        return view('kurikulum-show', compact('curriculum'));
     }
 }
