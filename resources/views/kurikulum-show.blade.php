@@ -2,10 +2,10 @@
 
 @push('styles')
 <style>
+    /* Palet Warna Baru: Biru Lembut & Modern */
     .kurikulum-body {
-        /* Mengganti background dengan gradient dan pattern ikon baru yang relevan */
-        background-color: #eef2f7;
-        background-image: linear-gradient(170deg, rgba(238, 242, 247, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 52 52'%3E%3Cpath fill='%23d1d8e0' fill-opacity='0.2' d='M0 17.83V0h17.83a3 3 0 0 1-2.12 5.12L3 7.24V15a3 3 0 0 1-3 2.83zm0 16.34a3 3 0 0 1 3-2.83h12.24l-2.12-2.12a3 3 0 0 1 2.12-5.12H0v10.07zm17.83 17.83a3 3 0 0 1-5.12-2.12L14.83 35H3a3 3 0 0 1-2.83 3v14h17.66a3 3 0 0 1-2.12-5.12zM52 0v17.83a3 3 0 0 1-3 2.83H36.76l2.12 2.12a3 3 0 0 1-2.12 5.12H52V0zm0 34.17a3 3 0 0 1-3 2.83H34.76l2.12 2.12a3 3 0 0 1-2.12 5.12H52V34.17zM34.17 0a3 3 0 0 1 5.12 2.12L37.17 15H49a3 3 0 0 1 2.83-3V0H34.17z'/%3E%3C/svg%3E");
+        background-color: #f4f7fc;
+        background-image: linear-gradient(170deg, rgba(244, 247, 252, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 52 52'%3E%3Cpath fill='%23d8e1ef' fill-opacity='0.3' d='M0 17.83V0h17.83a3 3 0 0 1-2.12 5.12L3 7.24V15a3 3 0 0 1-3 2.83zm0 16.34a3 3 0 0 1 3-2.83h12.24l-2.12-2.12a3 3 0 0 1 2.12-5.12H0v10.07zm17.83 17.83a3 3 0 0 1-5.12-2.12L14.83 35H3a3 3 0 0 1-2.83 3v14h17.66a3 3 0 0 1-2.12-5.12zM52 0v17.83a3 3 0 0 1-3 2.83H36.76l2.12 2.12a3 3 0 0 1-2.12 5.12H52V0zm0 34.17a3 3 0 0 1-3 2.83H34.76l2.12 2.12a3 3 0 0 1-2.12 5.12H52V34.17zM34.17 0a3 3 0 0 1 5.12 2.12L37.17 15H49a3 3 0 0 1 2.83-3V0H34.17z'/%3E%3C/svg%3E");
         padding: 3rem 0;
     }
     .kurikulum-title-container {
@@ -15,7 +15,7 @@
     .kurikulum-title {
         font-size: 2.5rem;
         font-weight: 800;
-        color: var(--dark-color);
+        color: #1a253c; /* Warna gelap yang lebih pekat */
         position: relative;
         display: inline-block;
         padding-bottom: 10px;
@@ -33,7 +33,7 @@
     }
     .kurikulum-description {
         font-size: 1.1rem;
-        color: #495057;
+        color: #5a6782; /* Warna abu-biru yang lebih lembut */
         margin-top: 1rem;
         max-width: 800px;
         margin-left: auto;
@@ -43,23 +43,23 @@
         background-color: #fff;
         padding: 2.5rem;
         border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(41, 82, 122, 0.1);
+        box-shadow: 0 10px 40px rgba(41, 82, 122, 0.08);
         height: 100%;
     }
     .kurikulum-image-card {
         margin-bottom: 2rem;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.05);
         border: 1px solid #e9ecef;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .kurikulum-image-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 12px 30px rgba(41, 82, 122, 0.12);
+        box-shadow: 0 12px 30px rgba(41, 82, 122, 0.1);
     }
     .kurikulum-image-card .card-body {
-        padding: 0; /* Menghapus padding jika ada */
+        padding: 0;
     }
     .kurikulum-image-card img {
         width: 100%;
@@ -73,17 +73,17 @@
 
     /* Style untuk Sidebar dan Info Box */
     .info-box {
-        background-color: #f0f5fb;
+        background-color: #ffffff;
         border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
-        border: 1px solid #d9e2ec;
-        box-shadow: 0 5px 15px rgba(41, 82, 122, 0.05);
+        border: 1px solid #e8eef7;
+        box-shadow: 0 5px 25px rgba(41, 82, 122, 0.06);
         transition: all 0.3s ease;
     }
     .info-box:hover {
-        border-color: var(--primary-color);
-        transform: translateY(-3px);
+        border-left: 4px solid var(--primary-color);
+        transform: translateX(5px);
     }
     .info-box-title {
         font-size: 1.2rem;
@@ -94,18 +94,17 @@
         padding-left: 1.8rem;
     }
     .info-box-title::before {
-        content: '✔';
+        content: '❖';
         position: absolute;
         left: 0;
         top: 50%;
         transform: translateY(-50%);
         font-size: 1.1rem;
         color: var(--primary-color);
-        font-weight: bold;
     }
     .info-box-content p, .info-box-content ul {
         font-size: 0.95rem;
-        color: #343a40;
+        color: #3e4a61; /* Warna teks konten yang lebih gelap dan kontras */
         line-height: 1.6;
     }
     .info-box-content ul {
@@ -135,7 +134,6 @@
                     @if($curriculum->images->isNotEmpty())
                         <div class="kurikulum-gallery">
                             @foreach($curriculum->images as $index => $image)
-                                {{-- Menghapus card-header untuk menghilangkan judul --}}
                                 <div class="card kurikulum-image-card">
                                     <div class="card-body">
                                         <a href="{{ Storage::url($image->image_path) }}" data-toggle="lightbox" data-gallery="kurikulum-gallery">
@@ -159,7 +157,7 @@
                     <div class="info-box">
                         <h5 class="info-box-title">Tujuan Program Studi</h5>
                         <div class="info-box-content">
-                            <p>Menghasilkan lulusan yang kompeten dalam bidang teknologi informasi, mampu beradaptasi dengan perkembangan teknologi, dan memiliki jiwa wirausaha.</p>
+                            <p>Menghasilkan lulusan yang kompeten, mampu beradaptasi dengan perkembangan teknologi, dan memiliki jiwa wirausaha.</p>
                         </div>
                     </div>
 
@@ -177,9 +175,23 @@
                     </div>
 
                     <div class="info-box">
-                        <h5 class="info-box-title">Kompetensi Utama</h5>
+                        <h5 class="info-box-title">Metode Pembelajaran</h5>
                         <div class="info-box-content">
-                            <p>Mahasiswa dibekali dengan keahlian dalam pengembangan perangkat lunak, analisis data, keamanan siber, dan manajemen proyek TI.</p>
+                            <p>Kami menerapkan metode inovatif, termasuk studi kasus, project-based learning, dan workshop interaktif untuk pemahaman mendalam.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h5 class="info-box-title">Sertifikasi Profesional</h5>
+                        <div class="info-box-content">
+                            <p>Mahasiswa didorong meraih sertifikasi industri (misal: Oracle, Cisco, Microsoft) untuk meningkatkan daya saing di pasar global.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h5 class="info-box-title">Kegiatan Pendukung</h5>
+                        <div class="info-box-content">
+                            <p>Tersedia seminar, kuliah tamu dari praktisi, dan UKM untuk mendukung pengembangan soft skills dan jaringan profesional.</p>
                         </div>
                     </div>
                 </div>
@@ -190,6 +202,5 @@
 @endsection
 
 @push('scripts')
-{{-- Pastikan jQuery sudah dimuat jika 'data-toggle' membutuhkannya, atau gunakan event listener murni --}}
 <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
 @endpush
