@@ -31,7 +31,13 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownTentangProdi">
                         <li><a class="dropdown-item" href="{{ route('facilities.index') }}"><i class="fas fa-building me-2"></i>Fasilitas</a></li>
-                        <li><a class="dropdown-item" href="/kurikulum"><i class="fas fa-book me-2"></i>Kurikulum</a></li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#"><i class="fas fa-book me-2"></i>Kurikulum</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-check me-2"></i>Kurikulum 2023</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-calendar-check me-2"></i>Kurikulum Merdeka</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             </ul>
