@@ -48,8 +48,6 @@
     }
     .kurikulum-image-card {
         margin-bottom: 2rem;
-        border-radius: 12px;
-        overflow: hidden;
         box-shadow: 0 8px 25px rgba(0,0,0,0.05);
         border: 1px solid #e9ecef;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
