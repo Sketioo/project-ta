@@ -80,7 +80,7 @@
                     <a class="nav-link collapsed d-flex justify-content-between align-items-center" href="#pageSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="pageSubmenu">
                         <span>
                             <i class="fas fa-sitemap fa-fw me-2"></i>
-                            Manajemen Halaman
+                            Kelola Halaman
                         </span>
                         <i class="fas fa-chevron-up"></i>
                     </a>
@@ -107,32 +107,27 @@
 <script>
 document.addEventListener("DOMContentLoaded", function(){
     // --- Initial State Setup ---
-    // Find all collapse triggers
     const collapseTriggers = document.querySelectorAll('.sidebar-layout .nav-link[data-bs-toggle="collapse"]');
 
-    // Function to set the icon for a trigger based on its expanded state
     const setInitialIcon = (trigger) => {
         const icon = trigger.querySelector('.fas[class*="fa-chevron-"]');
         if (!icon) return;
         
         const target = document.querySelector(trigger.getAttribute('data-bs-target'));
         if (target && target.classList.contains('show')) {
-            // It's open, show 'down' arrow
             icon.classList.remove('fa-chevron-up');
             icon.classList.add('fa-chevron-down');
         } else {
-            // It's closed, show 'up' arrow
             icon.classList.remove('fa-chevron-down');
             icon.classList.add('fa-chevron-up');
         }
     };
 
-    // Logic to automatically open the active submenu and set its icon
     const activeSubLink = document.querySelector('.nav-item .collapse .nav-link.active');
     if (activeSubLink) {
         const collapseElement = activeSubLink.closest('.collapse');
         if (collapseElement) {
-            collapseElement.classList.add('show'); // Ensure it's open
+            collapseElement.classList.add('show');
             const trigger = document.querySelector(`[data-bs-target="#${collapseElement.id}"]`);
             if (trigger) {
                 trigger.classList.remove('collapsed');
@@ -141,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
     
-    // Set the correct initial icons for ALL triggers after potentially opening one
     collapseTriggers.forEach(setInitialIcon);
 
     // --- Click Event Handling ---
@@ -149,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function(){
         trigger.addEventListener('click', function() {
             const icon = this.querySelector('.fas[class*="fa-chevron-"]');
             if (icon) {
-                // Directly toggle the classes
                 icon.classList.toggle('fa-chevron-up');
                 icon.classList.toggle('fa-chevron-down');
             }
@@ -161,16 +154,36 @@ document.addEventListener("DOMContentLoaded", function(){
 
 @push('styles')
 <style>
+    /* More robust fix for the layout jump issue */
+    .sidebar-layout .position-sticky {
+        /* Set height to fill viewport minus header (adjust 56px if needed) */
+        height: calc(100vh - 56px); 
+        /* Enable vertical scrolling ONLY on this container */
+        overflow-y: auto;
+        /* Keep it positioned correctly below the header */
+        top: 56px; 
+    }
+
+    /* Smoother animation for the collapse itself */
+    .sidebar-layout .collapse {
+        transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Synchronized, smoother animation for the icon */
+    .sidebar-layout .nav-link .fas[class*="fa-chevron-"] {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     .sidebar-layout .collapse .nav-link {
         font-size: 0.9rem;
-        padding: 0.5rem 1rem 0.5rem 2.5rem; /* Added more left padding for sub-items */
+        padding: 0.5rem 1rem 0.5rem 2.5rem;
     }
     .sidebar-layout .collapse .nav-link.active {
         font-weight: bold;
         color: var(--primary-color);
     }
     .sidebar-layout .nav-link[data-bs-toggle="collapse"] {
-        padding-right: 1rem; /* Ensure padding for the arrow */
+        padding-right: 1rem;
     }
 </style>
 @endpush
