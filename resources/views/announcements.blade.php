@@ -57,7 +57,7 @@
             </div>
 
             <!-- Pagination Links -->
-            <div class="d-flex justify-content-center mt-5" id="agendaPaginationLinks">
+            <div class="d-flex justify-content-center mt-5" id="announcementPaginationLinks">
                 {{ $announcements->links() }}
             </div>
         @endif
@@ -67,10 +67,10 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.getElementById('agendaSearchInput');
-    const listContainer = document.getElementById('agendaListContainer');
+    const searchInput = document.getElementById('announcementSearchInput');
+    const listContainer = document.getElementById('announcementListContainer');
     const noResultsMessage = document.getElementById('noResultsMessage');
-    const paginationLinks = document.getElementById('agendaPaginationLinks');
+    const paginationLinks = document.getElementById('announcementPaginationLinks');
 
     let searchTimeout;
 
@@ -120,13 +120,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
                     } else {
                         listContainer.style.display = 'none'; // Hide container
-                        noResultsMessage.style.display = 'flex'; // Show no results message
+                        noResultsMessage.style.display = 'block'; // Show no results message
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error("AJAX Error: ", status, error);
                     listContainer.style.display = 'none';
-                    noResultsMessage.style.display = 'flex';
+                    noResultsMessage.style.display = 'block';
                     noResultsMessage.querySelector('.empty-state-text').innerText = 'Terjadi kesalahan saat mencari pengumuman.';
                 }
             });
