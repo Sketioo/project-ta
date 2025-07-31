@@ -92,6 +92,12 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::routeIs('admin.users.index') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
+                        <i class="fas fa-users fa-fw me-2"></i>
+                        Manajemen Pengguna
+                    </a>
+                </li>
                  <li class="nav-item">
                     <a class="nav-link {{ Request::routeIs('suggestions.index') ? 'active' : '' }}" href="{{ route('suggestions.index') }}">
                         <i class="fas fa-inbox fa-fw me-2"></i>

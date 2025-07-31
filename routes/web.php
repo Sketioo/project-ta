@@ -9,6 +9,7 @@ use App\Http\Controllers\Kaprodi\AchievementValidationController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\Admin\FacilityController as AdminFacilityController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('facilities', AdminFacilityController::class);
         Route::resource('curriculums', \App\Http\Controllers\Admin\CurriculumController::class);
         Route::delete('curriculum-images/{curriculumImage}', [\App\Http\Controllers\Admin\CurriculumImageController::class, 'destroy'])->name('curriculum-images.destroy');
+        Route::resource('users', UserController::class);
     });
 
     // Kaprodi Routes
