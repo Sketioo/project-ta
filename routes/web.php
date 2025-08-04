@@ -41,7 +41,7 @@ Route::get('/facilities', [FacilityController::class, 'index'])->name('facilitie
 Route::get('/facilities/{facility}', [FacilityController::class, 'show'])->name('facilities.show');
 Route::get('/kurikulum/{curriculum}', [PageController::class, 'showCurriculum'])->name('kurikulum.show');
 
-// Auth::routes();
+Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 

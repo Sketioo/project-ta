@@ -105,6 +105,7 @@
                         <div class="mb-3">
                             <label for="photos_dokumentasi" class="form-label">Foto Dokumentasi (Opsional, Multiple)</label>
                             <input type="file" class="form-control @error('photos_dokumentasi.*') is-invalid @enderror" id="photos_dokumentasi" name="photos_dokumentasi[]" multiple>
+                            <div class="form-text">Setiap foto harus memiliki rasio aspek 16:9.</div>
                             @error('photos_dokumentasi.*')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

@@ -58,6 +58,8 @@ class AchievementController extends Controller
             'file_sertifikat' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
             'keterangan_lomba' => 'nullable|string',
             'photos_dokumentasi.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048|aspect_ratio:16/9',
+        ], [
+            'photos_dokumentasi.*.aspect_ratio' => 'Setiap foto dokumentasi harus memiliki rasio aspek 16:9.',
         ]);
 
         $fileSertifikatPath = null;
