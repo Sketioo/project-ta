@@ -1,5 +1,19 @@
 @extends('layouts.app')
 
+@push('styles')
+<style>
+    #role option:hover {
+        background-color: #ffc107 !important; /* Bootstrap yellow */
+        color: #000 !important;
+    }
+    /* Custom focus style for the select element */
+    .form-select:focus {
+        border-color: #ffc107;
+        box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.5);
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="container-fluid">
     <div class="row">

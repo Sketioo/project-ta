@@ -27,6 +27,13 @@ Route::get('/agenda', [PageController::class, 'agenda'])->name('agenda'); // Add
 Route::get('/agenda/{agenda}', [PageController::class, 'showAgendaPublic'])->name('agenda.show.public');
 Route::get('/announcements', [PageController::class, 'announcements'])->name('announcements.public.index');
 Route::get('/announcements/{announcement}', [PageController::class, 'showAnnouncementPublic'])->name('announcements.public.show');
+
+// Achievement Submission Routes for authenticated users
+Route::middleware(['auth'])->group(function () {
+    Route::get('/achievements/create', [AchievementController::class, 'create'])->name('achievements.create');
+    Route::post('/achievements', [AchievementController::class, 'store'])->name('achievements.store');
+});
+
 Route::get('/achievements/{achievement}', [PageController::class, 'showAchievementPublic'])->name('achievements.public.show');
 Route::get('/documents/search', [PageController::class, 'searchDocuments'])->name('documents.search');
 Route::get('/documents/filter', [PageController::class, 'filterDocuments'])->name('documents.filter');
@@ -34,7 +41,7 @@ Route::get('/facilities', [FacilityController::class, 'index'])->name('facilitie
 Route::get('/facilities/{facility}', [FacilityController::class, 'show'])->name('facilities.show');
 Route::get('/kurikulum/{curriculum}', [PageController::class, 'showCurriculum'])->name('kurikulum.show');
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
@@ -54,10 +61,6 @@ Route::middleware(['auth'])->group(function () {
         // Route to view read suggestions
         Route::get('/suggestions/read', [SuggestionController::class, 'readSuggestions'])->name('suggestions.read');
     });
-
-    // Achievement Submission Routes
-    Route::get('/achievements/create', [AchievementController::class, 'create'])->name('achievements.create');
-    Route::post('/achievements', [AchievementController::class, 'store'])->name('achievements.store');
 
     // Admin Routes
     Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
