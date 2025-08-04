@@ -18,10 +18,6 @@ class AchievementController extends Controller
     public function store(Request $request)
     {
         Validator::extend('aspect_ratio', function ($attribute, $value, $parameters, $validator) {
-            $ratio = explode('/', $parameters[0]);
-            $expectedWidth = (int) $ratio[0];
-            $expectedHeight = (int) $ratio[1];
-
             if (!$value->isValid()) {
                 return false;
             }
@@ -34,16 +30,17 @@ class AchievementController extends Controller
             $width = $imageSize[0];
             $height = $imageSize[1];
 
-            // Calculate GCD to simplify the ratio
-            $gcd = function($a, $b) use (&$gcd) {
-                return ($a % $b) ? $gcd($b, $a % $b) : $b;
-            };
+            // Prevent division by zero
+            if ($height == 0) {
+                return false;
+            }
 
-            $commonDivisor = $gcd($width, $height);
-            $actualWidthRatio = $width / $commonDivisor;
-            $actualHeightRatio = $height / $commonDivisor;
+            $ratio = explode('/', $parameters[0]);
+            $expectedRatio = (float)$ratio[0] / (float)$ratio[1];
+            $actualRatio = (float)$width / (float)$height;
 
-            return $actualWidthRatio == $expectedWidth && $actualHeightRatio == $expectedHeight;
+            // Compare with a small tolerance for floating point inaccuracies
+            return abs($actualRatio - $expectedRatio) < 0.01;
         });
 
         $request->validate([
