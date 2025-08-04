@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
+use App\Exports\UsersTemplateExport;
 
 class UserController extends Controller
 {
@@ -96,5 +99,41 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
+    }
+
+    /**
+     * Show the form for importing users.
+     */
+    public function showImportForm()
+    {
+        return view('admin.users.import');
+    }
+
+    /**
+     * Import users from an Excel file.
+     */
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        try {
+            Excel::import(new UsersImport, $request->file('file'));
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+             $failures = $e->failures();
+             // You can handle validation failures here, e.g., return them to the view
+             return back()->withErrors($failures)->withInput();
+        }
+
+        return redirect()->route('admin.users.index')->with('success', 'Users imported successfully.');
+    }
+
+    /**
+     * Export a template for importing users.
+     */
+    public function exportTemplate()
+    {
+        return Excel::download(new UsersTemplateExport, 'users_template.xlsx');
     }
 }

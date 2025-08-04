@@ -79,6 +79,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('curriculums', \App\Http\Controllers\Admin\CurriculumController::class);
         Route::delete('curriculum-images/{curriculumImage}', [\App\Http\Controllers\Admin\CurriculumImageController::class, 'destroy'])->name('curriculum-images.destroy');
         Route::resource('users', UserController::class);
+        Route::get('users-import', [UserController::class, 'showImportForm'])->name('users.importForm');
+        Route::post('users-import', [UserController::class, 'importExcel'])->name('users.import');
+        Route::get('users-export-template', [UserController::class, 'exportTemplate'])->name('users.exportTemplate');
     });
 
     // Kaprodi Routes

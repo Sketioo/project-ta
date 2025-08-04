@@ -27,6 +27,9 @@
                     <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus me-2"></i>Tambah Pengguna Baru
                     </a>
+                    <a href="{{ route('admin.users.importForm') }}" class="btn btn-success">
+                        <i class="fas fa-file-excel me-2"></i>Impor dari Excel
+                    </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
