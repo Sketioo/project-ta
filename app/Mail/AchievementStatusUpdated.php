@@ -31,7 +31,7 @@ class AchievementStatusUpdated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Pembaruan Status Prestasi Anda: ' . $this->achievement->title,
+            subject: 'Pembaruan Status Prestasi: ' . $this->achievement->nama_kompetisi,
         );
     }
 
