@@ -70,10 +70,6 @@ class AchievementValidationController extends Controller
 
     public function destroy(Achievement $achievement)
     {
-        // Optionally, add authorization check here if not already handled by middleware
-        // if (Auth::user()->role !== 'kaprodi') {
-        //     abort(403, 'Unauthorized action.');
-        // }
 
         $achievement->delete();
 
