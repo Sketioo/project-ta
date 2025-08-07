@@ -63,14 +63,8 @@
         @include('components.sidebar')
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                <h1 class="h2">Dashboard</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <a href="{{ route('achievements.create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus-circle me-1"></i>
-                        Lapor Prestasi Baru
-                    </a>
-                </div>
+            <div class="page-header pt-3 pb-2 mb-3">
+                <h1 class="page-title">Dashboard</h1>
             </div>
 
             <!-- Welcome Header -->
@@ -123,8 +117,12 @@
 
             <!-- Achievements Table -->
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0"><i class="fas fa-history me-2"></i>Riwayat Pelaporan Prestasi</h5>
+                    <a href="{{ route('achievements.create') }}" class="btn btn-sm btn-primary shadow-sm">
+                        <i class="fas fa-plus-circle fa-fw me-1"></i>
+                        Lapor Prestasi Baru
+                    </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
