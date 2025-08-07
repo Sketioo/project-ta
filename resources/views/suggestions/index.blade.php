@@ -2,7 +2,7 @@
 
 @push('styles')
     {{-- Link ke stylesheet kustom yang baru --}}
-    <link rel="stylesheet" href="{{ asset('css/custom-suggestions.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/custom-suggestions.css') }}">
 @endpush
 
 @section('content')
