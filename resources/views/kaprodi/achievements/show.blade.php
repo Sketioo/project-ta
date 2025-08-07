@@ -54,6 +54,11 @@
         border-radius: 8px;
     }
     .form-switch .form-check-input { width: 3.5em; height: 1.75em; cursor: pointer; }
+    .form-switch .form-check-input:disabled {
+        cursor: not-allowed;
+        background-color: #e9ecef;
+        opacity: 0.7;
+    }
 </style>
 @endpush
 
@@ -168,3 +173,30 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const statusRadios = document.querySelectorAll('input[name="status"]');
+    const showOnMainPageToggle = document.getElementById('show_on_main_page');
+
+    function updateToggleState() {
+        const selectedStatus = document.querySelector('input[name="status"]:checked').value;
+
+        if (selectedStatus === 'ditolak') {
+            showOnMainPageToggle.checked = false;
+            showOnMainPageToggle.disabled = true;
+        } else {
+            showOnMainPageToggle.disabled = false;
+        }
+    }
+
+    statusRadios.forEach(function(radio) {
+        radio.addEventListener('change', updateToggleState);
+    });
+
+    // Initial check on page load
+    updateToggleState();
+});
+</script>
+@endpush
