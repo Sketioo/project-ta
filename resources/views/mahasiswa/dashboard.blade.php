@@ -31,6 +31,32 @@
     .stat-icon.icon-primary { background: linear-gradient(135deg, #0d6efd, #0a58ca); }
     .stat-icon.icon-success { background: linear-gradient(135deg, #198754, #146c43); }
     .stat-icon.icon-warning { background: linear-gradient(135deg, #ffc107, #d39e00); }
+    .stat-icon.icon-danger { background: linear-gradient(135deg, #dc3545, #b02a37); }
+
+    /* Welcome Header Styles */
+    .dashboard-header {
+        background-color: #f8f9fa;
+        padding: 20px 25px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .dashboard-header .welcome-text h4 {
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: #343a40;
+        margin-bottom: 0.25rem;
+    }
+    .dashboard-header .welcome-text p {
+        font-size: 1rem;
+        color: #6c757d;
+        margin: 0;
+    }
+    .dashboard-header .welcome-icon {
+        font-size: 3rem;
+        color: #dee2e6;
+    }
 
     /* Badge styles */
     .status-badge {
@@ -70,36 +96,47 @@
 
             <!-- Stats Cards -->
             <div class="row g-4 mb-4">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="stat-card-v2">
                         <div class="stat-icon icon-primary">
                             <i class="fas fa-trophy"></i>
                         </div>
                         <div class="stat-info">
-                            <div class="stat-label">Total Prestasi Dilaporkan</div>
+                            <div class="stat-label">Total Prestasi</div>
                             <div class="stat-number">{{ $stats['total'] }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="stat-card-v2">
                         <div class="stat-icon icon-success">
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <div class="stat-info">
-                            <div class="stat-label">Prestasi Disetujui</div>
+                            <div class="stat-label">Disetujui</div>
                             <div class="stat-number">{{ $stats['approved'] }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card-v2">
+                        <div class="stat-icon icon-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-label">Perlu Revisi</div>
+                            <div class="stat-number">{{ $stats['revision'] }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
                     <div class="stat-card-v2">
                         <div class="stat-icon icon-warning">
                             <i class="fas fa-hourglass-half"></i>
                         </div>
                         <div class="stat-info">
                             <div class="stat-label">Menunggu Validasi</div>
-                            <div class="stat-number">{{ $stats['pending'] }}</div>
+                            <div class="stat-number">{{ $stats['waiting'] }}</div>
                         </div>
                     </div>
                 </div>
