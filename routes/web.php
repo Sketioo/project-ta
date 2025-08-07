@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\Admin\FacilityController as AdminFacilityController;
 use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ use App\Http\Controllers\Admin\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/symlink', function () {
+    Artisan::call('storage:link');
+    return 'Storage link created successfully!';
+});
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/agenda', [PageController::class, 'agenda'])->name('agenda'); // Added name for agenda route
