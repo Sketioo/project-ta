@@ -21,6 +21,25 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function authenticated(\Illuminate\Http\Request $request, $user)
+    {
+        if ($user->role == 'mahasiswa') {
+            return redirect()->route('mahasiswa.dashboard');
+        } elseif ($user->role == 'admin' || $user->role == 'kaprodi') {
+            return redirect('/dashboard');
+        }
+
+        return redirect('/dashboard');
+    }
+
+    /**
      * Where to redirect users after login.
      *
      * @var string

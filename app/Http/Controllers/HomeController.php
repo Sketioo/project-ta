@@ -49,4 +49,25 @@ class HomeController extends Controller
 
         return view('dashboard', compact('stats'));
     }
+
+    /**
+     * Show the student dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function mahasiswaDashboard()
+    {
+        $user = Auth::user();
+        $achievementsQuery = Achievement::where('user_id', $user->id);
+
+        $stats = [
+            'total' => $achievementsQuery->count(),
+            'approved' => $achievementsQuery->clone()->where('status', 'approved')->count(),
+            'pending' => $achievementsQuery->clone()->where('status', 'pending')->count(),
+        ];
+
+        $achievements = $achievementsQuery->clone()->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('mahasiswa.dashboard', compact('achievements', 'stats'));
+    }
 }

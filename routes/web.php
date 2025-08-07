@@ -23,11 +23,6 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Route::get('/symlink', function () {
-    Artisan::call('storage:link');
-    return 'Storage link created successfully!';
-});
-
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/agenda', [PageController::class, 'agenda'])->name('agenda'); // Added name for agenda route
 Route::get('/agenda/{agenda}', [PageController::class, 'showAgendaPublic'])->name('agenda.show.public');
@@ -49,7 +44,12 @@ Route::get('/kurikulum/{curriculum}', [PageController::class, 'showCurriculum'])
 
 Auth::routes();
 
+Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
+    Route::get('/mahasiswa/dashboard', [App\Http\Controllers\HomeController::class, 'mahasiswaDashboard'])->name('mahasiswa.dashboard');
+});
+
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
 
 
 // Public route for submitting suggestions

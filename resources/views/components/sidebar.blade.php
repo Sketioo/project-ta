@@ -25,9 +25,9 @@
             {{-- Mahasiswa Menu --}}
             @if(Auth::user()->role == 'mahasiswa')
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('achievements.create') ? 'active' : '' }}" href="{{ route('achievements.create') }}">
-                        <i class="fas fa-trophy fa-fw me-2"></i>
-                        Ajukan Prestasi
+                    <a class="nav-link {{ Request::routeIs('mahasiswa.dashboard') ? 'active' : '' }}" href="{{ route('mahasiswa.dashboard') }}">
+                        <i class="fas fa-tachometer-alt fa-fw me-2"></i>
+                        Dashboard
                     </a>
                 </li>
             @endif

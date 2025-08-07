@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@push('styles')
+{{-- @push('styles')
 <link rel="stylesheet" href="{{ secure_asset('css/custom-login.css') }}">
-@endpush
+@endpush --}}
 
 @section('content')
 <div class="container login-page-container">

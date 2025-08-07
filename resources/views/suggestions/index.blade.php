@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@push('styles')
+{{-- @push('styles')
     {{-- Link ke stylesheet kustom yang baru --}}
-    <link rel="stylesheet" href="{{ secure_asset('css/custom-suggestions.css') }}">
-@endpush
+    {{-- <link rel="stylesheet" href="{{ secure_asset('css/custom-suggestions.css') }}"> --}}
+{{-- @endpush  --}}
 
 @section('content')
 <div class="container-fluid">
