@@ -1,3 +1,9 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+// ... (You can add other specific styles for dashboard etc. here if needed)
+
+
 :root {
     --primary-color: #FFD700; /* Kuning Utama (Emas) */
     --secondary-color: #E6C200; /* Kuning Sedikit Gelap untuk Hover */
@@ -6,6 +12,7 @@
     --text-color: #333333; /* Abu-abu Gelap untuk Teks */
     --background-color: #f4f4f4; /* Abu-abu Sangat Terang untuk Latar */
 }
+
 
 // General Card and Title Styles (from original app.scss)
 .card {
