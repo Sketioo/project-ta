@@ -83,7 +83,7 @@ class AchievementController extends Controller
             'file_sertifikat' => $fileSertifikatPath,
             'keterangan_lomba' => $request->keterangan_lomba,
             'photos_dokumentasi' => $photosDokumentasiPaths,
-            'status' => 'pending',
+            'status' => 'menunggu validasi', // Explicitly set status on creation
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Pengajuan prestasi berhasil dikirim!');

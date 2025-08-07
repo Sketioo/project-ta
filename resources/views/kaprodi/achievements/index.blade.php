@@ -15,7 +15,8 @@
         }
         .status-disetujui { background-color: #d1e7dd; color: #0f5132; }
         .status-ditolak { background-color: #f8d7da; color: #58151c; }
-        .status-pending { background-color: #fff3cd; color: #664d03; }
+        .status-menunggu-validasi { background-color: #cfe2ff; color: #084298; }
+        .status-pending { background-color: #fff3cd; color: #664d03; } /* Revisi */
         .action-btn-group .btn {
             width: 40px;
             height: 40px;
@@ -45,6 +46,7 @@
                             <form id="filterForm" action="{{ route('kaprodi.achievements.index') }}" method="GET">
                                 <select name="status" class="form-select" onchange="document.getElementById('filterForm').submit()">
                                     <option value="all" {{ request('status', 'all') == 'all' ? 'selected' : '' }}>Semua Status</option>
+                                    <option value="menunggu validasi" {{ request('status') == 'menunggu validasi' ? 'selected' : '' }}>Menunggu Validasi</option>
                                     <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Revisi</option>
                                     <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
                                     <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
@@ -77,7 +79,13 @@
                                         <td class="text-center">{{ $achievement->created_at->format('d M Y') }}</td>
                                         <td class="text-center">
                                             <span class="status-badge status-{{ str_replace(' ', '-', strtolower($achievement->status)) }}">
-                                                {{ ucfirst($achievement->status) }}
+                                                @if($achievement->status == 'pending')
+                                                    Revisi
+                                                @elseif($achievement->status == 'menunggu validasi')
+                                                    Menunggu Validasi
+                                                @else
+                                                    {{ ucfirst($achievement->status) }}
+                                                @endif
                                             </span>
                                         </td>
                                         <td class="text-center">

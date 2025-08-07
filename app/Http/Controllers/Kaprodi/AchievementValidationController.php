@@ -38,41 +38,42 @@ class AchievementValidationController extends Controller
     public function update(Request $request, Achievement $achievement)
     {
         $validatedData = $request->validate([
-            'status' => 'sometimes|required|in:pending,menunggu validasi,disetujui,ditolak',
-            'keterangan_lomba' => 'sometimes|required|string',
+            'status' => 'sometimes|in:pending,disetujui,ditolak', // 'menunggu validasi' is not a state kaprodi can set.
+            'keterangan_lomba' => 'nullable|string',
             'show_on_main_page' => 'sometimes|boolean',
         ]);
 
         $updateData = [];
         $statusChanged = false;
 
-        // When Kaprodi sets to "Revisi", we store it as "pending"
-        if (isset($validatedData['status'])) {
+        // Only update status if it's present in the request
+        if ($request->has('status')) {
             $newStatus = $validatedData['status'];
             if ($achievement->status !== $newStatus) {
                 $statusChanged = true;
+                $updateData['status'] = $newStatus;
+                $updateData['validated_by'] = Auth::id();
+                $updateData['validated_at'] = now();
             }
-            $updateData['status'] = $newStatus;
-            $updateData['validated_by'] = Auth::id();
-            $updateData['validated_at'] = now();
         }
 
-        if (isset($validatedData['keterangan_lomba'])) {
+        if ($request->has('keterangan_lomba')) {
             $updateData['keterangan_lomba'] = $validatedData['keterangan_lomba'];
         }
 
-        if (isset($validatedData['show_on_main_page'])) {
-            $updateData['show_on_main_page'] = $validatedData['show_on_main_page'];
-        } else {
-            // Ensure the value is set to 0 if the checkbox is not checked
-            $updateData['show_on_main_page'] = 0;
+        // Handle the checkbox for showing on the main page
+        $updateData['show_on_main_page'] = $request->has('show_on_main_page') ? 1 : 0;
+
+        if (!empty($updateData)) {
+            $achievement->update($updateData);
         }
 
-        $achievement->update($updateData);
-
-        // Send email if status was changed
-        if ($statusChanged) {
-            Mail::to($achievement->user->email)->send(new AchievementStatusUpdated($achievement));
+        // Send email if status was changed to 'disetujui' or 'ditolak'
+        if ($statusChanged && in_array($achievement->status, ['disetujui', 'ditolak'])) {
+            // Make sure user and email exist to prevent errors
+            if ($achievement->user && $achievement->user->email) {
+                Mail::to($achievement->user->email)->send(new AchievementStatusUpdated($achievement));
+            }
         }
 
         return redirect()->route('kaprodi.achievements.show', $achievement)->with('success', 'Perubahan berhasil disimpan.');

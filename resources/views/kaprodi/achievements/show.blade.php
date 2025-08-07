@@ -107,8 +107,10 @@
                                             <span class="status-badge status-disetujui">Disetujui</span>
                                         @elseif($achievement->status == 'ditolak')
                                             <span class="status-badge status-ditolak">Ditolak</span>
-                                        @else
+                                        @elseif($achievement->status == 'pending')
                                             <span class="status-badge status-revisi">Revisi</span>
+                                        @else
+                                            <span class="status-badge status-menunggu-validasi">Menunggu Validasi</span>
                                         @endif
                                     </span>
                                 </div>
@@ -149,6 +151,7 @@
                                 <div class="mb-4">
                                     <label class="form-label-custom">Ubah Status Pengajuan</label>
                                     <div class="status-radio-group text-center">
+                                        {{-- The 'Revisi' button sets the status to 'pending' --}}
                                         <input type="radio" class="btn-check" name="status" id="status_pending" value="pending" {{ $achievement->status == 'pending' ? 'checked' : '' }} autocomplete="off">
                                         <label class="btn btn-outline-primary" for="status_pending">Revisi</label>
 
@@ -190,9 +193,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const showOnMainPageToggle = document.getElementById('show_on_main_page');
 
     function updateToggleState() {
-        const selectedStatus = document.querySelector('input[name="status"]:checked').value;
+        const selectedStatusRadio = document.querySelector('input[name="status"]:checked');
+        
+        // If no radio button is selected, do nothing.
+        if (!selectedStatusRadio) {
+            showOnMainPageToggle.disabled = false;
+            return;
+        }
+        
+        const selectedStatus = selectedStatusRadio.value;
 
-        if (selectedStatus === 'ditolak') {
+        if (selectedStatus === 'ditolak' || selectedStatus === 'pending') {
             showOnMainPageToggle.checked = false;
             showOnMainPageToggle.disabled = true;
         } else {
