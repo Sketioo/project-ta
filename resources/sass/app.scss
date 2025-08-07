@@ -1,5 +1,11 @@
-// Import Bootstrap
-@import '~bootstrap/scss/bootstrap';
+:root {
+    --primary-color: #FFD700; /* Kuning Utama (Emas) */
+    --secondary-color: #E6C200; /* Kuning Sedikit Gelap untuk Hover */
+    --dark-color: #1a1a1a; /* Hitam Pekat */
+    --light-color: #ffffff; /* Putih */
+    --text-color: #333333; /* Abu-abu Gelap untuk Teks */
+    --background-color: #f4f4f4; /* Abu-abu Sangat Terang untuk Latar */
+}
 
 // General Card and Title Styles (from original app.scss)
 .card {
@@ -24,15 +30,6 @@
 }
 
 // Custom Color Palette and Global Styles
-:root {
-    --primary-color: #FFD700; /* Kuning Utama (Emas) */
-    --secondary-color: #E6C200; /* Kuning Sedikit Gelap untuk Hover */
-    --dark-color: #1a1a1a; /* Hitam Pekat */
-    --light-color: #ffffff; /* Putih */
-    --text-color: #333333; /* Abu-abu Gelap untuk Teks */
-    --background-color: #f4f4f4; /* Abu-abu Sangat Terang untuk Latar */
-}
-
 html, body {
     height: 100%;
     font-family: 'Inter', sans-serif;
