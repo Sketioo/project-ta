@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('achievements', function (Blueprint $table) {
-            $table->string('status')->default('pending');
+            $table->string('status', 50)->default('menunggu validasi');
             $table->foreignId('validated_by')->nullable()->constrained('users');
             $table->timestamp('validated_at')->nullable();
         });

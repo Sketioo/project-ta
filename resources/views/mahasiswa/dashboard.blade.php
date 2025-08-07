@@ -32,18 +32,7 @@
     .stat-icon.icon-success { background: linear-gradient(135deg, #198754, #146c43); }
     .stat-icon.icon-warning { background: linear-gradient(135deg, #ffc107, #d39e00); }
 
-    .stat-info .stat-label {
-        font-size: 14px;
-        color: #6c757d;
-        margin-bottom: 4px;
-    }
-    .stat-info .stat-number {
-        font-size: 28px;
-        font-weight: 700;
-        color: #343a40;
-    }
-
-    /* Badge styles from previous step */
+    /* Badge styles */
     .status-badge {
         padding: 0.5em 0.75em;
         border-radius: 0.375rem;
@@ -51,9 +40,10 @@
         font-weight: 600;
         text-transform: capitalize;
     }
-    .status-pending { background-color: #fff3cd; color: #664d03; }
+    .status-menunggu-validasi { background-color: #cfe2ff; color: #084298; }
     .status-approved { background-color: #d1e7dd; color: #0f5132; }
     .status-rejected { background-color: #f8d7da; color: #842029; }
+    .status-pending { background-color: #fff3cd; color: #664d03; } /* This is for Kaprodi's "Revisi" */
 </style>
 @endpush
 
@@ -63,7 +53,7 @@
         @include('components.sidebar')
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 management-page">
-            <div class="page-header pt-3 pb-2 mb-3">
+            <div class="page-header pt-3">
                 <h1 class="page-title">Dashboard</h1>
             </div>
 
@@ -146,8 +136,13 @@
                                     <td>{{ $achievement->prestasi }}</td>
                                     <td>{{ \Carbon\Carbon::parse($achievement->tanggal_pelaksanaan)->translatedFormat('d F Y') }}</td>
                                     <td class="text-center">
-                                        <span class="status-badge status-{{ strtolower($achievement->status) }}">
-                                            {{ $achievement->status }}
+                                        <span class="status-badge status-{{ str_replace(' ', '-', strtolower($achievement->status)) }}">
+                                            {{-- Display "Menunggu Validasi" for 'pending' status --}}
+                                            @if($achievement->status == 'pending')
+                                                Menunggu Validasi
+                                            @else
+                                                {{ ucfirst($achievement->status) }}
+                                            @endif
                                         </span>
                                     </td>
                                 </tr>

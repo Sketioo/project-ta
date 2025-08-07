@@ -38,7 +38,7 @@ class AchievementValidationController extends Controller
     public function update(Request $request, Achievement $achievement)
     {
         $validatedData = $request->validate([
-            'status' => 'sometimes|required|in:pending,disetujui,ditolak',
+            'status' => 'sometimes|required|in:pending,menunggu validasi,disetujui,ditolak',
             'keterangan_lomba' => 'sometimes|required|string',
             'show_on_main_page' => 'sometimes|boolean',
         ]);
@@ -46,11 +46,13 @@ class AchievementValidationController extends Controller
         $updateData = [];
         $statusChanged = false;
 
+        // When Kaprodi sets to "Revisi", we store it as "pending"
         if (isset($validatedData['status'])) {
-            if ($achievement->status !== $validatedData['status']) {
+            $newStatus = $validatedData['status'];
+            if ($achievement->status !== $newStatus) {
                 $statusChanged = true;
             }
-            $updateData['status'] = $validatedData['status'];
+            $updateData['status'] = $newStatus;
             $updateData['validated_by'] = Auth::id();
             $updateData['validated_at'] = now();
         }
@@ -61,6 +63,9 @@ class AchievementValidationController extends Controller
 
         if (isset($validatedData['show_on_main_page'])) {
             $updateData['show_on_main_page'] = $validatedData['show_on_main_page'];
+        } else {
+            // Ensure the value is set to 0 if the checkbox is not checked
+            $updateData['show_on_main_page'] = 0;
         }
 
         $achievement->update($updateData);
