@@ -42,7 +42,7 @@
         margin-bottom: 0.5rem;
         border-width: 2px;
     }
-    .status-radio-group input[type="radio"]:checked + .btn-outline-secondary { background-color: var(--bs-secondary); color: #fff; border-color: var(--bs-secondary); }
+    .status-radio-group input[type="radio"]:checked + .btn-outline-primary { background-color: var(--bs-primary); color: #fff; border-color: var(--bs-primary); }
     .status-radio-group input[type="radio"]:checked + .btn-outline-success { background-color: var(--bs-success); color: #fff; border-color: var(--bs-success); }
     .status-radio-group input[type="radio"]:checked + .btn-outline-danger { background-color: var(--bs-danger); color: #fff; border-color: var(--bs-danger); }
     .form-check-custom {
@@ -59,6 +59,15 @@
         background-color: #e9ecef;
         opacity: 0.7;
     }
+    /* Enhanced Textarea Style */
+    #keterangan_lomba {
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        background-color: #fdfdff;
+    }
+    #keterangan_lomba:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
 </style>
 @endpush
 
@@ -67,8 +76,8 @@
     <div class="row">
         @include('components.sidebar')
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
-            <div class="page-header pt-3">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4 management-page">
+            <div class="page-header pt-3 mb-3">
                 <h1 class="page-title">Detail & Validasi Prestasi</h1>
             </div>
 
@@ -78,7 +87,7 @@
 
                 <div class="row g-4">
                     <!-- Details Column -->
-                    <div class="col-lg-7">
+                    <div class="col-lg-8">
                         <div class="card details-card">
                             <div class="card-header"><i class="fas fa-info-circle me-2"></i>Detail Pengajuan</div>
                             <div class="card-body p-4">
@@ -105,7 +114,7 @@
                                 </div>
                                 <div class="pt-3">
                                     <label for="keterangan_lomba" class="form-label-custom">Keterangan Lomba (dapat diedit)</label>
-                                    <textarea name="keterangan_lomba" id="keterangan_lomba" class="form-control" rows="5">{{ old('keterangan_lomba', $achievement->keterangan_lomba) }}</textarea>
+                                    <textarea name="keterangan_lomba" id="keterangan_lomba" class="form-control" rows="8">{{ old('keterangan_lomba', $achievement->keterangan_lomba) }}</textarea>
                                 </div>
 
                                 @if ($achievement->file_sertifikat)
@@ -133,7 +142,7 @@
                     </div>
 
                     <!-- Form Column -->
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         <div class="card form-card">
                             <div class="card-header"><i class="fas fa-edit me-2"></i>Form Validasi</div>
                             <div class="card-body p-4">
@@ -141,7 +150,7 @@
                                     <label class="form-label-custom">Ubah Status Pengajuan</label>
                                     <div class="status-radio-group text-center">
                                         <input type="radio" class="btn-check" name="status" id="status_pending" value="pending" {{ $achievement->status == 'pending' ? 'checked' : '' }} autocomplete="off">
-                                        <label class="btn btn-outline-secondary" for="status_pending">Revisi</label>
+                                        <label class="btn btn-outline-primary" for="status_pending">Revisi</label>
 
                                         <input type="radio" class="btn-check" name="status" id="status_disetujui" value="disetujui" {{ $achievement->status == 'disetujui' ? 'checked' : '' }} autocomplete="off">
                                         <label class="btn btn-outline-success" for="status_disetujui">Setujui</label>
@@ -161,7 +170,7 @@
                                 </div>
 
                                 <div class="d-grid gap-2 mt-4">
-                                    <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save me-2"></i>Simpan Perubahan</button>
+                                    <button type="submit" class="btn btn-warning btn-lg text-dark"><i class="fas fa-save me-2"></i>Simpan Perubahan</button>
                                     <a href="{{ route('kaprodi.achievements.index') }}" class="btn btn-light btn-lg">Kembali</a>
                                 </div>
                             </div>
