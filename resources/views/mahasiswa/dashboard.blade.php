@@ -41,9 +41,9 @@
         text-transform: capitalize;
     }
     .status-menunggu-validasi { background-color: #cfe2ff; color: #084298; }
-    .status-approved { background-color: #d1e7dd; color: #0f5132; }
-    .status-rejected { background-color: #f8d7da; color: #842029; }
-    .status-pending { background-color: #fff3cd; color: #664d03; } /* This is for Kaprodi's "Revisi" */
+    .status-disetujui { background-color: #d1e7dd; color: #0f5132; }
+    .status-ditolak { background-color: #f8d7da; color: #842029; }
+    .status-pending { background-color: #fff3cd; color: #664d03; } /* This is for "Revisi" */
 </style>
 @endpush
 
@@ -137,8 +137,9 @@
                                     <td>{{ \Carbon\Carbon::parse($achievement->tanggal_pelaksanaan)->translatedFormat('d F Y') }}</td>
                                     <td class="text-center">
                                         <span class="status-badge status-{{ str_replace(' ', '-', strtolower($achievement->status)) }}">
-                                            {{-- Display "Menunggu Validasi" for 'pending' status --}}
                                             @if($achievement->status == 'pending')
+                                                Revisi
+                                            @elseif($achievement->status == 'menunggu validasi')
                                                 Menunggu Validasi
                                             @else
                                                 {{ ucfirst($achievement->status) }}

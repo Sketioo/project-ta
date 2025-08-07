@@ -86,6 +86,6 @@ class AchievementController extends Controller
             'status' => 'menunggu validasi', // Explicitly set status on creation
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Pengajuan prestasi berhasil dikirim!');
+        return redirect()->route('mahasiswa.dashboard')->with('success', 'Pengajuan prestasi berhasil dikirim!');
     }
 }
