@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
     <!-- Animate.css -->
@@ -19,8 +19,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.0/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="{{ asset('css/featurette-layout.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom-facilities.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/featurette-layout.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/custom-facilities.css') }}">
     @stack('styles')
     <style>
         /* Sidebar Full Height Fix */
