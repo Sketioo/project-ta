@@ -6,11 +6,6 @@
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         border: none;
-        transition: all 0.3s ease-in-out;
-    }
-    .details-card:hover, .form-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
     .details-card .card-header, .form-card .card-header {
         background-color: #f8f9fa;
@@ -25,15 +20,9 @@
         padding: 0.75rem 0;
         border-bottom: 1px solid #f1f1f1;
     }
-    .detail-item:last-child {
-        border-bottom: none;
-    }
-    .detail-item strong {
-        color: #495057;
-    }
-    .detail-item span {
-        color: #6c757d;
-    }
+    .detail-item:last-child { border-bottom: none; }
+    .detail-item strong { color: #495057; }
+    .detail-item span { color: #6c757d; }
     .status-badge {
         padding: 0.4em 0.8em;
         border-radius: 50px;
@@ -42,7 +31,7 @@
     }
     .status-disetujui { background-color: #d1e7dd; color: #0f5132; }
     .status-ditolak { background-color: #f8d7da; color: #58151c; }
-    .status-pending { background-color: #fff3cd; color: #664d03; }
+    .status-revisi { background-color: #fff3cd; color: #664d03; }
     .form-label-custom {
         font-weight: 600;
         margin-bottom: 0.75rem;
@@ -53,24 +42,9 @@
         margin-bottom: 0.5rem;
         border-width: 2px;
     }
-    .status-radio-group input[type="radio"] {
-        display: none;
-    }
-    .status-radio-group input[type="radio"]:checked + .btn-outline-secondary {
-        background-color: var(--bs-secondary);
-        color: #fff;
-        border-color: var(--bs-secondary);
-    }
-    .status-radio-group input[type="radio"]:checked + .btn-outline-success {
-        background-color: var(--bs-success);
-        color: #fff;
-        border-color: var(--bs-success);
-    }
-    .status-radio-group input[type="radio"]:checked + .btn-outline-danger {
-        background-color: var(--bs-danger);
-        color: #fff;
-        border-color: var(--bs-danger);
-    }
+    .status-radio-group input[type="radio"]:checked + .btn-outline-secondary { background-color: var(--bs-secondary); color: #fff; border-color: var(--bs-secondary); }
+    .status-radio-group input[type="radio"]:checked + .btn-outline-success { background-color: var(--bs-success); color: #fff; border-color: var(--bs-success); }
+    .status-radio-group input[type="radio"]:checked + .btn-outline-danger { background-color: var(--bs-danger); color: #fff; border-color: var(--bs-danger); }
     .form-check-custom {
         display: flex;
         align-items: center;
@@ -79,14 +53,7 @@
         background-color: #f8f9fa;
         border-radius: 8px;
     }
-    .form-check-label strong {
-        color: #495057;
-    }
-    .form-switch .form-check-input {
-        width: 3.5em;
-        height: 1.75em;
-        cursor: pointer;
-    }
+    .form-switch .form-check-input { width: 3.5em; height: 1.75em; cursor: pointer; }
 </style>
 @endpush
 
@@ -100,81 +67,76 @@
                 <h1 class="page-title">Detail & Validasi Prestasi</h1>
             </div>
 
-            <div class="row g-4">
-                <!-- Details Column -->
-                <div class="col-lg-7">
-                    <div class="card details-card">
-                        <div class="card-header">
-                            <i class="fas fa-info-circle me-2"></i>Detail Pengajuan
-                        </div>
-                        <div class="card-body p-4">
-                            <h4 class="card-title mb-3">{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}</h4>
-                            <div class="detail-item">
-                                <strong>Mahasiswa</strong>
-                                <span>{{ $achievement->user->name }}</span>
-                            </div>
-                            <div class="detail-item">
-                                <strong>NIM</strong>
-                                <span>{{ $achievement->nim }}</span>
-                            </div>
-                            
-                            <div class="detail-item">
-                                <strong>Status Saat Ini</strong>
-                                <span>
-                                    @if($achievement->status == 'disetujui')
-                                        <span class="status-badge status-disetujui">Disetujui</span>
-                                    @elseif($achievement->status == 'ditolak')
-                                        <span class="status-badge status-ditolak">Ditolak</span>
-                                    @else
-                                        <span class="status-badge status-pending">Pending</span>
-                                    @endif
-                                </span>
-                            </div>
-                            <div class="pt-3">
-                                <strong>Keterangan Lomba</strong>
-                                <p class="text-muted mt-2">{{ $achievement->keterangan_lomba }}</p>
-                            </div>
+            <form action="{{ route('kaprodi.achievements.update', $achievement) }}" method="POST">
+                @csrf
+                @method('PATCH')
 
-                            @if ($achievement->file_sertifikat)
-                                <a href="{{ asset('storage/' . $achievement->file_sertifikat) }}" target="_blank" class="btn btn-outline-primary mt-3">
-                                    <i class="fas fa-paperclip me-2"></i>Lihat Lampiran
-                                </a>
-                            @endif
-
-                            @if ($achievement->photos_dokumentasi && count($achievement->photos_dokumentasi) > 0)
-                                <div class="mt-4">
-                                    <strong>Foto Dokumentasi</strong>
-                                    <div class="row mt-2">
-                                        @foreach ($achievement->photos_dokumentasi as $photoPath)
-                                            <div class="col-md-4 mb-3">
-                                                <a href="{{ asset('storage/' . $photoPath) }}" target="_blank">
-                                                    <img src="{{ asset('storage/' . $photoPath) }}" class="img-fluid rounded shadow-sm" alt="Dokumentasi Prestasi">
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    </div>
+                <div class="row g-4">
+                    <!-- Details Column -->
+                    <div class="col-lg-7">
+                        <div class="card details-card">
+                            <div class="card-header"><i class="fas fa-info-circle me-2"></i>Detail Pengajuan</div>
+                            <div class="card-body p-4">
+                                <h4 class="card-title mb-3">{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}</h4>
+                                <div class="detail-item">
+                                    <strong>Mahasiswa</strong>
+                                    <span>{{ $achievement->user->name }}</span>
                                 </div>
-                            @endif
+                                <div class="detail-item">
+                                    <strong>NIM</strong>
+                                    <span>{{ $achievement->nim }}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Status Saat Ini</strong>
+                                    <span>
+                                        @if($achievement->status == 'disetujui')
+                                            <span class="status-badge status-disetujui">Disetujui</span>
+                                        @elseif($achievement->status == 'ditolak')
+                                            <span class="status-badge status-ditolak">Ditolak</span>
+                                        @else
+                                            <span class="status-badge status-revisi">Revisi</span>
+                                        @endif
+                                    </span>
+                                </div>
+                                <div class="pt-3">
+                                    <label for="keterangan_lomba" class="form-label-custom">Keterangan Lomba (dapat diedit)</label>
+                                    <textarea name="keterangan_lomba" id="keterangan_lomba" class="form-control" rows="5">{{ old('keterangan_lomba', $achievement->keterangan_lomba) }}</textarea>
+                                </div>
+
+                                @if ($achievement->file_sertifikat)
+                                    <a href="{{ asset('storage/' . $achievement->file_sertifikat) }}" target="_blank" class="btn btn-outline-primary mt-3">
+                                        <i class="fas fa-paperclip me-2"></i>Lihat Lampiran
+                                    </a>
+                                @endif
+
+                                @if ($achievement->photos_dokumentasi && count($achievement->photos_dokumentasi) > 0)
+                                    <div class="mt-4">
+                                        <strong>Foto Dokumentasi</strong>
+                                        <div class="row mt-2">
+                                            @foreach ($achievement->photos_dokumentasi as $photoPath)
+                                                <div class="col-md-4 mb-3">
+                                                    <a href="{{ asset('storage/' . $photoPath) }}" target="_blank">
+                                                        <img src="{{ asset('storage/' . $photoPath) }}" class="img-fluid rounded shadow-sm" alt="Dokumentasi Prestasi">
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Form Column -->
-                <div class="col-lg-5">
-                    <div class="card form-card">
-                        <div class="card-header">
-                            <i class="fas fa-edit me-2"></i>Form Validasi
-                        </div>
-                        <div class="card-body p-4">
-                            <form action="{{ route('kaprodi.achievements.update', $achievement) }}" method="POST">
-                                @csrf
-                                @method('PATCH')
-
+                    <!-- Form Column -->
+                    <div class="col-lg-5">
+                        <div class="card form-card">
+                            <div class="card-header"><i class="fas fa-edit me-2"></i>Form Validasi</div>
+                            <div class="card-body p-4">
                                 <div class="mb-4">
                                     <label class="form-label-custom">Ubah Status Pengajuan</label>
                                     <div class="status-radio-group text-center">
                                         <input type="radio" class="btn-check" name="status" id="status_pending" value="pending" {{ $achievement->status == 'pending' ? 'checked' : '' }} autocomplete="off">
-                                        <label class="btn btn-outline-secondary" for="status_pending">Pending</label>
+                                        <label class="btn btn-outline-secondary" for="status_pending">Revisi</label>
 
                                         <input type="radio" class="btn-check" name="status" id="status_disetujui" value="disetujui" {{ $achievement->status == 'disetujui' ? 'checked' : '' }} autocomplete="off">
                                         <label class="btn btn-outline-success" for="status_disetujui">Setujui</label>
@@ -197,13 +159,12 @@
                                     <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save me-2"></i>Simpan Perubahan</button>
                                     <a href="{{ route('kaprodi.achievements.index') }}" class="btn btn-light btn-lg">Kembali</a>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </main>
     </div>
 </div>
 @endsection
-

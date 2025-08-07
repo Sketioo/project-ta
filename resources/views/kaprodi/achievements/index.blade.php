@@ -45,7 +45,7 @@
                             <form id="filterForm" action="{{ route('kaprodi.achievements.index') }}" method="GET">
                                 <select name="status" class="form-select" onchange="document.getElementById('filterForm').submit()">
                                     <option value="all" {{ request('status', 'all') == 'all' ? 'selected' : '' }}>Semua Status</option>
-                                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Revisi</option>
                                     <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
                                     <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
                                 </select>

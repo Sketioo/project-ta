@@ -39,6 +39,7 @@ class AchievementValidationController extends Controller
     {
         $validatedData = $request->validate([
             'status' => 'sometimes|required|in:pending,disetujui,ditolak',
+            'keterangan_lomba' => 'sometimes|required|string',
             'show_on_main_page' => 'sometimes|boolean',
         ]);
 
@@ -54,6 +55,10 @@ class AchievementValidationController extends Controller
             $updateData['validated_at'] = now();
         }
 
+        if (isset($validatedData['keterangan_lomba'])) {
+            $updateData['keterangan_lomba'] = $validatedData['keterangan_lomba'];
+        }
+
         if (isset($validatedData['show_on_main_page'])) {
             $updateData['show_on_main_page'] = $validatedData['show_on_main_page'];
         }
@@ -65,7 +70,7 @@ class AchievementValidationController extends Controller
             Mail::to($achievement->user->email)->send(new AchievementStatusUpdated($achievement));
         }
 
-        return redirect()->route('kaprodi.achievements.index')->with('success', 'Achievement updated successfully.');
+        return redirect()->route('kaprodi.achievements.show', $achievement)->with('success', 'Perubahan berhasil disimpan.');
     }
 
     public function destroy(Achievement $achievement)
