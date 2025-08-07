@@ -50,7 +50,7 @@
     color: var(--dark-color);
     margin-bottom: 2rem; /* Increased margin */
     text-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Added subtle shadow */
-    animation: float 3s ease-in-out infinite;
+    animation: float 6s ease-in-out;
 }
 
 @keyframes float {
