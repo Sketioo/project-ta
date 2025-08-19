@@ -164,7 +164,7 @@
                                 <div class="card kurikulum-image-card">
                                     <div class="card-body">
                                         <a href="{{ Storage::url($image->image_path) }}" data-toggle="lightbox" data-gallery="kurikulum-gallery">
-                                            <img src="{{ Storage::url($image->image_path) }}" class="img-fluid" alt="Gambar Kurikulum {{ $curriculum->name }} bagian {{ $index + 1 }}">
+                                            <img src="{{ Storage::url($image->image_path) }}" class="img-fluid" alt="{{ __('messages.curriculum_image_alt', ['name' => $curriculum->name, 'index' => $index + 1]) }}">
                                         </a>
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@
                         </div>
                     @else
                         <div class="empty-state-kurikulum">
-                            <p class="h5 text-muted">Tidak ada gambar struktur kurikulum yang tersedia saat ini.</p>
+                            <p class="h5 text-muted">{{ __('messages.curriculum_images_not_available') }}</p>
                         </div>
                     @endif
                 </div>
@@ -182,43 +182,43 @@
             <div class="col-lg-4">
                 <div class="sidebar">
                     <div class="info-box">
-                        <h5 class="info-box-title">Tujuan Program Studi</h5>
+                        <h5 class="info-box-title">{{ __('messages.study_program_objectives') }}</h5>
                         <div class="info-box-content">
-                            <p>Menghasilkan lulusan yang kompeten, mampu beradaptasi dengan perkembangan teknologi, dan memiliki jiwa wirausaha.</p>
+                            <p>{{ __('messages.study_program_objectives_content') }}</p>
                         </div>
                     </div>
 
                     <div class="info-box">
-                        <h5 class="info-box-title">Profil Lulusan</h5>
+                        <h5 class="info-box-title">{{ __('messages.graduate_profiles') }}</h5>
                         <div class="info-box-content">
                            <ul>
-                                <li>Software Developer</li>
-                                <li>System Analyst</li>
-                                <li>Data Scientist</li>
-                                <li>IT Consultant</li>
-                                <li>Technopreneur</li>
+                                <li>{{ __('messages.software_developer') }}</li>
+                                <li>{{ __('messages.system_analyst') }}</li>
+                                <li>{{ __('messages.data_scientist') }}</li>
+                                <li>{{ __('messages.it_consultant') }}</li>
+                                <li>{{ __('messages.technopreneur') }}</li>
                            </ul>
                         </div>
                     </div>
 
                     <div class="info-box">
-                        <h5 class="info-box-title">Metode Pembelajaran</h5>
+                        <h5 class="info-box-title">{{ __('messages.learning_methods') }}</h5>
                         <div class="info-box-content">
-                            <p>Kami menerapkan metode inovatif, termasuk studi kasus, project-based learning, dan workshop interaktif untuk pemahaman mendalam.</p>
+                            <p>{{ __('messages.learning_methods_content') }}</p>
                         </div>
                     </div>
 
                     <div class="info-box">
-                        <h5 class="info-box-title">Sertifikasi Profesional</h5>
+                        <h5 class="info-box-title">{{ __('messages.professional_certifications') }}</h5>
                         <div class="info-box-content">
-                            <p>Mahasiswa didorong meraih sertifikasi industri (misal: Oracle, Cisco, Microsoft) untuk meningkatkan daya saing di pasar global.</p>
+                            <p>{{ __('messages.professional_certifications_content') }}</p>
                         </div>
                     </div>
 
                     <div class="info-box">
-                        <h5 class="info-box-title">Kegiatan Pendukung</h5>
+                        <h5 class="info-box-title">{{ __('messages.supporting_activities') }}</h5>
                         <div class="info-box-content">
-                            <p>Tersedia seminar, kuliah tamu dari praktisi, dan UKM untuk mendukung pengembangan soft skills dan jaringan profesional.</p>
+                            <p>{{ __('messages.supporting_activities_content') }}</p>
                         </div>
                     </div>
                 </div>

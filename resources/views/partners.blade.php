@@ -19,7 +19,7 @@
                         <i class="fas fa-filter"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="filterDropdown">
-                        <h6 class="dropdown-header">{{ __('messages.filter') }} Berdasarkan Kabupaten</h6>
+                        <h6 class="dropdown-header">{{ __('messages.filter') }} {{ __('messages.location') }}</h6>
                         <div id="regencyFilterCheckboxes">
                             <!-- Kabupaten akan diisi dengan JavaScript -->
                         </div>
@@ -39,9 +39,9 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Logo</th>
                                 <th scope="col">{{ __('messages.partners') }}</th>
-                                <th scope="col">Website</th>
-                                <th scope="col">Kontak</th>
-                                <th scope="col">Alamat</th>
+                                <th scope="col">{{ __('messages.website') }}</th>
+                                <th scope="col">{{ __('messages.contact') }}</th>
+                                <th scope="col">{{ __('messages.address') }}</th>
                             </tr>
                         </thead>
                         <tbody id="partnersTableBody">
@@ -52,7 +52,7 @@
                                     @if($partner->logo_path)
                                         <img src="{{ Storage::url($partner->logo_path) }}" alt="{{ $partner->name }}" class="img-fluid" style="max-height: 50px;">
                                     @else
-                                        <span class="text-muted">Tidak ada logo</span>
+                                        <span class="text-muted">{{ __('messages.no_logo') }}</span>
                                     @endif
                                 </td>
                                 <td>{{ $partner->name }}</td>
@@ -74,7 +74,7 @@
                 <div class="empty-state text-center py-5">
                     <i class="fas fa-box-open empty-state-icon"></i>
                     <p class="empty-state-text">{{ __('messages.no_partners') }}</p>
-                    <p class="empty-state-subtext">Silakan cek kembali nanti atau hubungi administrator.</p>
+                    <p class="empty-state-subtext">{{ __('messages.check_later') }}</p>
                 </div>
             @endif
         </div>

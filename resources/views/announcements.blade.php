@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Pengumuman')
+@section('title', __('messages.announcements') . ' - Sistem Informasi Prodi TRPL')
 
 @section('content')
     <div class="container py-5">
-        <h1 class="section-title mb-5">Pengumuman</h1>
+        <h1 class="section-title mb-5">{{ __('messages.announcements') }}</h1>
 
         <!-- Search Bar -->
         <div class="row justify-content-center mb-4">
             <div class="col-lg-8 col-md-10">
                 <form action="{{ route('announcements.public.index') }}" method="GET" class="d-flex agenda-search-form">
                     <div class="input-group">
-                        <input type="text" name="search" id="announcementSearchInput" class="form-control agenda-search-input" placeholder="Cari pengumuman..." value="{{ request('search') }}">
+                        <input type="text" name="search" id="announcementSearchInput" class="form-control agenda-search-input" placeholder="{{ __('messages.search') }} {{ __('messages.announcements') }}..." value="{{ request('search') }}">
                         <button class="btn agenda-search-btn" type="button"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
@@ -23,8 +23,8 @@
         @if($announcements->isEmpty() && !request()->has('search'))
             <div class="empty-state">
                 <i class="fas fa-bullhorn empty-state-icon"></i>
-                <p class="empty-state-text">Tidak ada pengumuman yang tersedia saat ini.</p>
-                <p class="empty-state-subtext">Silakan cek kembali nanti!</p>
+                <p class="empty-state-text">{{ __('messages.no_announcements') }}</p>
+                <p class="empty-state-subtext">{{ __('messages.check_later_exclamation') }}</p>
             </div>
         @else
             <div class="row g-4" id="announcementListContainer">
@@ -41,8 +41,8 @@
                         <div class="card-body d-flex flex-column agenda-card-body">
                             <h5 class="card-title fw-bold text-primary">{{ $announcement->title }}</h5>
                             <p class="card-text text-muted flex-grow-1">{{ Str::limit($announcement->content, 100) }}</p>
-                            <p class="card-text mb-1"><small class="text-muted"><i class="fas fa-tag me-1"></i>Kategori: {{ ucfirst($announcement->category) }}</small></p>
-                            <a href="{{ route('announcements.public.show', $announcement->id) }}" class="btn btn-outline-primary mt-auto agenda-read-more-btn">Baca Selengkapnya</a>
+                            <p class="card-text mb-1"><small class="text-muted"><i class="fas fa-tag me-1"></i>{{ __('messages.category') }}: {{ ucfirst($announcement->category) }}</small></p>
+                            <a href="{{ route('announcements.public.show', $announcement->id) }}" class="btn btn-outline-primary mt-auto agenda-read-more-btn">{{ __('messages.read_more') }}</a>
                         </div>
                     </div>
                 </div>
@@ -52,8 +52,8 @@
             <!-- Empty state for search results -->
             <div id="noResultsMessage" class="empty-state" style="display: none;">
                 <i class="fas fa-search-minus empty-state-icon"></i>
-                <p class="empty-state-text">Pengumuman tidak ditemukan.</p>
-                <p class="empty-state-subtext">Coba kata kunci lain atau periksa kembali ejaan Anda.</p>
+                <p class="empty-state-text">{{ __('messages.announcement_not_found') }}</p>
+                <p class="empty-state-subtext">{{ __('messages.no_results_subtitle') }}</p>
             </div>
 
             <!-- Pagination Links -->

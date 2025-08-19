@@ -2,7 +2,7 @@
 
 return [
     'home' => 'Home',
-    'agenda' => 'Agenda',
+    'agenda' => 'Events',
     'announcements' => 'Announcements',
     'about' => 'About Program',
     'facilities' => 'Facilities',
@@ -47,4 +47,5 @@ return [
     'back' => 'Back',
     'no_results' => 'No results found.',
     'no_results_subtitle' => 'Please try different keywords.',
+    'activities' => 'Activities',
 ];

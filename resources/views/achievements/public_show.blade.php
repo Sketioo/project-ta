@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $achievement->nama_kompetisi . ' - ' . $achievement->prestasi)
+@section('title', $achievement->nama_kompetisi . ' - ' . $achievement->prestasi . ' - Sistem Informasi Prodi TRPL')
 
 @section('content')
     <div class="container py-5 agenda-detail-container">
@@ -91,7 +91,7 @@
                             @endphp
                             
                             @if(count($teamInfo) > 0)
-                                <h5 class="mb-3">Anggota Kelompok</h5>
+                                <h5 class="mb-3">{{ __('messages.team_members') }}</h5>
                                 <ul class="list-group mb-4">
                                     @foreach($teamInfo as $member)
                                         <li class="list-group-item">{{ $member }}</li>
@@ -100,7 +100,7 @@
                             @endif
                             
                             @if(count($keteranganLomba) > 0)
-                                <h5 class="mb-3">Keterangan Lomba</h5>
+                                <h5 class="mb-3">{{ __('messages.competition_details') }}</h5>
                                 <p>{{ implode("\n", $keteranganLomba) }}</p>
                             @endif
                         @else

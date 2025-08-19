@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', $agenda->title)
+@section('title', $agenda->translated_title . ' - ' . __('messages.agenda') . ' - Sistem Informasi Prodi TRPL')
 
 @section('content')
     <div class="container py-5 agenda-detail-container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
                 <article class="agenda-article" data-animation="animate__fadeInUp">
-                    <h1 class="agenda-article-title text-center mb-3">{{ $agenda->title }}</h1>
+                    <h1 class="agenda-article-title text-center mb-3">{{ $agenda->translated_title }}</h1>
                     <div class="agenda-article-meta text-center text-muted mb-5">
                         <i class="fas fa-calendar-alt me-1"></i> {{ $agenda->date->format('d F Y') }}
                         <span class="mx-2">•</span>
@@ -25,7 +25,7 @@
                                 <div class="carousel-inner">
                                     @foreach($agenda->images as $index => $imagePath)
                                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                            <img src="{{ asset('storage/' . $imagePath) }}" class="d-block w-100" alt="{{ $agenda->title }} Image {{ $index + 1 }}">
+                                            <img src="{{ asset('storage/' . $imagePath) }}" class="d-block w-100" alt="{{ $agenda->translated_title }} Image {{ $index + 1 }}">
                                         </div>
                                     @endforeach
                                 </div>
@@ -40,7 +40,7 @@
                             </div>
                         @else
                             <div class="agenda-article-main-image mb-4">
-                                <img src="{{ asset('storage/' . $agenda->images[0]) }}" alt="{{ $agenda->title }}" class="img-fluid rounded shadow-sm">
+                                <img src="{{ asset('storage/' . $agenda->images[0]) }}" alt="{{ $agenda->translated_title }}" class="img-fluid rounded shadow-sm">
                             </div>
                         @endif
                     @else
@@ -50,19 +50,19 @@
                     @endif
 
                     <div class="agenda-article-content mb-5">
-                        <p>{{ $agenda->description }}</p>
+                        <p>{{ $agenda->translated_description }}</p>
                     </div>
 
                     @if($agenda->link_terkait)
                     <div class="text-center mb-4">
                         <a href="{{ $agenda->link_terkait }}" class="btn agenda-read-more-btn" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-link me-2"></i>Kunjungi Link Terkait
+                            <i class="fas fa-link me-2"></i>{{ __('messages.visit_link') }}
                         </a>
                     </div>
                     @endif
 
                     <div class="text-center mt-5">
-                        <a href="{{ route('agenda') }}" class="btn btn-outline-secondary agenda-back-btn" data-animation="animate__fadeInUp" data-animation-delay="0.2s"><i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Agenda</a>
+                        <a href="{{ route('agenda') }}" class="btn btn-outline-secondary agenda-back-btn" data-animation="animate__fadeInUp" data-animation-delay="0.2s"><i class="fas fa-arrow-left me-2"></i>{{ __('messages.back_to_agenda') }}</a>
                     </div>
                 </article>
             </div>

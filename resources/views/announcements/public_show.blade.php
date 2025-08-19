@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $announcement->title)
+@section('title', $announcement->title . ' - Sistem Informasi Prodi TRPL')
 
 @section('content')
     <div class="container py-5 agenda-detail-container">
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="text-center mt-5">
-                        <a href="{{ route('announcements.public.index') }}" class="btn btn-outline-secondary agenda-back-btn" data-animation="animate__fadeInUp" data-animation-delay="0.2s"><i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Pengumuman</a>
+                        <a href="{{ route('announcements.public.index') }}" class="btn btn-outline-secondary agenda-back-btn" data-animation="animate__fadeInUp" data-animation-delay="0.2s"><i class="fas fa-arrow-left me-2"></i>{{ __('messages.back_to_announcements') }}</a>
                     </div>
                 </article>
             </div>
