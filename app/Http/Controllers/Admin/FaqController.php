@@ -38,10 +38,25 @@ class FaqController extends Controller
         $request->validate([
             'question' => 'required|string|max:255',
             'answer' => 'required|string',
+            'question_en' => 'nullable|string|max:255',
+            'answer_en' => 'nullable|string',
             'is_visible' => 'boolean',
         ]);
 
-        Faq::create($request->all());
+        $translations = [];
+        if ($request->question_en || $request->answer_en) {
+            $translations['en'] = [
+                'question' => $request->question_en,
+                'answer' => $request->answer_en,
+            ];
+        }
+
+        Faq::create([
+            'question' => $request->question,
+            'answer' => $request->answer,
+            'translations' => $translations,
+            'is_visible' => $request->has('is_visible'),
+        ]);
 
         return redirect()->route('admin.faqs.index')->with('success', 'FAQ berhasil ditambahkan!');
     }
@@ -71,10 +86,25 @@ class FaqController extends Controller
         $request->validate([
             'question' => 'required|string|max:255',
             'answer' => 'required|string',
+            'question_en' => 'nullable|string|max:255',
+            'answer_en' => 'nullable|string',
             'is_visible' => 'boolean',
         ]);
 
-        $faq->update($request->all());
+        $translations = $faq->translations ?? [];
+        if ($request->question_en || $request->answer_en) {
+            $translations['en'] = [
+                'question' => $request->question_en,
+                'answer' => $request->answer_en,
+            ];
+        }
+
+        $faq->update([
+            'question' => $request->question,
+            'answer' => $request->answer,
+            'translations' => $translations,
+            'is_visible' => $request->has('is_visible'),
+        ]);
 
         return redirect()->route('admin.faqs.index')->with('success', 'FAQ berhasil diperbarui!');
     }

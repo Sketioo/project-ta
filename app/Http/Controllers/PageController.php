@@ -147,4 +147,10 @@ class PageController extends Controller
         $curriculum->load('images'); // Eager load images
         return view('kurikulum-show', compact('curriculum'));
     }
+
+    public function partners()
+    {
+        $partners = Partner::where('is_visible', true)->with('regency')->get();
+        return view('partners', compact('partners'));
+    }
 }

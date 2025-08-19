@@ -81,43 +81,104 @@
                 <h1 class="page-title">Detail & Validasi Prestasi</h1>
             </div>
 
-            <form action="{{ route('kaprodi.achievements.update', $achievement) }}" method="POST">
-                @csrf
-                @method('PATCH')
-
-                <div class="row g-4">
-                    <!-- Details Column -->
-                    <div class="col-lg-8">
-                        <div class="card details-card">
-                            <div class="card-header"><i class="fas fa-info-circle me-2"></i>Detail Pengajuan</div>
-                            <div class="card-body p-4">
-                                <h4 class="card-title mb-3">{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}</h4>
-                                <div class="detail-item">
-                                    <strong>Mahasiswa</strong>
-                                    <span>{{ $achievement->user->name }}</span>
-                                </div>
-                                <div class="detail-item">
-                                    <strong>NIM</strong>
-                                    <span>{{ $achievement->nim }}</span>
-                                </div>
-                                <div class="detail-item">
-                                    <strong>Status Saat Ini</strong>
-                                    <span>
-                                        @if($achievement->status == 'disetujui')
-                                            <span class="status-badge status-disetujui">Disetujui</span>
-                                        @elseif($achievement->status == 'ditolak')
-                                            <span class="status-badge status-ditolak">Ditolak</span>
-                                        @elseif($achievement->status == 'pending')
-                                            <span class="status-badge status-revisi">Revisi</span>
-                                        @else
-                                            <span class="status-badge status-menunggu-validasi">Menunggu Validasi</span>
-                                        @endif
-                                    </span>
-                                </div>
-                                <div class="pt-3">
-                                    <label for="keterangan_lomba" class="form-label-custom">Keterangan Lomba (dapat diedit)</label>
-                                    <textarea name="keterangan_lomba" id="keterangan_lomba" class="form-control" rows="8">{{ old('keterangan_lomba', $achievement->keterangan_lomba) }}</textarea>
-                                </div>
+            <div class="row g-4">
+                <!-- Details Column -->
+                <div class="col-lg-7">
+                    <div class="card details-card">
+                        <div class="card-header">
+                            <i class="fas fa-info-circle me-2"></i>Detail Pengajuan
+                        </div>
+                        <div class="card-body p-4">
+                            <h4 class="card-title mb-3">{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}</h4>
+                            <div class="detail-item">
+                                <strong>Mahasiswa</strong>
+                                <span>{{ $achievement->user->name }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>NIM</strong>
+                                <span>{{ $achievement->nim }}</span>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <strong>Status Saat Ini</strong>
+                                <span>
+                                    @if($achievement->status == 'disetujui')
+                                        <span class="status-badge status-disetujui">Disetujui</span>
+                                    @elseif($achievement->status == 'ditolak')
+                                        <span class="status-badge status-ditolak">Ditolak</span>
+                                    @else
+                                        <span class="status-badge status-pending">Pending</span>
+                                    @endif
+                                </span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Tingkat Kompetisi</strong>
+                                <span>{{ $achievement->tingkat_kompetisi }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Jenis Lomba</strong>
+                                <span>
+                                    @if($achievement->jenis_lomba === 'kelompok')
+                                        <span class="badge bg-info">Kelompok</span>
+                                    @else
+                                        <span class="badge bg-primary">Individu</span>
+                                    @endif
+                                </span>
+                            </div>
+                            <div class="pt-3">
+                                <strong>Keterangan Lomba</strong>
+                                @if($achievement->jenis_lomba === 'kelompok')
+                                    @php
+                                        // Parse team member information from keterangan_lomba
+                                        $lines = explode("\n", $achievement->keterangan_lomba);
+                                        $teamInfo = [];
+                                        $keteranganLomba = [];
+                                        $isTeamInfo = false;
+                                        $isKeterangan = false;
+                                        
+                                        foreach($lines as $line) {
+                                            if (strpos($line, 'Jenis Lomba:') === 0) {
+                                                $isTeamInfo = true;
+                                                continue;
+                                            }
+                                            
+                                            if (strpos($line, 'Data Anggota:') === 0) {
+                                                $isTeamInfo = true;
+                                                continue;
+                                            }
+                                            
+                                            if (strpos($line, 'Keterangan Lomba:') === 0) {
+                                                $isTeamInfo = false;
+                                                $isKeterangan = true;
+                                                continue;
+                                            }
+                                            
+                                            if ($isTeamInfo && trim($line) !== '') {
+                                                $teamInfo[] = $line;
+                                            } elseif ($isKeterangan || (trim($line) !== '' && !$isTeamInfo)) {
+                                                $keteranganLomba[] = $line;
+                                            }
+                                        }
+                                    @endphp
+                                    
+                                    @if(count($teamInfo) > 0)
+                                        <div class="mt-2">
+                                            <strong>Anggota Kelompok:</strong>
+                                            <ul class="mt-1">
+                                                @foreach($teamInfo as $member)
+                                                    <li>{{ $member }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    
+                                    @if(count($keteranganLomba) > 0)
+                                        <p class="text-muted mt-2">{{ implode("\n", $keteranganLomba) }}</p>
+                                    @endif
+                                @else
+                                    <p class="text-muted mt-2">{{ $achievement->keterangan_lomba }}</p>
+                                @endif
+                            </div>
 
                                 @if ($achievement->file_sertifikat)
                                     <a href="{{ asset('storage/' . $achievement->file_sertifikat) }}" target="_blank" class="btn btn-outline-primary mt-3">

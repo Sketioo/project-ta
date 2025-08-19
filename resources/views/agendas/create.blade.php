@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Judul Agenda</label>
+                                    <label for="title" class="form-label">Judul Agenda (Bahasa Indonesia)</label>
                                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
                                     @error('title')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -56,9 +56,33 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="description" class="form-label">Deskripsi</label>
+                            <label for="description" class="form-label">Deskripsi (Bahasa Indonesia)</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="5" required>{{ old('description') }}</textarea>
                             @error('description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <hr>
+
+                        <h5>Terjemahan (Opsional)</h5>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="title_en" class="form-label">Judul Agenda (Bahasa Inggris)</label>
+                                    <input type="text" class="form-control @error('title_en') is-invalid @enderror" id="title_en" name="title_en" value="{{ old('title_en') }}">
+                                    @error('title_en')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description_en" class="form-label">Deskripsi (Bahasa Inggris)</label>
+                            <textarea class="form-control @error('description_en') is-invalid @enderror" id="description_en" name="description_en" rows="5">{{ old('description_en') }}</textarea>
+                            @error('description_en')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

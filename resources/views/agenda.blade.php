@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Agenda & Kegiatan')
+@section('title', __('messages.agenda') . ' - Sistem Informasi Prodi TRPL')
 
 @section('content')
     <div class="container py-5">
-        <h1 class="section-title mb-5">Agenda & Kegiatan</h1>
+        <h1 class="section-title mb-5">{{ __('messages.agenda') }}</h1>
 
         <!-- Search Bar -->
         <div class="row justify-content-center mb-4">
             <div class="col-lg-8 col-md-10">
                 <form action="{{ route('agenda') }}" method="GET" class="d-flex agenda-search-form">
                     <div class="input-group">
-                        <input type="text" name="search" id="agendaSearchInput" class="form-control agenda-search-input" placeholder="Cari agenda..." value="{{ request('search') }}">
+                        <input type="text" name="search" id="agendaSearchInput" class="form-control agenda-search-input" placeholder="{{ __('messages.search') }} {{ __('messages.agenda') }}..." value="{{ request('search') }}">
                         <button class="btn agenda-search-btn" type="button"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
@@ -23,8 +23,8 @@
         @if($agendas->isEmpty() && !request()->has('search'))
             <div class="empty-state">
                 <i class="fas fa-calendar-times empty-state-icon"></i>
-                <p class="empty-state-text">Tidak ada agenda yang tersedia saat ini.</p>
-                <p class="empty-state-subtext">Silakan cek kembali nanti!</p>
+                <p class="empty-state-text">{{ __('messages.no_results') }}</p>
+                <p class="empty-state-subtext">{{ __('messages.no_results_subtitle') }}</p>
             </div>
         @else
             <div class="row g-4" id="agendaListContainer">
@@ -33,17 +33,17 @@
                     <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden agenda-card">
                         <div class="agenda-image-container">
                             @if($agenda->images && count($agenda->images) > 0)
-                                <img src="{{ asset('storage/' . $agenda->images[0]) }}" class="card-img-top" alt="{{ $agenda->title }}">
+                                <img src="{{ asset('storage/' . $agenda->images[0]) }}" class="card-img-top" alt="{{ $agenda->translated_title }}">
                             @else
                                 <img src="https://via.placeholder.com/400x250.png/cccccc/ffffff?text=No+Image" class="card-img-top" alt="No Image">
                             @endif
                         </div>
                         <div class="card-body d-flex flex-column agenda-card-body">
-                            <h5 class="card-title fw-bold text-primary">{{ $agenda->title }}</h5>
-                            <p class="card-text text-muted flex-grow-1">{{ Str::limit($agenda->description, 100) }}</p>
-                            <p class="card-text mb-1"><small class="text-muted"><i class="fas fa-calendar-alt me-1"></i>Tanggal: {{ \Carbon\Carbon::parse($agenda->date)->translatedFormat('d M Y') }}</small></p>
-                            <p class="card-text"><small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Lokasi: {{ $agenda->location }}</small></p>
-                            <a href="{{ route('agenda.show.public', $agenda->id) }}" class="btn btn-outline-primary mt-auto agenda-read-more-btn">Baca Selengkapnya</a>
+                            <h5 class="card-title fw-bold text-primary">{{ $agenda->translated_title }}</h5>
+                            <p class="card-text text-muted flex-grow-1">{{ Str::limit($agenda->translated_description, 100) }}</p>
+                            <p class="card-text mb-1"><small class="text-muted"><i class="fas fa-calendar-alt me-1"></i>{{ __('messages.date') }}: {{ \Carbon\Carbon::parse($agenda->date)->translatedFormat('d M Y') }}</small></p>
+                            <p class="card-text"><small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>{{ __('messages.location') }}: {{ $agenda->location }}</small></p>
+                            <a href="{{ route('agenda.show.public', $agenda->id) }}" class="btn btn-outline-primary mt-auto agenda-read-more-btn">{{ __('messages.read_more') }}</a>
                         </div>
                     </div>
                 </div>
@@ -53,8 +53,8 @@
             <!-- Empty state for search results -->
             <div id="noResultsMessage" class="empty-state" style="display: none;">
                 <i class="fas fa-search-minus empty-state-icon"></i>
-                <p class="empty-state-text">Agenda tidak ditemukan.</p>
-                <p class="empty-state-subtext">Coba kata kunci lain atau periksa kembali ejaan Anda.</p>
+                <p class="empty-state-text">{{ __('messages.no_results') }}</p>
+                <p class="empty-state-subtext">{{ __('messages.no_results_subtitle') }}</p>
             </div>
 
             <!-- Pagination Links -->
@@ -113,9 +113,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <div class="card-body d-flex flex-column agenda-card-body">
                                             <h5 class="card-title fw-bold text-primary">${agenda.title}</h5>
                                             <p class="card-text text-muted flex-grow-1">${description}</p>
-                                            <p class="card-text mb-1"><small class="text-muted"><i class="fas fa-calendar-alt me-1"></i>Tanggal: ${formattedDate}</small></p>
-                                            <p class="card-text"><small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Lokasi: ${agenda.location}</small></p>
-                                            <a href="/agenda/${agenda.id}" class="btn btn-outline-primary mt-auto agenda-read-more-btn">Baca Selengkapnya</a>
+                                            <p class="card-text mb-1"><small class="text-muted"><i class="fas fa-calendar-alt me-1"></i>{{ __('messages.date') }}: ${formattedDate}</small></p>
+                                            <p class="card-text"><small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>{{ __('messages.location') }}: ${agenda.location}</small></p>
+                                            <a href="/agenda/${agenda.id}" class="btn btn-outline-primary mt-auto agenda-read-more-btn">{{ __('messages.read_more') }}</a>
                                         </div>
                                     </div>
                                 </div>

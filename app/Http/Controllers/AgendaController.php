@@ -33,6 +33,8 @@ class AgendaController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'title_en' => 'nullable|string|max:255',
+            'description_en' => 'nullable|string',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
             'link_terkait' => 'nullable|url|max:255',
@@ -46,9 +48,18 @@ class AgendaController extends Controller
             }
         }
 
+        $translations = [];
+        if ($request->title_en || $request->description_en) {
+            $translations['en'] = [
+                'title' => $request->title_en,
+                'description' => $request->description_en,
+            ];
+        }
+
         Agenda::create([
             'title' => $request->title,
             'description' => $request->description,
+            'translations' => $translations,
             'date' => $request->date,
             'location' => $request->location,
             'link_terkait' => $request->link_terkait,
@@ -83,6 +94,8 @@ class AgendaController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'title_en' => 'nullable|string|max:255',
+            'description_en' => 'nullable|string',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
             'link_terkait' => 'nullable|url|max:255',
@@ -103,9 +116,18 @@ class AgendaController extends Controller
             }
         }
 
+        $translations = $agenda->translations ?? [];
+        if ($request->title_en || $request->description_en) {
+            $translations['en'] = [
+                'title' => $request->title_en,
+                'description' => $request->description_en,
+            ];
+        }
+
         $agenda->update([
             'title' => $request->title,
             'description' => $request->description,
+            'translations' => $translations,
             'date' => $request->date,
             'location' => $request->location,
             'link_terkait' => $request->link_terkait,

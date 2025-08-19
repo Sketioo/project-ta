@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $facility->name)
+@section('title', $facility->name . ' - Sistem Informasi Prodi TRPL')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/custom-facility-show.css') }}">
@@ -48,7 +48,7 @@
                                 <div class="info-box">
                                     <p>
                                         <i class="fas fa-user-shield me-2"></i>
-                                        <strong>Penanggung Jawab:</strong> {{ $facility->person_in_charge }}
+                                        <strong>{{ __('messages.person_in_charge') }}:</strong> {{ $facility->person_in_charge }}
                                     </p>
                                 </div>
                             @endif
@@ -59,7 +59,7 @@
 
                             <div class="mt-4 text-center">
                                 <a href="{{ route('facilities.index') }}" class="btn btn-back">
-                                    <i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar
+                                    <i class="fas fa-arrow-left me-2"></i>{{ __('messages.back_to_list') }}
                                 </a>
                             </div>
                         </div>

@@ -41,6 +41,13 @@ Route::get('/documents/filter', [PageController::class, 'filterDocuments'])->nam
 Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
 Route::get('/facilities/{facility}', [FacilityController::class, 'show'])->name('facilities.show');
 Route::get('/kurikulum/{curriculum}', [PageController::class, 'showCurriculum'])->name('kurikulum.show');
+Route::get('/partners', [PageController::class, 'partners'])->name('partners.index');
+Route::get('/lang/{locale}', function ($locale) {
+    if (in_array($locale, config('app.supported_locales', ['id', 'en']))) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('locale.switch');
 
 Auth::routes();
 

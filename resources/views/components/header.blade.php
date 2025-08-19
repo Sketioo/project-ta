@@ -12,27 +12,32 @@
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">
-                        <i class="fas fa-home me-1"></i>Home
+                        <i class="fas fa-home me-1"></i>{{ __('messages.home') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('agenda*') ? 'active' : '' }}" href="/agenda">
-                        <i class="fas fa-calendar-alt me-1"></i>Agenda
+                        <i class="fas fa-calendar-alt me-1"></i>{{ __('messages.agenda') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('announcements*') ? 'active' : '' }}" href="/announcements">
-                        <i class="fas fa-bullhorn me-1"></i>Pengumuman
+                        <i class="fas fa-bullhorn me-1"></i>{{ __('messages.announcements') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('partners*') ? 'active' : '' }}" href="{{ route('partners.index') }}">
+                        <i class="fas fa-handshake me-1"></i>{{ __('messages.partners') }}
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle nav-link-dropdown-custom" href="#" id="navbarDropdownTentangProdi" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-info-circle me-1"></i>Tentang Prodi
+                        <i class="fas fa-info-circle me-1"></i>{{ __('messages.about') }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownTentangProdi">
-                        <li><a class="dropdown-item" href="{{ route('facilities.index') }}"><i class="fas fa-building me-2"></i>Fasilitas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('facilities.index') }}"><i class="fas fa-building me-2"></i>{{ __('messages.facilities') }}</a></li>
                         <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="#"><i class="fas fa-book me-2"></i>Kurikulum</a>
+                            <a class="dropdown-item dropdown-toggle" href="#"><i class="fas fa-book me-2"></i>{{ __('messages.curriculum') }}</a>
                             <ul class="dropdown-menu">
                                 @forelse($navCurriculums as $curriculum)
                                     <li><a class="dropdown-item" href="{{ route('kurikulum.show', $curriculum) }}"><i class="fas fa-calendar-check me-2"></i>{{ $curriculum->name }}</a></li>
@@ -45,25 +50,37 @@
                 </li>
             </ul>
             <div class="d-flex align-items-center">
+                <!-- Language Switcher -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-outline-light dropdown-toggle custom-language-dropdown" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: 2px solid #FFD700 !important; color: #1a1a1a !important; font-weight: 600; transition: all 0.3s ease; background-color: #ffffff;">
+                        <i class="fas fa-globe me-1"></i>
+                        {{ app()->getLocale() == 'id' ? 'ID' : 'EN' }}
+                    </button>
+                    <ul class="dropdown-menu custom-language-dropdown-menu" aria-labelledby="languageDropdown" style="border: 1px solid #FFD700; border-radius: 8px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); margin-top: 0.5rem; padding: 0.5rem 0; background-color: #ffffff;">
+                        <li><a class="dropdown-item custom-language-dropdown-item" href="{{ route('locale.switch', 'id') }}" style="padding: 0.75rem 1.5rem; color: #1a1a1a; font-weight: 500; transition: all 0.2s ease;">Bahasa Indonesia</a></li>
+                        <li><a class="dropdown-item custom-language-dropdown-item" href="{{ route('locale.switch', 'en') }}" style="padding: 0.75rem 1.5rem; color: #1a1a1a; font-weight: 500; transition: all 0.2s ease;">English</a></li>
+                    </ul>
+                </div>
+                
                 @guest
                     <a href="{{ route('login') }}" class="btn btn-outline-dark custom-login-btn">
-                        <i class="fas fa-sign-in-alt me-1"></i>Login
+                        <i class="fas fa-sign-in-alt me-1"></i>{{ __('messages.login') }}
                     </a>
                 @endguest
                 @auth
                     @if (Auth::user()->role == 'mahasiswa')
                         <a href="{{ route('achievements.create') }}" class="btn btn-primary-custom me-2">
-                            <i class="fas fa-award me-1"></i>Ajukan Prestasi
+                            <i class="fas fa-award me-1"></i>{{ __('messages.achievement_submission') }}
                         </a>
                     @else
                         <a href="{{ route('dashboard') }}" class="btn btn-secondary custom-dashboard-btn me-2">
-                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                            <i class="fas fa-tachometer-alt me-1"></i>{{ __('messages.dashboard') }}
                         </a>
                     @endif
 
                     <a href="{{ route('logout') }}" class="btn btn-danger"
                        onclick="event.preventDefault(); document.getElementById('logout-form-header').submit();">
-                        <i class="fas fa-sign-out-alt"></i>
+                        <i class="fas fa-sign-out-alt"></i> {{ __('messages.logout') }}
                     </a>
                     <form id="logout-form-header" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
@@ -73,3 +90,41 @@
         </div>
     </div>
 </header>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Language dropdown hover effects
+    const languageDropdown = document.querySelector('.custom-language-dropdown');
+    const languageDropdownItems = document.querySelectorAll('.custom-language-dropdown-item');
+    
+    if (languageDropdown) {
+        languageDropdown.addEventListener('mouseover', function() {
+            this.style.backgroundColor = '#FFD700';
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 4px 12px rgba(255, 215, 0, 0.3)';
+        });
+        
+        languageDropdown.addEventListener('mouseout', function() {
+            this.style.backgroundColor = '#ffffff';
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    }
+    
+    if (languageDropdownItems.length > 0) {
+        languageDropdownItems.forEach(item => {
+            item.addEventListener('mouseover', function() {
+                this.style.backgroundColor = 'rgba(255, 215, 0, 0.15)';
+                this.style.paddingLeft = '2rem';
+            });
+            
+            item.addEventListener('mouseout', function() {
+                this.style.backgroundColor = 'transparent';
+                this.style.paddingLeft = '1.5rem';
+            });
+        });
+    }
+});
+</script>
+@endpush

@@ -64,6 +64,8 @@
                                     <th>Nama Mahasiswa</th>
                                     <th>Nama Kompetisi</th>
                                     <th>Prestasi</th>
+                                    <th>Tingkat Kompetisi</th>
+                                    <th class="text-center">Jenis Lomba</th>
                                     <th class="text-center">Tanggal Pengajuan</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Aksi</th>
@@ -76,6 +78,14 @@
                                         <td>{{ $achievement->user->name }}</td>
                                         <td>{{ Str::limit($achievement->nama_kompetisi, 40) }}</td>
                                         <td>{{ Str::limit($achievement->prestasi, 40) }}</td>
+                                        <td>{{ $achievement->tingkat_kompetisi }}</td>
+                                        <td class="text-center">
+                                            @if($achievement->jenis_lomba === 'kelompok')
+                                                <span class="badge bg-info">Kelompok</span>
+                                            @else
+                                                <span class="badge bg-primary">Individu</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">{{ $achievement->created_at->format('d M Y') }}</td>
                                         <td class="text-center">
                                             <span class="status-badge status-{{ str_replace(' ', '-', strtolower($achievement->status)) }}">
