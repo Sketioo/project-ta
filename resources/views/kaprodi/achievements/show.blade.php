@@ -130,9 +130,69 @@
                                     @endif
                                 </span>
                             </div>
+                            <div class="detail-item">
+                                <strong>Jenis Lomba</strong>
+                                <span>
+                                    @if($achievement->jenis_lomba === 'kelompok')
+                                        <span class="badge bg-info">Kelompok</span>
+                                    @else
+                                        <span class="badge bg-primary">Individu</span>
+                                    @endif
+                                </span>
+                            </div>
                             <div class="pt-3">
                                 <strong>Keterangan Lomba</strong>
-                                <p class="text-muted mt-2">{{ $achievement->keterangan_lomba }}</p>
+                                @if($achievement->jenis_lomba === 'kelompok')
+                                    @php
+                                        // Parse team member information from keterangan_lomba
+                                        $lines = explode("\n", $achievement->keterangan_lomba);
+                                        $teamInfo = [];
+                                        $keteranganLomba = [];
+                                        $isTeamInfo = false;
+                                        $isKeterangan = false;
+                                        
+                                        foreach($lines as $line) {
+                                            if (strpos($line, 'Jenis Lomba:') === 0) {
+                                                $isTeamInfo = true;
+                                                continue;
+                                            }
+                                            
+                                            if (strpos($line, 'Data Anggota:') === 0) {
+                                                $isTeamInfo = true;
+                                                continue;
+                                            }
+                                            
+                                            if (strpos($line, 'Keterangan Lomba:') === 0) {
+                                                $isTeamInfo = false;
+                                                $isKeterangan = true;
+                                                continue;
+                                            }
+                                            
+                                            if ($isTeamInfo && trim($line) !== '') {
+                                                $teamInfo[] = $line;
+                                            } elseif ($isKeterangan || (trim($line) !== '' && !$isTeamInfo)) {
+                                                $keteranganLomba[] = $line;
+                                            }
+                                        }
+                                    @endphp
+                                    
+                                    @if(count($teamInfo) > 0)
+                                        <div class="mt-2">
+                                            <strong>Anggota Kelompok:</strong>
+                                            <ul class="mt-1">
+                                                @foreach($teamInfo as $member)
+                                                    <li>{{ $member }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    
+                                    @if(count($keteranganLomba) > 0)
+                                        <p class="text-muted mt-2">{{ implode("\n", $keteranganLomba) }}</p>
+                                    @endif
+                                @else
+                                    <p class="text-muted mt-2">{{ $achievement->keterangan_lomba }}</p>
+                                @endif
                             </div>
 
                             @if ($achievement->file_sertifikat)

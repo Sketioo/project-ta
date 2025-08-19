@@ -13,6 +13,7 @@ class Achievement extends Model
         'user_id',
         'nim',
         'nama',
+        'jenis_lomba',
         'nama_kompetisi',
         'tingkat_kompetisi',
         'penyelenggara',

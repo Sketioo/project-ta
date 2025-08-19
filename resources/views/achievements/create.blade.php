@@ -15,9 +15,36 @@
                     <h5 class="mb-0">Form Pengajuan Prestasi</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('achievements.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('achievements.store') }}" method="POST" enctype="multipart/form-data" id="achievementForm">
                         @csrf
 
+                        <!-- Jenis Lomba Selection -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="jenis_lomba" class="form-label">Jenis Lomba</label>
+                                <select class="form-control" id="jenis_lomba" name="jenis_lomba" required>
+                                    <option value="">Pilih Jenis Lomba</option>
+                                    <option value="individu" {{ old('jenis_lomba') == 'individu' ? 'selected' : '' }}>Individu</option>
+                                    <option value="kelompok" {{ old('jenis_lomba') == 'kelompok' ? 'selected' : '' }}>Kelompok</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6" id="jumlahAnggotaContainer" style="display: none;">
+                                <label for="jumlah_anggota" class="form-label">Jumlah Anggota</label>
+                                <input type="number" class="form-control" id="jumlah_anggota" name="jumlah_anggota" min="2" max="10" value="{{ old('jumlah_anggota') }}">
+                            </div>
+                        </div>
+
+                        <!-- Anggota Kelompok Container -->
+                        <div id="anggotaKelompokContainer" style="display: none;">
+                            <h5 class="mb-3">Data Anggota Kelompok</h5>
+                            <div id="anggotaFields">
+                                <!-- Fields for team members will be added here dynamically -->
+                            </div>
+                            <hr>
+                        </div>
+
+                        <!-- Data Peserta Utama -->
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="nim" class="form-label">NIM</label>
@@ -126,3 +153,65 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const jenisLombaSelect = document.getElementById('jenis_lomba');
+    const jumlahAnggotaContainer = document.getElementById('jumlahAnggotaContainer');
+    const anggotaKelompokContainer = document.getElementById('anggotaKelompokContainer');
+    const jumlahAnggotaInput = document.getElementById('jumlah_anggota');
+    const anggotaFields = document.getElementById('anggotaFields');
+    
+    // Show/hide jumlah anggota field based on jenis lomba selection
+    jenisLombaSelect.addEventListener('change', function() {
+        if (this.value === 'kelompok') {
+            jumlahAnggotaContainer.style.display = 'block';
+            anggotaKelompokContainer.style.display = 'block';
+        } else {
+            jumlahAnggotaContainer.style.display = 'none';
+            anggotaKelompokContainer.style.display = 'none';
+            anggotaFields.innerHTML = '';
+        }
+    });
+    
+    // Generate fields for team members when jumlah anggota changes
+    jumlahAnggotaInput.addEventListener('input', function() {
+        const jumlah = parseInt(this.value) || 0;
+        anggotaFields.innerHTML = '';
+        
+        // Create fields for each team member (excluding the first one which is the main participant)
+        for (let i = 2; i <= jumlah; i++) {
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'team-member mb-3 p-3 border rounded';
+            memberDiv.innerHTML = `
+                <h6 class="mb-3">Anggota ${i}</h6>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="nim_anggota_${i}" class="form-label">NIM Anggota ${i}</label>
+                        <input type="text" class="form-control" id="nim_anggota_${i}" name="nim_anggota[]" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="nama_anggota_${i}" class="form-label">Nama Anggota ${i}</label>
+                        <input type="text" class="form-control" id="nama_anggota_${i}" name="nama_anggota[]" required>
+                    </div>
+                </div>
+            `;
+            anggotaFields.appendChild(memberDiv);
+        }
+    });
+    
+    // Initialize based on old value if exists
+    if (jenisLombaSelect.value === 'kelompok') {
+        jumlahAnggotaContainer.style.display = 'block';
+        anggotaKelompokContainer.style.display = 'block';
+        
+        // Trigger input event to generate fields if jumlah_anggota has a value
+        if (jumlahAnggotaInput.value) {
+            const event = new Event('input');
+            jumlahAnggotaInput.dispatchEvent(event);
+        }
+    }
+});
+</script>
+@endpush
