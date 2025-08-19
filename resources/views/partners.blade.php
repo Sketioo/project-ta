@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Mitra - Sistem Informasi Prodi TRPL')
+@section('title', __('messages.partners') . ' - Sistem Informasi Prodi TRPL')
 
 @section('content')
 <div class="container py-5">
     <div class="row">
         <div class="col-12">
-            <h1 class="mb-4">Daftar Mitra Industri</h1>
+            <h1 class="mb-4">{{ __('messages.partners_title') }}</h1>
             
             <!-- Search and Filter Controls -->
             <div class="document-controls mb-4">
                 <div class="input-group document-search-form">
-                    <input type="text" id="partnerSearch" class="form-control document-search-input" placeholder="Cari mitra...">
+                    <input type="text" id="partnerSearch" class="form-control document-search-input" placeholder="{{ __('messages.search') }}...">
                     <button class="btn document-search-btn" type="button"><i class="fas fa-search"></i></button>
                 </div>
                 <div class="dropdown">
@@ -19,13 +19,13 @@
                         <i class="fas fa-filter"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="filterDropdown">
-                        <h6 class="dropdown-header">Filter Berdasarkan Kabupaten</h6>
+                        <h6 class="dropdown-header">{{ __('messages.filter') }} Berdasarkan Kabupaten</h6>
                         <div id="regencyFilterCheckboxes">
                             <!-- Kabupaten akan diisi dengan JavaScript -->
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="px-2">
-                            <button class="btn btn-primary-custom w-100" id="applyFilterBtn">Terapkan</button>
+                            <button class="btn btn-primary-custom w-100" id="applyFilterBtn">{{ __('messages.apply_filter') }}</button>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Logo</th>
-                                <th scope="col">Nama Mitra</th>
+                                <th scope="col">{{ __('messages.partners') }}</th>
                                 <th scope="col">Website</th>
                                 <th scope="col">Kontak</th>
                                 <th scope="col">Alamat</th>
@@ -73,7 +73,7 @@
             @else
                 <div class="empty-state text-center py-5">
                     <i class="fas fa-box-open empty-state-icon"></i>
-                    <p class="empty-state-text">Belum ada mitra yang terdaftar.</p>
+                    <p class="empty-state-text">{{ __('messages.no_partners') }}</p>
                     <p class="empty-state-subtext">Silakan cek kembali nanti atau hubungi administrator.</p>
                 </div>
             @endif

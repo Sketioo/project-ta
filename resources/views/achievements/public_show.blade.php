@@ -109,7 +109,7 @@
                     </div>
 
                     <div class="text-center mt-5">
-                        <a href="{{ route('home') }}#prestasi" class="btn btn-outline-secondary agenda-back-btn" data-animation="animate__fadeInUp" data-animation-delay="0.2s"><i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Prestasi</a>
+                        <a href="{{ route('home') }}#prestasi" class="btn btn-outline-secondary agenda-back-btn" data-animation="animate__fadeInUp" data-animation-delay="0.2s"><i class="fas fa-arrow-left me-2"></i>{{ __('messages.back_to_achievements') }}</a>
                     </div>
                 </article>
             </div>

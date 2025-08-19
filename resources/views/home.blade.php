@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sistem Informasi Prodi TRPL')
+@section('title', __('messages.home') . ' - Sistem Informasi Prodi TRPL')
 
 @section('content')
     <!-- Hero Section -->
@@ -8,9 +8,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="animate__animated animate__fadeInDown">Teknologi Rekayasa Perangkat Lunak</h1>
-                    <p class="lead mb-5 animate__animated animate__fadeInUp">Mencetak talenta digital yang kreatif, inovatif, dan berdaya saing global.</p>
-                    <a href="#prestasi" class="btn animate__animated animate__pulse">Lihat Prestasi</a>
+                    <h1 class="animate__animated animate__fadeInDown">{{ __('messages.hero_title') }}</h1>
+                    <p class="lead mb-5 animate__animated animate__fadeInUp">{{ __('messages.hero_subtitle') }}</p>
+                    <a href="#prestasi" class="btn animate__animated animate__pulse">{{ __('messages.achievements') }}</a>
                 </div>
             </div>
         </div>
@@ -23,13 +23,13 @@
                 <!-- Visi Column -->
                 <div class="col-lg-6 vm-col vm-col-visi">
                     <div class="vm-icon-bg"><i class="fas fa-eye"></i></div>
-                    <h3 class="vm-title">Visi</h3>
+                    <h3 class="vm-title">{{ __('messages.vision') }}</h3>
                     <p>Menjadi program studi Teknologi Rekayasa Perangkat Lunak yang unggul dan inovatif dalam pengembangan solusi digital cerdas, serta berdaya saing di tingkat nasional maupun internasional pada tahun 2030.</p>
                 </div>
                 <!-- Misi Column -->
                 <div class="col-lg-6 vm-col vm-col-misi">
                     <div class="vm-icon-bg"><i class="fas fa-bullseye"></i></div>
-                    <h3 class="vm-title">Misi</h3>
+                    <h3 class="vm-title">{{ __('messages.mission') }}</h3>
                     <ul>
                         <li>Menyelenggarakan pendidikan vokasi yang berkualitas di bidang rekayasa perangkat lunak dengan kurikulum yang adaptif terhadap perkembangan industri.</li>
                         <li>Melaksanakan penelitian terapan yang inovatif untuk menghasilkan produk dan solusi digital yang bermanfaat bagi masyarakat dan industri.</li>
@@ -43,7 +43,7 @@
     <!-- Prestasi Section -->
     <section id="prestasi" class="py-5" data-animation="animate__fadeInUp">
         <div class="container">
-            <h2 class="section-title mb-5">Prestasi Mahasiswa</h2>
+            <h2 class="section-title mb-5">{{ __('messages.achievements') }}</h2>
             @if($achievements->isNotEmpty())
             <div id="achievementCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -87,7 +87,7 @@
             @else
             <div class="empty-state">
                 <i class="fas fa-frown empty-state-icon"></i>
-                <p class="empty-state-text">Belum ada prestasi mahasiswa yang ditampilkan.</p>
+                <p class="empty-state-text">{{ __('messages.no_achievements') }}</p>
                 <p class="empty-state-subtext">Tetap semangat dan terus berkarya!</p>
             </div>
             @endif
@@ -97,13 +97,13 @@
     <!-- Dokumen Section -->
     <section id="dokumen" class="py-5 bg-light" data-animation="animate__fadeInUp">
         <div class="container">
-            <h2 class="section-title mb-5">Pusat Dokumen</h2>
+            <h2 class="section-title mb-5">{{ __('messages.documents') }}</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <!-- Search and Filter Controls -->
                     <div class="document-controls mb-4">
                         <div class="input-group document-search-form">
-                            <input type="text" id="documentSearch" class="form-control document-search-input" placeholder="Cari dokumen...">
+                            <input type="text" id="documentSearch" class="form-control document-search-input" placeholder="{{ __('messages.document_search_placeholder') }}">
                             <button class="btn document-search-btn" type="button"><i class="fas fa-search"></i></button>
                         </div>
                         <div class="dropdown">
@@ -111,7 +111,7 @@
                                 <i class="fas fa-filter"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="filterDropdown">
-                                <h6 class="dropdown-header">Filter Berdasarkan Kategori</h6>
+                                <h6 class="dropdown-header">{{ __('messages.document_filter_title') }}</h6>
                                 <div id="categoryFilterCheckboxes">
                                     @if($documentCategories->isNotEmpty())
                                         @foreach($documentCategories as $category)
@@ -123,13 +123,13 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        <p class="text-muted px-2">Tidak ada kategori.</p>
+                                        <p class="text-muted px-2">{{ __('messages.document_category_empty') }}</p>
                                     @endif
                                 </div>
                                 @if($documentCategories->isNotEmpty())
                                 <div class="dropdown-divider"></div>
                                 <div class="px-2">
-                                    <button class="btn btn-primary-custom w-100" id="applyFilterBtn">Terapkan</button>
+                                    <button class="btn btn-primary-custom w-100" id="applyFilterBtn">{{ __('messages.apply_filter') }}</button>
                                 </div>
                                 @endif
                             </div>
@@ -165,7 +165,7 @@
                                     </div>
                                     <div class="document-item-action">
                                         <a href="{{ Storage::url($document->file_path) }}" class="btn document-download-btn" download>
-                                            <i class="fas fa-download me-2"></i>Download
+                                            <i class="fas fa-download me-2"></i>{{ __('messages.download') }}
                                         </a>
                                     </div>
                                 </div>
@@ -173,13 +173,13 @@
                             </div>
                             <div id="noResultsMessage" class="empty-state" style="display: none;">
                                 <i class="fas fa-search-minus empty-state-icon"></i>
-                                <p class="empty-state-text">Dokumen tidak ditemukan.</p>
-                                <p class="empty-state-subtext">Coba kata kunci lain atau periksa kembali ejaan Anda.</p>
+                                <p class="empty-state-text">{{ __('messages.document_empty') }}</p>
+                                <p class="empty-state-subtext">{{ __('messages.document_empty_subtitle') }}</p>
                             </div>
                         @else
                             <div class="empty-state">
                                 <i class="fas fa-folder-open empty-state-icon"></i>
-                                <p class="empty-state-text">Belum ada dokumen yang tersedia.</p>
+                                <p class="empty-state-text">{{ __('messages.no_documents') }}</p>
                                 <p class="empty-state-subtext">Silakan cek kembali nanti.</p>
                             </div>
                         @endif
@@ -192,7 +192,7 @@
     <!-- Mitra Section -->
     <section id="mitra" class="py-5" data-animation="animate__fadeInUp">
         <div class="container">
-            <h2 class="section-title mb-5">Mitra Industri</h2>
+            <h2 class="section-title mb-5">{{ __('messages.partners_title') }}</h2>
             @if($partners->isNotEmpty())
                 <div id="mitraCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -231,7 +231,7 @@
             @else
                 <div class="empty-state">
                     <i class="fas fa-box-open empty-state-icon"></i>
-                    <p class="empty-state-text">Belum ada mitra yang terdaftar.</p>
+                    <p class="empty-state-text">{{ __('messages.no_partners') }}</p>
                     <p class="empty-state-subtext">Silakan cek kembali nanti atau hubungi administrator.</p>
                 </div>
             @endif
@@ -241,7 +241,7 @@
     <!-- FAQ Section -->
     <section id="faq" class="py-5 bg-light" data-animation="animate__fadeInUp">
         <div class="container">
-            <h2 class="section-title mb-5">Frequently Asked Questions (FAQ)</h2>
+            <h2 class="section-title mb-5">{{ __('messages.faq') }}</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-9">
                     @if($faqs->isNotEmpty())
@@ -264,7 +264,7 @@
                     @else
                     <div class="empty-state">
                         <i class="fas fa-question-circle empty-state-icon"></i>
-                        <p class="empty-state-text">Belum ada FAQ yang tersedia.</p>
+                        <p class="empty-state-text">{{ __('messages.no_faqs') }}</p>
                         <p class="empty-state-subtext">Silakan cek kembali nanti atau tambahkan FAQ baru.</p>
                     </div>
                     @endif
