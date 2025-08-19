@@ -47,7 +47,7 @@
                         <div class="row agenda-image-gallery">
                             @foreach($agenda->images as $imagePath)
                                 <div class="col-md-4 mb-3">
-                                    <img src="{{ asset('storage/' . $imagePath) }}" alt="Agenda Image" class="img-fluid rounded shadow-sm agenda-detail-img">
+                                    <img src="{{ secure_asset('storage/' . $imagePath) }}" alt="Agenda Image" class="img-fluid rounded shadow-sm agenda-detail-img">
                                 </div>
                             @endforeach
                         </div>

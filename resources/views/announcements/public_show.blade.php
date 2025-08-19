@@ -25,7 +25,7 @@
                                 <div class="carousel-inner">
                                     @foreach($announcement->photos_path as $index => $photoPath)
                                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                            <img src="{{ asset('storage/' . $photoPath) }}" class="d-block w-100" alt="{{ $announcement->title }} Image {{ $index + 1 }}">
+                                            <img src="{{ secure_asset('storage/' . $photoPath) }}" class="d-block w-100" alt="{{ $announcement->title }} Image {{ $index + 1 }}">
                                         </div>
                                     @endforeach
                                 </div>
@@ -40,7 +40,7 @@
                             </div>
                         @else
                             <div class="agenda-article-main-image mb-4">
-                                <img src="{{ asset('storage/' . $announcement->photos_path[0]) }}" alt="{{ $announcement->title }}" class="img-fluid rounded shadow-sm">
+                                <img src="{{ secure_asset('storage/' . $announcement->photos_path[0]) }}" alt="{{ $announcement->title }}" class="img-fluid rounded shadow-sm">
                             </div>
                         @endif
                     @else

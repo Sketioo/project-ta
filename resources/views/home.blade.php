@@ -59,7 +59,7 @@
                                 <div class="card achievement-card w-100" onclick="window.location='{{ route('achievements.public.show', $achievement->id) }}'" style="cursor: pointer;">
                                     <div class="achievement-image-container">
                                         @if($achievement->photos_dokumentasi && count($achievement->photos_dokumentasi) > 0)
-                                            <img src="{{ asset('storage/' . $achievement->photos_dokumentasi[0]) }}" class="card-img-top" alt="{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}">
+                                            <img src="{{ secure_asset('storage/' . $achievement->photos_dokumentasi[0]) }}" class="card-img-top" alt="{{ $achievement->nama_kompetisi }} - {{ $achievement->prestasi }}">
                                         @else
                                             <img src="https://via.placeholder.com/400x220.png/1a1a1a/FFD700?text=TRPL" class="card-img-top" alt="No Image">
                                         @endif

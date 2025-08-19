@@ -109,7 +109,7 @@
                                 @if($agenda->images && count($agenda->images) > 0)
                                     @foreach($agenda->images as $imagePath)
                                         <div class="col-md-3 mb-3">
-                                            <img src="{{ asset('storage/' . $imagePath) }}" alt="Agenda Image" class="img-thumbnail img-fluid rounded" style="height: 100px; object-fit: cover;">
+                                            <img src="{{ secure_asset('storage/' . $imagePath) }}" alt="Agenda Image" class="img-thumbnail img-fluid rounded" style="height: 100px; object-fit: cover;">
                                         </div>
                                     @endforeach
                                 @endif

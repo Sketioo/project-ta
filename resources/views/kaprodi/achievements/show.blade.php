@@ -181,7 +181,7 @@
                             </div>
 
                                 @if ($achievement->file_sertifikat)
-                                    <a href="{{ asset('storage/' . $achievement->file_sertifikat) }}" target="_blank" class="btn btn-outline-primary mt-3">
+                                    <a href="{{ secure_asset('storage/' . $achievement->file_sertifikat) }}" target="_blank" class="btn btn-outline-primary mt-3">
                                         <i class="fas fa-paperclip me-2"></i>Lihat Lampiran
                                     </a>
                                 @endif
@@ -192,8 +192,8 @@
                                         <div class="row mt-2">
                                             @foreach ($achievement->photos_dokumentasi as $photoPath)
                                                 <div class="col-md-4 mb-3">
-                                                    <a href="{{ asset('storage/' . $photoPath) }}" target="_blank">
-                                                        <img src="{{ asset('storage/' . $photoPath) }}" class="img-fluid rounded shadow-sm" alt="Dokumentasi Prestasi">
+                                                    <a href="{{ secure_asset('storage/' . $photoPath) }}" target="_blank">
+                                                        <img src="{{ secure_asset('storage/' . $photoPath) }}" class="img-fluid rounded shadow-sm" alt="Dokumentasi Prestasi">
                                                     </a>
                                                 </div>
                                             @endforeach

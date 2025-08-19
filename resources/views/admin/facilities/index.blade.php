@@ -43,7 +43,7 @@
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td class="text-center">
                                         @if(!empty($facility->photos))
-                                            <img src="{{ asset('storage/' . $facility->photos[0]) }}" alt="{{ $facility->name }}" class="img-thumbnail" width="100" style="border-radius: 8px;">
+                                            <img src="{{ secure_asset('storage/' . $facility->photos[0]) }}" alt="{{ $facility->name }}" class="img-thumbnail" width="100" style="border-radius: 8px;">
                                         @else
                                             <span class="text-muted">No Logo</span>
                                         @endif

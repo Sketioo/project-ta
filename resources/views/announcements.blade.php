@@ -33,7 +33,7 @@
                     <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden agenda-card">
                         <div class="agenda-image-container">
                             @if($announcement->photos_path && count($announcement->photos_path) > 0)
-                                <img src="{{ asset('storage/' . $announcement->photos_path[0]) }}" class="card-img-top" alt="{{ $announcement->title }}">
+                                <img src="{{ secure_asset('storage/' . $announcement->photos_path[0]) }}" class="card-img-top" alt="{{ $announcement->title }}">
                             @else
                                 <img src="https://via.placeholder.com/400x250.png/cccccc/ffffff?text=No+Image" class="card-img-top" alt="No Image">
                             @endif

@@ -79,7 +79,7 @@
                                     @foreach($facility->photos as $photoPath)
                                         <div class="col-6 col-sm-4 col-md-3 col-lg-2">
                                             <div class="position-relative current-photo-container">
-                                                <img src="{{ asset('storage/' . $photoPath) }}" class="img-fluid rounded" alt="Foto fasilitas">
+                                                <img src="{{ secure_asset('storage/' . $photoPath) }}" class="img-fluid rounded" alt="Foto fasilitas">
                                                 <label class="delete-photo-label">
                                                     <input type="checkbox" name="deleted_photos[]" value="{{ $photoPath }}" onchange="this.closest('.current-photo-container').querySelector('img').classList.toggle('to-be-deleted', this.checked)"> Hapus
                                                 </label>
