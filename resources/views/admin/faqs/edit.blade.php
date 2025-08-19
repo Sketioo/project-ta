@@ -24,7 +24,7 @@
                         @method('PUT')
                         
                         <div class="mb-3">
-                            <label for="question" class="form-label">Pertanyaan</label>
+                            <label for="question" class="form-label">Pertanyaan (Bahasa Indonesia)</label>
                             <input type="text" name="question" id="question" class="form-control @error('question') is-invalid @enderror" value="{{ old('question', $faq->question) }}" required>
                             @error('question')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -32,9 +32,35 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="answer" class="form-label">Jawaban</label>
+                            <label for="answer" class="form-label">Jawaban (Bahasa Indonesia)</label>
                             <textarea name="answer" id="answer" class="form-control @error('answer') is-invalid @enderror" rows="5" required>{{ old('answer', $faq->answer) }}</textarea>
                             @error('answer')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <hr>
+
+                        <h5>Terjemahan (Opsional)</h5>
+
+                        @php
+                            $translations = $faq->translations ?? [];
+                            $questionEn = isset($translations['en']['question']) ? $translations['en']['question'] : '';
+                            $answerEn = isset($translations['en']['answer']) ? $translations['en']['answer'] : '';
+                        @endphp
+
+                        <div class="mb-3">
+                            <label for="question_en" class="form-label">Pertanyaan (Bahasa Inggris)</label>
+                            <input type="text" name="question_en" id="question_en" class="form-control @error('question_en') is-invalid @enderror" value="{{ old('question_en', $questionEn) }}">
+                            @error('question_en')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="answer_en" class="form-label">Jawaban (Bahasa Inggris)</label>
+                            <textarea name="answer_en" id="answer_en" class="form-control @error('answer_en') is-invalid @enderror" rows="5">{{ old('answer_en', $answerEn) }}</textarea>
+                            @error('answer_en')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

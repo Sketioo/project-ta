@@ -24,16 +24,16 @@
                 <div class="col-lg-6 vm-col vm-col-visi">
                     <div class="vm-icon-bg"><i class="fas fa-eye"></i></div>
                     <h3 class="vm-title">{{ __('messages.vision') }}</h3>
-                    <p>Menjadi program studi Teknologi Rekayasa Perangkat Lunak yang unggul dan inovatif dalam pengembangan solusi digital cerdas, serta berdaya saing di tingkat nasional maupun internasional pada tahun 2030.</p>
+                    <p>{{ __('messages.vision_content') }}</p>
                 </div>
                 <!-- Misi Column -->
                 <div class="col-lg-6 vm-col vm-col-misi">
                     <div class="vm-icon-bg"><i class="fas fa-bullseye"></i></div>
                     <h3 class="vm-title">{{ __('messages.mission') }}</h3>
                     <ul>
-                        <li>Menyelenggarakan pendidikan vokasi yang berkualitas di bidang rekayasa perangkat lunak dengan kurikulum yang adaptif terhadap perkembangan industri.</li>
-                        <li>Melaksanakan penelitian terapan yang inovatif untuk menghasilkan produk dan solusi digital yang bermanfaat bagi masyarakat dan industri.</li>
-                        <li>Menjalin kemitraan strategis dengan industri dan berbagai pihak untuk meningkatkan kompetensi lulusan dan relevansi program studi.</li>
+                        <li>{{ __('messages.mission_content_1') }}</li>
+                        <li>{{ __('messages.mission_content_2') }}</li>
+                        <li>{{ __('messages.mission_content_3') }}</li>
                     </ul>
                 </div>
             </div>
@@ -244,18 +244,20 @@
             <h2 class="section-title mb-5">{{ __('messages.faq') }}</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-9">
+                    {{-- Debug info --}}
+                    {{-- <p>Current locale: {{ app()->getLocale() }}</p> --}}
                     @if($faqs->isNotEmpty())
                     <div class="accordion" id="faqAccordion">
                         @foreach($faqs as $index => $faq)
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading{{ $index }}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="false" aria-controls="collapse{{ $index }}">
-                                    {{ $faq->question }}
+                                    {{ $faq->translated_question }}
                                 </button>
                             </h2>
                             <div id="collapse{{ $index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $index }}" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    {{ $faq->answer }}
+                                    {!! nl2br(e($faq->translated_answer)) !!}
                                 </div>
                             </div>
                         </div>
@@ -265,7 +267,7 @@
                     <div class="empty-state">
                         <i class="fas fa-question-circle empty-state-icon"></i>
                         <p class="empty-state-text">{{ __('messages.no_faqs') }}</p>
-                        <p class="empty-state-subtext">Silakan cek kembali nanti atau tambahkan FAQ baru.</p>
+                        <p class="empty-state-subtext">{{ __('messages.no_results_subtitle') }}</p>
                     </div>
                     @endif
                 </div>

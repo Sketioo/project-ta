@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class SetLocale
 {
@@ -20,6 +21,7 @@ class SetLocale
         // Cek locale dari session
         if (Session::has('locale')) {
             App::setLocale(Session::get('locale'));
+            Log::info('Locale from session: ' . Session::get('locale'));
         } 
         // Cek locale dari query parameter
         elseif ($request->has('locale')) {
@@ -27,9 +29,12 @@ class SetLocale
             if (in_array($locale, config('app.supported_locales', ['id', 'en']))) {
                 App::setLocale($locale);
                 Session::put('locale', $locale);
+                Log::info('Locale from query: ' . $locale);
             }
         }
 
+        Log::info('Current locale: ' . App::getLocale());
+        
         return $next($request);
     }
 }
