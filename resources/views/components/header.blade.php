@@ -52,13 +52,13 @@
             <div class="d-flex align-items-center">
                 <!-- Language Switcher -->
                 <div class="dropdown me-3">
-                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-outline-light dropdown-toggle custom-language-dropdown" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: 2px solid #FFD700 !important; color: #1a1a1a !important; font-weight: 600; transition: all 0.3s ease; background-color: #ffffff;">
                         <i class="fas fa-globe me-1"></i>
                         {{ app()->getLocale() == 'id' ? 'ID' : 'EN' }}
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                        <li><a class="dropdown-item" href="{{ route('locale.switch', 'id') }}">Bahasa Indonesia</a></li>
-                        <li><a class="dropdown-item" href="{{ route('locale.switch', 'en') }}">English</a></li>
+                    <ul class="dropdown-menu custom-language-dropdown-menu" aria-labelledby="languageDropdown" style="border: 1px solid #FFD700; border-radius: 8px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); margin-top: 0.5rem; padding: 0.5rem 0; background-color: #ffffff;">
+                        <li><a class="dropdown-item custom-language-dropdown-item" href="{{ route('locale.switch', 'id') }}" style="padding: 0.75rem 1.5rem; color: #1a1a1a; font-weight: 500; transition: all 0.2s ease;">Bahasa Indonesia</a></li>
+                        <li><a class="dropdown-item custom-language-dropdown-item" href="{{ route('locale.switch', 'en') }}" style="padding: 0.75rem 1.5rem; color: #1a1a1a; font-weight: 500; transition: all 0.2s ease;">English</a></li>
                     </ul>
                 </div>
                 
@@ -90,3 +90,41 @@
         </div>
     </div>
 </header>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Language dropdown hover effects
+    const languageDropdown = document.querySelector('.custom-language-dropdown');
+    const languageDropdownItems = document.querySelectorAll('.custom-language-dropdown-item');
+    
+    if (languageDropdown) {
+        languageDropdown.addEventListener('mouseover', function() {
+            this.style.backgroundColor = '#FFD700';
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 4px 12px rgba(255, 215, 0, 0.3)';
+        });
+        
+        languageDropdown.addEventListener('mouseout', function() {
+            this.style.backgroundColor = '#ffffff';
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    }
+    
+    if (languageDropdownItems.length > 0) {
+        languageDropdownItems.forEach(item => {
+            item.addEventListener('mouseover', function() {
+                this.style.backgroundColor = 'rgba(255, 215, 0, 0.15)';
+                this.style.paddingLeft = '2rem';
+            });
+            
+            item.addEventListener('mouseout', function() {
+                this.style.backgroundColor = 'transparent';
+                this.style.paddingLeft = '1.5rem';
+            });
+        });
+    }
+});
+</script>
+@endpush
