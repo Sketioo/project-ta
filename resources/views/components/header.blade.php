@@ -25,6 +25,11 @@
                         <i class="fas fa-bullhorn me-1"></i>Pengumuman
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('partners*') ? 'active' : '' }}" href="{{ route('partners.index') }}">
+                        <i class="fas fa-handshake me-1"></i>Mitra
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle nav-link-dropdown-custom" href="#" id="navbarDropdownTentangProdi" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-info-circle me-1"></i>Tentang Prodi

@@ -20,4 +20,9 @@ class Partner extends Model
         'deskripsi',
         'is_visible',
     ];
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class);
+    }
 }
