@@ -164,6 +164,10 @@
             });
         });
     </script>
+
+    <!-- Accessibility Widget -->
+    {{-- <script src="https://cdn.jsdelivr.net/npm/accessibility-widget@1.0.0/dist/accessibility-widget.min.js"></script> --}}
+    <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
 </body>
 </html>
 <script>
