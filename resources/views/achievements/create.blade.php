@@ -72,7 +72,14 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="tingkat_kompetisi" class="form-label">Tingkat Kompetisi</label>
-                                <input type="text" class="form-control @error('tingkat_kompetisi') is-invalid @enderror" id="tingkat_kompetisi" name="tingkat_kompetisi" value="{{ old('tingkat_kompetisi') }}" required>
+                                <select class="form-control @error('tingkat_kompetisi') is-invalid @enderror" id="tingkat_kompetisi" name="tingkat_kompetisi" required>
+                                    <option value="">Pilih Tingkat Kompetisi</option>
+                                    <option value="Internal" {{ old('tingkat_kompetisi') == 'Internal' ? 'selected' : '' }}>Internal</option>
+                                    <option value="Kabupaten" {{ old('tingkat_kompetisi') == 'Kabupaten' ? 'selected' : '' }}>Kabupaten</option>
+                                    <option value="Provinsi" {{ old('tingkat_kompetisi') == 'Provinsi' ? 'selected' : '' }}>Provinsi</option>
+                                    <option value="Nasional" {{ old('tingkat_kompetisi') == 'Nasional' ? 'selected' : '' }}>Nasional</option>
+                                    <option value="Internasional" {{ old('tingkat_kompetisi') == 'Internasional' ? 'selected' : '' }}>Internasional</option>
+                                </select>
                                 @error('tingkat_kompetisi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

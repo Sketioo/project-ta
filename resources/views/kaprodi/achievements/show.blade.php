@@ -131,6 +131,10 @@
                                 </span>
                             </div>
                             <div class="detail-item">
+                                <strong>Tingkat Kompetisi</strong>
+                                <span>{{ $achievement->tingkat_kompetisi }}</span>
+                            </div>
+                            <div class="detail-item">
                                 <strong>Jenis Lomba</strong>
                                 <span>
                                     @if($achievement->jenis_lomba === 'kelompok')

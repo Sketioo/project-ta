@@ -49,7 +49,7 @@ class AchievementController extends Controller
             'nim' => 'required|string|max:255',
             'nama' => 'required|string|max:255',
             'nama_kompetisi' => 'required|string|max:255',
-            'tingkat_kompetisi' => 'required|string|max:255',
+            'tingkat_kompetisi' => 'required|in:Internal,Kabupaten,Provinsi,Nasional,Internasional',
             'penyelenggara' => 'required|string|max:255',
             'prestasi' => 'required|string|max:255',
             'tanggal_pelaksanaan' => 'required|date',
